@@ -17,6 +17,7 @@ fun LoadingContent(
     if (empty) {
         emptyContent()
     } else {
+        @Suppress("DEPRECATION")
         SwipeRefresh(
             state = rememberSwipeRefreshState(loading),
             onRefresh = onRefresh,
