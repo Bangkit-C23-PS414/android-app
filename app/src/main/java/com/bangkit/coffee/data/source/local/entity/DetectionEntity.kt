@@ -1,4 +1,4 @@
-package com.bangkit.coffee.data.source.local
+package com.bangkit.coffee.data.source.local.entity
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity
@@ -6,7 +6,7 @@ import androidx.room.PrimaryKey
 import java.util.Date
 
 @Entity(tableName = "detections")
-data class LocalDetection(
+data class DetectionEntity(
     @PrimaryKey val id: String,
     @ColumnInfo(name = "user_id") val userId: String,
     @ColumnInfo(name = "image_url") val imageUrl: String,

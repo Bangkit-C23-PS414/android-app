@@ -1,13 +1,13 @@
-package com.bangkit.coffee.data
+package com.bangkit.coffee.data.model
 
-import com.bangkit.coffee.data.source.local.LocalDetection
-import com.bangkit.coffee.data.source.remote.RemoteDetection
+import com.bangkit.coffee.data.source.local.entity.DetectionEntity
+import com.bangkit.coffee.data.source.network.response.DetectionResponse
 
 /* Local <--> External Segment */
 
 @JvmName("detection_ExternalToLocal")
 fun List<Detection>.toLocal() = map(Detection::toLocal)
-fun Detection.toLocal() = LocalDetection(
+fun Detection.toLocal() = DetectionEntity(
     id = id,
     userId = userId,
     imageUrl = imageUrl,
@@ -17,8 +17,8 @@ fun Detection.toLocal() = LocalDetection(
 )
 
 @JvmName("detection_LocalToExternal")
-fun List<LocalDetection>.toExternal() = map(LocalDetection::toExternal)
-fun LocalDetection.toExternal() = Detection(
+fun List<DetectionEntity>.toExternal() = map(DetectionEntity::toExternal)
+fun DetectionEntity.toExternal() = Detection(
     id = id,
     userId = userId,
     imageUrl = imageUrl,
@@ -31,7 +31,7 @@ fun LocalDetection.toExternal() = Detection(
 
 @JvmName("detection_ExternalToRemote")
 fun List<Detection>.toRemote() = map(Detection::toRemote)
-fun Detection.toRemote() = RemoteDetection(
+fun Detection.toRemote() = DetectionResponse(
     id = id,
     userId = userId,
     imageUrl = imageUrl,
@@ -41,8 +41,8 @@ fun Detection.toRemote() = RemoteDetection(
 )
 
 @JvmName("detection_RemoteToExternal")
-fun List<RemoteDetection>.toExternal() = map(RemoteDetection::toExternal)
-fun RemoteDetection.toExternal() = Detection(
+fun List<DetectionResponse>.toExternal() = map(DetectionResponse::toExternal)
+fun DetectionResponse.toExternal() = Detection(
     id = id,
     userId = userId,
     imageUrl = imageUrl,
@@ -54,9 +54,9 @@ fun RemoteDetection.toExternal() = Detection(
 /* Local <--> Remote Segment */
 
 @JvmName("detection_LocalToRemote")
-fun List<LocalDetection>.toRemote() = map(LocalDetection::toRemote)
-fun LocalDetection.toRemote() = toExternal().toRemote()
+fun List<DetectionEntity>.toRemote() = map(DetectionEntity::toRemote)
+fun DetectionEntity.toRemote() = toExternal().toRemote()
 
 @JvmName("detection_RemoteToLocal")
-fun List<RemoteDetection>.toLocal() = map(RemoteDetection::toLocal)
-fun RemoteDetection.toLocal() = toExternal().toLocal()
+fun List<DetectionResponse>.toLocal() = map(DetectionResponse::toLocal)
+fun DetectionResponse.toLocal() = toExternal().toLocal()

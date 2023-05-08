@@ -1,7 +1,7 @@
 package com.bangkit.coffee.di
 
 import com.bangkit.coffee.BuildConfig
-import com.bangkit.coffee.data.source.remote.DetectionService
+import com.bangkit.coffee.data.source.network.DetectionService
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

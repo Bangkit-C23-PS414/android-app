@@ -1,9 +1,9 @@
-package com.bangkit.coffee.data.source.remote
+package com.bangkit.coffee.data.source.network.response
 
 import com.squareup.moshi.Json
 import java.util.Date
 
-data class RemoteDetection(
+data class DetectionResponse(
     @Json(name = "id") val id: String,
     @Json(name = "user_id") val userId: String,
     @Json(name = "image_url") val imageUrl: String,

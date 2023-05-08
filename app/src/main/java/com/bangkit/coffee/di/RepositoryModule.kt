@@ -1,7 +1,7 @@
 package com.bangkit.coffee.di
 
-import com.bangkit.coffee.data.DetectionRepository
-import com.bangkit.coffee.data.DetectionRepositoryImpl
+import com.bangkit.coffee.data.repository.DetectionRepository
+import com.bangkit.coffee.data.repository.DetectionRepositoryImpl
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn

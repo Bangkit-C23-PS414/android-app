@@ -2,8 +2,8 @@ package com.bangkit.coffee.di
 
 import android.content.Context
 import androidx.room.Room
-import com.bangkit.coffee.data.source.local.DetectionDao
 import com.bangkit.coffee.data.source.local.MainDatabase
+import com.bangkit.coffee.data.source.local.dao.DetectionDao
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
