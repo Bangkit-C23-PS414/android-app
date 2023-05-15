@@ -1,4 +1,4 @@
-package com.bangkit.coffee.ui
+package com.bangkit.coffee.presentation
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope

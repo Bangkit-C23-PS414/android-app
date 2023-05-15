@@ -1,8 +1,8 @@
-package com.bangkit.coffee.ui.signin
+package com.bangkit.coffee.presentation.signin
 
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.viewModelScope
-import com.bangkit.coffee.ui.BaseViewModel
+import com.bangkit.coffee.presentation.BaseViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted.Companion.WhileSubscribed

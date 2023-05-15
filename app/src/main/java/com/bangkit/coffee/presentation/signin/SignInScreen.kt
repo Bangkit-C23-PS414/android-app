@@ -1,4 +1,4 @@
-package com.bangkit.coffee.ui.signin
+package com.bangkit.coffee.presentation.signin
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column

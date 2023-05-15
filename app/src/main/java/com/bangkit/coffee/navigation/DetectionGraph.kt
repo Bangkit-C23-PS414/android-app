@@ -4,7 +4,7 @@ import androidx.navigation.NavType
 import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
 import androidx.navigation.navigation
-import com.bangkit.coffee.ui.components.SimpleScreen
+import com.bangkit.coffee.presentation.components.SimpleScreen
 
 fun NavGraphBuilder.detectionGraph(navController: NavHostController) {
     navigation(

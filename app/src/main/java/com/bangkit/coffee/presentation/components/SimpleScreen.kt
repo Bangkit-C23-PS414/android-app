@@ -1,4 +1,4 @@
-package com.bangkit.coffee.ui.components
+package com.bangkit.coffee.presentation.components
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
