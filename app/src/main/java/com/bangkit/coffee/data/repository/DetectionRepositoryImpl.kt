@@ -1,11 +1,11 @@
 package com.bangkit.coffee.data.repository
 
-import com.bangkit.coffee.data.model.Detection
-import com.bangkit.coffee.data.model.toExternal
 import com.bangkit.coffee.data.source.local.dao.DetectionDao
 import com.bangkit.coffee.data.source.network.DetectionService
 import com.bangkit.coffee.di.ApplicationScope
 import com.bangkit.coffee.di.DefaultDispatcher
+import com.bangkit.coffee.domain.entity.Detection
+import com.bangkit.coffee.domain.entity.toExternal
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.Flow

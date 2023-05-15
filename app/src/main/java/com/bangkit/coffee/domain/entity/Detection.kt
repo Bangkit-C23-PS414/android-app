@@ -1,4 +1,4 @@
-package com.bangkit.coffee.data.model
+package com.bangkit.coffee.domain.entity
 
 import java.util.Date
 

@@ -1,4 +1,4 @@
-package com.bangkit.coffee.util
+package com.bangkit.coffee.ui.components
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier

@@ -1,4 +1,4 @@
-package com.bangkit.coffee.data.model
+package com.bangkit.coffee.domain.entity
 
 import com.bangkit.coffee.data.source.local.entity.DetectionEntity
 import com.bangkit.coffee.data.source.network.response.DetectionResponse

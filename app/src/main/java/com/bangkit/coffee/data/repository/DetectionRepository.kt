@@ -1,6 +1,6 @@
 package com.bangkit.coffee.data.repository
 
-import com.bangkit.coffee.data.model.Detection
+import com.bangkit.coffee.domain.entity.Detection
 import kotlinx.coroutines.flow.Flow
 
 interface DetectionRepository {

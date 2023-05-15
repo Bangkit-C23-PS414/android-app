@@ -3,9 +3,9 @@ package com.bangkit.coffee.ui.signin
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.viewModelScope
 import com.bangkit.coffee.ui.BaseViewModel
-import com.bangkit.coffee.util.WhileUiSubscribed
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.SharingStarted.Companion.WhileSubscribed
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.stateIn
@@ -21,7 +21,7 @@ class SignInViewModel @Inject constructor(
 
     val stateFlow: StateFlow<SignInState> = _stateFlow.asStateFlow().stateIn(
         scope = viewModelScope,
-        started = WhileUiSubscribed,
+        started = WhileSubscribed(5000),
         initialValue = SignInState(),
     )
 
