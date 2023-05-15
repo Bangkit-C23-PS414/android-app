@@ -1,7 +1,7 @@
 package com.bangkit.coffee.di
 
 import com.bangkit.coffee.BuildConfig
-import com.bangkit.coffee.data.source.network.DetectionService
+import com.bangkit.coffee.data.source.network.ImageDetectionService
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -29,7 +29,7 @@ object NetworkModule {
     }
 
     @Provides
-    fun provideDetectionService(retrofit: Retrofit): DetectionService {
-        return retrofit.create(DetectionService::class.java)
+    fun provideImageDetectionService(retrofit: Retrofit): ImageDetectionService {
+        return retrofit.create(ImageDetectionService::class.java)
     }
 }

@@ -1,10 +1,10 @@
 package com.bangkit.coffee.data.repository
 
-import com.bangkit.coffee.data.source.local.dao.DetectionDao
-import com.bangkit.coffee.data.source.network.DetectionService
+import com.bangkit.coffee.data.source.local.dao.ImageDetectionDao
+import com.bangkit.coffee.data.source.network.ImageDetectionService
 import com.bangkit.coffee.di.ApplicationScope
 import com.bangkit.coffee.di.DefaultDispatcher
-import com.bangkit.coffee.domain.entity.Detection
+import com.bangkit.coffee.domain.entity.ImageDetection
 import com.bangkit.coffee.domain.entity.toExternal
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.CoroutineScope
@@ -16,26 +16,26 @@ import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
-class DetectionRepositoryImpl @Inject constructor(
-    private val localDataSource: DetectionDao,
-    private val remoteDataSource: DetectionService,
+class ImageDetectionRepositoryImpl @Inject constructor(
+    private val localDataSource: ImageDetectionDao,
+    private val remoteDataSource: ImageDetectionService,
     @DefaultDispatcher private val dispatcher: CoroutineDispatcher,
     @ApplicationScope private val scope: CoroutineScope,
-) : DetectionRepository {
+) : ImageDetectionRepository {
 
-    override fun getAllStream(): Flow<Result<List<Detection>>> {
-        return localDataSource.observeAll().map { detections ->
+    override fun getAllStream(): Flow<Result<List<ImageDetection>>> {
+        return localDataSource.observeAll().map { imageDetections ->
             withContext(dispatcher) {
-                Result.success(detections.toExternal())
+                Result.success(imageDetections.toExternal())
             }
         }.catch { e -> emit(Result.failure(e)) }
     }
 
-    override fun getOneStream(id: String): Flow<Result<Detection>> {
+    override fun getOneStream(id: String): Flow<Result<ImageDetection>> {
         TODO("Not yet implemented")
     }
 
-    override suspend fun getOne(id: String): Result<Detection> {
+    override suspend fun getOne(id: String): Result<ImageDetection> {
         TODO("Not yet implemented")
     }
 }

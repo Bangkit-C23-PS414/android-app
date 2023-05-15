@@ -3,7 +3,7 @@ package com.bangkit.coffee.di
 import android.content.Context
 import androidx.room.Room
 import com.bangkit.coffee.data.source.local.MainDatabase
-import com.bangkit.coffee.data.source.local.dao.DetectionDao
+import com.bangkit.coffee.data.source.local.dao.ImageDetectionDao
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -26,7 +26,7 @@ object DatabaseModule {
     }
 
     @Provides
-    fun provideDetectionDao(database: MainDatabase): DetectionDao {
-        return database.detectionDao()
+    fun provideImageDetectionDao(database: MainDatabase): ImageDetectionDao {
+        return database.imageDetectionDao()
     }
 }

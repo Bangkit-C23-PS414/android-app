@@ -2,7 +2,7 @@ package com.bangkit.coffee.domain.entity
 
 import java.util.Date
 
-data class Detection(
+data class ImageDetection(
     val id: String,
     val userId: String,
     val imageUrl: String,

@@ -4,7 +4,7 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.rememberNavController
-import detectionGraph
+import imageDetectionGraph
 
 @Composable
 fun Router(
@@ -15,6 +15,6 @@ fun Router(
         startDestination = "dashboard",
     ) {
         authGraph(navController)
-        detectionGraph(navController)
+        imageDetectionGraph(navController)
     }
 }

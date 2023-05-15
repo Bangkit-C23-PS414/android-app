@@ -6,10 +6,10 @@ import androidx.navigation.navArgument
 import androidx.navigation.navigation
 import com.bangkit.coffee.presentation.components.SimpleScreen
 
-fun NavGraphBuilder.detectionGraph(navController: NavHostController) {
+fun NavGraphBuilder.imageDetectionGraph(navController: NavHostController) {
     navigation(
         startDestination = "list",
-        route = "detections"
+        route = "image-detections"
     ) {
         composable("list") {
             SimpleScreen(
