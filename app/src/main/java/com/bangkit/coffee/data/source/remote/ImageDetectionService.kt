@@ -1,6 +1,6 @@
-package com.bangkit.coffee.data.source.network
+package com.bangkit.coffee.data.source.remote
 
-import com.bangkit.coffee.data.source.network.response.RemoteImageDetection
+import com.bangkit.coffee.data.source.remote.response.RemoteImageDetection
 import retrofit2.http.GET
 import retrofit2.http.Path
 
