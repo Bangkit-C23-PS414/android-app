@@ -73,6 +73,7 @@ dependencies {
 
     // Third-party UI Dependencies
     implementation 'com.google.accompanist:accompanist-swiperefresh:0.31.1-alpha'
+    implementation 'io.coil-kt:coil-compose:2.3.0'
 
     // Jetpack - Room
     implementation "androidx.room:room-ktx:$room_version"
