@@ -8,7 +8,7 @@ import androidx.compose.runtime.staticCompositionLocalOf
  * UI State that represents SignInScreen
  **/
 data class SignInState(
-    val isLoading: Boolean = true,
+    val isLoading: Boolean = false,
 )
 
 /**

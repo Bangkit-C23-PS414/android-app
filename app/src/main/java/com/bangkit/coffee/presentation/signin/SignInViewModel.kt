@@ -17,7 +17,8 @@ class SignInViewModel @Inject constructor(
     savedStateHandle: SavedStateHandle
 ) : BaseViewModel() {
 
-    private val _stateFlow: MutableStateFlow<SignInState> = MutableStateFlow(SignInState())
+    private val _stateFlow: MutableStateFlow<SignInState> =
+        MutableStateFlow(SignInState(isLoading = true))
 
     val stateFlow: StateFlow<SignInState> = _stateFlow.asStateFlow().stateIn(
         scope = viewModelScope,
