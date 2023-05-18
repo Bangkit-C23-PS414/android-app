@@ -2,4 +2,19 @@
 <resources>
     <string name="app_name">Kopintar</string>
     <string name="or">ATAU</string>
+    <string name="welcome_title_1">Deteksi penyakit dengan mudah</string>
+    <string name="welcome_title_2">Revolusi perkebunan Anda</string>
+    <string name="welcome_title_3">Diagnosis penyakit yang mudah</string>
+    <string name="welcome_description_1">Ambil gambar daun kopi Anda dan biarkan AI kami melakukan sisanya.</string>
+    <string name="welcome_description_2">Dapatkan hasil instan pada kesehatan daun dan cegah potensi kerugian panen.</string>
+    <string name="welcome_description_3">Hemat waktu dan sumber daya dengan identifikasi penyakit secara cepat dan akurat.</string>
+    <string name="navigate_up">Kembali</string>
+    <string name="sign_in">Masuk</string>
+    <string name="email_address">Alamat email</string>
+    <string name="password">Kata sandi</string>
+    <string name="email_hint">Ketik alamat email anda</string>
+    <string name="password_hint">Ketik kata sandi anda</string>
+    <string name="forgot_password_question">Lupa kata sandi?</string>
+    <string name="email_error">Alamat email tidak valid</string>
+    <string name="password_error">Kata sandi tidak valid</string>
 </resources>

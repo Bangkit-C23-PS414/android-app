@@ -26,9 +26,9 @@ class SignInViewModel @Inject constructor(
         initialValue = SignInState(),
     )
 
-    fun update() {
+    fun setPasswordVisibility(visibility: Boolean) {
         _stateFlow.update {
-            it.copy(isLoading = true)
+            it.copy(isPasswordVisible = visibility)
         }
     }
 

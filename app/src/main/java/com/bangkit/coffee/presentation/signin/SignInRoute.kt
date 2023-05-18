@@ -7,13 +7,15 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 
 @Composable
 fun SignInRoute(
-    coordinator: SignInCoordinator = rememberSignInCoordinator()
+    coordinator: SignInCoordinator = rememberSignInCoordinator(),
+    navigateUp: () -> Unit,
+    navigateToForgotPassword: () -> Unit
 ) {
     // State observing and declarations
     val uiState by coordinator.screenStateFlow.collectAsStateWithLifecycle(SignInState())
 
     // UI Actions
-    val actions = rememberSignInActions(coordinator)
+    val actions = rememberSignInActions(coordinator, navigateUp, navigateToForgotPassword)
 
     // UI Rendering
     SignInScreen(uiState, actions)
@@ -21,10 +23,17 @@ fun SignInRoute(
 
 
 @Composable
-fun rememberSignInActions(coordinator: SignInCoordinator): SignInActions {
+fun rememberSignInActions(
+    coordinator: SignInCoordinator,
+    navigateUp: () -> Unit,
+    navigateToForgotPassword: () -> Unit
+): SignInActions {
     return remember(coordinator) {
         SignInActions(
-            onClick = coordinator::doStuff
+            signIn = coordinator::signIn,
+            setPasswordVisibility = coordinator::setPasswordVisibility,
+            navigateUp = navigateUp,
+            navigateToForgotPassword = navigateToForgotPassword
         )
     }
 }

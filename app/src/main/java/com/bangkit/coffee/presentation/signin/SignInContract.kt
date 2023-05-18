@@ -9,6 +9,7 @@ import androidx.compose.runtime.staticCompositionLocalOf
  **/
 data class SignInState(
     val isLoading: Boolean = false,
+    val isPasswordVisible: Boolean = false,
 )
 
 /**
@@ -16,7 +17,10 @@ data class SignInState(
  * passed to the coordinator to handle
  **/
 data class SignInActions(
-    val onClick: () -> Unit = {}
+    val signIn: () -> Unit = {},
+    val setPasswordVisibility: (Boolean) -> Unit = {},
+    val navigateUp: () -> Unit = {},
+    val navigateToForgotPassword: () -> Unit = {},
 )
 
 /**

@@ -7,13 +7,15 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 
 @Composable
 fun WelcomeRoute(
-    coordinator: WelcomeCoordinator = rememberWelcomeCoordinator()
+    coordinator: WelcomeCoordinator = rememberWelcomeCoordinator(),
+    navigateToSignIn: () -> Unit,
+    navigateToSignUp: () -> Unit
 ) {
     // State observing and declarations
     val uiState by coordinator.screenStateFlow.collectAsStateWithLifecycle(WelcomeState())
 
     // UI Actions
-    val actions = rememberWelcomeActions(coordinator)
+    val actions = rememberWelcomeActions(coordinator, navigateToSignIn, navigateToSignUp)
 
     // UI Rendering
     WelcomeScreen(uiState, actions)
@@ -21,10 +23,15 @@ fun WelcomeRoute(
 
 
 @Composable
-fun rememberWelcomeActions(coordinator: WelcomeCoordinator): WelcomeActions {
+fun rememberWelcomeActions(
+    coordinator: WelcomeCoordinator,
+    navigateToSignIn: () -> Unit,
+    navigateToSignUp: () -> Unit
+): WelcomeActions {
     return remember(coordinator) {
         WelcomeActions(
-            onClick = coordinator::doStuff
+            navigateToSignIn = navigateToSignIn,
+            navigateToSignUp = navigateToSignUp
         )
     }
 }

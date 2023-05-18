@@ -25,7 +25,8 @@ data class WelcomeCarouselItem(
  * passed to the coordinator to handle
  **/
 data class WelcomeActions(
-    val onClick: () -> Unit = {}
+    val navigateToSignIn: () -> Unit = {},
+    val navigateToSignUp: () -> Unit = {}
 )
 
 /**

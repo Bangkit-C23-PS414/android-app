@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -74,7 +75,10 @@ fun WelcomeScreen(
             ) {
                 Image(
                     painter = painterResource(state.carouselItems[i].image),
-                    contentDescription = null
+                    contentDescription = null,
+                    modifier = Modifier
+                        .fillMaxWidth(0.85f)
+                        .aspectRatio(1f),
                 )
                 Text(
                     text = stringResource(state.carouselItems[i].title),
@@ -107,7 +111,7 @@ fun WelcomeScreen(
 
         // Login button
         Button(
-            onClick = { /*TODO*/ },
+            onClick = actions.navigateToSignIn,
             modifier = Modifier
                 .padding(horizontal = 24.dp)
                 .fillMaxWidth()
@@ -122,7 +126,7 @@ fun WelcomeScreen(
 
         // Register button
         OutlinedButton(
-            onClick = {},
+            onClick = actions.navigateToSignUp,
             modifier = Modifier
                 .padding(horizontal = 24.dp)
                 .fillMaxWidth()
