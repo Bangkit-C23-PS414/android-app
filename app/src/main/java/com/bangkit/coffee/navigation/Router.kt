@@ -21,7 +21,7 @@ fun Router(
 
     NavHost(
         navController = navController,
-        startDestination = "dashboard",
+        startDestination = "auth",
     ) {
         authGraph(navController)
         imageDetectionGraph(navController)

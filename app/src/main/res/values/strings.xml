@@ -1,3 +1,10 @@
 <resources>
-    <string name="app_name">Coffee Leaf Disease Recognition</string>
+    <string name="app_name">Kopintar</string>
+    <string name="or">OR</string>
+    <string name="welcome_title_1">Detect diseases with ease</string>
+    <string name="welcome_title_2">Revolutionize your farm</string>
+    <string name="welcome_title_3">Effortless disease diagnosis</string>
+    <string name="welcome_description_1">Capture images of your coffee leaves and let our machine learning algorithms do the rest.</string>
+    <string name="welcome_description_2">Get instant results on leaf health and prevent potential crop losses.</string>
+    <string name="welcome_description_3">Save time and resources by identifying coffee diseases quickly and accurately.</string>
 </resources>
