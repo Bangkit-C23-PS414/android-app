@@ -1,4 +1,4 @@
-package com.bangkit.coffee.presentation.signin
+package com.bangkit.coffee.presentation.signup
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Column
@@ -21,13 +21,13 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import com.bangkit.coffee.R
-import com.bangkit.coffee.presentation.signin.components.SignInForm
+import com.bangkit.coffee.presentation.signup.components.SignUpForm
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun SignInScreen(
-    state: SignInState = SignInState(),
-    actions: SignInActions = SignInActions()
+fun SignUpScreen(
+    state: SignUpState = SignUpState(),
+    actions: SignUpActions = SignUpActions()
 ) {
     Column(
         modifier = Modifier
@@ -48,22 +48,20 @@ fun SignInScreen(
                 .align(Alignment.CenterHorizontally)
                 .fillMaxWidth()
                 .aspectRatio(1.35f),
-            painter = painterResource(R.drawable.sign_in),
+            painter = painterResource(R.drawable.sign_up),
             contentDescription = null,
             contentScale = ContentScale.FillWidth
         )
 
-        ProvideSignInActions(actions = actions) {
-            SignInForm(
-                isPasswordVisible = state.isPasswordVisible,
-            )
+        ProvideSignUpActions(actions = actions) {
+            SignUpForm()
         }
     }
 }
 
 @Composable
-@Preview(name = "SignIn", showBackground = true)
-private fun SignInScreenPreview() {
-    SignInScreen()
+@Preview(name = "SignUp", showBackground = true)
+private fun SignUpScreenPreview() {
+    SignUpScreen()
 }
 

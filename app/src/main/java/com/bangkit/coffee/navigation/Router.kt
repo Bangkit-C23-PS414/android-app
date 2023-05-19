@@ -11,6 +11,7 @@ import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import com.bangkit.coffee.presentation.components.SimpleScreen
 import com.bangkit.coffee.presentation.signin.SignInRoute
+import com.bangkit.coffee.presentation.signup.SignUpRoute
 import com.bangkit.coffee.presentation.welcome.WelcomeRoute
 
 @Composable
@@ -26,7 +27,7 @@ fun Router(
 
     NavHost(
         navController = navController,
-        startDestination = Screen.SignIn.route,
+        startDestination = Screen.SignUp.route,
     ) {
         // Welcome
         composable(Screen.Welcome.route) {
@@ -45,7 +46,9 @@ fun Router(
         }
 
         composable(Screen.SignUp.route) {
-            SimpleScreen(text = "Sign Up")
+            SignUpRoute(
+                navigateUp = { navController.navigateUp() },
+            )
         }
 
         // Image Detections

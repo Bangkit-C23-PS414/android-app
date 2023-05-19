@@ -8,8 +8,8 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Email
 import androidx.compose.material.icons.filled.Lock
-import androidx.compose.material.icons.filled.Person
 import androidx.compose.material3.Button
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
@@ -21,6 +21,7 @@ import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.focus.FocusDirection
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
@@ -70,12 +71,15 @@ fun SignInForm(
                         Text(text = stringResource(R.string.email_hint))
                     },
                     leadingIcon = {
-                        Icon(imageVector = Icons.Filled.Person, contentDescription = null)
+                        Icon(imageVector = Icons.Filled.Email, contentDescription = null)
                     },
                     keyboardOptions = KeyboardOptions(
                         keyboardType = KeyboardType.Email,
                         imeAction = ImeAction.Next,
                     ),
+                    keyboardActions = KeyboardActions(
+                        onNext = { focusManager.moveFocus(FocusDirection.Down) }
+                    )
                 )
             }
             Spacer(modifier = Modifier.height(12.dp))
@@ -89,7 +93,7 @@ fun SignInForm(
                         Text(text = stringResource(R.string.password))
                     },
                     placeholder = {
-                        Text(text = stringResource(R.string.password))
+                        Text(text = stringResource(R.string.password_hint))
                     },
                     leadingIcon = {
                         Icon(imageVector = Icons.Filled.Lock, contentDescription = null)

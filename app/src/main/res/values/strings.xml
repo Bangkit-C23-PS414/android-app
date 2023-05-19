@@ -16,4 +16,11 @@
     <string name="forgot_password_question">Forgot your password?</string>
     <string name="email_error">Email address is not valid</string>
     <string name="password_error">Password is not valid</string>
+    <string name="full_name">Full name</string>
+    <string name="sign_up">Sign Up</string>
+    <string name="terms_agreement">By signing up, you agree to our</string>
+    <string name="terms_and_conditions">terms and conditions</string>
+    <string name="full_name_hint">Type your full name</string>
+    <string name="confirm_password">Confirm password</string>
+    <string name="confirm_password_hint">Type your password again</string>
 </resources>

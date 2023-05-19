@@ -17,4 +17,11 @@
     <string name="forgot_password_question">Lupa kata sandi?</string>
     <string name="email_error">Alamat email tidak valid</string>
     <string name="password_error">Kata sandi tidak valid</string>
+    <string name="full_name">Nama lengkap</string>
+    <string name="sign_up">Mendaftar</string>
+    <string name="terms_agreement">Dengan mendaftar, anda setuju dengan</string>
+    <string name="terms_and_conditions">syarat dan ketentuan</string>
+    <string name="full_name_hint">Ketik nama lengkap anda</string>
+    <string name="confirm_password">Konfirmasi kata sandi</string>
+    <string name="confirm_password_hint">Ketik ulang kata sandi anda</string>
 </resources>
