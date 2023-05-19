@@ -30,7 +30,7 @@ fun Router(
 
     NavHost(
         navController = navController,
-        startDestination = Screen.ResetPassword.route,
+        startDestination = Screen.Welcome.route,
     ) {
         // Welcome
         composable(Screen.Welcome.route) {

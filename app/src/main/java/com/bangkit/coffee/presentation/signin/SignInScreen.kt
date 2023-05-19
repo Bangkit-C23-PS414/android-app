@@ -132,7 +132,7 @@ fun SignInScreen(
                         )
                     )
                 }
-                Spacer(modifier = Modifier.height(12.dp))
+
                 field(SignInForm::password) {
                     OutlinedTextField(
                         modifier = Modifier.fillMaxWidth(),

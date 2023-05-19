@@ -136,8 +136,6 @@ fun SignUpScreen(
                     )
                 }
 
-                Spacer(modifier = Modifier.height(12.dp))
-
                 field(SignUpForm::email) {
                     OutlinedTextField(
                         modifier = Modifier.fillMaxWidth(),
@@ -167,8 +165,6 @@ fun SignUpScreen(
                         )
                     )
                 }
-
-                Spacer(modifier = Modifier.height(12.dp))
 
                 field(SignUpForm::password) {
                     OutlinedTextField(
@@ -200,8 +196,6 @@ fun SignUpScreen(
                         )
                     )
                 }
-
-                Spacer(modifier = Modifier.height(12.dp))
 
                 field(SignUpForm::confirmPassword) {
                     OutlinedTextField(

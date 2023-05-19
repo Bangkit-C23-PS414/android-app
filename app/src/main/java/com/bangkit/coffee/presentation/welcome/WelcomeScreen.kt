@@ -40,6 +40,10 @@ fun WelcomeScreen(
     state: WelcomeState = WelcomeState(),
     actions: WelcomeActions = WelcomeActions(),
 ) {
+    val pagerState = rememberPagerState()
+    val pageCount = state.carouselItems.size
+    val isLoaded = rememberSaveable { mutableStateOf(false) }
+
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -47,10 +51,6 @@ fun WelcomeScreen(
         verticalArrangement = Arrangement.Bottom,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        val pagerState = rememberPagerState()
-        val pageCount = state.carouselItems.size
-        val isLoaded = rememberSaveable { mutableStateOf(false) }
-
         // App title
         Row(
             modifier = Modifier.padding(horizontal = 24.dp)
@@ -67,7 +67,7 @@ fun WelcomeScreen(
             pageCount = pageCount,
             state = pagerState,
         ) { i ->
-            LaunchedEffect(pagerState) { isLoaded.value = true }
+            LaunchedEffect(Unit) { isLoaded.value = true }
 
             Column(
                 modifier = Modifier.padding(horizontal = 24.dp),

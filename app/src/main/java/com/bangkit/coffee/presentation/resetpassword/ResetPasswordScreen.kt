@@ -139,8 +139,6 @@ fun ResetPasswordScreen(
                     )
                 }
 
-                Spacer(modifier = Modifier.height(12.dp))
-
                 field(ResetPasswordForm::confirmPassword) {
                     OutlinedTextField(
                         modifier = Modifier.fillMaxWidth(),
