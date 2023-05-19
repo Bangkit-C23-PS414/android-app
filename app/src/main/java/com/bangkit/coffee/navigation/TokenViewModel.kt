@@ -3,8 +3,8 @@ package com.bangkit.coffee.navigation
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.auth0.android.jwt.JWT
+import com.bangkit.coffee.data.repository.UserPreferencesRepository
 import com.bangkit.coffee.di.IODispatcher
-import com.bangkit.coffee.util.auth.TokenManager
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -15,7 +15,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class TokenViewModel @Inject constructor(
-    private val tokenManager: TokenManager,
+    private val userPreferencesRepository: UserPreferencesRepository,
     @IODispatcher private val dispatcher: CoroutineDispatcher,
 ) : ViewModel() {
 
@@ -27,7 +27,7 @@ class TokenViewModel @Inject constructor(
 
     init {
         viewModelScope.launch(dispatcher) {
-            tokenManager.getToken().collect { token ->
+            userPreferencesRepository.tokenFlow.collect { token ->
                 _token.emit(token)
                 _isValid.emit(tryParseJWT(token)?.isExpired(0) == false)
             }
