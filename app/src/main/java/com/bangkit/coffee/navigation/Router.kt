@@ -10,8 +10,11 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import com.bangkit.coffee.presentation.components.SimpleScreen
+import com.bangkit.coffee.presentation.forgotpassword.ForgotPasswordRoute
+import com.bangkit.coffee.presentation.resetpassword.ResetPasswordRoute
 import com.bangkit.coffee.presentation.signin.SignInRoute
 import com.bangkit.coffee.presentation.signup.SignUpRoute
+import com.bangkit.coffee.presentation.verifyotp.VerifyOTPRoute
 import com.bangkit.coffee.presentation.welcome.WelcomeRoute
 
 @Composable
@@ -27,7 +30,7 @@ fun Router(
 
     NavHost(
         navController = navController,
-        startDestination = Screen.SignUp.route,
+        startDestination = Screen.ResetPassword.route,
     ) {
         // Welcome
         composable(Screen.Welcome.route) {
@@ -47,6 +50,27 @@ fun Router(
 
         composable(Screen.SignUp.route) {
             SignUpRoute(
+                navigateUp = { navController.navigateUp() },
+            )
+        }
+
+        // Forgot Password
+        composable(Screen.ForgotPassword.route) {
+            ForgotPasswordRoute(
+                navigateUp = { navController.navigateUp() },
+                navigateToVerifyOTP = { navController.navigate(Screen.VerifyOTP.route) }
+            )
+        }
+
+        composable(Screen.VerifyOTP.route) {
+            VerifyOTPRoute(
+                navigateUp = { navController.navigateUp() },
+                navigateToResetPassword = { navController.navigate(Screen.ResetPassword.route) }
+            )
+        }
+
+        composable(Screen.ResetPassword.route) {
+            ResetPasswordRoute(
                 navigateUp = { navController.navigateUp() },
             )
         }

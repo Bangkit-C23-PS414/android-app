@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Kopintar</string>
     <string name="or">ATAU</string>
     <string name="welcome_title_1">Deteksi penyakit dengan mudah</string>
     <string name="welcome_title_2">Revolusi perkebunan Anda</string>
@@ -16,7 +15,7 @@
     <string name="password_hint">Ketik kata sandi anda</string>
     <string name="forgot_password_question">Lupa kata sandi?</string>
     <string name="email_error">Alamat email tidak valid</string>
-    <string name="password_error">Kata sandi tidak valid</string>
+    <string name="password_error">Kata sandi minimum 6 karakter</string>
     <string name="full_name">Nama lengkap</string>
     <string name="sign_up">Mendaftar</string>
     <string name="terms_agreement">Dengan mendaftar, anda setuju dengan</string>
@@ -24,4 +23,19 @@
     <string name="full_name_hint">Ketik nama lengkap anda</string>
     <string name="confirm_password">Konfirmasi kata sandi</string>
     <string name="confirm_password_hint">Ketik ulang kata sandi anda</string>
+    <string name="forgot_password_description">Ups, tidak ingat kata sandi Anda? Izinkan kami bantu Anda dapatkan akses.</string>
+    <string name="send_me_otp">Kirimkan saya OTP</string>
+    <string name="enter_otp">Verifikasi OTP</string>
+    <string name="enter_otp_description">Kode 6 digit telah dikirim ke</string>
+    <string name="verify">Verifikasi</string>
+    <string name="full_name_error">Nama lengkap wajib diisi</string>
+    <string name="confirm_password_error">Konfirmasi kata sandi tidak cocok</string>
+    <string name="reset_password">Atur ulang kata sandi</string>
+    <string name="reset_password_description">Atur kata sandi baru untuk akun Anda sehingga Anda dapat mengakses semua fitur.</string>
+    <string name="new_password">Kata sandi baru</string>
+    <string name="new_password_hint">Ketik kata sandi baru</string>
+    <string name="new_password_error">Kata sandi baru minimum 6 karakter</string>
+    <string name="confirm_new_password">Konfirmasi kata sandi baru</string>
+    <string name="confirm_new_password_hint">Ketik ulang kata sandi baru</string>
+    <string name="confirm_new_password_error">Konfirmasi kata sandi baru tidak cocok</string>
 </resources>

@@ -32,6 +32,7 @@ import androidx.compose.ui.unit.dp
 import com.bangkit.coffee.R
 import com.bangkit.coffee.presentation.components.DividerWithText
 import com.bangkit.coffee.presentation.components.PageIndicator
+import com.bangkit.coffee.presentation.theme.AppTheme
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
@@ -120,7 +121,7 @@ fun WelcomeScreen(
         }
 
         DividerWithText(
-            modifier = Modifier.padding(horizontal = 24.dp, vertical = 12.dp),
+            modifier = Modifier.padding(horizontal = 24.dp, vertical = 8.dp),
             text = stringResource(R.string.or)
         )
 
@@ -139,16 +140,18 @@ fun WelcomeScreen(
 @Composable
 @Preview(name = "Welcome", showBackground = true)
 private fun WelcomeScreenPreview() {
-    WelcomeScreen(
-        state = WelcomeState(
-            carouselItems = listOf(
-                WelcomeCarouselItem(
-                    image = R.drawable.welcome_1,
-                    title = R.string.welcome_title_1,
-                    description = R.string.welcome_description_1
-                ),
+    AppTheme {
+        WelcomeScreen(
+            state = WelcomeState(
+                carouselItems = listOf(
+                    WelcomeCarouselItem(
+                        image = R.drawable.welcome_1,
+                        title = R.string.welcome_title_1,
+                        description = R.string.welcome_description_1
+                    ),
+                )
             )
         )
-    )
+    }
 }
 

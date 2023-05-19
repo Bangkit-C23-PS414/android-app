@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Kopintar</string>
+    <string name="app_name" translatable="false">Kopintar</string>
     <string name="or">OR</string>
     <string name="welcome_title_1">Detect diseases with ease</string>
     <string name="welcome_title_2">Revolutionize your farm</string>
@@ -13,9 +13,9 @@
     <string name="password">Password</string>
     <string name="email_hint">Type your email address</string>
     <string name="password_hint">Type your password</string>
-    <string name="forgot_password_question">Forgot your password?</string>
+    <string name="forgot_password_question">Forgot password?</string>
     <string name="email_error">Email address is not valid</string>
-    <string name="password_error">Password is not valid</string>
+    <string name="password_error">Password minimum 6 characters</string>
     <string name="full_name">Full name</string>
     <string name="sign_up">Sign Up</string>
     <string name="terms_agreement">By signing up, you agree to our</string>
@@ -23,4 +23,19 @@
     <string name="full_name_hint">Type your full name</string>
     <string name="confirm_password">Confirm password</string>
     <string name="confirm_password_hint">Type your password again</string>
+    <string name="forgot_password_description">Oops, can\'t remember your password? Let us help you regain access.</string>
+    <string name="send_me_otp">Send me OTP</string>
+    <string name="enter_otp">Enter OTP</string>
+    <string name="enter_otp_description">An 6 digit code has been sent to</string>
+    <string name="verify">Verify</string>
+    <string name="full_name_error">Full name is required</string>
+    <string name="confirm_password_error">Confirm password is not match</string>
+    <string name="reset_password">Reset password</string>
+    <string name="reset_password_description">Set the new password for your account so you can login and access all the features.</string>
+    <string name="new_password">New password</string>
+    <string name="new_password_hint">Type new password</string>
+    <string name="new_password_error">New password minimum 6 characters</string>
+    <string name="confirm_new_password">Confirm new password</string>
+    <string name="confirm_new_password_hint">Type your new password again</string>
+    <string name="confirm_new_password_error">Confirm new password is not match</string>
 </resources>

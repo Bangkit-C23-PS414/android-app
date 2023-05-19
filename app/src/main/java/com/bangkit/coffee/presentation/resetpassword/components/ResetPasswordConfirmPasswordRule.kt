@@ -1,14 +1,14 @@
-package com.bangkit.coffee.presentation.signup.components
+package com.bangkit.coffee.presentation.resetpassword.components
 
 import me.naingaungluu.formconductor.FieldResult
 import me.naingaungluu.formconductor.validation.rules.StateBasedValidationRule
 
-object SignUpConfirmPasswordRule :
-    StateBasedValidationRule<String, SignUpConfirmPassword, SignUpForm> {
+object ResetPasswordConfirmPasswordRule :
+    StateBasedValidationRule<String, ResetPasswordConfirmPassword, ResetPasswordForm> {
     override fun validate(
         value: String,
-        options: SignUpConfirmPassword,
-        formState: SignUpForm
+        options: ResetPasswordConfirmPassword,
+        formState: ResetPasswordForm
     ): FieldResult {
         return if (value == formState.password) {
             FieldResult.Success
