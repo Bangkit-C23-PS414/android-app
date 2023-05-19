@@ -1,6 +1,7 @@
 package com.bangkit.coffee.data.repository
 
 import android.content.Context
+import androidx.datastore.preferences.core.edit
 import com.bangkit.coffee.data.source.datastore.UserPreferences
 import com.bangkit.coffee.data.source.datastore.UserPreferencesKeys
 import com.bangkit.coffee.di.dataStore
@@ -28,10 +29,14 @@ class UserPreferencesRepositoryImpl @Inject constructor(
         }
 
     override suspend fun updateToken(token: String) {
-        TODO("Not yet implemented")
+        context.dataStore.edit { pref ->
+            pref[UserPreferencesKeys.token] = token
+        }
     }
 
     override suspend fun deleteToken() {
-        TODO("Not yet implemented")
+        context.dataStore.edit { pref ->
+            pref.remove(UserPreferencesKeys.token)
+        }
     }
 }
