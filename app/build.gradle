@@ -50,6 +50,7 @@ android {
 }
 
 dependencies {
+    testImplementation 'junit:junit:4.12'
     def room_version = '2.5.1'
     def hilt_version = '2.45'
     def retrofit_version = '2.9.0'
@@ -102,17 +103,21 @@ dependencies {
     implementation "androidx.datastore:datastore-preferences:$datastore_version"
     implementation 'com.auth0.android:jwtdecode:2.0.2'
 
-    // Testing
+    // Unit Testing
     implementation 'com.jakewharton.timber:timber:5.0.1'
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.5'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
+    testImplementation 'org.mockito:mockito-core:5.2.0'
+    androidTestImplementation 'org.mockito:mockito-android:5.2.0'
+
+    // Compose Testing
     androidTestImplementation platform('androidx.compose:compose-bom:2022.10.00')
     androidTestImplementation 'androidx.compose.ui:ui-test-junit4'
-
-    // Compose Toolkit
     debugImplementation 'androidx.compose.ui:ui-tooling'
     debugImplementation 'androidx.compose.ui:ui-test-manifest'
+    androidTestImplementation 'com.kaspersky.android-components:kaspresso:1.5.2'
+    androidTestImplementation 'com.kaspersky.android-components:kaspresso-compose-support:1.5.2'
 }
 
 kapt {

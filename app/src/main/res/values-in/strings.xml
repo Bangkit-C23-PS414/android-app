@@ -38,4 +38,6 @@
     <string name="confirm_new_password">Konfirmasi kata sandi baru</string>
     <string name="confirm_new_password_hint">Ketik ulang kata sandi baru</string>
     <string name="confirm_new_password_error">Konfirmasi kata sandi baru tidak cocok</string>
+    <string name="sign_in_action">Saya memiliki akun</string>
+    <string name="sign_up_action">Saya ingin mendaftar</string>
 </resources>

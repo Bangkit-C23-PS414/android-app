@@ -38,4 +38,6 @@
     <string name="confirm_new_password">Confirm new password</string>
     <string name="confirm_new_password_hint">Type your new password again</string>
     <string name="confirm_new_password_error">Confirm new password is not match</string>
+    <string name="sign_in_action">I have an account</string>
+    <string name="sign_up_action">I want to register</string>
 </resources>

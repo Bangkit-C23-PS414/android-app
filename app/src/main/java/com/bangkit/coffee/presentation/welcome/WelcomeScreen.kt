@@ -23,6 +23,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
@@ -116,8 +117,9 @@ fun WelcomeScreen(
             modifier = Modifier
                 .padding(horizontal = 24.dp)
                 .fillMaxWidth()
+                .testTag("SignInButton")
         ) {
-            Text(text = "I have an account")
+            Text(text = stringResource(R.string.sign_in_action))
         }
 
         DividerWithText(
@@ -131,8 +133,9 @@ fun WelcomeScreen(
             modifier = Modifier
                 .padding(horizontal = 24.dp)
                 .fillMaxWidth()
+                .testTag("SignUpButton")
         ) {
-            Text(text = "I want to register")
+            Text(text = stringResource(R.string.sign_up_action))
         }
     }
 }

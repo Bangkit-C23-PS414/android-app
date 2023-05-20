@@ -35,6 +35,7 @@ import androidx.compose.ui.focus.FocusDirection
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalFocusManager
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
@@ -51,6 +52,7 @@ import me.naingaungluu.formconductor.FieldResult
 import me.naingaungluu.formconductor.FormResult
 import me.naingaungluu.formconductor.composeui.field
 import me.naingaungluu.formconductor.composeui.form
+import timber.log.Timber
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -105,9 +107,14 @@ fun SignInScreen(
             form(SignInForm::class) {
                 field(SignInForm::email) {
                     OutlinedTextField(
-                        modifier = Modifier.fillMaxWidth(),
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .testTag("EmailField"),
                         value = this.state.value?.value.orEmpty(),
-                        onValueChange = this::setField,
+                        onValueChange = {
+                            Timber.d("Email changed: $it")
+                            this.setField(it)
+                        },
                         isError = resultState.value is FieldResult.Error,
                         supportingText = {
                             if (resultState.value is FieldResult.Error) {
@@ -135,7 +142,9 @@ fun SignInScreen(
 
                 field(SignInForm::password) {
                     OutlinedTextField(
-                        modifier = Modifier.fillMaxWidth(),
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .testTag("PasswordField"),
                         value = this.state.value?.value.orEmpty(),
                         onValueChange = this::setField,
                         isError = resultState.value is FieldResult.Error,
@@ -192,9 +201,12 @@ fun SignInScreen(
                     Text(text = stringResource(R.string.forgot_password_question))
                 }
                 Spacer(modifier = Modifier.height(8.dp))
+
                 Button(
                     onClick = actions.signIn,
-                    modifier = Modifier.fillMaxWidth(),
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .testTag("SignInButton"),
                     enabled = this.formState.value is FormResult.Success
                 ) {
                     Text(text = stringResource(R.string.sign_in))
