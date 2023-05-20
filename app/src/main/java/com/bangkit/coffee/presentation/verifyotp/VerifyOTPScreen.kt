@@ -36,6 +36,7 @@ import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.focus.onFocusEvent
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
@@ -57,14 +58,10 @@ fun VerifyOTPScreen(
     state: VerifyOTPState = VerifyOTPState(),
     actions: VerifyOTPActions = VerifyOTPActions()
 ) {
-    val focusRequester = FocusRequester()
+    val focusRequester = remember { FocusRequester() }
     val scrollState = rememberScrollState()
     val bringIntoViewRequester = remember { BringIntoViewRequester() }
     val coroutineScope = rememberCoroutineScope()
-
-    LaunchedEffect(Unit) {
-        focusRequester.requestFocus()
-    }
 
     Scaffold(
         topBar = {
@@ -134,8 +131,13 @@ fun VerifyOTPScreen(
                                         bringIntoViewRequester.bringIntoView()
                                     }
                                 }
-                            },
+                            }
+                            .testTag("OTPField"),
                     )
+
+                    LaunchedEffect(Unit) {
+                        focusRequester.requestFocus()
+                    }
                 }
 
                 Spacer(modifier = Modifier.height(12.dp))
@@ -144,7 +146,8 @@ fun VerifyOTPScreen(
                     onClick = actions.navigateToResetPassword,
                     modifier = Modifier
                         .fillMaxWidth()
-                        .bringIntoViewRequester(bringIntoViewRequester),
+                        .bringIntoViewRequester(bringIntoViewRequester)
+                        .testTag("VerifyOTPButton"),
                     enabled = this.formState.value is FormResult.Success
                 ) {
                     Text(text = stringResource(R.string.verify))

@@ -8,7 +8,7 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 @Composable
 fun SignUpRoute(
     coordinator: SignUpCoordinator = rememberSignUpCoordinator(),
-    navigateUp: () -> Unit
+    navigateUp: () -> Unit = {}
 ) {
     // State observing and declarations
     val uiState by coordinator.screenStateFlow.collectAsStateWithLifecycle(SignUpState())

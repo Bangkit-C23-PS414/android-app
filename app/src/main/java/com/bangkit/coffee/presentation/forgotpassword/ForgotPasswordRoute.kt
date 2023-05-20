@@ -8,8 +8,8 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 @Composable
 fun ForgotPasswordRoute(
     coordinator: ForgotPasswordCoordinator = rememberForgotPasswordCoordinator(),
-    navigateUp: () -> Unit,
-    navigateToVerifyOTP: () -> Unit
+    navigateUp: () -> Unit = {},
+    navigateToVerifyOTP: () -> Unit = {}
 ) {
     // State observing and declarations
     val uiState by coordinator.screenStateFlow.collectAsStateWithLifecycle(ForgotPasswordState())

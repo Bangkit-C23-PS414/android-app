@@ -8,8 +8,8 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 @Composable
 fun VerifyOTPRoute(
     coordinator: VerifyOTPCoordinator = rememberVerifyOTPCoordinator(),
-    navigateUp: () -> Unit,
-    navigateToResetPassword: () -> Unit
+    navigateUp: () -> Unit = {},
+    navigateToResetPassword: () -> Unit = {}
 ) {
     // State observing and declarations
     val uiState by coordinator.screenStateFlow.collectAsStateWithLifecycle(VerifyOTPState())

@@ -36,6 +36,7 @@ import androidx.compose.ui.focus.FocusDirection
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalFocusManager
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.SpanStyle
@@ -108,7 +109,9 @@ fun SignUpScreen(
             form(SignUpForm::class) {
                 field(SignUpForm::name) {
                     OutlinedTextField(
-                        modifier = Modifier.fillMaxWidth(),
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .testTag("FullNameField"),
                         value = this.state.value?.value.orEmpty(),
                         onValueChange = this::setField,
                         isError = resultState.value is FieldResult.Error,
@@ -138,7 +141,9 @@ fun SignUpScreen(
 
                 field(SignUpForm::email) {
                     OutlinedTextField(
-                        modifier = Modifier.fillMaxWidth(),
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .testTag("EmailField"),
                         value = this.state.value?.value.orEmpty(),
                         onValueChange = this::setField,
                         isError = resultState.value is FieldResult.Error,
@@ -168,7 +173,9 @@ fun SignUpScreen(
 
                 field(SignUpForm::password) {
                     OutlinedTextField(
-                        modifier = Modifier.fillMaxWidth(),
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .testTag("PasswordField"),
                         value = this.state.value?.value.orEmpty(),
                         onValueChange = this::setField,
                         isError = resultState.value is FieldResult.Error,
@@ -199,7 +206,9 @@ fun SignUpScreen(
 
                 field(SignUpForm::confirmPassword) {
                     OutlinedTextField(
-                        modifier = Modifier.fillMaxWidth(),
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .testTag("ConfirmPasswordField"),
                         value = this.state.value?.value.orEmpty(),
                         onValueChange = this::setField,
                         isError = resultState.value is FieldResult.Error,
@@ -239,6 +248,7 @@ fun SignUpScreen(
                         verticalAlignment = Alignment.CenterVertically
                     ) {
                         Checkbox(
+                            modifier = Modifier.testTag("AgreementCheckbox"),
                             checked = checked,
                             onCheckedChange = setField,
                         )
@@ -258,7 +268,9 @@ fun SignUpScreen(
                 Spacer(modifier = Modifier.height(12.dp))
                 Button(
                     onClick = actions.signUp,
-                    modifier = Modifier.fillMaxWidth(),
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .testTag("SignUpButton"),
                     enabled = this.formState.value is FormResult.Success
                 ) {
                     Text(text = stringResource(R.string.sign_up))

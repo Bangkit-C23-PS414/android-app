@@ -9,27 +9,15 @@ import androidx.compose.ui.test.onNodeWithTag
 import com.bangkit.coffee.presentation.theme.AppTheme
 import org.junit.Rule
 import org.junit.Test
-import org.mockito.Mockito.mock
 
-class WelcomeTest {
+class WelcomeRouteTest {
 
     @get:Rule
     val rule = createAndroidComposeRule<ComponentActivity>()
 
-    private fun setContent() {
-        rule.setContent {
-            AppTheme {
-                WelcomeRoute(
-                    navigateToSignIn = mock(),
-                    navigateToSignUp = mock()
-                )
-            }
-        }
-    }
-
     @Test
     fun signInButton_exists() {
-        setContent()
+        rule.setContent { AppTheme { WelcomeRoute() } }
 
         rule.onNodeWithTag("SignInButton").assertHasClickAction()
         rule.onNodeWithTag("SignInButton").assertIsEnabled()
@@ -38,7 +26,7 @@ class WelcomeTest {
 
     @Test
     fun signUpButton_exists() {
-        setContent()
+        rule.setContent { AppTheme { WelcomeRoute() } }
 
         rule.onNodeWithTag("SignUpButton").assertHasClickAction()
         rule.onNodeWithTag("SignUpButton").assertIsEnabled()

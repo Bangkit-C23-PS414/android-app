@@ -8,8 +8,8 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 @Composable
 fun SignInRoute(
     coordinator: SignInCoordinator = rememberSignInCoordinator(),
-    navigateUp: () -> Unit,
-    navigateToForgotPassword: () -> Unit
+    navigateUp: () -> Unit = {},
+    navigateToForgotPassword: () -> Unit = {}
 ) {
     // State observing and declarations
     val uiState by coordinator.screenStateFlow.collectAsStateWithLifecycle(SignInState())

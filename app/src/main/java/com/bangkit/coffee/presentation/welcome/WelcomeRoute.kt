@@ -8,8 +8,8 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 @Composable
 fun WelcomeRoute(
     coordinator: WelcomeCoordinator = rememberWelcomeCoordinator(),
-    navigateToSignIn: () -> Unit,
-    navigateToSignUp: () -> Unit
+    navigateToSignIn: () -> Unit = {},
+    navigateToSignUp: () -> Unit = {}
 ) {
     // State observing and declarations
     val uiState by coordinator.screenStateFlow.collectAsStateWithLifecycle(WelcomeState())

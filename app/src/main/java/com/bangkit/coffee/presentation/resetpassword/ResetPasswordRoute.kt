@@ -8,7 +8,7 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 @Composable
 fun ResetPasswordRoute(
     coordinator: ResetPasswordCoordinator = rememberResetPasswordCoordinator(),
-    navigateUp: () -> Unit
+    navigateUp: () -> Unit = {}
 ) {
     // State observing and declarations
     val uiState by coordinator.screenStateFlow.collectAsStateWithLifecycle(ResetPasswordState())

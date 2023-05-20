@@ -38,6 +38,7 @@ import androidx.compose.ui.focus.onFocusEvent
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalFocusManager
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
@@ -125,7 +126,8 @@ fun ForgotPasswordScreen(
                                         bringIntoViewRequester.bringIntoView()
                                     }
                                 }
-                            },
+                            }
+                            .testTag("EmailField"),
                         value = this.state.value?.value.orEmpty(),
                         onValueChange = this::setField,
                         isError = resultState.value is FieldResult.Error,
@@ -159,7 +161,8 @@ fun ForgotPasswordScreen(
                     onClick = actions.navigateToVerifyOTP,
                     modifier = Modifier
                         .fillMaxWidth()
-                        .bringIntoViewRequester(bringIntoViewRequester),
+                        .bringIntoViewRequester(bringIntoViewRequester)
+                        .testTag("ForgotPasswordButton"),
                     enabled = this.formState.value is FormResult.Success
                 ) {
                     Text(text = stringResource(R.string.send_me_otp))

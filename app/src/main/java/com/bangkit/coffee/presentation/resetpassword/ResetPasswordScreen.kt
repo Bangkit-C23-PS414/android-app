@@ -33,6 +33,7 @@ import androidx.compose.ui.focus.FocusDirection
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalFocusManager
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
@@ -110,7 +111,9 @@ fun ResetPasswordScreen(
             form(ResetPasswordForm::class) {
                 field(ResetPasswordForm::password) {
                     OutlinedTextField(
-                        modifier = Modifier.fillMaxWidth(),
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .testTag("NewPasswordField"),
                         value = this.state.value?.value.orEmpty(),
                         onValueChange = this::setField,
                         isError = resultState.value is FieldResult.Error,
@@ -141,7 +144,9 @@ fun ResetPasswordScreen(
 
                 field(ResetPasswordForm::confirmPassword) {
                     OutlinedTextField(
-                        modifier = Modifier.fillMaxWidth(),
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .testTag("ConfirmNewPasswordField"),
                         value = this.state.value?.value.orEmpty(),
                         onValueChange = this::setField,
                         isError = resultState.value is FieldResult.Error,
@@ -174,7 +179,9 @@ fun ResetPasswordScreen(
 
                 Button(
                     onClick = {},
-                    modifier = Modifier.fillMaxWidth(),
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .testTag("ResetPasswordButton"),
                     enabled = this.formState.value is FormResult.Success
                 ) {
                     Text(text = stringResource(R.string.reset_password))
