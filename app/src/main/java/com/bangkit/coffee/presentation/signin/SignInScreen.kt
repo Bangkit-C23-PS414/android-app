@@ -16,6 +16,8 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.Email
 import androidx.compose.material.icons.filled.Lock
+import androidx.compose.material.icons.filled.Visibility
+import androidx.compose.material.icons.filled.VisibilityOff
 import androidx.compose.material3.Button
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
@@ -172,14 +174,12 @@ fun SignInScreen(
                                 checked = state.isPasswordVisible,
                                 onCheckedChange = actions.setPasswordVisibility,
                             ) {
-                                val iconRes = if (state.isPasswordVisible) {
-                                    R.drawable.baseline_visibility_24
-                                } else {
-                                    R.drawable.baseline_visibility_off_24
-                                }
-
                                 Icon(
-                                    painter = painterResource(iconRes),
+                                    imageVector = if (state.isPasswordVisible) {
+                                        Icons.Filled.Visibility
+                                    } else {
+                                        Icons.Filled.VisibilityOff
+                                    },
                                     contentDescription = null,
                                 )
                             }
