@@ -72,6 +72,11 @@ fun Router(
         composable(Screen.ResetPassword.route) {
             ResetPasswordRoute(
                 navigateUp = { navController.navigateUp() },
+                navigateToLogin = {
+                    navController.navigate(Screen.SignIn.route) {
+                        popUpTo(Screen.Welcome.route)
+                    }
+                }
             )
         }
 
