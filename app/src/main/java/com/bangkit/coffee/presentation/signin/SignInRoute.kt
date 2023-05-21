@@ -8,7 +8,6 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 @Composable
 fun SignInRoute(
     coordinator: SignInCoordinator = rememberSignInCoordinator(),
-    navigateUp: () -> Unit = {},
     navigateToForgotPassword: () -> Unit = {},
     navigateToDashboard: () -> Unit = {}
 ) {
@@ -18,7 +17,6 @@ fun SignInRoute(
     // UI Actions
     val actions = rememberSignInActions(
         coordinator,
-        navigateUp,
         navigateToForgotPassword,
         navigateToDashboard
     )
@@ -31,7 +29,6 @@ fun SignInRoute(
 @Composable
 fun rememberSignInActions(
     coordinator: SignInCoordinator,
-    navigateUp: () -> Unit,
     navigateToForgotPassword: () -> Unit,
     navigateToDashboard: () -> Unit
 ): SignInActions {
@@ -39,7 +36,6 @@ fun rememberSignInActions(
         SignInActions(
             signIn = coordinator::signIn,
             setPasswordVisibility = coordinator::setPasswordVisibility,
-            navigateUp = navigateUp,
             navigateToForgotPassword = navigateToForgotPassword,
             navigateToDashboard = navigateToDashboard
         )

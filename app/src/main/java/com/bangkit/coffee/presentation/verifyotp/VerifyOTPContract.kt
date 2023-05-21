@@ -16,7 +16,6 @@ class VerifyOTPState
  **/
 data class VerifyOTPActions(
     val verifyOTP: () -> Unit = {},
-    val navigateUp: () -> Unit = {},
     val navigateToResetPassword: () -> Unit = {}
 )
 

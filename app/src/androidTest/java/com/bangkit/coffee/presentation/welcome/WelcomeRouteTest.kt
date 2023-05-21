@@ -6,7 +6,7 @@ import androidx.compose.ui.test.assertIsDisplayed
 import androidx.compose.ui.test.assertIsEnabled
 import androidx.compose.ui.test.junit4.createAndroidComposeRule
 import androidx.compose.ui.test.onNodeWithTag
-import com.bangkit.coffee.presentation.theme.AppTheme
+import com.bangkit.coffee.ui.theme.AppTheme
 import org.junit.Rule
 import org.junit.Test
 

@@ -2,6 +2,7 @@ package com.bangkit.coffee.navigation
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.ui.Modifier
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.NavType
@@ -10,8 +11,10 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import com.bangkit.coffee.presentation.components.SimpleScreen
-import com.bangkit.coffee.presentation.dashboard.DashboardScreen
 import com.bangkit.coffee.presentation.forgotpassword.ForgotPasswordRoute
+import com.bangkit.coffee.presentation.history.HistoryRoute
+import com.bangkit.coffee.presentation.home.HomeRoute
+import com.bangkit.coffee.presentation.profile.ProfileRoute
 import com.bangkit.coffee.presentation.resetpassword.ResetPasswordRoute
 import com.bangkit.coffee.presentation.signin.SignInRoute
 import com.bangkit.coffee.presentation.signup.SignUpRoute
@@ -20,6 +23,7 @@ import com.bangkit.coffee.presentation.welcome.WelcomeRoute
 
 @Composable
 fun Router(
+    modifier: Modifier = Modifier,
     navController: NavHostController = rememberNavController(),
     tokenViewModel: TokenViewModel = hiltViewModel(),
 ) {
@@ -30,14 +34,15 @@ fun Router(
     }
 
     NavHost(
+        modifier = modifier,
         navController = navController,
-        startDestination = Screen.Dashboard.route,
+        startDestination = Screen.Welcome.route,
     ) {
         // Splash
         composable(Screen.Splash.route) {
             SimpleScreen(
                 text = "Splash",
-                action = { navController.navigate(Screen.Dashboard.route) }
+                action = { navController.navigate(Screen.Home.route) }
             )
         }
 
@@ -52,10 +57,9 @@ fun Router(
         // Auth
         composable(Screen.SignIn.route) {
             SignInRoute(
-                navigateUp = { navController.navigateUp() },
                 navigateToForgotPassword = { navController.navigate(Screen.ForgotPassword.route) },
                 navigateToDashboard = {
-                    navController.navigate(Screen.Dashboard.route) {
+                    navController.navigate(Screen.Home.route) {
                         popUpTo(navController.graph.id) {
                             inclusive = true
                         }
@@ -66,9 +70,8 @@ fun Router(
 
         composable(Screen.SignUp.route) {
             SignUpRoute(
-                navigateUp = { navController.navigateUp() },
                 navigateToDashboard = {
-                    navController.navigate(Screen.Dashboard.route) {
+                    navController.navigate(Screen.Home.route) {
                         popUpTo(navController.graph.id) {
                             inclusive = true
                         }
@@ -80,21 +83,18 @@ fun Router(
         // Forgot Password
         composable(Screen.ForgotPassword.route) {
             ForgotPasswordRoute(
-                navigateUp = { navController.navigateUp() },
                 navigateToVerifyOTP = { navController.navigate(Screen.VerifyOTP.route) }
             )
         }
 
         composable(Screen.VerifyOTP.route) {
             VerifyOTPRoute(
-                navigateUp = { navController.navigateUp() },
                 navigateToResetPassword = { navController.navigate(Screen.ResetPassword.route) }
             )
         }
 
         composable(Screen.ResetPassword.route) {
             ResetPasswordRoute(
-                navigateUp = { navController.navigateUp() },
                 navigateToLogin = {
                     navController.navigate(Screen.SignIn.route) {
                         popUpTo(Screen.Welcome.route)
@@ -104,11 +104,20 @@ fun Router(
         }
 
         // Dashboard
-        composable(Screen.Dashboard.route) {
-            DashboardScreen(
-                rootNavController = navController,
-                navController = rememberNavController()
+        composable(Screen.Home.route) {
+            HomeRoute()
+        }
+        composable(Screen.History.route) {
+            HistoryRoute(
+                navigateToDetail = {
+                    navController.navigate(
+                        Screen.ImageDetectionDetail.createRoute("42")
+                    )
+                }
             )
+        }
+        composable(Screen.Profile.route) {
+            ProfileRoute()
         }
 
         // Image detections detail

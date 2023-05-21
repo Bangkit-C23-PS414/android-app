@@ -27,7 +27,7 @@ import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.bangkit.coffee.presentation.theme.AppTheme
+import com.bangkit.coffee.ui.theme.AppTheme
 
 @Composable
 fun OTPTextField(

@@ -14,23 +14,17 @@ import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.Lock
 import androidx.compose.material3.Button
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
-import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
-import androidx.compose.material3.TopAppBar
-import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.FocusDirection
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.platform.testTag
@@ -44,7 +38,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.bangkit.coffee.R
 import com.bangkit.coffee.presentation.resetpassword.components.ResetPasswordForm
-import com.bangkit.coffee.presentation.theme.AppTheme
+import com.bangkit.coffee.ui.theme.AppTheme
 import me.naingaungluu.formconductor.FieldResult
 import me.naingaungluu.formconductor.FormResult
 import me.naingaungluu.formconductor.composeui.field
@@ -59,133 +53,115 @@ fun ResetPasswordScreen(
     val focusManager = LocalFocusManager.current
     val scrollState = rememberScrollState()
 
-    Scaffold(
-        topBar = {
-            TopAppBar(
-                title = {},
-                colors = TopAppBarDefaults.smallTopAppBarColors(containerColor = Color.Transparent),
-                navigationIcon = {
-                    IconButton(onClick = actions.navigateUp) {
-                        Icon(
-                            imageVector = Icons.Filled.ArrowBack,
-                            contentDescription = stringResource(R.string.navigate_up)
-                        )
-                    }
-                },
-            )
-        }
-    ) { contentPadding ->
-        Column(
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .imePadding()
+            .verticalScroll(scrollState)
+            .padding(24.dp)
+    ) {
+        Image(
             modifier = Modifier
-                .fillMaxSize()
-                .imePadding()
-                .verticalScroll(scrollState)
-                .padding(contentPadding)
-                .padding(24.dp)
-        ) {
-            Image(
-                modifier = Modifier
-                    .align(Alignment.CenterHorizontally)
-                    .fillMaxWidth()
-                    .aspectRatio(1.4f),
-                painter = painterResource(R.drawable.reset_password),
-                contentDescription = null,
-                contentScale = ContentScale.FillWidth
-            )
+                .align(Alignment.CenterHorizontally)
+                .fillMaxWidth()
+                .aspectRatio(1.4f),
+            painter = painterResource(R.drawable.reset_password),
+            contentDescription = null,
+            contentScale = ContentScale.FillWidth
+        )
 
-            Spacer(modifier = Modifier.height(24.dp))
+        Spacer(modifier = Modifier.height(24.dp))
 
-            Text(
-                text = stringResource(R.string.reset_password),
-                style = MaterialTheme.typography.headlineMedium,
-                fontWeight = FontWeight.Bold,
-            )
-            Spacer(modifier = Modifier.height(8.dp))
-            Text(
-                text = stringResource(R.string.reset_password_description),
-                style = MaterialTheme.typography.bodyMedium,
-            )
+        Text(
+            text = stringResource(R.string.reset_password),
+            style = MaterialTheme.typography.headlineMedium,
+            fontWeight = FontWeight.Bold,
+        )
+        Spacer(modifier = Modifier.height(8.dp))
+        Text(
+            text = stringResource(R.string.reset_password_description),
+            style = MaterialTheme.typography.bodyMedium,
+        )
 
-            Spacer(modifier = Modifier.height(24.dp))
+        Spacer(modifier = Modifier.height(24.dp))
 
-            form(ResetPasswordForm::class) {
-                field(ResetPasswordForm::password) {
-                    OutlinedTextField(
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .testTag("NewPasswordField"),
-                        value = this.state.value?.value.orEmpty(),
-                        onValueChange = this::setField,
-                        isError = resultState.value is FieldResult.Error,
-                        supportingText = {
-                            if (resultState.value is FieldResult.Error) {
-                                Text(text = stringResource(R.string.new_password_error))
-                            }
-                        },
-                        label = {
-                            Text(text = stringResource(R.string.new_password))
-                        },
-                        placeholder = {
-                            Text(text = stringResource(R.string.new_password_hint))
-                        },
-                        leadingIcon = {
-                            Icon(imageVector = Icons.Filled.Lock, contentDescription = null)
-                        },
-                        visualTransformation = PasswordVisualTransformation(),
-                        keyboardOptions = KeyboardOptions(
-                            keyboardType = KeyboardType.Password,
-                            imeAction = ImeAction.Next,
-                        ),
-                        keyboardActions = KeyboardActions(
-                            onNext = { focusManager.moveFocus(FocusDirection.Down) }
-                        )
-                    )
-                }
-
-                field(ResetPasswordForm::confirmPassword) {
-                    OutlinedTextField(
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .testTag("ConfirmNewPasswordField"),
-                        value = this.state.value?.value.orEmpty(),
-                        onValueChange = this::setField,
-                        isError = resultState.value is FieldResult.Error,
-                        supportingText = {
-                            if (resultState.value is FieldResult.Error) {
-                                Text(text = stringResource(R.string.confirm_new_password_error))
-                            }
-                        },
-                        label = {
-                            Text(text = stringResource(R.string.confirm_new_password))
-                        },
-                        placeholder = {
-                            Text(text = stringResource(R.string.confirm_new_password_hint))
-                        },
-                        leadingIcon = {
-                            Icon(imageVector = Icons.Filled.Lock, contentDescription = null)
-                        },
-                        visualTransformation = PasswordVisualTransformation(),
-                        keyboardOptions = KeyboardOptions(
-                            keyboardType = KeyboardType.Password,
-                            imeAction = ImeAction.Done,
-                        ),
-                        keyboardActions = KeyboardActions(
-                            onDone = { focusManager.clearFocus() }
-                        )
-                    )
-                }
-
-                Spacer(modifier = Modifier.height(12.dp))
-
-                Button(
-                    onClick = actions.navigateToLogin,
+        form(ResetPasswordForm::class) {
+            field(ResetPasswordForm::password) {
+                OutlinedTextField(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .testTag("ResetPasswordButton"),
-                    enabled = this.formState.value is FormResult.Success
-                ) {
-                    Text(text = stringResource(R.string.reset_password))
-                }
+                        .testTag("NewPasswordField"),
+                    value = this.state.value?.value.orEmpty(),
+                    onValueChange = this::setField,
+                    isError = resultState.value is FieldResult.Error,
+                    supportingText = {
+                        if (resultState.value is FieldResult.Error) {
+                            Text(text = stringResource(R.string.new_password_error))
+                        }
+                    },
+                    label = {
+                        Text(text = stringResource(R.string.new_password))
+                    },
+                    placeholder = {
+                        Text(text = stringResource(R.string.new_password_hint))
+                    },
+                    leadingIcon = {
+                        Icon(imageVector = Icons.Filled.Lock, contentDescription = null)
+                    },
+                    visualTransformation = PasswordVisualTransformation(),
+                    keyboardOptions = KeyboardOptions(
+                        keyboardType = KeyboardType.Password,
+                        imeAction = ImeAction.Next,
+                    ),
+                    keyboardActions = KeyboardActions(
+                        onNext = { focusManager.moveFocus(FocusDirection.Down) }
+                    )
+                )
+            }
+
+            field(ResetPasswordForm::confirmPassword) {
+                OutlinedTextField(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .testTag("ConfirmNewPasswordField"),
+                    value = this.state.value?.value.orEmpty(),
+                    onValueChange = this::setField,
+                    isError = resultState.value is FieldResult.Error,
+                    supportingText = {
+                        if (resultState.value is FieldResult.Error) {
+                            Text(text = stringResource(R.string.confirm_new_password_error))
+                        }
+                    },
+                    label = {
+                        Text(text = stringResource(R.string.confirm_new_password))
+                    },
+                    placeholder = {
+                        Text(text = stringResource(R.string.confirm_new_password_hint))
+                    },
+                    leadingIcon = {
+                        Icon(imageVector = Icons.Filled.Lock, contentDescription = null)
+                    },
+                    visualTransformation = PasswordVisualTransformation(),
+                    keyboardOptions = KeyboardOptions(
+                        keyboardType = KeyboardType.Password,
+                        imeAction = ImeAction.Done,
+                    ),
+                    keyboardActions = KeyboardActions(
+                        onDone = { focusManager.clearFocus() }
+                    )
+                )
+            }
+
+            Spacer(modifier = Modifier.height(12.dp))
+
+            Button(
+                onClick = actions.navigateToLogin,
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .testTag("ResetPasswordButton"),
+                enabled = this.formState.value is FormResult.Success
+            ) {
+                Text(text = stringResource(R.string.reset_password))
             }
         }
     }

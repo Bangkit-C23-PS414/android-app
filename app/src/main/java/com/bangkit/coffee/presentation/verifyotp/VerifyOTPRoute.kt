@@ -8,14 +8,13 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 @Composable
 fun VerifyOTPRoute(
     coordinator: VerifyOTPCoordinator = rememberVerifyOTPCoordinator(),
-    navigateUp: () -> Unit = {},
     navigateToResetPassword: () -> Unit = {}
 ) {
     // State observing and declarations
     val uiState by coordinator.screenStateFlow.collectAsStateWithLifecycle(VerifyOTPState())
 
     // UI Actions
-    val actions = rememberVerifyOTPActions(coordinator, navigateUp, navigateToResetPassword)
+    val actions = rememberVerifyOTPActions(coordinator, navigateToResetPassword)
 
     // UI Rendering
     VerifyOTPScreen(uiState, actions)
@@ -25,13 +24,11 @@ fun VerifyOTPRoute(
 @Composable
 fun rememberVerifyOTPActions(
     coordinator: VerifyOTPCoordinator,
-    navigateUp: () -> Unit,
     navigateToResetPassword: () -> Unit
 ): VerifyOTPActions {
     return remember(coordinator) {
         VerifyOTPActions(
             verifyOTP = coordinator::verifyOTP,
-            navigateUp = navigateUp,
             navigateToResetPassword = navigateToResetPassword
         )
     }

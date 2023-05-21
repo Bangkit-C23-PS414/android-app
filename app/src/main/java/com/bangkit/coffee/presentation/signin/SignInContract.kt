@@ -19,7 +19,6 @@ data class SignInState(
 data class SignInActions(
     val signIn: () -> Unit = {},
     val setPasswordVisibility: (Boolean) -> Unit = {},
-    val navigateUp: () -> Unit = {},
     val navigateToForgotPassword: () -> Unit = {},
     val navigateToDashboard: () -> Unit = {},
 )

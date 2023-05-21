@@ -16,7 +16,6 @@ class ForgotPasswordState
  **/
 data class ForgotPasswordActions(
     val forgotPassword: () -> Unit = {},
-    val navigateUp: () -> Unit = {},
     val navigateToVerifyOTP: () -> Unit = {}
 )
 

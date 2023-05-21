@@ -8,7 +8,7 @@ import androidx.compose.ui.test.onNodeWithTag
 import androidx.compose.ui.test.performImeAction
 import androidx.compose.ui.test.performTextInput
 import androidx.compose.ui.test.performTextReplacement
-import com.bangkit.coffee.presentation.theme.AppTheme
+import com.bangkit.coffee.ui.theme.AppTheme
 import org.junit.Rule
 import org.junit.Test
 

@@ -33,7 +33,7 @@ import androidx.compose.ui.unit.dp
 import com.bangkit.coffee.R
 import com.bangkit.coffee.presentation.components.DividerWithText
 import com.bangkit.coffee.presentation.components.PageIndicator
-import com.bangkit.coffee.presentation.theme.AppTheme
+import com.bangkit.coffee.ui.theme.AppTheme
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable

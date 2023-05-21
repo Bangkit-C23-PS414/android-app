@@ -1,4 +1,4 @@
-package com.bangkit.coffee.presentation.theme
+package com.bangkit.coffee.ui.theme
 
 import androidx.compose.ui.graphics.Color
 

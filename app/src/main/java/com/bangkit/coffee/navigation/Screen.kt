@@ -28,11 +28,6 @@ sealed class Screen(val route: String) {
     object VerifyOTP : Screen("auth/forgot-password/verify")
     object ResetPassword : Screen("auth/forgot-password/reset")
 
-    // Dashboard
-    object Dashboard : Screen("dashboard") {
-        val screens = listOf(Home, History, Profile)
-    }
-
     // Home
     object Home : NavigationBarScreen("home", Icons.Filled.Home, R.string.home)
 

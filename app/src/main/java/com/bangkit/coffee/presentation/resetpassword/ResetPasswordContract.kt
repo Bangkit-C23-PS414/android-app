@@ -15,7 +15,6 @@ class ResetPasswordState
  * passed to the coordinator to handle
  **/
 data class ResetPasswordActions(
-    val navigateUp: () -> Unit = {},
     val navigateToLogin: () -> Unit = {}
 )
 
