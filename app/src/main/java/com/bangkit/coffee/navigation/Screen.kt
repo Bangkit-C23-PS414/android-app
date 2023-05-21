@@ -11,6 +11,9 @@ sealed class Screen(val route: String) {
     object VerifyOTP : Screen("auth/forgot-password/verify")
     object ResetPassword : Screen("auth/forgot-password/reset")
 
+    // Dashboard
+    object Dashboard : Screen("dashboard")
+
     // Image Detections
     object ImageDetections : Screen("image-detections")
     object ImageDetectionDetail : Screen("image-detections/{id}") {

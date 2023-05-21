@@ -203,7 +203,7 @@ fun SignInScreen(
                 Spacer(modifier = Modifier.height(8.dp))
 
                 Button(
-                    onClick = actions.signIn,
+                    onClick = actions.navigateToDashboard,
                     modifier = Modifier
                         .fillMaxWidth()
                         .testTag("SignInButton"),

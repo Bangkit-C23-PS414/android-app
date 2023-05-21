@@ -44,13 +44,27 @@ fun Router(
         composable(Screen.SignIn.route) {
             SignInRoute(
                 navigateUp = { navController.navigateUp() },
-                navigateToForgotPassword = { navController.navigate(Screen.ForgotPassword.route) }
+                navigateToForgotPassword = { navController.navigate(Screen.ForgotPassword.route) },
+                navigateToDashboard = {
+                    navController.navigate(Screen.Dashboard.route) {
+                        popUpTo(navController.graph.id) {
+                            inclusive = true
+                        }
+                    }
+                }
             )
         }
 
         composable(Screen.SignUp.route) {
             SignUpRoute(
                 navigateUp = { navController.navigateUp() },
+                navigateToDashboard = {
+                    navController.navigate(Screen.Dashboard.route) {
+                        popUpTo(navController.graph.id) {
+                            inclusive = true
+                        }
+                    }
+                }
             )
         }
 
@@ -77,6 +91,13 @@ fun Router(
                         popUpTo(Screen.Welcome.route)
                     }
                 }
+            )
+        }
+
+        // Dashboard
+        composable(Screen.Dashboard.route) {
+            SimpleScreen(
+                text = "Dashboard"
             )
         }
 

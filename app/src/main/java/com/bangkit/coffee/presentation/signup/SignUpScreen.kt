@@ -267,7 +267,7 @@ fun SignUpScreen(
                 }
                 Spacer(modifier = Modifier.height(12.dp))
                 Button(
-                    onClick = actions.signUp,
+                    onClick = actions.navigateToDashboard,
                     modifier = Modifier
                         .fillMaxWidth()
                         .testTag("SignUpButton"),

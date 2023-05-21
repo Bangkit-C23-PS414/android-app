@@ -8,13 +8,14 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 @Composable
 fun SignUpRoute(
     coordinator: SignUpCoordinator = rememberSignUpCoordinator(),
-    navigateUp: () -> Unit = {}
+    navigateUp: () -> Unit = {},
+    navigateToDashboard: () -> Unit = {}
 ) {
     // State observing and declarations
     val uiState by coordinator.screenStateFlow.collectAsStateWithLifecycle(SignUpState())
 
     // UI Actions
-    val actions = rememberSignUpActions(coordinator, navigateUp)
+    val actions = rememberSignUpActions(coordinator, navigateUp, navigateToDashboard)
 
     // UI Rendering
     SignUpScreen(uiState, actions)
@@ -24,11 +25,13 @@ fun SignUpRoute(
 @Composable
 fun rememberSignUpActions(
     coordinator: SignUpCoordinator,
-    navigateUp: () -> Unit
+    navigateUp: () -> Unit,
+    navigateToDashboard: () -> Unit
 ): SignUpActions {
     return remember(coordinator) {
         SignUpActions(
-            navigateUp = navigateUp
+            navigateUp = navigateUp,
+            navigateToDashboard = navigateToDashboard
         )
     }
 }
