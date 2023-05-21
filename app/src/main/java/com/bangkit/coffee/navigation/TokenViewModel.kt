@@ -29,15 +29,14 @@ class TokenViewModel @Inject constructor(
         viewModelScope.launch(dispatcher) {
             userPreferencesRepository.tokenFlow.collect { token ->
                 _token.emit(token)
-                _isValid.emit(tryParseJWT(token)?.isExpired(0) == false)
+                _isValid.emit(tryParseJWT(token)?.isExpired(30) == false)
             }
         }
     }
 
     private fun tryParseJWT(token: String?): JWT? {
         return try {
-            if (token.isNullOrBlank()) throw Exception("No token")
-            JWT(token)
+            if (token.isNullOrBlank()) null else JWT(token)
         } catch (e: Exception) {
             return null
         }

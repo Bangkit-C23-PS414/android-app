@@ -17,15 +17,15 @@ class UserPreferencesRepositoryImpl @Inject constructor(
     override val flow: Flow<UserPreferences>
         get() = context.dataStore.data.map { pref ->
             UserPreferences(
-                token = pref[UserPreferencesKeys.token] ?: "no-token",
+                token = pref[UserPreferencesKeys.token],
                 locale = pref[UserPreferencesKeys.locale] ?: "id-ID",
                 theme = pref[UserPreferencesKeys.theme] ?: "default"
             )
         }
 
-    override val tokenFlow: Flow<String>
+    override val tokenFlow: Flow<String?>
         get() = context.dataStore.data.map { pref ->
-            pref[UserPreferencesKeys.token] ?: "no-token"
+            pref[UserPreferencesKeys.token]
         }
 
     override suspend fun updateToken(token: String) {

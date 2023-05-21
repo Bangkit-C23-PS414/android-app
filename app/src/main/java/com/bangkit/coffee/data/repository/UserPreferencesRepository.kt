@@ -5,7 +5,7 @@ import kotlinx.coroutines.flow.Flow
 
 interface UserPreferencesRepository {
     val flow: Flow<UserPreferences>
-    val tokenFlow: Flow<String>
+    val tokenFlow: Flow<String?>
 
     suspend fun updateToken(token: String)
     suspend fun deleteToken()

@@ -40,4 +40,7 @@
     <string name="confirm_new_password_error">Confirm new password is not match</string>
     <string name="sign_in_action">I have an account</string>
     <string name="sign_up_action">I want to register</string>
+    <string name="home">Home</string>
+    <string name="history">History</string>
+    <string name="profile">Profile</string>
 </resources>
