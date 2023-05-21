@@ -1,6 +1,5 @@
 package com.bangkit.coffee.ui
 
-import androidx.annotation.StringRes
 import androidx.compose.material3.SnackbarHostState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
@@ -12,7 +11,7 @@ import androidx.navigation.compose.rememberNavController
 import com.bangkit.coffee.navigation.Screen
 import kotlinx.coroutines.CoroutineScope
 
-class KopintarAppState(
+data class KopintarAppState(
     val coroutineScope: CoroutineScope,
     val navController: NavHostController,
     val snackbarHostState: SnackbarHostState,
@@ -22,11 +21,9 @@ class KopintarAppState(
             .currentBackStackEntryAsState().value?.destination
 
     // Top app bar
-    private val topAppBarTitles = mapOf<String, @receiver:StringRes Int?>()
+    private val topAppBarScreenRoutes = listOf(Screen.Home.route, Screen.History.route)
     val shouldShowTopAppBar: Boolean
-        @Composable get() = topAppBarTitles.containsKey(currentDestination?.route)
-    val getTitle: Int?
-        @Composable get() = topAppBarTitles[currentDestination?.route]
+        @Composable get() = currentDestination?.route in topAppBarScreenRoutes
 
     // Bottom navigation bar
     val navigationBarScreens = listOf(Screen.Home, Screen.History, Screen.Profile)

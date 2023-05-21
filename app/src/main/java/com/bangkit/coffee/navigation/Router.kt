@@ -20,12 +20,14 @@ import com.bangkit.coffee.presentation.signin.SignInRoute
 import com.bangkit.coffee.presentation.signup.SignUpRoute
 import com.bangkit.coffee.presentation.verifyotp.VerifyOTPRoute
 import com.bangkit.coffee.presentation.welcome.WelcomeRoute
+import com.bangkit.coffee.ui.KopintarTopAppBarState
 
 @Composable
 fun Router(
     modifier: Modifier = Modifier,
     navController: NavHostController = rememberNavController(),
     tokenViewModel: TokenViewModel = hiltViewModel(),
+    onComposing: (KopintarTopAppBarState) -> Unit
 ) {
     LaunchedEffect(Unit) {
         tokenViewModel.isValid.collect {
@@ -36,7 +38,7 @@ fun Router(
     NavHost(
         modifier = modifier,
         navController = navController,
-        startDestination = Screen.Welcome.route,
+        startDestination = Screen.Home.route,
     ) {
         // Splash
         composable(Screen.Splash.route) {
@@ -105,9 +107,19 @@ fun Router(
 
         // Dashboard
         composable(Screen.Home.route) {
+            LaunchedEffect(Unit) {
+                onComposing(
+                    KopintarTopAppBarState(title = "Home")
+                )
+            }
             HomeRoute()
         }
         composable(Screen.History.route) {
+            LaunchedEffect(Unit) {
+                onComposing(
+                    KopintarTopAppBarState(title = "History")
+                )
+            }
             HistoryRoute(
                 navigateToDetail = {
                     navController.navigate(
