@@ -14,23 +14,23 @@ fun DashboardRouter(
     navController: NavHostController
 ) {
     NavHost(
-        route = Graph.Dashboard.route,
+        route = Screen.Dashboard.route,
         navController = navController,
-        startDestination = Graph.Home.route,
+        startDestination = Screen.Home.route,
     ) {
-        composable(Graph.Home.route) {
+        composable(Screen.Home.route) {
             HomeRoute()
         }
-        composable(Graph.History.route) {
+        composable(Screen.History.route) {
             HistoryRoute(
                 navigateToDetail = {
                     rootNavController.navigate(
-                        Graph.ImageDetectionDetail.createRoute("42")
+                        Screen.ImageDetectionDetail.createRoute("42")
                     )
                 }
             )
         }
-        composable(Graph.Profile.route) {
+        composable(Screen.Profile.route) {
             ProfileRoute()
         }
     }

@@ -31,31 +31,31 @@ fun Router(
 
     NavHost(
         navController = navController,
-        startDestination = Graph.Splash.route,
+        startDestination = Screen.Dashboard.route,
     ) {
         // Splash
-        composable(Graph.Splash.route) {
+        composable(Screen.Splash.route) {
             SimpleScreen(
                 text = "Splash",
-                action = { navController.navigate(Graph.Dashboard.route) }
+                action = { navController.navigate(Screen.Dashboard.route) }
             )
         }
 
         // Welcome
-        composable(Graph.Welcome.route) {
+        composable(Screen.Welcome.route) {
             WelcomeRoute(
-                navigateToSignIn = { navController.navigate(Graph.SignIn.route) },
-                navigateToSignUp = { navController.navigate(Graph.SignUp.route) }
+                navigateToSignIn = { navController.navigate(Screen.SignIn.route) },
+                navigateToSignUp = { navController.navigate(Screen.SignUp.route) }
             )
         }
 
         // Auth
-        composable(Graph.SignIn.route) {
+        composable(Screen.SignIn.route) {
             SignInRoute(
                 navigateUp = { navController.navigateUp() },
-                navigateToForgotPassword = { navController.navigate(Graph.ForgotPassword.route) },
+                navigateToForgotPassword = { navController.navigate(Screen.ForgotPassword.route) },
                 navigateToDashboard = {
-                    navController.navigate(Graph.Dashboard.route) {
+                    navController.navigate(Screen.Dashboard.route) {
                         popUpTo(navController.graph.id) {
                             inclusive = true
                         }
@@ -64,11 +64,11 @@ fun Router(
             )
         }
 
-        composable(Graph.SignUp.route) {
+        composable(Screen.SignUp.route) {
             SignUpRoute(
                 navigateUp = { navController.navigateUp() },
                 navigateToDashboard = {
-                    navController.navigate(Graph.Dashboard.route) {
+                    navController.navigate(Screen.Dashboard.route) {
                         popUpTo(navController.graph.id) {
                             inclusive = true
                         }
@@ -78,33 +78,33 @@ fun Router(
         }
 
         // Forgot Password
-        composable(Graph.ForgotPassword.route) {
+        composable(Screen.ForgotPassword.route) {
             ForgotPasswordRoute(
                 navigateUp = { navController.navigateUp() },
-                navigateToVerifyOTP = { navController.navigate(Graph.VerifyOTP.route) }
+                navigateToVerifyOTP = { navController.navigate(Screen.VerifyOTP.route) }
             )
         }
 
-        composable(Graph.VerifyOTP.route) {
+        composable(Screen.VerifyOTP.route) {
             VerifyOTPRoute(
                 navigateUp = { navController.navigateUp() },
-                navigateToResetPassword = { navController.navigate(Graph.ResetPassword.route) }
+                navigateToResetPassword = { navController.navigate(Screen.ResetPassword.route) }
             )
         }
 
-        composable(Graph.ResetPassword.route) {
+        composable(Screen.ResetPassword.route) {
             ResetPasswordRoute(
                 navigateUp = { navController.navigateUp() },
                 navigateToLogin = {
-                    navController.navigate(Graph.SignIn.route) {
-                        popUpTo(Graph.Welcome.route)
+                    navController.navigate(Screen.SignIn.route) {
+                        popUpTo(Screen.Welcome.route)
                     }
                 }
             )
         }
 
         // Dashboard
-        composable(Graph.Dashboard.route) {
+        composable(Screen.Dashboard.route) {
             DashboardScreen(
                 rootNavController = navController,
                 navController = rememberNavController()
@@ -113,7 +113,7 @@ fun Router(
 
         // Image detections detail
         composable(
-            Graph.ImageDetectionDetail.route,
+            Screen.ImageDetectionDetail.route,
             arguments = listOf(navArgument("id") { type = NavType.StringType })
         ) { backStackEntry ->
             val id = backStackEntry.arguments?.getString("userId")

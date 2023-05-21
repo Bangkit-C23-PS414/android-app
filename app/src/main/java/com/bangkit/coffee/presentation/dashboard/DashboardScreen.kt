@@ -20,7 +20,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.bangkit.coffee.navigation.DashboardRouter
-import com.bangkit.coffee.navigation.Graph
+import com.bangkit.coffee.navigation.Screen
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -34,7 +34,7 @@ fun DashboardScreen(
                 val navBackStackEntry by navController.currentBackStackEntryAsState()
                 val currentDestination = navBackStackEntry?.destination
 
-                Graph.Dashboard.screens.forEach { screen ->
+                Screen.Dashboard.screens.forEach { screen ->
                     NavigationBarItem(
                         icon = {
                             Icon(
