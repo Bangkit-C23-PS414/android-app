@@ -54,4 +54,9 @@
     <string name="filter_history">Filter history</string>
     <string name="coffee_leaf_image">Coffee leaf image</string>
     <string name="date_header">Date %s</string>
+    <string name="edit_profile">Edit Profile</string>
+    <string name="change_password">Change Password</string>
+    <string name="sign_out">Sign Out</string>
+    <string name="update_profile_photo">Update Profile Photo</string>
+    <string name="profile_photo">Profile photo</string>
 </resources>
