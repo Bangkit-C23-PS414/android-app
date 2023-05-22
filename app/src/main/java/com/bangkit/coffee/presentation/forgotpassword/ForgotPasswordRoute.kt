@@ -11,7 +11,7 @@ fun ForgotPasswordRoute(
     navigateToVerifyOTP: () -> Unit = {}
 ) {
     // State observing and declarations
-    val uiState by coordinator.screenStateFlow.collectAsStateWithLifecycle(ForgotPasswordState())
+    val uiState by coordinator.screenStateFlow.collectAsStateWithLifecycle()
 
     // UI Actions
     val actions = rememberForgotPasswordActions(coordinator, navigateToVerifyOTP)

@@ -71,7 +71,7 @@ fun SignInScreen(
                 .fillMaxWidth()
                 .aspectRatio(1.35f),
             painter = painterResource(R.drawable.sign_in),
-            contentDescription = null,
+            contentDescription = stringResource(R.string.sign_in),
             contentScale = ContentScale.FillWidth
         )
 
@@ -107,7 +107,7 @@ fun SignInScreen(
                         Text(text = stringResource(R.string.email_hint))
                     },
                     leadingIcon = {
-                        Icon(imageVector = Icons.Filled.Email, contentDescription = null)
+                        Icon(imageVector = Icons.Filled.Email, contentDescription = stringResource(R.string.email_address))
                     },
                     keyboardOptions = KeyboardOptions(
                         keyboardType = KeyboardType.Email,
@@ -139,7 +139,7 @@ fun SignInScreen(
                         Text(text = stringResource(R.string.password_hint))
                     },
                     leadingIcon = {
-                        Icon(imageVector = Icons.Filled.Lock, contentDescription = null)
+                        Icon(imageVector = Icons.Filled.Lock, contentDescription = stringResource(R.string.password))
                     },
                     visualTransformation = if (state.isPasswordVisible) {
                         VisualTransformation.None
@@ -157,7 +157,7 @@ fun SignInScreen(
                                 } else {
                                     Icons.Filled.VisibilityOff
                                 },
-                                contentDescription = null,
+                                contentDescription = stringResource(R.string.toggle_password_visibility),
                             )
                         }
                     },

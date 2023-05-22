@@ -11,7 +11,7 @@ fun SignUpRoute(
     navigateToDashboard: () -> Unit = {}
 ) {
     // State observing and declarations
-    val uiState by coordinator.screenStateFlow.collectAsStateWithLifecycle(SignUpState())
+    val uiState by coordinator.screenStateFlow.collectAsStateWithLifecycle()
 
     // UI Actions
     val actions = rememberSignUpActions(coordinator, navigateToDashboard)

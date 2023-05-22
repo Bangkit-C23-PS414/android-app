@@ -77,7 +77,7 @@ fun WelcomeScreen(
             ) {
                 Image(
                     painter = painterResource(state.carouselItems[i].image),
-                    contentDescription = null,
+                    contentDescription = stringResource(state.carouselItems[i].title),
                     modifier = Modifier
                         .fillMaxWidth(0.85f)
                         .aspectRatio(1f),

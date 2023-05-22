@@ -11,7 +11,7 @@ fun HistoryRoute(
     navigateToDetail: () -> Unit = {}
 ) {
     // State observing and declarations
-    val uiState by coordinator.screenStateFlow.collectAsStateWithLifecycle(HistoryState())
+    val uiState by coordinator.screenStateFlow.collectAsStateWithLifecycle()
 
     // UI Actions
     val actions = rememberHistoryActions(coordinator, navigateToDetail)

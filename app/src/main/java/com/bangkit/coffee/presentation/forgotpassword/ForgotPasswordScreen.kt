@@ -74,7 +74,7 @@ fun ForgotPasswordScreen(
                 .fillMaxWidth()
                 .aspectRatio(1.1f),
             painter = painterResource(R.drawable.forgot_password),
-            contentDescription = null,
+            contentDescription = stringResource(R.string.forgot_password_question),
             contentScale = ContentScale.FillWidth
         )
 
@@ -120,7 +120,7 @@ fun ForgotPasswordScreen(
                         Text(text = stringResource(R.string.email_hint))
                     },
                     leadingIcon = {
-                        Icon(imageVector = Icons.Filled.Email, contentDescription = null)
+                        Icon(imageVector = Icons.Filled.Email, contentDescription = stringResource(R.string.email_address))
                     },
                     keyboardOptions = KeyboardOptions(
                         keyboardType = KeyboardType.Email,

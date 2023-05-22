@@ -12,7 +12,7 @@ fun WelcomeRoute(
     navigateToSignUp: () -> Unit = {}
 ) {
     // State observing and declarations
-    val uiState by coordinator.screenStateFlow.collectAsStateWithLifecycle(WelcomeState())
+    val uiState by coordinator.screenStateFlow.collectAsStateWithLifecycle()
 
     // UI Actions
     val actions = rememberWelcomeActions(coordinator, navigateToSignIn, navigateToSignUp)

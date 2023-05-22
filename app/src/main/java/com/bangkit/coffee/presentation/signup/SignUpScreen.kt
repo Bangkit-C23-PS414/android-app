@@ -72,7 +72,7 @@ fun SignUpScreen(
                 .fillMaxWidth()
                 .aspectRatio(1.35f),
             painter = painterResource(R.drawable.sign_up),
-            contentDescription = null,
+            contentDescription = stringResource(R.string.sign_up),
             contentScale = ContentScale.FillWidth
         )
 
@@ -105,7 +105,7 @@ fun SignUpScreen(
                         Text(text = stringResource(R.string.full_name_hint))
                     },
                     leadingIcon = {
-                        Icon(imageVector = Icons.Filled.Person, contentDescription = null)
+                        Icon(imageVector = Icons.Filled.Person, contentDescription = stringResource(R.string.full_name))
                     },
                     keyboardOptions = KeyboardOptions(
                         keyboardType = KeyboardType.Text,
@@ -137,7 +137,7 @@ fun SignUpScreen(
                         Text(text = stringResource(R.string.email_hint))
                     },
                     leadingIcon = {
-                        Icon(imageVector = Icons.Filled.Email, contentDescription = null)
+                        Icon(imageVector = Icons.Filled.Email, contentDescription = stringResource(R.string.email_address))
                     },
                     keyboardOptions = KeyboardOptions(
                         keyboardType = KeyboardType.Email,
@@ -169,7 +169,7 @@ fun SignUpScreen(
                         Text(text = stringResource(R.string.password_hint))
                     },
                     leadingIcon = {
-                        Icon(imageVector = Icons.Filled.Lock, contentDescription = null)
+                        Icon(imageVector = Icons.Filled.Lock, contentDescription = stringResource(R.string.password))
                     },
                     visualTransformation = PasswordVisualTransformation(),
                     keyboardOptions = KeyboardOptions(
@@ -202,7 +202,7 @@ fun SignUpScreen(
                         Text(text = stringResource(R.string.confirm_password_hint))
                     },
                     leadingIcon = {
-                        Icon(imageVector = Icons.Filled.Lock, contentDescription = null)
+                        Icon(imageVector = Icons.Filled.Lock, contentDescription = stringResource(R.string.confirm_password))
                     },
                     visualTransformation = PasswordVisualTransformation(),
                     keyboardOptions = KeyboardOptions(

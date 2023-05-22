@@ -12,7 +12,7 @@ fun SignInRoute(
     navigateToDashboard: () -> Unit = {}
 ) {
     // State observing and declarations
-    val uiState by coordinator.screenStateFlow.collectAsStateWithLifecycle(SignInState())
+    val uiState by coordinator.screenStateFlow.collectAsStateWithLifecycle()
 
     // UI Actions
     val actions = rememberSignInActions(

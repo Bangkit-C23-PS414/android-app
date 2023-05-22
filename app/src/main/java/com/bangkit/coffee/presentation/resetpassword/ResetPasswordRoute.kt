@@ -11,7 +11,7 @@ fun ResetPasswordRoute(
     navigateToLogin: () -> Unit = {}
 ) {
     // State observing and declarations
-    val uiState by coordinator.screenStateFlow.collectAsStateWithLifecycle(ResetPasswordState())
+    val uiState by coordinator.screenStateFlow.collectAsStateWithLifecycle()
 
     // UI Actions
     val actions = rememberResetPasswordActions(coordinator, navigateToLogin)

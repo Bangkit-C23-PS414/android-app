@@ -107,12 +107,9 @@ fun Router(
 
         // Dashboard
         composable(Screen.Home.route) {
-            LaunchedEffect(Unit) {
-                onComposing(
-                    KopintarTopAppBarState(title = "Home")
-                )
-            }
-            HomeRoute()
+            HomeRoute(
+                onComposing = onComposing
+            )
         }
         composable(Screen.History.route) {
             LaunchedEffect(Unit) {

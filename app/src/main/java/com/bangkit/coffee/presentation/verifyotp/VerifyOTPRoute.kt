@@ -11,7 +11,7 @@ fun VerifyOTPRoute(
     navigateToResetPassword: () -> Unit = {}
 ) {
     // State observing and declarations
-    val uiState by coordinator.screenStateFlow.collectAsStateWithLifecycle(VerifyOTPState())
+    val uiState by coordinator.screenStateFlow.collectAsStateWithLifecycle()
 
     // UI Actions
     val actions = rememberVerifyOTPActions(coordinator, navigateToResetPassword)
