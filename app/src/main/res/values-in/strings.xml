@@ -51,4 +51,7 @@
     <string name="what_disease_detect">Penyakit tanaman kopi yang bisa dideteksi?</string>
     <string name="step_number">Langkah %d</string>
     <string name="toggle_password_visibility">Tampilkan atau sembunyikan kata sandi</string>
+    <string name="filter_history">Filter riwayat</string>
+    <string name="coffee_leaf_image">Foto daun kopi</string>
+    <string name="date_header">Tanggal %s</string>
 </resources>

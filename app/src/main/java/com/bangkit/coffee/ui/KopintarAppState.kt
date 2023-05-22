@@ -21,7 +21,8 @@ data class KopintarAppState(
             .currentBackStackEntryAsState().value?.destination
 
     // Top app bar
-    private val topAppBarScreenRoutes = listOf(Screen.Home.route, Screen.History.route)
+    // private val topAppBarScreenRoutes = listOf(Screen.Home.route, Screen.History.route)
+    private val topAppBarScreenRoutes = emptyList<String>()
     val shouldShowTopAppBar: Boolean
         @Composable get() = currentDestination?.route in topAppBarScreenRoutes
 

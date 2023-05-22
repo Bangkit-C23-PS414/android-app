@@ -2,11 +2,12 @@ package com.bangkit.coffee.presentation.history
 
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
+import com.bangkit.coffee.domain.ImageDetectionDummies
+import com.bangkit.coffee.domain.entity.ImageDetection
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
-import timber.log.Timber
 import javax.inject.Inject
 
 @HiltViewModel
@@ -14,16 +15,11 @@ class HistoryViewModel @Inject constructor(
     savedStateHandle: SavedStateHandle
 ) : ViewModel() {
 
-    init {
-        Timber.d("History init")
-    }
+    private val imageDetections: List<ImageDetection> = ImageDetectionDummies
 
-    private val _stateFlow: MutableStateFlow<HistoryState> = MutableStateFlow(HistoryState())
+    private val _stateFlow: MutableStateFlow<HistoryState> = MutableStateFlow(HistoryState(
+        imageDetections = imageDetections
+    ))
 
     val stateFlow: StateFlow<HistoryState> = _stateFlow.asStateFlow()
-
-    override fun onCleared() {
-        super.onCleared()
-        Timber.d("History onCleared")
-    }
 }

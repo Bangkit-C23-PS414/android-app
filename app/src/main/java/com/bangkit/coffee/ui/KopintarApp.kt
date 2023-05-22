@@ -47,7 +47,6 @@ fun KopintarApp(
                 Router(
                     modifier = Modifier.padding(contentPadding),
                     navController = appState.navController,
-                    onComposing = { topAppBarState = it }
                 )
             }
         }

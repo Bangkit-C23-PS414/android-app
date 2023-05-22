@@ -3,12 +3,15 @@ package com.bangkit.coffee.presentation.history
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.staticCompositionLocalOf
+import com.bangkit.coffee.domain.entity.ImageDetection
 
 
 /**
  * UI State that represents HistoryScreen
  **/
-class HistoryState
+data class HistoryState(
+    val imageDetections: List<ImageDetection> = emptyList()
+)
 
 /**
  * History Actions emitted from the UI Layer

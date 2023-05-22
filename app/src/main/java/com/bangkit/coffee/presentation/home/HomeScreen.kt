@@ -22,9 +22,12 @@ import androidx.compose.material.icons.filled.Info
 import androidx.compose.material.icons.filled.PhotoCamera
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
+import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -36,9 +39,9 @@ import com.bangkit.coffee.domain.entity.Disease
 import com.bangkit.coffee.presentation.home.components.DetectionStepCard
 import com.bangkit.coffee.presentation.home.components.DiseaseCard
 import com.bangkit.coffee.ui.theme.AppTheme
-import timber.log.Timber
 import java.util.UUID
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun HomeScreen(
     state: HomeState = HomeState(),
@@ -46,97 +49,105 @@ fun HomeScreen(
 ) {
     val lazyGridState = rememberLazyGridState()
 
-    Timber.d("Size " + state.diseases.size)
-
-    LazyVerticalGrid(
-        columns = GridCells.Fixed(2),
-        state = lazyGridState,
-        modifier = Modifier.fillMaxSize(),
-        contentPadding = PaddingValues(16.dp),
-        verticalArrangement = Arrangement.spacedBy(8.dp),
-        horizontalArrangement = Arrangement.spacedBy(8.dp)
-    ) {
-        // Section 1
-        item(
-            span = { GridItemSpan(maxLineSpan) },
-            contentType = "section-1-title"
-        ) {
-            Row(
-                modifier = Modifier.padding(bottom = 8.dp),
-                verticalAlignment = Alignment.CenterVertically
-            ) {
-                Icon(
-                    imageVector = Icons.Filled.AutoFixHigh,
-                    contentDescription = stringResource(R.string.how_to_detect)
-                )
-                Spacer(modifier = Modifier.width(8.dp))
-                Text(
-                    text = stringResource(R.string.how_to_detect),
-                    style = MaterialTheme.typography.titleMedium
-                )
-            }
+    Scaffold(
+        topBar = {
+            TopAppBar(
+                title = { Text(text = stringResource(R.string.app_name)) },
+            )
         }
-        item(
-            span = { GridItemSpan(maxLineSpan) },
-            contentType = "section-1-content"
+    ) { contentPadding ->
+        LazyVerticalGrid(
+            columns = GridCells.Fixed(2),
+            state = lazyGridState,
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(contentPadding),
+            contentPadding = PaddingValues(16.dp),
+            verticalArrangement = Arrangement.spacedBy(8.dp),
+            horizontalArrangement = Arrangement.spacedBy(8.dp)
         ) {
-            Row(
-                modifier = Modifier.height(intrinsicSize = IntrinsicSize.Max),
-                horizontalArrangement = Arrangement.spacedBy(12.dp)
+            // Section 1
+            item(
+                span = { GridItemSpan(maxLineSpan) },
+                contentType = "section-1-title"
             ) {
-                state.detectionSteps.forEach { detectionStep ->
-                    DetectionStepCard(
-                        modifier = Modifier.weight(1f),
-                        detectionStep = detectionStep
+                Row(
+                    modifier = Modifier.padding(bottom = 8.dp),
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
+                    Icon(
+                        imageVector = Icons.Filled.AutoFixHigh,
+                        contentDescription = stringResource(R.string.how_to_detect)
+                    )
+                    Spacer(modifier = Modifier.width(8.dp))
+                    Text(
+                        text = stringResource(R.string.how_to_detect),
+                        style = MaterialTheme.typography.titleMedium
                     )
                 }
             }
-        }
-
-        // Action button detect
-        item(
-            span = { GridItemSpan(maxLineSpan) },
-            contentType = "action-button"
-        ) {
-            Button(
-                onClick = {},
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(bottom = 16.dp)
+            item(
+                span = { GridItemSpan(maxLineSpan) },
+                contentType = "section-1-content"
             ) {
-                Icon(
-                    Icons.Filled.PhotoCamera,
-                    contentDescription = stringResource(R.string.detect_now),
-                    modifier = Modifier.size(ButtonDefaults.IconSize)
-                )
-                Spacer(Modifier.size(ButtonDefaults.IconSpacing))
-                Text(text = stringResource(R.string.detect_now))
+                Row(
+                    modifier = Modifier.height(intrinsicSize = IntrinsicSize.Max),
+                    horizontalArrangement = Arrangement.spacedBy(12.dp)
+                ) {
+                    state.detectionSteps.forEach { detectionStep ->
+                        DetectionStepCard(
+                            modifier = Modifier.weight(1f),
+                            detectionStep = detectionStep
+                        )
+                    }
+                }
             }
-        }
 
-        // Section 2
-        item(
-            span = { GridItemSpan(maxLineSpan) },
-            contentType = "section-2-title"
-        ) {
-            Row(
-                modifier = Modifier.padding(bottom = 8.dp),
-                verticalAlignment = Alignment.CenterVertically
+            // Action button detect
+            item(
+                span = { GridItemSpan(maxLineSpan) },
+                contentType = "action-button"
             ) {
-                Icon(
-                    imageVector = Icons.Filled.Info,
-                    contentDescription = stringResource(R.string.what_disease_detect)
-                )
-                Spacer(modifier = Modifier.width(8.dp))
-                Text(
-                    text = stringResource(R.string.what_disease_detect),
-                    style = MaterialTheme.typography.titleMedium
-                )
+                Button(
+                    onClick = {},
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(bottom = 16.dp)
+                ) {
+                    Icon(
+                        Icons.Filled.PhotoCamera,
+                        contentDescription = stringResource(R.string.detect_now),
+                        modifier = Modifier.size(ButtonDefaults.IconSize)
+                    )
+                    Spacer(Modifier.size(ButtonDefaults.IconSpacing))
+                    Text(text = stringResource(R.string.detect_now))
+                }
             }
-        }
 
-        items(state.diseases, key = { it.id }) { disease ->
-            DiseaseCard(disease = disease)
+            // Section 2
+            item(
+                span = { GridItemSpan(maxLineSpan) },
+                contentType = "section-2-title"
+            ) {
+                Row(
+                    modifier = Modifier.padding(bottom = 8.dp),
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
+                    Icon(
+                        imageVector = Icons.Filled.Info,
+                        contentDescription = stringResource(R.string.what_disease_detect)
+                    )
+                    Spacer(modifier = Modifier.width(8.dp))
+                    Text(
+                        text = stringResource(R.string.what_disease_detect),
+                        style = MaterialTheme.typography.titleMedium
+                    )
+                }
+            }
+
+            items(state.diseases, key = { it.id }) { disease ->
+                DiseaseCard(disease = disease)
+            }
         }
     }
 }

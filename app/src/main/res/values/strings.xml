@@ -51,4 +51,7 @@
     <string name="what_disease_detect">What coffee plant diseases can we detect?</string>
     <string name="step_number">Step %d</string>
     <string name="toggle_password_visibility">Toggle password visibility</string>
+    <string name="filter_history">Filter history</string>
+    <string name="coffee_leaf_image">Coffee leaf image</string>
+    <string name="date_header">Date %s</string>
 </resources>
