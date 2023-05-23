@@ -41,4 +41,7 @@ sealed class Screen(val route: String) {
     object ImageDetectionDetail : Screen("image-detections/{id}") {
         fun createRoute(id: String) = "image-detections/$id"
     }
+
+    // Camera
+    object Camera : Screen("camera")
 }

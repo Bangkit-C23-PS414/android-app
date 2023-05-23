@@ -10,6 +10,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
+import com.bangkit.coffee.presentation.camera.CameraRoute
 import com.bangkit.coffee.presentation.components.SimpleScreen
 import com.bangkit.coffee.presentation.forgotpassword.ForgotPasswordRoute
 import com.bangkit.coffee.presentation.history.HistoryRoute
@@ -36,7 +37,7 @@ fun Router(
     NavHost(
         modifier = modifier,
         navController = navController,
-        startDestination = Screen.Profile.route,
+        startDestination = Screen.Camera.route,
     ) {
         // Splash
         composable(Screen.Splash.route) {
@@ -105,7 +106,9 @@ fun Router(
 
         // Dashboard
         composable(Screen.Home.route) {
-            HomeRoute()
+            HomeRoute(
+                navigateToCamera = { navController.navigate(Screen.Camera.route) }
+            )
         }
         composable(Screen.History.route) {
             HistoryRoute(
@@ -127,6 +130,13 @@ fun Router(
         ) { backStackEntry ->
             val id = backStackEntry.arguments?.getString("userId")
             SimpleScreen(text = "Detail Detection: $id")
+        }
+
+        // Camera
+        composable(Screen.Camera.route) {
+            CameraRoute(
+                navigateUp = { navController.navigateUp() }
+            )
         }
     }
 }

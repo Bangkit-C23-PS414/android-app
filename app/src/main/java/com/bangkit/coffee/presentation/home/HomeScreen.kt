@@ -109,7 +109,7 @@ fun HomeScreen(
                 contentType = "action-button"
             ) {
                 Button(
-                    onClick = {},
+                    onClick = actions.navigateToCamera,
                     modifier = Modifier
                         .fillMaxWidth()
                         .padding(bottom = 16.dp)

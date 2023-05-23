@@ -8,12 +8,13 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 @Composable
 fun HomeRoute(
     coordinator: HomeCoordinator = rememberHomeCoordinator(),
+    navigateToCamera: () -> Unit = {}
 ) {
     // State observing and declarations
     val uiState by coordinator.screenStateFlow.collectAsStateWithLifecycle()
 
     // UI Actions
-    val actions = rememberHomeActions(coordinator)
+    val actions = rememberHomeActions(coordinator, navigateToCamera)
 
     // UI Rendering
     HomeScreen(uiState, actions)
@@ -21,10 +22,13 @@ fun HomeRoute(
 
 
 @Composable
-fun rememberHomeActions(coordinator: HomeCoordinator): HomeActions {
+fun rememberHomeActions(
+    coordinator: HomeCoordinator,
+    navigateToCamera: () -> Unit
+): HomeActions {
     return remember(coordinator) {
         HomeActions(
-            onClick = coordinator::doStuff
+            navigateToCamera = navigateToCamera
         )
     }
 }

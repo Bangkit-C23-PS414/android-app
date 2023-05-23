@@ -59,4 +59,18 @@
     <string name="sign_out">Keluar</string>
     <string name="update_profile_photo">Perbarui Foto Profil</string>
     <string name="profile_photo">Foto profil</string>
+    <string name="request_camera_title">Berikan Izin Kamera</string>
+    <string name="request_camera_description">Untuk memberi Anda pengalaman terbaik dan membantu mendeteksi penyakit tanaman kopi, aplikasi kami memerlukan izin Anda untuk mengakses kamera Anda. Dengan memberi kami akses, Anda dapat mengambil gambar tanaman dan mengirimkannya untuk dianalisis.</string>
+    <string name="camera_denied_title">Izin Kamera Ditolak</string>
+    <string name="camera_denied_description">Ups! Tanpa memberikan izin kamera, aplikasi kami tidak akan dapat mengambil gambar dan membantu mendeteksi penyakit tanaman kopi. Jika berubah pikiran, Anda selalu dapat meninjau kembali pengaturan aplikasi dan memberikan izin kamera.</string>
+    <string name="grant_access">Berikan Akses</string>
+    <string name="deny">Tolak</string>
+    <string name="close">Tutup</string>
+    <string name="open_settings">Buka Pengaturan</string>
+    <string name="take_a_picture">Ambil Gambar</string>
+    <string name="focus_on_leaf">Fokus pada bagian daun</string>
+    <string name="confirm_image">Konfirmasi Gambar</string>
+    <string name="pick_image_from_gallery">Ambil gambar dari galeri</string>
+    <string name="toggle_flash">Ubah flash</string>
+    <string name="capture">Potret</string>
 </resources>

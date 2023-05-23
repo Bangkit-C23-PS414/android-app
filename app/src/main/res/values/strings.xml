@@ -59,4 +59,18 @@
     <string name="sign_out">Sign Out</string>
     <string name="update_profile_photo">Update Profile Photo</string>
     <string name="profile_photo">Profile photo</string>
+    <string name="request_camera_title">Grant Camera Permission</string>
+    <string name="request_camera_description">To provide you with the best possible experience and help detect coffee plant diseases, our app requires your permission to access your camera. By granting us access, you\'ll be able to capture images of the plants and submit them for analysis.</string>
+    <string name="camera_denied_title">Camera Permission Denied</string>
+    <string name="camera_denied_description">Oops! Without granting camera permission, our app won\'t be able to capture images and assist in detecting coffee plant diseases. If you change your mind, you can always revisit your app settings and grant camera permission.</string>
+    <string name="grant_access">Grant Access</string>
+    <string name="deny">Deny</string>
+    <string name="close">Close</string>
+    <string name="open_settings">Open Settings</string>
+    <string name="take_a_picture">Take A Picture</string>
+    <string name="focus_on_leaf">Focus on the leaf part</string>
+    <string name="confirm_image">Confirm Image</string>
+    <string name="pick_image_from_gallery">Pick image from gallery</string>
+    <string name="toggle_flash">Toggle flash</string>
+    <string name="capture">Capture</string>
 </resources>
