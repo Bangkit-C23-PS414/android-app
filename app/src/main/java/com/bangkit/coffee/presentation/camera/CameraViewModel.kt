@@ -1,5 +1,6 @@
 package com.bangkit.coffee.presentation.camera
 
+import android.net.Uri
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -18,9 +19,17 @@ class CameraViewModel @Inject constructor(
 
     val stateFlow: StateFlow<CameraState> = _stateFlow.asStateFlow()
 
-    fun toggleFlash(isFlashOn: Boolean) {
-        _stateFlow.update {
-            it.copy(isFlashOn = isFlashOn)
-        }
+    fun toggleFlash(isFlashOn: Boolean) = _stateFlow.update { it.copy(isFlashOn = isFlashOn) }
+
+    fun capture() = _stateFlow.update { it.copy(isCapturing = true) }
+
+    fun cancelCapture() = _stateFlow.update { it.copy(isCapturing = false) }
+
+    fun setImage(uri: Uri) = _stateFlow.update {
+        it.copy(image = uri, isCapturing = false)
+    }
+
+    fun clearImage() = _stateFlow.update {
+        it.copy(image = null, isCapturing = false)
     }
 }

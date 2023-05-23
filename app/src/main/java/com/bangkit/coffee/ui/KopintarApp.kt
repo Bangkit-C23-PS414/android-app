@@ -1,54 +1,48 @@
 package com.bangkit.coffee.ui
 
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Scaffold
-import androidx.compose.material3.SnackbarHost
-import androidx.compose.material3.Surface
+import android.widget.Toast
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
-import androidx.compose.ui.Modifier
-import com.bangkit.coffee.navigation.Router
-import com.bangkit.coffee.ui.theme.AppTheme
+import androidx.compose.ui.platform.LocalContext
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 
 @Composable
-fun KopintarApp(
-    appState: KopintarAppState = rememberKopintarAppState()
+fun KopintarAppRoute(
+    coordinator: KopintarAppCoordinator = rememberKopintarAppCoordinator()
 ) {
-    AppTheme {
-        Surface(
-            modifier = Modifier.fillMaxSize(),
-            color = MaterialTheme.colorScheme.background
-        ) {
-            var topAppBarState by remember { mutableStateOf(KopintarTopAppBarState()) }
+    // State observing and declarations
+    val uiState by coordinator.screenStateFlow.collectAsStateWithLifecycle(KopintarAppState())
 
-            Scaffold(
-                snackbarHost = { SnackbarHost(appState.snackbarHostState) },
-                topBar = {
-                    if (appState.shouldShowTopAppBar) {
-                        KopintarTopAppBar(
-                            topAppBarState = topAppBarState
-                        )
-                    }
-                },
-                bottomBar = {
-                    if (appState.shouldShowNavigationBar) {
-                        KopintarNavigationBar(
-                            navController = appState.navController,
-                            screenList = appState.navigationBarScreens
-                        )
-                    }
-                }
-            ) { contentPadding ->
-                Router(
-                    modifier = Modifier.padding(contentPadding),
-                    navController = appState.navController,
-                )
+    // UI Actions
+    val actions = rememberKopintarAppActions(coordinator)
+
+    // Toast
+    val context = LocalContext.current
+    LaunchedEffect(Unit) {
+        coordinator
+            .toastMessage
+            .collect { message ->
+                Toast.makeText(
+                    context,
+                    message,
+                    Toast.LENGTH_SHORT,
+                ).show()
             }
-        }
+    }
+
+    // UI Rendering
+    KopintarAppScreen(uiState, actions)
+}
+
+
+@Composable
+fun rememberKopintarAppActions(coordinator: KopintarAppCoordinator): KopintarAppActions {
+    return remember(coordinator) {
+        KopintarAppActions(
+            onBackStackEntryChanged = coordinator::onBackStackEntryChanged,
+            showToast = coordinator::showToast
+        )
     }
 }

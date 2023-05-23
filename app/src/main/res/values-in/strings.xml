@@ -73,4 +73,7 @@
     <string name="pick_image_from_gallery">Ambil gambar dari galeri</string>
     <string name="toggle_flash">Ubah flash</string>
     <string name="capture">Potret</string>
+    <string name="capture_error">Tidak dapat mengambil gambar</string>
+    <string name="image">Gambar</string>
+    <string name="upload_image">Unggah gambar</string>
 </resources>

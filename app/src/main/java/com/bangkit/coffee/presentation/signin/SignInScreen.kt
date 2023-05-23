@@ -1,6 +1,5 @@
 package com.bangkit.coffee.presentation.signin
 
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.aspectRatio
@@ -32,7 +31,6 @@ import androidx.compose.ui.focus.FocusDirection
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.platform.testTag
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.ImeAction
@@ -41,6 +39,7 @@ import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import coil.compose.AsyncImage
 import com.bangkit.coffee.R
 import com.bangkit.coffee.presentation.signin.components.SignInForm
 import com.bangkit.coffee.ui.theme.AppTheme
@@ -65,12 +64,12 @@ fun SignInScreen(
             .verticalScroll(scrollState)
             .padding(24.dp)
     ) {
-        Image(
+        AsyncImage(
             modifier = Modifier
                 .align(Alignment.CenterHorizontally)
                 .fillMaxWidth()
                 .aspectRatio(1.35f),
-            painter = painterResource(R.drawable.sign_in),
+            model = R.drawable.sign_in,
             contentDescription = stringResource(R.string.sign_in),
             contentScale = ContentScale.FillWidth
         )

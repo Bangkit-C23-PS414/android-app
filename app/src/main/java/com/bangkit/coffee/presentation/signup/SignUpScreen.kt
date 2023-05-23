@@ -1,6 +1,5 @@
 package com.bangkit.coffee.presentation.signup
 
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -32,7 +31,6 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.platform.testTag
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.buildAnnotatedString
@@ -43,6 +41,7 @@ import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import coil.compose.AsyncImage
 import com.bangkit.coffee.R
 import com.bangkit.coffee.presentation.signup.components.SignUpForm
 import com.bangkit.coffee.ui.theme.AppTheme
@@ -66,12 +65,12 @@ fun SignUpScreen(
             .verticalScroll(scrollState)
             .padding(24.dp)
     ) {
-        Image(
+        AsyncImage(
             modifier = Modifier
                 .align(Alignment.CenterHorizontally)
                 .fillMaxWidth()
                 .aspectRatio(1.35f),
-            painter = painterResource(R.drawable.sign_up),
+            model = R.drawable.sign_up,
             contentDescription = stringResource(R.string.sign_up),
             contentScale = ContentScale.FillWidth
         )

@@ -73,4 +73,7 @@
     <string name="pick_image_from_gallery">Pick image from gallery</string>
     <string name="toggle_flash">Toggle flash</string>
     <string name="capture">Capture</string>
+    <string name="capture_error">Cannot capture image</string>
+    <string name="image">Image</string>
+    <string name="upload_image">Upload the image</string>
 </resources>

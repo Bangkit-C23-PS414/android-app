@@ -1,5 +1,6 @@
 package com.bangkit.coffee.presentation.camera
 
+import android.net.Uri
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -14,6 +15,14 @@ class CameraCoordinator(
     val screenStateFlow = viewModel.stateFlow
 
     fun toggleFlash(isFlashOn: Boolean) = viewModel.toggleFlash(isFlashOn)
+
+    fun capture() = viewModel.capture()
+
+    fun cancelCapture() = viewModel.cancelCapture()
+
+    fun setImage(uri: Uri) = viewModel.setImage(uri)
+
+    fun clearImage() = viewModel.clearImage()
 }
 
 @Composable

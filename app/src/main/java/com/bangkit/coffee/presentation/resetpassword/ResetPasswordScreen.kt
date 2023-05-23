@@ -1,6 +1,5 @@
 package com.bangkit.coffee.presentation.resetpassword
 
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.aspectRatio
@@ -28,7 +27,6 @@ import androidx.compose.ui.focus.FocusDirection
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.platform.testTag
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.ImeAction
@@ -36,6 +34,7 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import coil.compose.AsyncImage
 import com.bangkit.coffee.R
 import com.bangkit.coffee.presentation.resetpassword.components.ResetPasswordForm
 import com.bangkit.coffee.ui.theme.AppTheme
@@ -60,12 +59,12 @@ fun ResetPasswordScreen(
             .verticalScroll(scrollState)
             .padding(24.dp)
     ) {
-        Image(
+        AsyncImage(
             modifier = Modifier
                 .align(Alignment.CenterHorizontally)
                 .fillMaxWidth()
                 .aspectRatio(1.4f),
-            painter = painterResource(R.drawable.reset_password),
+            model = R.drawable.reset_password,
             contentDescription = stringResource(R.string.reset_password),
             contentScale = ContentScale.FillWidth
         )

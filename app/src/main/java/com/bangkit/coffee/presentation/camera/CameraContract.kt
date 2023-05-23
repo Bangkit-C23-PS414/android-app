@@ -1,5 +1,6 @@
 package com.bangkit.coffee.presentation.camera
 
+import android.net.Uri
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.staticCompositionLocalOf
@@ -10,6 +11,8 @@ import androidx.compose.runtime.staticCompositionLocalOf
  **/
 data class CameraState(
     val isFlashOn: Boolean = false,
+    val image: Uri? = null,
+    val isCapturing: Boolean = false
 )
 
 /**
@@ -18,7 +21,11 @@ data class CameraState(
  **/
 data class CameraActions(
     val navigateUp: () -> Unit = {},
-    val toggleFlash: (Boolean) -> Unit = {}
+    val toggleFlash: (Boolean) -> Unit = {},
+    val capture: () -> Unit = {},
+    val cancelCapture: () -> Unit = {},
+    val setImage: (Uri) -> Unit = {},
+    val clearImage: () -> Unit = {},
 )
 
 /**

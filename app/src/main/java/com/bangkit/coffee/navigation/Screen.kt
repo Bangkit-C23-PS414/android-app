@@ -15,6 +15,16 @@ sealed class Screen(val route: String) {
         @StringRes val title: Int,
     ) : Screen(route)
 
+    object Manifest {
+        val topBarScreens = emptyList<Screen>()
+        val bottomBarScreens = listOf(
+            Home, History, Profile
+        )
+
+        val topBarRoutes = topBarScreens.map { it.route }
+        val bottomBarRoutes = bottomBarScreens.map { it.route }
+    }
+
     // Splash
     object Splash : Screen("splash")
 

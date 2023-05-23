@@ -29,7 +29,11 @@ fun rememberCameraActions(
     return remember(coordinator) {
         CameraActions(
             navigateUp = navigateUp,
-            toggleFlash = coordinator::toggleFlash
+            toggleFlash = coordinator::toggleFlash,
+            capture = coordinator::capture,
+            cancelCapture = coordinator::cancelCapture,
+            setImage = coordinator::setImage,
+            clearImage = coordinator::clearImage
         )
     }
 }

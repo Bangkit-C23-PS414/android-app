@@ -1,4 +1,4 @@
-package com.bangkit.coffee.ui
+package com.bangkit.coffee.ui.components
 
 import androidx.compose.material3.Icon
 import androidx.compose.material3.NavigationBar
@@ -13,19 +13,18 @@ import androidx.navigation.NavDestination.Companion.hierarchy
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
-import com.bangkit.coffee.navigation.Screen
+import com.bangkit.coffee.navigation.Screen.Manifest.bottomBarScreens
 
 @Composable
 fun KopintarNavigationBar(
     modifier: Modifier = Modifier,
     navController: NavHostController = rememberNavController(),
-    screenList: List<Screen.NavigationBarScreen> = emptyList(),
 ) {
     NavigationBar(modifier = modifier) {
         val navBackStackEntry by navController.currentBackStackEntryAsState()
         val currentDestination = navBackStackEntry?.destination
 
-        screenList.forEach { screen ->
+        bottomBarScreens.forEach { screen ->
             NavigationBarItem(
                 icon = {
                     Icon(
@@ -37,7 +36,7 @@ fun KopintarNavigationBar(
                 selected = currentDestination?.hierarchy?.any { it.route == screen.route } == true,
                 onClick = {
                     navController.navigate(screen.route) {
-                        popUpTo(screenList[0].route) {
+                        popUpTo(bottomBarScreens.first().route) {
                             saveState = true
                         }
                         launchSingleTop = true

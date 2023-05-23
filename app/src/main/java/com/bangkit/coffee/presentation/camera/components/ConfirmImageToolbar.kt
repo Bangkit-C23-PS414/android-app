@@ -2,21 +2,19 @@ package com.bangkit.coffee.presentation.camera.components
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Camera
-import androidx.compose.material.icons.filled.FlashOff
-import androidx.compose.material.icons.filled.FlashOn
-import androidx.compose.material.icons.filled.PhotoLibrary
+import androidx.compose.material.icons.filled.Delete
+import androidx.compose.material.icons.filled.Upload
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.FloatingActionButtonDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
-import androidx.compose.material3.IconToggleButton
-import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.minimumInteractiveComponentSize
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -31,16 +29,11 @@ import com.bangkit.coffee.ui.theme.AppTheme
 import com.bangkit.coffee.util.zeroElevation
 
 @Composable
-fun CameraToolbar(
+fun ConfirmImageToolbar(
     modifier: Modifier = Modifier,
-    flashEnabled: Boolean = true,
-    isFlashOn: Boolean = false,
-    isCapturing: Boolean = false,
-    onCapture: () -> Unit = {},
-    pickFromGallery: () -> Unit = {},
 ) {
     val actions = LocalCameraActions.current
-
+    
     Row(
         modifier = modifier
             .fillMaxWidth()
@@ -49,58 +42,45 @@ fun CameraToolbar(
         verticalAlignment = Alignment.CenterVertically
     ) {
         IconButton(
-            onClick = pickFromGallery,
+            onClick = actions.clearImage,
         ) {
             Icon(
-                imageVector = Icons.Filled.PhotoLibrary,
+                imageVector = Icons.Filled.Delete,
                 contentDescription = stringResource(R.string.pick_image_from_gallery),
                 modifier = Modifier.size(30.dp)
             )
         }
 
-        if (isCapturing) {
+        if (false) {
             CircularProgressIndicator(
                 modifier = Modifier.padding(10.dp)
             )
         } else {
             FloatingActionButton(
-                onClick = onCapture,
+                onClick = {},
                 shape = FloatingActionButtonDefaults.largeShape,
                 elevation = FloatingActionButtonDefaults.zeroElevation(),
-                containerColor = MaterialTheme.colorScheme.background,
             ) {
                 Icon(
-                    imageVector = Icons.Filled.Camera,
-                    contentDescription = stringResource(R.string.capture),
-                    modifier = Modifier.size(60.dp)
+                    imageVector = Icons.Filled.Upload,
+                    contentDescription = stringResource(R.string.upload_image),
+                    modifier = Modifier
+                        .size(60.dp)
+                        .padding(12.dp)
                 )
             }
         }
 
-        IconToggleButton(
-            enabled = flashEnabled,
-            checked = isFlashOn,
-            onCheckedChange = actions.toggleFlash,
-        ) {
-            Icon(
-                imageVector = if (isFlashOn) {
-                    Icons.Filled.FlashOn
-                } else {
-                    Icons.Filled.FlashOff
-                },
-                contentDescription = stringResource(R.string.toggle_flash),
-                modifier = Modifier.size(30.dp)
-            )
-        }
+        Spacer(modifier = Modifier.minimumInteractiveComponentSize())
     }
 }
 
-@Preview(name = "CameraToolbar", showBackground = true)
+@Preview(name = "ConfirmImageToolbar", showBackground = true)
 @Composable
-private fun PreviewCameraToolbar() {
+private fun PreviewConfirmImageToolbar() {
     AppTheme {
         ProvideCameraActions(actions = CameraActions()) {
-            CameraToolbar()
+            ConfirmImageToolbar()
         }
     }
 }
