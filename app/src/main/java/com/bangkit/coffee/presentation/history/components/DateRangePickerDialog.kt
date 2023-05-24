@@ -2,10 +2,7 @@ package com.bangkit.coffee.presentation.history.components
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Close
 import androidx.compose.material3.DateRangePicker
@@ -15,13 +12,12 @@ import androidx.compose.material3.IconButton
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
+import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.rememberDateRangePickerState
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
 import androidx.compose.ui.window.DialogProperties
 import com.bangkit.coffee.R
@@ -51,36 +47,34 @@ fun DateRangePickerDialog(
             Column(
                 verticalArrangement = Arrangement.Top
             ) {
-                Row(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(start = 12.dp, end = 12.dp),
-                    verticalAlignment = Alignment.CenterVertically,
-                    horizontalArrangement = Arrangement.SpaceBetween
-                ) {
-                    IconButton(onClick = onDismiss) {
-                        Icon(Icons.Filled.Close, contentDescription = null)
-                    }
+                TopAppBar(
+                    title = {},
+                    navigationIcon = {
+                        IconButton(onClick = onDismiss) {
+                            Icon(Icons.Filled.Close, contentDescription = null)
+                        }
+                    },
+                    actions = {
+                        TextButton(
+                            onClick = {
+                                val startTimestamp = state.selectedStartDateMillis
+                                val endTimestamp = state.selectedEndDateMillis
 
-                    TextButton(
-                        onClick = {
-                            val startTimestamp = state.selectedStartDateMillis
-                            val endTimestamp = state.selectedEndDateMillis
-
-                            if (startTimestamp != null && endTimestamp != null) {
-                                onConfirm(
-                                    FilterDateWrapper(
-                                        startDate = Date(startTimestamp),
-                                        endDate = Date(endTimestamp)
+                                if (startTimestamp != null && endTimestamp != null) {
+                                    onConfirm(
+                                        FilterDateWrapper(
+                                            startDate = Date(startTimestamp),
+                                            endDate = Date(endTimestamp)
+                                        )
                                     )
-                                )
-                            }
-                        },
-                        enabled = state.selectedEndDateMillis != null
-                    ) {
-                        Text(text = stringResource(R.string.save))
+                                }
+                            },
+                            enabled = state.selectedEndDateMillis != null
+                        ) {
+                            Text(text = stringResource(R.string.save))
+                        }
                     }
-                }
+                )
 
                 DateRangePicker(
                     state = state,
