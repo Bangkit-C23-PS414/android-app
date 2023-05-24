@@ -4,8 +4,12 @@ import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.navigation.NavBackStackEntry
+import com.bangkit.coffee.data.repository.UserPreferencesRepository
+import com.bangkit.coffee.di.IODispatcher
 import com.bangkit.coffee.navigation.Screen
+import com.bangkit.coffee.util.tryParseJWT
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -17,8 +21,23 @@ import javax.inject.Inject
 
 @HiltViewModel
 class KopintarAppViewModel @Inject constructor(
-    savedStateHandle: SavedStateHandle
+    savedStateHandle: SavedStateHandle,
+    private val userPreferencesRepository: UserPreferencesRepository,
+    @IODispatcher private val dispatcher: CoroutineDispatcher,
 ) : ViewModel() {
+
+    init {
+        viewModelScope.launch(dispatcher) {
+            userPreferencesRepository.tokenFlow.collect { token ->
+                _stateFlow.update {
+                    it.copy(
+                        token = token,
+                        isValid = tryParseJWT(token)?.isExpired(30) == false
+                    )
+                }
+            }
+        }
+    }
 
     private val _stateFlow: MutableStateFlow<KopintarAppState> =
         MutableStateFlow(KopintarAppState())
@@ -26,7 +45,7 @@ class KopintarAppViewModel @Inject constructor(
 
     fun onBackStackEntryChanged(navBackStackEntry: NavBackStackEntry) {
         _stateFlow.update {
-            KopintarAppState(
+            it.copy(
                 currentDestination = navBackStackEntry.destination,
                 currentRoute = navBackStackEntry.destination.route,
                 shouldShowTopAppBar = navBackStackEntry.destination.route in Screen.Manifest.topBarRoutes,

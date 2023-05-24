@@ -16,6 +16,8 @@ data class KopintarAppState(
     val shouldShowTopAppBar: Boolean = false,
     val shouldShowNavigationBar: Boolean = false,
     val topBarTitle: String = "",
+    val token: String? = null,
+    val isValid: Boolean = false,
 )
 
 /**

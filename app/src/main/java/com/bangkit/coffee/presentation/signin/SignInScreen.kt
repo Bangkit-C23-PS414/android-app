@@ -47,7 +47,6 @@ import me.naingaungluu.formconductor.FieldResult
 import me.naingaungluu.formconductor.FormResult
 import me.naingaungluu.formconductor.composeui.field
 import me.naingaungluu.formconductor.composeui.form
-import timber.log.Timber
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -89,10 +88,7 @@ fun SignInScreen(
                         .fillMaxWidth()
                         .testTag("EmailField"),
                     value = this.state.value?.value.orEmpty(),
-                    onValueChange = {
-                        Timber.d("Email changed: $it")
-                        this.setField(it)
-                    },
+                    onValueChange = this::setField,
                     isError = resultState.value is FieldResult.Error,
                     supportingText = {
                         if (resultState.value is FieldResult.Error) {

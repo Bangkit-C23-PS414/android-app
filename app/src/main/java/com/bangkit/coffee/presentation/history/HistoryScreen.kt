@@ -22,11 +22,11 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.bangkit.coffee.R
 import com.bangkit.coffee.domain.entity.ImageDetection
+import com.bangkit.coffee.presentation.history.components.FilterHistoryBottomSheet
 import com.bangkit.coffee.presentation.history.components.ImageDetectionCard
 import com.bangkit.coffee.presentation.history.components.ImageDetectionGroupHeader
 import com.bangkit.coffee.ui.theme.AppTheme
 import com.bangkit.coffee.util.header
-import timber.log.Timber
 import java.util.Date
 import java.util.UUID
 
@@ -36,7 +36,6 @@ fun HistoryScreen(
     state: HistoryState = HistoryState(),
     actions: HistoryActions = HistoryActions()
 ) {
-    Timber.d("Size: ${state.imageDetections.size}")
     val lazyGridState = rememberLazyGridState()
 
     Scaffold(
@@ -44,7 +43,7 @@ fun HistoryScreen(
             TopAppBar(
                 title = { Text(text = stringResource(R.string.history)) },
                 actions = {
-                    IconButton(onClick = {}) {
+                    IconButton(onClick = actions.toggleFilter) {
                         Icon(
                             imageVector = Icons.Filled.FilterList,
                             contentDescription = stringResource(R.string.filter_history)
@@ -87,6 +86,14 @@ fun HistoryScreen(
                     imageDetection = imageDetection
                 )
             }
+        }
+    }
+
+    if (state.filterVisible) {
+        ProvideHistoryActions(actions = actions) {
+            FilterHistoryBottomSheet(
+                formData = state.filterFormData,
+            )
         }
     }
 }

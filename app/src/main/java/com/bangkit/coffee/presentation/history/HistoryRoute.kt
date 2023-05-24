@@ -28,7 +28,10 @@ fun rememberHistoryActions(
 ): HistoryActions {
     return remember(coordinator) {
         HistoryActions(
-            navigateToDetail = navigateToDetail
+            navigateToDetail = navigateToDetail,
+            toggleFilter = coordinator::toggleFilter,
+            applyFilter = coordinator::applyFilter,
+            resetFilter = coordinator::resetFilter
         )
     }
 }

@@ -4,13 +4,16 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.staticCompositionLocalOf
 import com.bangkit.coffee.domain.entity.ImageDetection
+import com.bangkit.coffee.presentation.history.components.FilterHistoryForm
 
 
 /**
  * UI State that represents HistoryScreen
  **/
 data class HistoryState(
-    val imageDetections: List<ImageDetection> = emptyList()
+    val filterVisible: Boolean = false,
+    val filterFormData: FilterHistoryForm = FilterHistoryForm(),
+    val imageDetections: List<ImageDetection> = emptyList(),
 )
 
 /**
@@ -18,7 +21,10 @@ data class HistoryState(
  * passed to the coordinator to handle
  **/
 data class HistoryActions(
-    val navigateToDetail: () -> Unit = {}
+    val navigateToDetail: () -> Unit = {},
+    val toggleFilter: () -> Unit = {},
+    val applyFilter: (FilterHistoryForm) -> Unit = {},
+    val resetFilter: () -> Unit = {},
 )
 
 /**

@@ -1,9 +1,7 @@
 package com.bangkit.coffee.navigation
 
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Modifier
-import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
@@ -26,18 +24,11 @@ import com.bangkit.coffee.presentation.welcome.WelcomeRoute
 fun Router(
     modifier: Modifier = Modifier,
     navController: NavHostController = rememberNavController(),
-    tokenViewModel: TokenViewModel = hiltViewModel(),
 ) {
-    LaunchedEffect(Unit) {
-        tokenViewModel.isValid.collect {
-            // navController.navigate("login")
-        }
-    }
-
     NavHost(
         modifier = modifier,
         navController = navController,
-        startDestination = Screen.Camera.route,
+        startDestination = Screen.History.route,
     ) {
         // Splash
         composable(Screen.Splash.route) {

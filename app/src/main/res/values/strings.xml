@@ -76,4 +76,12 @@
     <string name="capture_error">Cannot capture image</string>
     <string name="image">Image</string>
     <string name="upload_image">Upload the image</string>
+    <string name="filter_date">Filter Date</string>
+    <string name="filter_label">Filter Label</string>
+    <string name="apply_filter">Apply Filter</string>
+    <string name="reset_filter">Reset Filter</string>
+    <string name="all_time">All Time</string>
+    <string name="select_date_range">Select Date Range</string>
+    <string name="save">Save</string>
+    <string name="date_range_format" translatable="false">%s - %s</string>
 </resources>

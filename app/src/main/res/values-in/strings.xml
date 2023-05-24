@@ -76,4 +76,11 @@
     <string name="capture_error">Tidak dapat mengambil gambar</string>
     <string name="image">Gambar</string>
     <string name="upload_image">Unggah gambar</string>
+    <string name="filter_date">Filter Tanggal</string>
+    <string name="filter_label">Filter Label</string>
+    <string name="apply_filter">Terapkan Filter</string>
+    <string name="reset_filter">Reset Filter</string>
+    <string name="all_time">Semua Waktu</string>
+    <string name="select_date_range">Pilih Rentang Tanggal</string>
+    <string name="save">Simpan</string>
 </resources>
