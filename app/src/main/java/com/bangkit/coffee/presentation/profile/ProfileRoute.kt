@@ -24,7 +24,7 @@ fun ProfileRoute(
 fun rememberProfileActions(coordinator: ProfileCoordinator): ProfileActions {
     return remember(coordinator) {
         ProfileActions(
-            onClick = coordinator::doStuff
+            updateAvatar = coordinator::updateAvatar
         )
     }
 }

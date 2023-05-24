@@ -1,5 +1,8 @@
 package com.bangkit.coffee.presentation.profile
 
+import androidx.activity.compose.rememberLauncherForActivityResult
+import androidx.activity.result.PickVisualMediaRequest
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -44,6 +47,10 @@ fun ProfileScreen(
     actions: ProfileActions = ProfileActions()
 ) {
     val scrollState = rememberScrollState()
+    val singlePhotoPickerLauncher = rememberLauncherForActivityResult(
+        contract = ActivityResultContracts.PickVisualMedia(),
+        onResult = { uri -> uri?.let { actions.updateAvatar(it) } },
+    )
 
     Scaffold(
         topBar = {
@@ -74,7 +81,11 @@ fun ProfileScreen(
                 )
 
                 FilledTonalIconButton(
-                    onClick = {},
+                    onClick = {
+                        singlePhotoPickerLauncher.launch(
+                            PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly)
+                        )
+                    },
                 ) {
                     Icon(
                         imageVector = Icons.Filled.Edit,

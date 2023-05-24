@@ -1,5 +1,6 @@
 package com.bangkit.coffee.presentation.profile
 
+import android.net.Uri
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.staticCompositionLocalOf
@@ -15,7 +16,7 @@ class ProfileState
  * passed to the coordinator to handle
  **/
 data class ProfileActions(
-    val onClick: () -> Unit = {}
+    val updateAvatar: (Uri) -> Unit = {}
 )
 
 /**
