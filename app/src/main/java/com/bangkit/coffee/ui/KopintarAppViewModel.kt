@@ -5,11 +5,9 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.navigation.NavBackStackEntry
 import com.bangkit.coffee.data.repository.UserPreferencesRepository
-import com.bangkit.coffee.di.IODispatcher
 import com.bangkit.coffee.navigation.Screen
 import com.bangkit.coffee.util.tryParseJWT
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -23,11 +21,14 @@ import javax.inject.Inject
 class KopintarAppViewModel @Inject constructor(
     savedStateHandle: SavedStateHandle,
     private val userPreferencesRepository: UserPreferencesRepository,
-    @IODispatcher private val dispatcher: CoroutineDispatcher,
 ) : ViewModel() {
 
+    private val _stateFlow: MutableStateFlow<KopintarAppState> =
+        MutableStateFlow(KopintarAppState())
+    val stateFlow: StateFlow<KopintarAppState> = _stateFlow.asStateFlow()
+
     init {
-        viewModelScope.launch(dispatcher) {
+        viewModelScope.launch {
             userPreferencesRepository.tokenFlow.collect { token ->
                 _stateFlow.update {
                     it.copy(
@@ -38,10 +39,6 @@ class KopintarAppViewModel @Inject constructor(
             }
         }
     }
-
-    private val _stateFlow: MutableStateFlow<KopintarAppState> =
-        MutableStateFlow(KopintarAppState())
-    val stateFlow: StateFlow<KopintarAppState> = _stateFlow.asStateFlow()
 
     fun onBackStackEntryChanged(navBackStackEntry: NavBackStackEntry) {
         _stateFlow.update {

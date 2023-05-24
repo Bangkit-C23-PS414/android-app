@@ -6,7 +6,7 @@ import androidx.compose.ui.text.googlefonts.Font
 import androidx.compose.ui.text.googlefonts.GoogleFont
 import com.bangkit.coffee.R
 
-private val fontName = GoogleFont("Lato")
+private val fontName = GoogleFont("Roboto")
 private val provider = GoogleFont.Provider(
     providerAuthority = "com.google.android.gms.fonts",
     providerPackage = "com.google.android.gms",

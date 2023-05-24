@@ -9,16 +9,17 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import com.bangkit.coffee.presentation.camera.CameraRoute
-import com.bangkit.coffee.presentation.components.SimpleScreen
 import com.bangkit.coffee.presentation.forgotpassword.ForgotPasswordRoute
 import com.bangkit.coffee.presentation.history.HistoryRoute
 import com.bangkit.coffee.presentation.home.HomeRoute
+import com.bangkit.coffee.presentation.imagedetectiondetail.ImageDetectionDetailRoute
 import com.bangkit.coffee.presentation.profile.ProfileRoute
 import com.bangkit.coffee.presentation.resetpassword.ResetPasswordRoute
 import com.bangkit.coffee.presentation.signin.SignInRoute
 import com.bangkit.coffee.presentation.signup.SignUpRoute
 import com.bangkit.coffee.presentation.verifyotp.VerifyOTPRoute
 import com.bangkit.coffee.presentation.welcome.WelcomeRoute
+import com.bangkit.coffee.ui.components.SimpleScreen
 
 @Composable
 fun Router(
@@ -28,7 +29,7 @@ fun Router(
     NavHost(
         modifier = modifier,
         navController = navController,
-        startDestination = Screen.History.route,
+        startDestination = Screen.ImageDetectionDetail.route,
     ) {
         // Splash
         composable(Screen.Splash.route) {
@@ -117,10 +118,12 @@ fun Router(
         // Image detections detail
         composable(
             Screen.ImageDetectionDetail.route,
-            arguments = listOf(navArgument("id") { type = NavType.StringType })
-        ) { backStackEntry ->
-            val id = backStackEntry.arguments?.getString("userId")
-            SimpleScreen(text = "Detail Detection: $id")
+            arguments = listOf(navArgument("id") {
+                type = NavType.StringType
+                defaultValue = "default-id"
+            })
+        ) {
+            ImageDetectionDetailRoute()
         }
 
         // Camera

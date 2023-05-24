@@ -8,6 +8,10 @@ fun Date.toTimeString(): String {
     return SimpleDateFormat.getTimeInstance(DateFormat.SHORT).format(this)
 }
 
-fun Date.toDateString() : String {
+fun Date.toDateString(): String {
     return SimpleDateFormat.getDateInstance(DateFormat.DEFAULT).format(this)
+}
+
+fun Date.toDateTimeString(): String {
+    return SimpleDateFormat.getDateTimeInstance(DateFormat.DEFAULT, DateFormat.SHORT).format(this)
 }

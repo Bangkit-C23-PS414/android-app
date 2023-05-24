@@ -83,4 +83,13 @@
     <string name="all_time">Semua Waktu</string>
     <string name="select_date_range">Pilih Rentang Tanggal</string>
     <string name="save">Simpan</string>
+    <string name="detection_result">Hasil Deteksi</string>
+    <string name="we_found_a_disease">Kami menemukan penyakit pada kopi anda</string>
+    <string name="accuracy_format">Akurasi %d\\%%</string>
+    <string name="detected_at_format">Terdeteksi pada %s</string>
+    <string name="how_to_control">Bagaimana cara mengontrolnya?</string>
+    <string name="everything_is_fine">Semua baik-baik saja!</string>
+    <string name="we_didn_t_found">Kami tidak menemukan apapun</string>
+    <string name="healthy_explanation">Menggabungkan kecanggihan teknologi dan keindahan alam, sistem pendeteksi penyakit kopi berbasis kecerdasan buatan (AI) kami membantu petani dalam mengidentifikasi masalah potensial. Namun, penting untuk diakui bahwa meskipun algoritma yang paling canggih, kadang-kadang hasil yang diberikan oleh AI bisa tidak akurat. Dalam kasus yang jarang terjadi yaitu hasil negatif palsu, di mana sistem gagal mendeteksi suatu penyakit, kami menyarankan petani untuk berkonsultasi dengan indikator tambahan dan mencari saran dari ahli. Komitmen kami tetap tidak berubah, karena kami terus menyempurnakan model AI kami untuk meningkatkan akurasi dan memberikan petani wawasan yang dapat diandalkan untuk panen kopi yang berkembang dengan baik.</string>
+    <string name="generic_error_message">Waduhhh.. ketahuan. Kayaknya ada yang salah.</string>
 </resources>

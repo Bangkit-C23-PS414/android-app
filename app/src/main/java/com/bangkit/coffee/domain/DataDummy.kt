@@ -11,7 +11,6 @@ val DiseaseDummy
     get() = Disease(
         randomUUID().toString(),
         "Cercospora Leaf Spot ${Random.nextInt(100)}",
-        "Cercospora coffeicola",
         "This fungal disease occurs in coffee plantations that lack proper nutrient balance. It spreads through wind and rain splash and thrives in humid and warm environments. The symptoms can be observed in newly generated leaves and tissue, appearing as brown spots that start at the edges of the coffee leaves and spread toward the center. The disease can also be seen on the branches, starting at the spots where leaves have fallen.",
         listOf(
             "Keep a balance and controlled fertilization plan, add organic matter to your soil, and balance the shadow& lighting of your plantation.",

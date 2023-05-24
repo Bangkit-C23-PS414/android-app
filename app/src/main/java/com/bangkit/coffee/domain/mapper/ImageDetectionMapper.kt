@@ -1,7 +1,8 @@
-package com.bangkit.coffee.domain.entity
+package com.bangkit.coffee.domain.mapper
 
 import com.bangkit.coffee.data.source.local.entity.LocalImageDetection
 import com.bangkit.coffee.data.source.remote.response.RemoteImageDetection
+import com.bangkit.coffee.domain.entity.ImageDetection
 
 /* Local <--> External Segment */
 

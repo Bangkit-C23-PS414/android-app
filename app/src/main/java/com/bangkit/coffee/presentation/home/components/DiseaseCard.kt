@@ -19,6 +19,7 @@ import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 import coil.request.CachePolicy
 import coil.request.ImageRequest
+import com.bangkit.coffee.domain.DiseaseDummy
 import com.bangkit.coffee.domain.entity.Disease
 import com.bangkit.coffee.ui.theme.AppTheme
 
@@ -63,18 +64,6 @@ fun DiseaseCard(
 @Composable
 private fun PreviewDiseaseCard() {
     AppTheme {
-        DiseaseCard(
-            disease = Disease(
-                "zDlhByJLobGnwZuJKBJ",
-                "Cercospora Leaf Spot",
-                "Cercospora coffeicola",
-                "This fungal disease occurs in coffee plantations that lack proper nutrient balance. It spreads through wind and rain splash and thrives in humid and warm environments. The symptoms can be observed in newly generated leaves and tissue, appearing as brown spots that start at the edges of the coffee leaves and spread toward the center. The disease can also be seen on the branches, starting at the spots where leaves have fallen.",
-                listOf(
-                    "Keep a balance and controlled fertilization plan, add organic matter to your soil, and balance the shadow& lighting of your plantation.",
-                    "Fungicides that contain copper and triazoles are effective in combating this disease."
-                ),
-                "https://picsum.photos/300"
-            )
-        )
+        DiseaseCard(disease = DiseaseDummy)
     }
 }

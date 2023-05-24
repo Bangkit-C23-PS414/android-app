@@ -30,8 +30,8 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 import com.bangkit.coffee.R
-import com.bangkit.coffee.presentation.components.DividerWithText
-import com.bangkit.coffee.presentation.components.PageIndicator
+import com.bangkit.coffee.presentation.welcome.components.DividerWithText
+import com.bangkit.coffee.presentation.welcome.components.PageIndicator
 import com.bangkit.coffee.ui.theme.AppTheme
 
 @OptIn(ExperimentalFoundationApi::class)

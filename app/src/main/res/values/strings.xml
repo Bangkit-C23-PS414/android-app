@@ -84,4 +84,13 @@
     <string name="select_date_range">Select Date Range</string>
     <string name="save">Save</string>
     <string name="date_range_format" translatable="false">%s - %s</string>
+    <string name="detection_result">Detection Result</string>
+    <string name="we_found_a_disease">We found a disease in your coffee</string>
+    <string name="accuracy_format">%d\%% Accuracy</string>
+    <string name="detected_at_format">Detected at %s</string>
+    <string name="how_to_control">How to control?</string>
+    <string name="everything_is_fine">Everything is fine!</string>
+    <string name="we_didn_t_found">We didn’t found any disease</string>
+    <string name="healthy_explanation">Discovering the perfect blend of technology and nature, our AI-driven coffee disease detection system assists farmers in identifying potential issues. However, it\'s important to acknowledge that even the most advanced algorithms can occasionally produce inaccurate results. In the rare case of a false negative, where the system fails to detect a disease, we advise farmers to consult additional indicators and seek expert advice. Our commitment remains unwavering, as we continuously refine our AI model to enhance its accuracy and empower farmers with reliable insights for a thriving coffee harvest.</string>
+    <string name="generic_error_message">Whoopss.. you got us. Something went wrong</string>
 </resources>

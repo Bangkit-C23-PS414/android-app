@@ -1,4 +1,4 @@
-package com.bangkit.coffee.presentation.components
+package com.bangkit.coffee.presentation.welcome.components
 
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.padding
