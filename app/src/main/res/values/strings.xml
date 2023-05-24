@@ -45,7 +45,7 @@
     <string name="profile">Profile</string>
     <string name="how_to_detect">How to detect coffee plant diseases?</string>
     <string name="how_to_detect_step_1">Take a coffee leaf photo</string>
-    <string name="how_to_detect_step_2">Wait for the AI to diagnose</string>
+    <string name="how_to_detect_step_2">Wait for the AI diagnosis</string>
     <string name="how_to_detect_step_3">Check the diagnosis result</string>
     <string name="detect_now">Detect Now</string>
     <string name="what_disease_detect">What coffee plant diseases can we detect?</string>
