@@ -1,23 +1,37 @@
 package com.bangkit.coffee.presentation.camera
 
 import android.Manifest
+import android.content.Intent
+import android.net.Uri
+import android.provider.Settings
 import androidx.activity.compose.BackHandler
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.PickVisualMediaRequest
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Close
+import androidx.compose.material3.Button
 import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
 import com.bangkit.coffee.R
 import com.bangkit.coffee.presentation.camera.components.CameraFragment
 import com.bangkit.coffee.presentation.camera.components.ConfirmImageFragment
@@ -26,6 +40,7 @@ import com.bangkit.coffee.ui.theme.AppTheme
 import com.google.accompanist.permissions.ExperimentalPermissionsApi
 import com.google.accompanist.permissions.isGranted
 import com.google.accompanist.permissions.rememberPermissionState
+import com.google.accompanist.permissions.shouldShowRationale
 
 
 @OptIn(ExperimentalPermissionsApi::class, ExperimentalMaterial3Api::class)
@@ -34,6 +49,8 @@ fun CameraScreen(
     state: CameraState = CameraState(),
     actions: CameraActions = CameraActions()
 ) {
+    val context = LocalContext.current
+
     Scaffold(
         topBar = {
             CenterAlignedTopAppBar(
@@ -91,10 +108,49 @@ fun CameraScreen(
                 }
             }
         } else {
-            RequestPermissionDialog(
-                onConfirm = { cameraPermissionState.launchPermissionRequest() },
-                onDismiss = actions.navigateUp
-            )
+            if (cameraPermissionState.status.shouldShowRationale) {
+                RequestPermissionDialog(
+                    onConfirm = { cameraPermissionState.launchPermissionRequest() },
+                    onDismiss = actions.navigateUp
+                )
+            } else {
+                LaunchedEffect(Unit) {
+                    cameraPermissionState.launchPermissionRequest()
+                }
+            }
+
+            Column(
+                verticalArrangement = Arrangement.Center,
+                horizontalAlignment = Alignment.CenterHorizontally,
+                modifier = Modifier
+                    .fillMaxSize()
+                    .padding(36.dp)
+            ) {
+                Text(
+                    text = stringResource(R.string.camera_denied_title),
+                    style = MaterialTheme.typography.titleMedium,
+                    fontWeight = FontWeight.Bold,
+                    textAlign = TextAlign.Center,
+                    modifier = Modifier.padding(bottom = 24.dp)
+                )
+                Text(
+                    text = stringResource(R.string.camera_denied_description),
+                    style = MaterialTheme.typography.bodySmall,
+                    textAlign = TextAlign.Center,
+                    modifier = Modifier.padding(bottom = 24.dp)
+                )
+
+                Button(onClick = {
+                    val intent = Intent(
+                        Settings.ACTION_APPLICATION_DETAILS_SETTINGS,
+                        Uri.fromParts("package", context.packageName, null)
+                    )
+                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                    context.startActivity(intent)
+                }) {
+                    Text(text = stringResource(R.string.open_settings))
+                }
+            }
         }
     }
 
