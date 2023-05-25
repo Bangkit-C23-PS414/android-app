@@ -19,18 +19,20 @@ import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.SideEffect
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.focus.focusRequester
-import androidx.compose.ui.platform.LocalLayoutDirection
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextRange
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
 import androidx.compose.ui.window.DialogProperties
@@ -43,6 +45,7 @@ import me.naingaungluu.formconductor.FieldResult
 import me.naingaungluu.formconductor.FormResult
 import me.naingaungluu.formconductor.composeui.field
 import me.naingaungluu.formconductor.composeui.form
+import timber.log.Timber
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -50,7 +53,6 @@ fun EditProfileDialog(
     modifier: Modifier = Modifier,
     name: String = ""
 ) {
-    val direction = LocalLayoutDirection.current
     val actions = LocalProfileActions.current
     val focusRequester = remember { FocusRequester() }
 
@@ -80,22 +82,39 @@ fun EditProfileDialog(
                     )
 
                     field(EditProfileForm::name) {
-                        val value = this.state.value?.value ?: name
+                        var valueState by remember {
+                            mutableStateOf(
+                                TextFieldValue(
+                                    text = name,
+                                    selection = TextRange(name.length)
+                                )
+                            )
+                        }
+                        val value = valueState.copy(text = this.state.value?.value ?: name)
+
+                        SideEffect {
+                            Timber.d("Side Effect: $value")
+                            if (value.selection != valueState.selection ||
+                                value.composition != valueState.composition
+                            ) {
+                                valueState = value
+                            }
+                        }
 
                         OutlinedTextField(
                             modifier = Modifier
                                 .fillMaxWidth()
                                 .padding(horizontal = 16.dp)
                                 .focusRequester(focusRequester),
-                            value = TextFieldValue(
-                                text = value,
-                                selection = if (direction == LayoutDirection.Ltr) {
-                                    TextRange(value.length)
-                                } else {
-                                    TextRange.Zero
+                            value = value,
+                            onValueChange = { newValue ->
+                                Timber.d("onValueChange: $newValue")
+                                valueState = newValue
+
+                                if (value.text != newValue.text) {
+                                    this.setField(newValue.text)
                                 }
-                            ),
-                            onValueChange = { this.setField(it.text) },
+                            },
                             isError = resultState.value is FieldResult.Error,
                             supportingText = {
                                 if (resultState.value is FieldResult.Error) {
