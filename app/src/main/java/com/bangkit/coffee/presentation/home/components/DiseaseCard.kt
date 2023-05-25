@@ -60,7 +60,7 @@ fun DiseaseCard(
     }
 }
 
-@Preview(name = "DiseaseCard")
+@Preview(name = "DiseaseCard", showBackground = true)
 @Composable
 private fun PreviewDiseaseCard() {
     AppTheme {

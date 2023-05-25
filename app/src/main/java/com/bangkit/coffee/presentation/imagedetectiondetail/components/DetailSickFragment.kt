@@ -179,7 +179,7 @@ fun DetailSickFragment(
     }
 }
 
-@Preview(name = "DetailSickFragment")
+@Preview(name = "DetailSickFragment", showBackground = true)
 @Composable
 private fun PreviewDetailSickFragment() {
     DetailSickFragment(

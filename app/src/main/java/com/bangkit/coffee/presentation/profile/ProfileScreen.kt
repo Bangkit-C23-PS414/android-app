@@ -39,6 +39,8 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 import com.bangkit.coffee.R
+import com.bangkit.coffee.presentation.profile.components.ChangePasswordDialog
+import com.bangkit.coffee.presentation.profile.components.EditProfileDialog
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -103,7 +105,7 @@ fun ProfileScreen(
             )
 
             ListItem(
-                modifier = Modifier.clickable { },
+                modifier = Modifier.clickable { actions.openEditProfile() },
                 headlineContent = {
                     Text(text = stringResource(R.string.edit_profile))
                 },
@@ -116,7 +118,7 @@ fun ProfileScreen(
             )
 
             ListItem(
-                modifier = Modifier.clickable { },
+                modifier = Modifier.clickable { actions.openChangePassword() },
                 headlineContent = {
                     Text(text = stringResource(R.string.change_password))
                 },
@@ -148,10 +150,24 @@ fun ProfileScreen(
             )
         }
     }
+
+    if (state.editProfileVisible) {
+        ProvideProfileActions(actions = actions) {
+            EditProfileDialog(
+                name = "Muhamamd John Doe"
+            )
+        }
+    }
+
+    if (state.changePasswordVisible) {
+        ProvideProfileActions(actions = actions) {
+            ChangePasswordDialog()
+        }
+    }
 }
 
 @Composable
-@Preview(name = "Profile")
+@Preview(name = "Profile", showBackground = true)
 private fun ProfileScreenPreview() {
     ProfileScreen()
 }

@@ -55,7 +55,7 @@ fun DetectionStepCard(
     }
 }
 
-@Preview(name = "DetectionStepCard")
+@Preview(name = "DetectionStepCard", showBackground = true)
 @Composable
 private fun PreviewDetectionStepCard() {
     AppTheme {

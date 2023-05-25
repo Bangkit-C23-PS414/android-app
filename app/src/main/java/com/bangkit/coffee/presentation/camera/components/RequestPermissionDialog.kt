@@ -38,7 +38,7 @@ fun RequestPermissionDialog(
     )
 }
 
-@Preview(name = "RequestPermissionDialog")
+@Preview(name = "RequestPermissionDialog", showBackground = true)
 @Composable
 private fun PreviewRequestPermissionDialog() {
     AppTheme {

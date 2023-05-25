@@ -23,7 +23,7 @@ fun FocusRing(
     )
 }
 
-@Preview(name = "FocusRing")
+@Preview(name = "FocusRing", showBackground = true)
 @Composable
 private fun PreviewFocusRing() {
     AppTheme {

@@ -89,7 +89,7 @@ fun DateRangePickerDialog(
     }
 }
 
-@Preview(name = "DateRangePickerDialog")
+@Preview(name = "DateRangePickerDialog", showBackground = true)
 @Composable
 private fun PreviewDateRangePickerDialog() {
     AppTheme {

@@ -102,7 +102,7 @@ fun CameraScreen(
 }
 
 @Composable
-@Preview(name = "Camera")
+@Preview(name = "Camera", showBackground = true)
 private fun CameraScreenPreview() {
     AppTheme {
         CameraScreen()

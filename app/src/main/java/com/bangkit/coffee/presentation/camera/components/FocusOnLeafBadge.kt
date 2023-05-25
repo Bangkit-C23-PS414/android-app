@@ -41,7 +41,7 @@ fun FocusOnLeafBadge(
     }
 }
 
-@Preview(name = "FocusOnLeafBadge")
+@Preview(name = "FocusOnLeafBadge", showBackground = true)
 @Composable
 private fun PreviewFocusOnLeafBadge() {
     AppTheme {

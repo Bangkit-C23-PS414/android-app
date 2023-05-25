@@ -92,4 +92,8 @@
     <string name="we_didn_t_found">Kami tidak menemukan apapun</string>
     <string name="healthy_explanation">Menggabungkan kecanggihan teknologi dan keindahan alam, sistem pendeteksi penyakit kopi berbasis kecerdasan buatan (AI) kami membantu petani dalam mengidentifikasi masalah potensial. Namun, penting untuk diakui bahwa meskipun algoritma yang paling canggih, kadang-kadang hasil yang diberikan oleh AI bisa tidak akurat. Dalam kasus yang jarang terjadi yaitu hasil negatif palsu, di mana sistem gagal mendeteksi suatu penyakit, kami menyarankan petani untuk berkonsultasi dengan indikator tambahan dan mencari saran dari ahli. Komitmen kami tetap tidak berubah, karena kami terus menyempurnakan model AI kami untuk meningkatkan akurasi dan memberikan petani wawasan yang dapat diandalkan untuk panen kopi yang berkembang dengan baik.</string>
     <string name="generic_error_message">Waduhhh.. ketahuan. Kayaknya ada yang salah.</string>
+    <string name="old_password">Kata sandi lama</string>
+    <string name="old_password_error">Ketik kata sandi lama</string>
+    <string name="old_password_hint">Kata sandi lama minimum 6 karakter</string>
+    <string name="update_password">Perbarui Kata Sandi</string>
 </resources>

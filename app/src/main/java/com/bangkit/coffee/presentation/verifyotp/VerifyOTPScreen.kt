@@ -131,7 +131,7 @@ fun VerifyOTPScreen(
 }
 
 @Composable
-@Preview(name = "VerifyOTP")
+@Preview(name = "VerifyOTP", showBackground = true)
 private fun VerifyOTPScreenPreview() {
     AppTheme {
         VerifyOTPScreen()

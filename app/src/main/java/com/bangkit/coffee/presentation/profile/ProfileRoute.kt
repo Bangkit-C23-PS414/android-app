@@ -24,7 +24,13 @@ fun ProfileRoute(
 fun rememberProfileActions(coordinator: ProfileCoordinator): ProfileActions {
     return remember(coordinator) {
         ProfileActions(
-            updateAvatar = coordinator::updateAvatar
+            updateAvatar = coordinator::updateAvatar,
+            openEditProfile = coordinator::openEditProfile,
+            closeEditProfile = coordinator::closeEditProfile,
+            editProfile = coordinator::editProfile,
+            openChangePassword = coordinator::openChangePassword,
+            closeChangePassword = coordinator::closeChangePassword,
+            changePassword = coordinator::changePassword
         )
     }
 }

@@ -59,7 +59,7 @@ fun ImageDetectionDetailScreen(
 }
 
 @Composable
-@Preview(name = "ImageDetectionDetail")
+@Preview(name = "ImageDetectionDetail", showBackground = true)
 private fun ImageDetectionDetailScreenPreview() {
     ImageDetectionDetailScreen()
 }
