@@ -27,10 +27,7 @@ fun KopintarNavigationBar(
         bottomBarScreens.forEach { screen ->
             NavigationBarItem(
                 icon = {
-                    Icon(
-                        screen.icon,
-                        contentDescription = stringResource(screen.title)
-                    )
+                    Icon(screen.icon, contentDescription = null)
                 },
                 label = { Text(stringResource(screen.title)) },
                 selected = currentDestination?.hierarchy?.any { it.route == screen.route } == true,

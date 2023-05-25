@@ -49,7 +49,9 @@ fun CameraScreen(
                     )
                 },
                 navigationIcon = {
-                    IconButton(onClick = actions.navigateUp) {
+                    IconButton(
+                        onClick = actions.navigateUp,
+                    ) {
                         Icon(
                             imageVector = Icons.Filled.Close,
                             contentDescription = stringResource(R.string.close),

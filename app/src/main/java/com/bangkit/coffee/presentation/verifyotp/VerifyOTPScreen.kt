@@ -67,7 +67,7 @@ fun VerifyOTPScreen(
                 .fillMaxWidth()
                 .aspectRatio(1f),
             model = R.drawable.enter_otp,
-            contentDescription = stringResource(R.string.enter_otp),
+            contentDescription = null,
             contentScale = ContentScale.FillWidth
         )
 

@@ -61,7 +61,7 @@ fun ResetPasswordScreen(
                 .fillMaxWidth()
                 .aspectRatio(1.4f),
             model = R.drawable.reset_password,
-            contentDescription = stringResource(R.string.reset_password),
+            contentDescription = null,
             contentScale = ContentScale.FillWidth
         )
 
@@ -101,7 +101,7 @@ fun ResetPasswordScreen(
                         Text(text = stringResource(R.string.new_password_hint))
                     },
                     leadingIcon = {
-                        Icon(imageVector = Icons.Filled.Lock, contentDescription = stringResource(R.string.new_password))
+                        Icon(imageVector = Icons.Filled.Lock, contentDescription = null)
                     },
                     visualTransformation = PasswordVisualTransformation(),
                     keyboardOptions = KeyboardOptions(
@@ -131,7 +131,7 @@ fun ResetPasswordScreen(
                         Text(text = stringResource(R.string.confirm_new_password_hint))
                     },
                     leadingIcon = {
-                        Icon(imageVector = Icons.Filled.Lock, contentDescription = stringResource(R.string.confirm_new_password))
+                        Icon(imageVector = Icons.Filled.Lock, contentDescription = null)
                     },
                     visualTransformation = PasswordVisualTransformation(),
                     keyboardOptions = KeyboardOptions(

@@ -13,12 +13,14 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 import coil.request.CachePolicy
 import coil.request.ImageRequest
+import com.bangkit.coffee.R
 import com.bangkit.coffee.domain.DiseaseDummy
 import com.bangkit.coffee.domain.entity.Disease
 import com.bangkit.coffee.ui.theme.AppTheme
@@ -45,7 +47,7 @@ fun DiseaseCard(
                 .crossfade(true)
                 .diskCachePolicy(CachePolicy.ENABLED)
                 .build(),
-            contentDescription = disease.name,
+            contentDescription = stringResource(R.string.image),
             contentScale = ContentScale.FillBounds
         )
         Text(

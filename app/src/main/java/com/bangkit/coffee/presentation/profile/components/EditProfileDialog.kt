@@ -85,10 +85,7 @@ fun EditProfileDialog(
                                 Text(text = stringResource(R.string.full_name_hint))
                             },
                             leadingIcon = {
-                                Icon(
-                                    imageVector = Icons.Filled.Person,
-                                    contentDescription = stringResource(R.string.full_name)
-                                )
+                                Icon(imageVector = Icons.Filled.Person, contentDescription = null)
                             },
                             keyboardOptions = KeyboardOptions(
                                 keyboardType = KeyboardType.Text,

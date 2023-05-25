@@ -66,7 +66,7 @@ fun HomeScreen(
             ) {
                 Icon(
                     imageVector = Icons.Filled.AutoFixHigh,
-                    contentDescription = stringResource(R.string.how_to_detect)
+                    contentDescription = null
                 )
                 Spacer(modifier = Modifier.width(8.dp))
                 Text(
@@ -95,7 +95,7 @@ fun HomeScreen(
             ) {
                 Icon(
                     Icons.Filled.PhotoCamera,
-                    contentDescription = stringResource(R.string.detect_now),
+                    contentDescription = null,
                     modifier = Modifier.size(ButtonDefaults.IconSize)
                 )
                 Spacer(Modifier.size(ButtonDefaults.IconSpacing))
@@ -109,7 +109,7 @@ fun HomeScreen(
             ) {
                 Icon(
                     imageVector = Icons.Filled.Info,
-                    contentDescription = stringResource(R.string.what_disease_detect)
+                    contentDescription = null,
                 )
                 Spacer(modifier = Modifier.width(8.dp))
                 Text(

@@ -32,7 +32,7 @@ fun DetectionStepCard(
                 .padding(16.dp)
                 .align(Alignment.CenterHorizontally),
             model = detectionStep.image,
-            contentDescription = stringResource(detectionStep.description)
+            contentDescription = null
         )
         Badge(
             modifier = Modifier

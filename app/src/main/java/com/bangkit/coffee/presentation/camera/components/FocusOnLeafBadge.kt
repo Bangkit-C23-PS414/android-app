@@ -30,7 +30,7 @@ fun FocusOnLeafBadge(
     ) {
         Icon(
             imageVector = Icons.Filled.TipsAndUpdates,
-            contentDescription = stringResource(R.string.focus_on_leaf),
+            contentDescription = null,
             modifier = Modifier.size(16.dp)
         )
         Spacer(modifier = Modifier.width(4.dp))

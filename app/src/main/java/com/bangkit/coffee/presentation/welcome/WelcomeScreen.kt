@@ -76,7 +76,7 @@ fun WelcomeScreen(
             ) {
                 AsyncImage(
                     model = state.carouselItems[i].image,
-                    contentDescription = stringResource(state.carouselItems[i].title),
+                    contentDescription = null,
                     modifier = Modifier
                         .fillMaxWidth(0.85f)
                         .aspectRatio(1f),

@@ -112,7 +112,7 @@ fun ProfileScreen(
                 leadingContent = {
                     Icon(
                         imageVector = Icons.Filled.Person,
-                        contentDescription = stringResource(R.string.edit_profile)
+                        contentDescription = null
                     )
                 }
             )
@@ -125,7 +125,7 @@ fun ProfileScreen(
                 leadingContent = {
                     Icon(
                         imageVector = Icons.Filled.Key,
-                        contentDescription = stringResource(R.string.change_password)
+                        contentDescription = null
                     )
                 }
             )
@@ -140,7 +140,7 @@ fun ProfileScreen(
                 leadingContent = {
                     Icon(
                         imageVector = Icons.Filled.Logout,
-                        contentDescription = stringResource(R.string.sign_out)
+                        contentDescription = null
                     )
                 },
                 colors = ListItemDefaults.colors(

@@ -92,10 +92,7 @@ fun ChangePasswordDialog(
                                 Text(text = stringResource(R.string.old_password_hint))
                             },
                             leadingIcon = {
-                                Icon(
-                                    imageVector = Icons.Filled.Lock,
-                                    contentDescription = stringResource(R.string.password)
-                                )
+                                Icon(imageVector = Icons.Filled.Lock, contentDescription = null)
                             },
                             visualTransformation = PasswordVisualTransformation(),
                             keyboardOptions = KeyboardOptions(
@@ -125,7 +122,7 @@ fun ChangePasswordDialog(
                                 Text(text = stringResource(R.string.new_password_hint))
                             },
                             leadingIcon = {
-                                Icon(imageVector = Icons.Filled.Lock, contentDescription = stringResource(R.string.new_password))
+                                Icon(imageVector = Icons.Filled.Lock, contentDescription = null)
                             },
                             visualTransformation = PasswordVisualTransformation(),
                             keyboardOptions = KeyboardOptions(
@@ -155,10 +152,7 @@ fun ChangePasswordDialog(
                                 Text(text = stringResource(R.string.confirm_new_password_hint))
                             },
                             leadingIcon = {
-                                Icon(
-                                    imageVector = Icons.Filled.Lock,
-                                    contentDescription = stringResource(R.string.confirm_new_password)
-                                )
+                                Icon(imageVector = Icons.Filled.Lock, contentDescription = null)
                             },
                             visualTransformation = PasswordVisualTransformation(),
                             keyboardOptions = KeyboardOptions(
