@@ -3,6 +3,7 @@ package com.bangkit.coffee.presentation.signin
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.hilt.navigation.compose.hiltViewModel
+import com.bangkit.coffee.presentation.signin.components.SignInForm
 
 /**
  * Screen's coordinator which is responsible for handling actions from the UI layer
@@ -17,8 +18,8 @@ class SignInCoordinator(
         viewModel.setPasswordVisibility(visibility)
     }
 
-    fun signIn() {
-
+    fun signIn(formData: SignInForm) {
+        viewModel.signIn(formData)
     }
 }
 

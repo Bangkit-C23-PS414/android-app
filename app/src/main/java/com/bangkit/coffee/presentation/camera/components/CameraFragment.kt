@@ -61,7 +61,7 @@ fun CameraFragment(
     isCapturing: Boolean = false,
     pickFromGallery: () -> Unit = {},
 ) {
-    val kopintarAppActions = LocalKopintarAppActions.current
+    val appActions = LocalKopintarAppActions.current
     val context = LocalContext.current
     val actions = LocalCameraActions.current
     val lifecycleOwner = LocalLifecycleOwner.current
@@ -213,7 +213,7 @@ fun CameraFragment(
                         val file = imageCaptureUseCase.takePicture(context.executor)
                         actions.setImage(file.toUri())
                     } catch (e: Exception) {
-                        kopintarAppActions.showToast(context.resources.getString(R.string.capture_error))
+                        appActions.showToast(context.resources.getString(R.string.capture_error))
                         actions.cancelCapture()
                     }
                 }
