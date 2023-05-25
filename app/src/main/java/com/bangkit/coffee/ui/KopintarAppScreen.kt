@@ -1,5 +1,6 @@
 package com.bangkit.coffee.ui
 
+import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.MaterialTheme
@@ -8,6 +9,7 @@ import androidx.compose.material3.SnackbarHost
 import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
@@ -18,6 +20,7 @@ import com.bangkit.coffee.navigation.Router
 import com.bangkit.coffee.ui.components.KopintarNavigationBar
 import com.bangkit.coffee.ui.components.KopintarTopAppBar
 import com.bangkit.coffee.ui.theme.AppTheme
+import com.google.accompanist.systemuicontroller.rememberSystemUiController
 
 @Composable
 fun KopintarAppScreen(
@@ -37,6 +40,19 @@ fun KopintarAppScreen(
             modifier = Modifier.fillMaxSize(),
             color = MaterialTheme.colorScheme.background
         ) {
+            // Remember a SystemUiController
+            val systemUiController = rememberSystemUiController()
+            val useDarkIcons = !isSystemInDarkTheme()
+            val surfaceColor = MaterialTheme.colorScheme.surface
+
+            DisposableEffect(systemUiController, useDarkIcons) {
+                systemUiController.setSystemBarsColor(
+                    color = surfaceColor,
+                    darkIcons = useDarkIcons
+                )
+                onDispose {}
+            }
+
             Scaffold(
                 snackbarHost = { SnackbarHost(snackbarHostState) },
                 topBar = {
