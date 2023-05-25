@@ -154,7 +154,7 @@ fun ProfileScreen(
     if (state.editProfileVisible) {
         ProvideProfileActions(actions = actions) {
             EditProfileDialog(
-                name = "Muhamamd John Doe"
+                name = "Muhammad John Doe"
             )
         }
     }

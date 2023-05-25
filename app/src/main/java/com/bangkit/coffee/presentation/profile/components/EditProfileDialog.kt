@@ -18,11 +18,19 @@ import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.focus.FocusRequester
+import androidx.compose.ui.focus.focusRequester
+import androidx.compose.ui.platform.LocalLayoutDirection
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.TextRange
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
+import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
 import androidx.compose.ui.window.DialogProperties
@@ -42,7 +50,13 @@ fun EditProfileDialog(
     modifier: Modifier = Modifier,
     name: String = ""
 ) {
+    val direction = LocalLayoutDirection.current
     val actions = LocalProfileActions.current
+    val focusRequester = remember { FocusRequester() }
+
+    LaunchedEffect(Unit) {
+        focusRequester.requestFocus()
+    }
 
     Dialog(
         onDismissRequest = actions.closeEditProfile,
@@ -66,12 +80,22 @@ fun EditProfileDialog(
                     )
 
                     field(EditProfileForm::name) {
+                        val value = this.state.value?.value ?: name
+
                         OutlinedTextField(
                             modifier = Modifier
                                 .fillMaxWidth()
-                                .padding(horizontal = 16.dp),
-                            value = this.state.value?.value ?: name,
-                            onValueChange = this::setField,
+                                .padding(horizontal = 16.dp)
+                                .focusRequester(focusRequester),
+                            value = TextFieldValue(
+                                text = value,
+                                selection = if (direction == LayoutDirection.Ltr) {
+                                    TextRange(value.length)
+                                } else {
+                                    TextRange.Zero
+                                }
+                            ),
+                            onValueChange = { this.setField(it.text) },
                             isError = resultState.value is FieldResult.Error,
                             supportingText = {
                                 if (resultState.value is FieldResult.Error) {
