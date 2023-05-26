@@ -13,18 +13,19 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
-import coil.request.CachePolicy
 import coil.request.ImageRequest
 import com.bangkit.coffee.R
 import com.bangkit.coffee.domain.entity.ImageDetection
 import com.bangkit.coffee.ui.theme.AppTheme
 import com.bangkit.coffee.util.toTimeString
+import com.wajahatiqbal.blurhash.BlurHashPainter
 import java.util.Date
 import java.util.UUID
 
@@ -49,10 +50,18 @@ fun ImageDetectionCard(
             model = ImageRequest.Builder(context)
                 .data(imageDetection.imageUrl)
                 .crossfade(true)
-                .diskCachePolicy(CachePolicy.ENABLED)
+                .diskCacheKey("image-detection-${imageDetection.id}")
+                .memoryCacheKey("image-detection-${imageDetection.id}")
                 .build(),
             contentDescription = stringResource(R.string.coffee_leaf_image),
-            contentScale = ContentScale.FillBounds
+            contentScale = ContentScale.Crop,
+            error = painterResource(R.drawable.no_image),
+            placeholder = BlurHashPainter(
+                blurHash = "LEHC4WWB2yk8pyoJadR*.7kCMdnj",
+                width = 290,
+                height = 200,
+                scale = 0.1f,
+            )
         )
         Text(
             text = imageDetection.result.orEmpty(),

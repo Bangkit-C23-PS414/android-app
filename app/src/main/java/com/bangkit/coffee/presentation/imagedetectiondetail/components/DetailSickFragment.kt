@@ -65,7 +65,7 @@ fun DetailSickFragment(
                     .diskCachePolicy(CachePolicy.ENABLED)
                     .build(),
                 contentDescription = stringResource(R.string.coffee_leaf_image),
-                contentScale = ContentScale.FillBounds,
+                contentScale = ContentScale.Crop,
                 modifier = Modifier
                     .fillMaxWidth()
                     .aspectRatio(1f)
