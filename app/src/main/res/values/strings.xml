@@ -97,4 +97,6 @@
     <string name="old_password_error">Old password minimum 6 characters</string>
     <string name="old_password_hint">Type old password</string>
     <string name="update_password">Update Password</string>
+    <string name="disease_detail">Disease Detail</string>
+    <string name="sample_disease_on_the_leaf">Sample disease on the leaf</string>
 </resources>

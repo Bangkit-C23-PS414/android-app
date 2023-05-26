@@ -21,7 +21,7 @@ data class HistoryState(
  * passed to the coordinator to handle
  **/
 data class HistoryActions(
-    val navigateToDetail: () -> Unit = {},
+    val navigateToDetailImageDetection: (String) -> Unit = {},
     val toggleFilter: () -> Unit = {},
     val applyFilter: (FilterHistoryForm) -> Unit = {},
     val resetFilter: () -> Unit = {},

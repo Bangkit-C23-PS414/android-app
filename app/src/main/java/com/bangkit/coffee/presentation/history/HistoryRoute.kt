@@ -8,13 +8,13 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 @Composable
 fun HistoryRoute(
     coordinator: HistoryCoordinator = rememberHistoryCoordinator(),
-    navigateToDetail: () -> Unit = {}
+    navigateToDetailImageDetection: (String) -> Unit = {}
 ) {
     // State observing and declarations
     val uiState by coordinator.screenStateFlow.collectAsStateWithLifecycle()
 
     // UI Actions
-    val actions = rememberHistoryActions(coordinator, navigateToDetail)
+    val actions = rememberHistoryActions(coordinator, navigateToDetailImageDetection)
 
     // UI Rendering
     HistoryScreen(uiState, actions)
@@ -24,11 +24,11 @@ fun HistoryRoute(
 @Composable
 fun rememberHistoryActions(
     coordinator: HistoryCoordinator,
-    navigateToDetail: () -> Unit
+    navigateToDetailImageDetection: (String) -> Unit
 ): HistoryActions {
     return remember(coordinator) {
         HistoryActions(
-            navigateToDetail = navigateToDetail,
+            navigateToDetailImageDetection = navigateToDetailImageDetection,
             toggleFilter = coordinator::toggleFilter,
             applyFilter = coordinator::applyFilter,
             resetFilter = coordinator::resetFilter

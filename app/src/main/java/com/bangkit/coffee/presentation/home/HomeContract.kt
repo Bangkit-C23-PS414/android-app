@@ -27,7 +27,8 @@ data class DetectionStep(
  * passed to the coordinator to handle
  **/
 data class HomeActions(
-    val navigateToCamera: () -> Unit = {}
+    val navigateToCamera: () -> Unit = {},
+    val navigateToDetailDisease: (String) -> Unit = {}
 )
 
 /**

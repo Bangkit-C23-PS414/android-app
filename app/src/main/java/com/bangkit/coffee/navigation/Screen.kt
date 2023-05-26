@@ -47,6 +47,11 @@ sealed class Screen(val route: String) {
     // Profile
     object Profile : NavigationBarScreen("profile", Icons.Filled.Person, R.string.profile)
 
+    // Disease Detail
+    object DiseaseDetail : Screen("diseases/{id}") {
+        fun createRoute(id: String) = "diseases/$id"
+    }
+
     // Image Detections Detail
     object ImageDetectionDetail : Screen("image-detections/{id}") {
         fun createRoute(id: String) = "image-detections/$id"

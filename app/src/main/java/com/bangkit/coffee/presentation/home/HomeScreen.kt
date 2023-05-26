@@ -126,6 +126,7 @@ fun HomeScreen(
                 state.diseases.forEach { disease ->
                     DiseaseCard(
                         disease = disease,
+                        onClick = { actions.navigateToDetailDisease("42") },
                         modifier = Modifier
                             .weight(1f, true)
                             .padding(bottom = 8.dp)

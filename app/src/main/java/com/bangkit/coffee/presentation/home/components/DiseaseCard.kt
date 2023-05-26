@@ -29,12 +29,13 @@ import com.bangkit.coffee.ui.theme.AppTheme
 @Composable
 fun DiseaseCard(
     modifier: Modifier = Modifier,
-    disease: Disease
+    disease: Disease,
+    onClick: () -> Unit = {}
 ) {
     val context = LocalContext.current
 
     OutlinedCard(
-        onClick = {},
+        onClick = onClick,
         modifier = modifier,
     ) {
         AsyncImage(

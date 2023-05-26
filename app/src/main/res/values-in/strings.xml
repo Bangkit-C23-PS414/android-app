@@ -96,4 +96,6 @@
     <string name="old_password_error">Ketik kata sandi lama</string>
     <string name="old_password_hint">Kata sandi lama minimum 6 karakter</string>
     <string name="update_password">Perbarui Kata Sandi</string>
+    <string name="disease_detail">Detail Penyakit</string>
+    <string name="sample_disease_on_the_leaf">Sampel penyakit pada daun</string>
 </resources>

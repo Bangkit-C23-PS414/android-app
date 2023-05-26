@@ -9,6 +9,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import com.bangkit.coffee.presentation.camera.CameraRoute
+import com.bangkit.coffee.presentation.diseasedetail.DiseaseDetailRoute
 import com.bangkit.coffee.presentation.forgotpassword.ForgotPasswordRoute
 import com.bangkit.coffee.presentation.history.HistoryRoute
 import com.bangkit.coffee.presentation.home.HomeRoute
@@ -99,14 +100,19 @@ fun Router(
         // Dashboard
         composable(Screen.Home.route) {
             HomeRoute(
-                navigateToCamera = { navController.navigate(Screen.Camera.route) }
+                navigateToCamera = { navController.navigate(Screen.Camera.route) },
+                navigateToDetailDisease = {id ->
+                    navController.navigate(
+                        Screen.DiseaseDetail.createRoute(id)
+                    )
+                }
             )
         }
         composable(Screen.History.route) {
             HistoryRoute(
-                navigateToDetail = {
+                navigateToDetailImageDetection = { id ->
                     navController.navigate(
-                        Screen.ImageDetectionDetail.createRoute("42")
+                        Screen.ImageDetectionDetail.createRoute(id)
                     )
                 }
             )
@@ -115,7 +121,20 @@ fun Router(
             ProfileRoute()
         }
 
-        // Image detections detail
+        // Disease Detail
+        composable(
+            Screen.DiseaseDetail.route,
+            arguments = listOf(navArgument("id") {
+                type = NavType.StringType
+                defaultValue = "default-id"
+            })
+        ) {
+            DiseaseDetailRoute(
+                navigateUp = { navController.navigateUp() }
+            )
+        }
+
+        // Image detections Detail
         composable(
             Screen.ImageDetectionDetail.route,
             arguments = listOf(navArgument("id") {
