@@ -32,12 +32,13 @@ import java.util.UUID
 @Composable
 fun ImageDetectionCard(
     modifier: Modifier = Modifier,
-    imageDetection: ImageDetection
+    imageDetection: ImageDetection,
+    onClick: () -> Unit = {}
 ) {
     val context = LocalContext.current
 
     Card(
-        onClick = {},
+        onClick = onClick,
         modifier = modifier,
     ) {
         AsyncImage(

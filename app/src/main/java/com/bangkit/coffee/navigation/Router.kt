@@ -29,7 +29,7 @@ fun Router(
     NavHost(
         modifier = modifier,
         navController = navController,
-        startDestination = Screen.Profile.route,
+        startDestination = Screen.Home.route,
     ) {
         // Splash
         composable(Screen.Splash.route) {
@@ -123,7 +123,9 @@ fun Router(
                 defaultValue = "default-id"
             })
         ) {
-            ImageDetectionDetailRoute()
+            ImageDetectionDetailRoute(
+                navigateUp = { navController.navigateUp() }
+            )
         }
 
         // Camera

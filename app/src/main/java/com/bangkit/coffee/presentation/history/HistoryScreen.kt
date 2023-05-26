@@ -70,7 +70,8 @@ fun HistoryScreen(
 
             items(state.imageDetections, key = { it.id }) { imageDetection ->
                 ImageDetectionCard(
-                    imageDetection = imageDetection
+                    imageDetection = imageDetection,
+                    onClick = actions.navigateToDetail
                 )
             }
 
@@ -83,7 +84,8 @@ fun HistoryScreen(
 
             items(state.imageDetections, key = { "copy" + it.id }) { imageDetection ->
                 ImageDetectionCard(
-                    imageDetection = imageDetection
+                    imageDetection = imageDetection,
+                    onClick = actions.navigateToDetail
                 )
             }
         }
