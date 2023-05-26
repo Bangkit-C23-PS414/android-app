@@ -5,12 +5,13 @@ import me.naingaungluu.formconductor.annotations.MinLength
 
 @Form
 data class ChangePasswordForm(
-    @MinLength(1)
+    @MinLength(6)
     val oldPassword: String = "",
 
-    @MinLength(1)
+    @MinLength(6)
     val newPassword: String = "",
 
-    @MinLength(1)
+    @MinLength(6)
+    @ChangePasswordConfirmPassword
     val confirmNewPassword: String = "",
 )
