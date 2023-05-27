@@ -17,6 +17,13 @@ data class ProfileState(
 )
 
 /**
+ * UI Event that represents ProfileScreen
+ */
+sealed class ProfileEvent {
+
+}
+
+/**
  * Profile Actions emitted from the UI Layer
  * passed to the coordinator to handle
  **/

@@ -11,6 +11,13 @@ import androidx.compose.runtime.staticCompositionLocalOf
 class VerifyOTPState
 
 /**
+ * UI Event that represents VerifyOTPScreen
+ */
+sealed class VerifyOTPEvent {
+
+}
+
+/**
  * VerifyOTP Actions emitted from the UI Layer
  * passed to the coordinator to handle
  **/

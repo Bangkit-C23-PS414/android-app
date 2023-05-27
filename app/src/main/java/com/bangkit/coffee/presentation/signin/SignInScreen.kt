@@ -49,7 +49,7 @@ import me.naingaungluu.formconductor.composeui.form
 
 @Composable
 fun SignInScreen(
-    state: SignInState = SignInState.Idle(),
+    state: SignInState = SignInState(),
     actions: SignInActions = SignInActions()
 ) {
     val scrollState = rememberScrollState()
@@ -139,18 +139,18 @@ fun SignInScreen(
                     leadingIcon = {
                         Icon(imageVector = Icons.Filled.Lock, contentDescription = null)
                     },
-                    visualTransformation = if (state is SignInState.Idle && state.passwordVisible) {
+                    visualTransformation = if (state.passwordVisible) {
                         VisualTransformation.None
                     } else {
                         PasswordVisualTransformation()
                     },
                     trailingIcon = {
                         IconToggleButton(
-                            checked = state is SignInState.Idle && state.passwordVisible,
+                            checked = state.passwordVisible,
                             onCheckedChange = actions.setPasswordVisibility,
                         ) {
                             Icon(
-                                imageVector = if (state is SignInState.Idle && state.passwordVisible) {
+                                imageVector = if (state.passwordVisible) {
                                     Icons.Filled.Visibility
                                 } else {
                                     Icons.Filled.VisibilityOff
@@ -177,7 +177,7 @@ fun SignInScreen(
             val formData = formState.value
             Button(
                 onClick = {
-                    if (formData is FormResult.Success && state is SignInState.Idle) {
+                    if (formData is FormResult.Success && !state.inProgress) {
                         actions.signIn(formData.data)
                     }
                 },
@@ -186,7 +186,7 @@ fun SignInScreen(
                     .testTag("SignInButton"),
                 enabled = this.formState.value is FormResult.Success
             ) {
-                if (state is SignInState.InProgress) {
+                if (state.inProgress) {
                     CircularProgressIndicator(
                         color = MaterialTheme.colorScheme.onPrimary,
                         strokeWidth = 2.dp,

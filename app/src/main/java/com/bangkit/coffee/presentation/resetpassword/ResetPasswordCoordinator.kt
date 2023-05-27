@@ -12,6 +12,8 @@ class ResetPasswordCoordinator(
     val viewModel: ResetPasswordViewModel
 ) {
     val screenStateFlow = viewModel.stateFlow
+
+    val screenEventFlow = viewModel.eventFlow
 }
 
 @Composable

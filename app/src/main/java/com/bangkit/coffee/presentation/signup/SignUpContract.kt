@@ -13,6 +13,13 @@ data class SignUpState(
 )
 
 /**
+ * UI Event that represents SignUpScreen
+ */
+sealed class SignUpEvent {
+
+}
+
+/**
  * SignUp Actions emitted from the UI Layer
  * passed to the coordinator to handle
  **/

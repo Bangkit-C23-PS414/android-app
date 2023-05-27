@@ -4,9 +4,10 @@ import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import com.bangkit.coffee.R
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.receiveAsFlow
 import javax.inject.Inject
 
 @HiltViewModel
@@ -32,12 +33,14 @@ class WelcomeViewModel @Inject constructor(
         )
     )
 
-    private val _stateFlow: MutableStateFlow<WelcomeState> = MutableStateFlow(
+    private val _eventFlow = Channel<WelcomeEvent>()
+    val eventFlow = _eventFlow.receiveAsFlow()
+
+    private val _stateFlow = MutableStateFlow(
         WelcomeState(
             carouselItems = carouselItems
         )
     )
-
-    val stateFlow: StateFlow<WelcomeState> = _stateFlow.asStateFlow()
+    val stateFlow = _stateFlow.asStateFlow()
 
 }

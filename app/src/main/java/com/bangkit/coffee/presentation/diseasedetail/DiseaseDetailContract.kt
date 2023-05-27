@@ -18,6 +18,13 @@ sealed class DiseaseDetailState {
 }
 
 /**
+ * UI Event that represents DiseaseDetailScreen
+ */
+sealed class DiseaseDetailEvent {
+
+}
+
+/**
  * DiseaseDetail Actions emitted from the UI Layer
  * passed to the coordinator to handle
  **/

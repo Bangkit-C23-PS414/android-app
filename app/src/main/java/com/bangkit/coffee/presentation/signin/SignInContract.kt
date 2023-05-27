@@ -9,16 +9,17 @@ import com.bangkit.coffee.util.Event
 /**
  * UI State that represents SignInScreen
  **/
-sealed class SignInState {
-    data class Idle(
-        val passwordVisible: Boolean = false
-    ) : SignInState()
+data class SignInState(
+    val passwordVisible: Boolean = false,
+    val inProgress: Boolean = false
+)
 
-    object InProgress : SignInState()
-
-    data class Error(val message: Event<String>) : SignInState()
-
-    object SignedIn : SignInState()
+/**
+ * UI Event that represents SignInScreen
+ */
+sealed class SignInEvent {
+    data class ShowToast(val message: Event<String>) : SignInEvent()
+    object SignedIn : SignInEvent()
 }
 
 /**

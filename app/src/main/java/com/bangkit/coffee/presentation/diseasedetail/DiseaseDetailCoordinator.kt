@@ -12,6 +12,8 @@ class DiseaseDetailCoordinator(
     val viewModel: DiseaseDetailViewModel
 ) {
     val screenStateFlow = viewModel.stateFlow
+
+    val screenEventFlow = viewModel.eventFlow
 }
 
 @Composable

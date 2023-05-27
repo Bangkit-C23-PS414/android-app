@@ -23,6 +23,13 @@ data class DetectionStep(
 )
 
 /**
+ * UI Event that represents HomeScreen
+ */
+sealed class HomeEvent {
+
+}
+
+/**
  * Home Actions emitted from the UI Layer
  * passed to the coordinator to handle
  **/

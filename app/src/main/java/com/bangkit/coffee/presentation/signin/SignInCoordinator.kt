@@ -14,6 +14,8 @@ class SignInCoordinator(
 ) {
     val screenStateFlow = viewModel.stateFlow
 
+    val screenEventFlow = viewModel.eventFlow
+
     fun setPasswordVisibility(visibility: Boolean) {
         viewModel.setPasswordVisibility(visibility)
     }

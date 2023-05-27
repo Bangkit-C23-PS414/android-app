@@ -14,6 +14,8 @@ class CameraCoordinator(
 ) {
     val screenStateFlow = viewModel.stateFlow
 
+    val screenEventFlow = viewModel.eventFlow
+
     fun toggleFlash(isFlashOn: Boolean) = viewModel.toggleFlash(isFlashOn)
 
     fun capture() = viewModel.capture()

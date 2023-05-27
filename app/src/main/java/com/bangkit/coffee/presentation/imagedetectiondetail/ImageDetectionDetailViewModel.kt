@@ -6,9 +6,10 @@ import androidx.lifecycle.viewModelScope
 import com.bangkit.coffee.domain.DiseaseDummy
 import com.bangkit.coffee.domain.ImageDetectionDummy
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -20,10 +21,11 @@ class ImageDetectionDetailViewModel @Inject constructor(
 
     private val imageDetectionId = checkNotNull<String>(savedStateHandle["id"])
 
-    private val _stateFlow: MutableStateFlow<ImageDetectionDetailState> =
-        MutableStateFlow(ImageDetectionDetailState.Loading)
+    private val _eventFlow = Channel<ImageDetectionDetailEvent>()
+    val eventFlow = _eventFlow.receiveAsFlow()
 
-    val stateFlow: StateFlow<ImageDetectionDetailState> = _stateFlow.asStateFlow()
+    private val _stateFlow = MutableStateFlow<ImageDetectionDetailState>(ImageDetectionDetailState.Loading)
+    val stateFlow = _stateFlow.asStateFlow()
 
     init {
         getData()

@@ -5,9 +5,10 @@ import androidx.lifecycle.ViewModel
 import com.bangkit.coffee.R
 import com.bangkit.coffee.domain.DiseaseDummies
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.receiveAsFlow
 import javax.inject.Inject
 
 @HiltViewModel
@@ -23,12 +24,14 @@ class HomeViewModel @Inject constructor(
 
     private val diseases = DiseaseDummies
 
-    private val _stateFlow: MutableStateFlow<HomeState> = MutableStateFlow(
+    private val _eventFlow = Channel<HomeEvent>()
+    val eventFlow = _eventFlow.receiveAsFlow()
+
+    private val _stateFlow = MutableStateFlow(
         HomeState(
             detectionSteps = detectionSteps,
             diseases = diseases
         )
     )
-
-    val stateFlow: StateFlow<HomeState> = _stateFlow.asStateFlow()
+    val stateFlow = _stateFlow.asStateFlow()
 }

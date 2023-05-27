@@ -1,6 +1,7 @@
 package com.bangkit.coffee.presentation.forgotpassword
 
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
@@ -15,6 +16,15 @@ fun ForgotPasswordRoute(
 
     // UI Actions
     val actions = rememberForgotPasswordActions(coordinator, navigateToVerifyOTP)
+
+    // Handle events
+    LaunchedEffect(Unit) {
+        coordinator.screenEventFlow.collect { event ->
+            when (event) {
+                else -> {}
+            }
+        }
+    }
 
     // UI Rendering
     ForgotPasswordScreen(uiState, actions)

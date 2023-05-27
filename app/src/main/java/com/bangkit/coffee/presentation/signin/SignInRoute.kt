@@ -23,16 +23,18 @@ fun SignInRoute(
         navigateToDashboard
     )
 
-    // Handle UiState event
+    // Handle events
     val appActions = LocalKopintarAppActions.current
-    LaunchedEffect(uiState) {
-        when (val state = uiState) {
-            is SignInState.SignedIn -> actions.navigateToDashboard()
-            is SignInState.Error -> state.message.getContentIfNotHandled()?.let { message ->
-                appActions.showToast(message)
+    LaunchedEffect(Unit) {
+        coordinator.screenEventFlow.collect { event ->
+            when (event) {
+                SignInEvent.SignedIn -> actions.navigateToDashboard()
+                is SignInEvent.ShowToast -> {
+                    event.message.getContentIfNotHandled()?.let { message ->
+                        appActions.showToast(message)
+                    }
+                }
             }
-
-            else -> {}
         }
     }
 

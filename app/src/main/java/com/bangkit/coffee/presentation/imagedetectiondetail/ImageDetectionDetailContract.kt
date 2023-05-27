@@ -22,6 +22,13 @@ sealed class ImageDetectionDetailState {
 }
 
 /**
+ * UI Event that represents ImageDetectionDetailScreen
+ */
+sealed class ImageDetectionDetailEvent {
+
+}
+
+/**
  * ImageDetectionDetail Actions emitted from the UI Layer
  * passed to the coordinator to handle
  **/

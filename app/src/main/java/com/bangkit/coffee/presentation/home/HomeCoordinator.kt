@@ -12,6 +12,8 @@ class HomeCoordinator(
     val viewModel: HomeViewModel
 ) {
     val screenStateFlow = viewModel.stateFlow
+
+    val screenEventFlow = viewModel.eventFlow
 }
 
 @Composable
