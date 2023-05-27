@@ -20,7 +20,6 @@ import com.bangkit.coffee.presentation.signin.SignInRoute
 import com.bangkit.coffee.presentation.signup.SignUpRoute
 import com.bangkit.coffee.presentation.verifyotp.VerifyOTPRoute
 import com.bangkit.coffee.presentation.welcome.WelcomeRoute
-import com.bangkit.coffee.ui.components.SimpleScreen
 
 @Composable
 fun Router(
@@ -32,14 +31,6 @@ fun Router(
         navController = navController,
         startDestination = Screen.Home.route,
     ) {
-        // Splash
-        composable(Screen.Splash.route) {
-            SimpleScreen(
-                text = "Splash",
-                action = { navController.navigate(Screen.Home.route) }
-            )
-        }
-
         // Welcome
         composable(Screen.Welcome.route) {
             WelcomeRoute(

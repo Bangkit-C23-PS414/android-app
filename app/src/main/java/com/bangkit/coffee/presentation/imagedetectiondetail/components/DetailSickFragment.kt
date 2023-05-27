@@ -4,19 +4,17 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.CalendarMonth
 import androidx.compose.material.icons.filled.Circle
-import androidx.compose.material.icons.filled.TipsAndUpdates
 import androidx.compose.material.icons.filled.Warning
 import androidx.compose.material3.Badge
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -26,6 +24,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
@@ -56,6 +55,7 @@ fun DetailSickFragment(
         modifier = modifier
             .fillMaxSize()
             .verticalScroll(scrollState)
+            .padding(16.dp, 0.dp, 16.dp, 16.dp)
     ) {
         Box {
             AsyncImage(
@@ -69,6 +69,7 @@ fun DetailSickFragment(
                 modifier = Modifier
                     .fillMaxWidth()
                     .aspectRatio(1f)
+                    .clip(RoundedCornerShape(16.dp))
             )
 
             Badge(
@@ -89,6 +90,8 @@ fun DetailSickFragment(
             verticalAlignment = Alignment.CenterVertically,
             modifier = Modifier
                 .fillMaxWidth()
+                .padding(vertical = 16.dp)
+                .clip(RoundedCornerShape(16.dp))
                 .background(MaterialTheme.colorScheme.errorContainer)
                 .padding(16.dp)
         ) {
@@ -114,7 +117,7 @@ fun DetailSickFragment(
 
         Row(
             verticalAlignment = Alignment.CenterVertically,
-            modifier = Modifier.padding(16.dp)
+            modifier = Modifier.padding(bottom = 16.dp)
         ) {
             Icon(
                 imageVector = Icons.Filled.CalendarMonth,
@@ -134,48 +137,30 @@ fun DetailSickFragment(
         Text(
             text = disease.description,
             style = MaterialTheme.typography.bodyMedium,
-            modifier = Modifier
-                .padding(horizontal = 16.dp)
-                .padding(bottom = 16.dp)
+            modifier = Modifier.padding(bottom = 16.dp)
         )
 
-        Row(
-            verticalAlignment = Alignment.CenterVertically,
-            modifier = Modifier
-                .padding(horizontal = 16.dp)
-                .padding(bottom = 6.dp)
-        ) {
-            Icon(
-                imageVector = Icons.Filled.TipsAndUpdates,
-                contentDescription = null,
-            )
-            Text(
-                text = stringResource(R.string.how_to_control),
-                style = MaterialTheme.typography.bodyLarge,
-                fontWeight = FontWeight.SemiBold,
-                modifier = Modifier.padding(start = 8.dp)
-            )
-        }
+        Text(
+            text = stringResource(R.string.how_to_control),
+            style = MaterialTheme.typography.bodyLarge,
+            fontWeight = FontWeight.SemiBold,
+            modifier = Modifier.padding(bottom = 6.dp)
+        )
         disease.controls.forEach { control ->
-            Row(
-                Modifier.padding(horizontal = 16.dp),
-                verticalAlignment = Alignment.Top
-            ) {
+            Row {
                 Icon(
                     imageVector = Icons.Filled.Circle,
                     contentDescription = null,
                     modifier = Modifier
-                        .padding(horizontal = 12.dp, vertical = 6.dp)
+                        .padding(end = 12.dp, top = 6.dp)
                         .size(8.dp)
                 )
                 Text(
                     text = control,
-                    style = MaterialTheme.typography.bodyMedium
+                    style = MaterialTheme.typography.bodyMedium,
                 )
             }
         }
-        
-        Spacer(modifier = Modifier.height(16.dp))
     }
 }
 

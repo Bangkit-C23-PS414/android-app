@@ -32,6 +32,9 @@ class ImageDetectionDetailViewModel @Inject constructor(
     private fun getData() {
         viewModelScope.launch {
             _stateFlow.update {
+                /*ImageDetectionDetailState.Healthy(
+                    ImageDetectionDummy,
+                )*/
                 ImageDetectionDetailState.Sick(
                     ImageDetectionDummy,
                     DiseaseDummy
