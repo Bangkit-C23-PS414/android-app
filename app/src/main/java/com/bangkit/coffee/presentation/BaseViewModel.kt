@@ -22,13 +22,13 @@ abstract class BaseViewModel : ViewModel() {
     // }
 
     // Mutable/SharedFlow of String resource reference Event
-    private val _message = MutableSharedFlow<String>()
-    val message = _message.asSharedFlow()
+    private val _toastMessage = MutableSharedFlow<String>()
+    val toastMessage = _toastMessage.asSharedFlow()
 
     // Post in background thread
-    fun sendMessage(message: String) {
+    fun sendToastMessage(toastMessage: String) {
         viewModelScope.launch {
-            _message.emit(message)
+            _toastMessage.emit(toastMessage)
         }
     }
 }
