@@ -23,8 +23,8 @@ import coil.compose.AsyncImage
 import coil.request.ImageRequest
 import com.bangkit.coffee.R
 import com.bangkit.coffee.domain.entity.ImageDetection
-import com.bangkit.coffee.ui.theme.AppTheme
-import com.bangkit.coffee.util.toTimeString
+import com.bangkit.coffee.shared.theme.AppTheme
+import com.bangkit.coffee.shared.util.toTimeString
 import com.wajahatiqbal.blurhash.BlurHashPainter
 import java.util.Date
 import java.util.UUID

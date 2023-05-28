@@ -41,7 +41,7 @@ import com.bangkit.coffee.R
 import com.bangkit.coffee.presentation.profile.LocalProfileActions
 import com.bangkit.coffee.presentation.profile.ProfileActions
 import com.bangkit.coffee.presentation.profile.ProvideProfileActions
-import com.bangkit.coffee.ui.theme.AppTheme
+import com.bangkit.coffee.shared.theme.AppTheme
 import me.naingaungluu.formconductor.FieldResult
 import me.naingaungluu.formconductor.FormResult
 import me.naingaungluu.formconductor.composeui.field

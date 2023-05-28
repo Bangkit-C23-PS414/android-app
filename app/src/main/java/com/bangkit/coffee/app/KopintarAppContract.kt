@@ -1,4 +1,4 @@
-package com.bangkit.coffee.ui
+package com.bangkit.coffee.app
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider

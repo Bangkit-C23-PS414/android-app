@@ -40,7 +40,7 @@ import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 import com.bangkit.coffee.R
 import com.bangkit.coffee.presentation.signin.components.SignInForm
-import com.bangkit.coffee.ui.theme.AppTheme
+import com.bangkit.coffee.shared.theme.AppTheme
 import me.naingaungluu.formconductor.FieldResult
 import me.naingaungluu.formconductor.FormResult
 import me.naingaungluu.formconductor.composeui.field

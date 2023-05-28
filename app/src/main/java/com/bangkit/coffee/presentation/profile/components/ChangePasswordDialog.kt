@@ -34,7 +34,7 @@ import androidx.compose.ui.window.Dialog
 import androidx.compose.ui.window.DialogProperties
 import com.bangkit.coffee.R
 import com.bangkit.coffee.presentation.profile.LocalProfileActions
-import com.bangkit.coffee.ui.theme.AppTheme
+import com.bangkit.coffee.shared.theme.AppTheme
 import me.naingaungluu.formconductor.FieldResult
 import me.naingaungluu.formconductor.FormResult
 import me.naingaungluu.formconductor.composeui.field

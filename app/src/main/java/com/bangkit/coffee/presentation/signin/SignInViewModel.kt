@@ -1,16 +1,14 @@
 package com.bangkit.coffee.presentation.signin
 
 import androidx.lifecycle.SavedStateHandle
+import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.bangkit.coffee.presentation.BaseViewModel
 import com.bangkit.coffee.presentation.signin.components.SignInForm
-import com.bangkit.coffee.util.Event
+import com.bangkit.coffee.shared.wrapper.Event
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -19,10 +17,7 @@ import kotlin.random.Random
 @HiltViewModel
 class SignInViewModel @Inject constructor(
     savedStateHandle: SavedStateHandle
-) : BaseViewModel() {
-
-    private val _eventFlow = Channel<SignInEvent>()
-    val eventFlow = _eventFlow.receiveAsFlow()
+) : ViewModel() {
 
     private val _stateFlow = MutableStateFlow(SignInState())
     val stateFlow = _stateFlow.asStateFlow()
@@ -38,10 +33,19 @@ class SignInViewModel @Inject constructor(
             _stateFlow.update { it.copy(inProgress = true) }
             delay(1000)
             if (Random.nextBoolean()) {
-                _stateFlow.update { it.copy(inProgress = false) }
-                _eventFlow.send(SignInEvent.ShowToast(Event("Something went wrong")))
+                _stateFlow.update {
+                    it.copy(
+                        inProgress = false,
+                        message = Event("Something went wrong")
+                    )
+                }
             } else {
-                _eventFlow.send(SignInEvent.SignedIn)
+                _stateFlow.update {
+                    it.copy(
+                        inProgress = false,
+                        signedIn = true
+                    )
+                }
             }
         }
     }

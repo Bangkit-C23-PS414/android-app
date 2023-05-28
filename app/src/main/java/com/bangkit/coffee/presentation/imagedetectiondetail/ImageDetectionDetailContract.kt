@@ -10,23 +10,11 @@ import com.bangkit.coffee.domain.entity.ImageDetection
 /**
  * UI State that represents ImageDetectionDetailScreen
  **/
-sealed class ImageDetectionDetailState {
-    object Loading : ImageDetectionDetailState()
-    object Empty : ImageDetectionDetailState()
-
-    class Healthy(val imageDetection: ImageDetection) : ImageDetectionDetailState()
-    class Sick(
-        val imageDetection: ImageDetection,
-        val disease: Disease
-    ) : ImageDetectionDetailState()
-}
-
-/**
- * UI Event that represents ImageDetectionDetailScreen
- */
-sealed class ImageDetectionDetailEvent {
-
-}
+data class ImageDetectionDetailState(
+    val loading: Boolean = true,
+    val imageDetection: ImageDetection? = null,
+    val disease: Disease? = null
+)
 
 /**
  * ImageDetectionDetail Actions emitted from the UI Layer

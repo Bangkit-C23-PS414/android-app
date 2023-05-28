@@ -1,4 +1,4 @@
-package com.bangkit.coffee.ui.components
+package com.bangkit.coffee.shared.components
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -20,7 +20,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 import com.bangkit.coffee.R
-import com.bangkit.coffee.ui.theme.AppTheme
+import com.bangkit.coffee.shared.theme.AppTheme
 
 @Composable
 fun DisplayErrorFragment(

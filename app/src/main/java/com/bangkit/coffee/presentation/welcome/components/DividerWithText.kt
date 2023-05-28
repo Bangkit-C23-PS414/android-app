@@ -11,7 +11,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.bangkit.coffee.R
-import com.bangkit.coffee.ui.theme.AppTheme
+import com.bangkit.coffee.shared.theme.AppTheme
 
 @Composable
 fun DividerWithText(

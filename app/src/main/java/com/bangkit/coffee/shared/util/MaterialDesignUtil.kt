@@ -1,4 +1,4 @@
-package com.bangkit.coffee.util
+package com.bangkit.coffee.shared.util
 
 import androidx.compose.material3.FloatingActionButtonDefaults
 import androidx.compose.runtime.Composable

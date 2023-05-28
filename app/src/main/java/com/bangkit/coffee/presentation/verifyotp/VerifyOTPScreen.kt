@@ -35,7 +35,7 @@ import coil.compose.AsyncImage
 import com.bangkit.coffee.R
 import com.bangkit.coffee.presentation.verifyotp.components.OTPTextField
 import com.bangkit.coffee.presentation.verifyotp.components.VerifyOTPForm
-import com.bangkit.coffee.ui.theme.AppTheme
+import com.bangkit.coffee.shared.theme.AppTheme
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import me.naingaungluu.formconductor.FormResult

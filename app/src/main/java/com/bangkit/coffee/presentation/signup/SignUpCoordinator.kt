@@ -12,8 +12,6 @@ class SignUpCoordinator(
     val viewModel: SignUpViewModel
 ) {
     val screenStateFlow = viewModel.stateFlow
-
-    val screenEventFlow = viewModel.eventFlow
 }
 
 @Composable

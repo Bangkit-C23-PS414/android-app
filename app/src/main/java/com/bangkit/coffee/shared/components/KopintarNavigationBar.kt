@@ -1,4 +1,4 @@
-package com.bangkit.coffee.ui.components
+package com.bangkit.coffee.shared.components
 
 import androidx.compose.material3.Icon
 import androidx.compose.material3.NavigationBar
@@ -14,7 +14,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.bangkit.coffee.navigation.Screen.Manifest.bottomBarScreens
-import com.bangkit.coffee.ui.theme.AppTheme
+import com.bangkit.coffee.shared.theme.AppTheme
 
 @Composable
 fun KopintarNavigationBar(

@@ -1,4 +1,4 @@
-package com.bangkit.coffee.ui
+package com.bangkit.coffee.app
 
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.fillMaxSize
@@ -17,9 +17,9 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.bangkit.coffee.navigation.Router
-import com.bangkit.coffee.ui.components.KopintarNavigationBar
-import com.bangkit.coffee.ui.components.KopintarTopAppBar
-import com.bangkit.coffee.ui.theme.AppTheme
+import com.bangkit.coffee.shared.components.KopintarNavigationBar
+import com.bangkit.coffee.shared.components.KopintarTopAppBar
+import com.bangkit.coffee.shared.theme.AppTheme
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 
 @Composable

@@ -13,8 +13,6 @@ class ImageDetectionDetailCoordinator(
 ) {
     val screenStateFlow = viewModel.stateFlow
 
-    val screenEventFlow = viewModel.eventFlow
-
     fun refresh() = viewModel.refresh()
 }
 

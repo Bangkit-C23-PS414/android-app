@@ -1,4 +1,4 @@
-package com.bangkit.coffee.ui
+package com.bangkit.coffee.app
 
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
@@ -6,7 +6,7 @@ import androidx.lifecycle.viewModelScope
 import androidx.navigation.NavBackStackEntry
 import com.bangkit.coffee.data.repository.UserPreferencesRepository
 import com.bangkit.coffee.navigation.Screen
-import com.bangkit.coffee.util.tryParseJWT
+import com.bangkit.coffee.shared.util.tryParseJWT
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow

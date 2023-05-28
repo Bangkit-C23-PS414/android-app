@@ -1,4 +1,4 @@
-package com.bangkit.coffee.ui.theme
+package com.bangkit.coffee.shared.theme
 
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material3.MaterialTheme

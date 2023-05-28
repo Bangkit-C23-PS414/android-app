@@ -42,7 +42,7 @@ import coil.compose.AsyncImage
 import com.bangkit.coffee.R
 import com.bangkit.coffee.presentation.profile.components.ChangePasswordDialog
 import com.bangkit.coffee.presentation.profile.components.EditProfileDialog
-import com.bangkit.coffee.ui.theme.AppTheme
+import com.bangkit.coffee.shared.theme.AppTheme
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable

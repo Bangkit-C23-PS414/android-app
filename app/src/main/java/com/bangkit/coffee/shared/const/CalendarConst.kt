@@ -1,4 +1,4 @@
-package com.bangkit.coffee.const
+package com.bangkit.coffee.shared.const
 
 object CalendarConst {
     const val timezone = "Asia/Jakarta"

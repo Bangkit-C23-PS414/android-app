@@ -1,9 +1,9 @@
 package com.bangkit.coffee.util
 
 import androidx.compose.runtime.Composable
-import com.bangkit.coffee.ui.KopintarAppActions
-import com.bangkit.coffee.ui.ProvideKopintarAppActions
-import com.bangkit.coffee.ui.theme.AppTheme
+import com.bangkit.coffee.app.KopintarAppActions
+import com.bangkit.coffee.app.ProvideKopintarAppActions
+import com.bangkit.coffee.shared.theme.AppTheme
 
 @Composable
 fun AppTest(

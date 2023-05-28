@@ -1,4 +1,4 @@
-package com.bangkit.coffee.ui
+package com.bangkit.coffee.app
 
 import android.widget.Toast
 import androidx.compose.runtime.Composable

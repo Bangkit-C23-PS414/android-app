@@ -31,9 +31,7 @@ class DiseaseDetailRouteTest : ComposeTest() {
         }
 
         rule.waitUntilExactlyOneExists(hasText(R.string.how_to_control), 10_000)
-        rule.waitUntil(10_000) { viewModel.stateFlow.value is DiseaseDetailState.Success }
-
-        val disease = (viewModel.stateFlow.value as DiseaseDetailState.Success).disease
+        val disease = checkNotNull(viewModel.stateFlow.value.disease)
 
         rule.onNodeWithText(disease.name).assertExists()
         rule.onNodeWithText(disease.description).assertExists()

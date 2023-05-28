@@ -17,13 +17,6 @@ data class HistoryState(
 )
 
 /**
- * UI Event that represents HistoryScreen
- */
-sealed class HistoryEvent {
-
-}
-
-/**
  * History Actions emitted from the UI Layer
  * passed to the coordinator to handle
  **/

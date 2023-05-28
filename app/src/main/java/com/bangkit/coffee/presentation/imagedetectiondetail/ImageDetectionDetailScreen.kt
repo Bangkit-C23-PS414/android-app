@@ -20,15 +20,15 @@ import androidx.compose.ui.tooling.preview.Preview
 import com.bangkit.coffee.R
 import com.bangkit.coffee.presentation.imagedetectiondetail.components.DetailHealthyFragment
 import com.bangkit.coffee.presentation.imagedetectiondetail.components.DetailSickFragment
-import com.bangkit.coffee.ui.components.DisplayErrorFragment
-import com.bangkit.coffee.ui.theme.AppTheme
+import com.bangkit.coffee.shared.components.DisplayErrorFragment
+import com.bangkit.coffee.shared.theme.AppTheme
 import com.google.accompanist.swiperefresh.SwipeRefresh
 import com.google.accompanist.swiperefresh.rememberSwipeRefreshState
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ImageDetectionDetailScreen(
-    state: ImageDetectionDetailState = ImageDetectionDetailState.Loading,
+    state: ImageDetectionDetailState = ImageDetectionDetailState(),
     actions: ImageDetectionDetailActions = ImageDetectionDetailActions()
 ) {
     Scaffold(
@@ -48,43 +48,33 @@ fun ImageDetectionDetailScreen(
     ) { contentPadding ->
         @Suppress("DEPRECATION")
         SwipeRefresh(
-            state = rememberSwipeRefreshState(
-                isRefreshing = state is ImageDetectionDetailState.Loading
-            ),
+            state = rememberSwipeRefreshState(isRefreshing = state.loading),
             onRefresh = actions.refresh
         ) {
-            when (state) {
-                ImageDetectionDetailState.Loading -> {
-                    Box(
-                        contentAlignment = Alignment.Center,
-                        modifier = Modifier
-                            .padding(contentPadding)
-                            .fillMaxSize()
-                    ) {
-                        CircularProgressIndicator()
-                    }
+            if (state.loading) {
+                Box(
+                    contentAlignment = Alignment.Center,
+                    modifier = Modifier
+                        .padding(contentPadding)
+                        .fillMaxSize()
+                ) {
+                    CircularProgressIndicator()
                 }
-
-                ImageDetectionDetailState.Empty -> {
-                    DisplayErrorFragment(
-                        modifier = Modifier.padding(contentPadding)
-                    )
-                }
-
-                is ImageDetectionDetailState.Healthy -> {
-                    DetailHealthyFragment(
-                        imageDetection = state.imageDetection,
-                        modifier = Modifier.padding(contentPadding)
-                    )
-                }
-
-                is ImageDetectionDetailState.Sick -> {
-                    DetailSickFragment(
-                        imageDetection = state.imageDetection,
-                        disease = state.disease,
-                        modifier = Modifier.padding(contentPadding)
-                    )
-                }
+            } else if (state.imageDetection != null && state.disease != null) {
+                DetailSickFragment(
+                    imageDetection = state.imageDetection,
+                    disease = state.disease,
+                    modifier = Modifier.padding(contentPadding)
+                )
+            } else if (state.imageDetection != null) {
+                DetailHealthyFragment(
+                    imageDetection = state.imageDetection,
+                    modifier = Modifier.padding(contentPadding)
+                )
+            } else {
+                DisplayErrorFragment(
+                    modifier = Modifier.padding(contentPadding)
+                )
             }
         }
     }

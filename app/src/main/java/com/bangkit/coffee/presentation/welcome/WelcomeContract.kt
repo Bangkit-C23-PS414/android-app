@@ -14,13 +14,6 @@ data class WelcomeState(
     val carouselItems: List<WelcomeCarouselItem> = emptyList(),
 )
 
-/**
- * UI Event that represents WelcomeScreen
- */
-sealed class WelcomeEvent {
-
-}
-
 data class WelcomeCarouselItem(
     @DrawableRes val image: Int,
     @StringRes val title: Int,

@@ -1,4 +1,4 @@
-package com.bangkit.coffee.util
+package com.bangkit.coffee.shared.util
 
 import com.auth0.android.jwt.JWT
 

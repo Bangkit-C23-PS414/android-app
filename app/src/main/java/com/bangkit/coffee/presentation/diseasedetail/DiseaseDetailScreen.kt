@@ -38,12 +38,13 @@ import coil.request.CachePolicy
 import coil.request.ImageRequest
 import com.bangkit.coffee.R
 import com.bangkit.coffee.domain.DiseaseDummy
-import com.bangkit.coffee.ui.theme.AppTheme
+import com.bangkit.coffee.shared.components.DisplayErrorFragment
+import com.bangkit.coffee.shared.theme.AppTheme
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun DiseaseDetailScreen(
-    state: DiseaseDetailState = DiseaseDetailState.Loading,
+    state: DiseaseDetailState = DiseaseDetailState(),
     actions: DiseaseDetailActions = DiseaseDetailActions()
 ) {
     val scrollState = rememberScrollState()
@@ -64,88 +65,86 @@ fun DiseaseDetailScreen(
             )
         }
     ) { contentPadding ->
-        when (state) {
-            DiseaseDetailState.Loading -> {
-                Box(
-                    contentAlignment = Alignment.Center,
-                    modifier = Modifier
-                        .padding(contentPadding)
-                        .fillMaxSize()
-                ) {
-                    CircularProgressIndicator()
-                }
+        if (state.loading) {
+            Box(
+                contentAlignment = Alignment.Center,
+                modifier = Modifier
+                    .padding(contentPadding)
+                    .fillMaxSize()
+            ) {
+                CircularProgressIndicator()
             }
+        } else if (state.disease == null) {
+            DisplayErrorFragment()
+        } else {
+            Column(
+                modifier = Modifier
+                    .padding(contentPadding)
+                    .fillMaxSize()
+                    .verticalScroll(scrollState)
+                    .padding(16.dp, 0.dp, 16.dp, 16.dp)
+            ) {
+                Box {
+                    AsyncImage(
+                        model = ImageRequest.Builder(context)
+                            .data(state.disease.imageUrl)
+                            .crossfade(true)
+                            .diskCachePolicy(CachePolicy.ENABLED)
+                            .build(),
+                        contentDescription = stringResource(R.string.coffee_leaf_image),
+                        contentScale = ContentScale.Crop,
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .aspectRatio(1f)
+                            .clip(RoundedCornerShape(16.dp))
+                    )
 
-            is DiseaseDetailState.Success -> {
-                Column(
-                    modifier = Modifier
-                        .padding(contentPadding)
-                        .fillMaxSize()
-                        .verticalScroll(scrollState)
-                        .padding(16.dp, 0.dp, 16.dp, 16.dp)
-                ) {
-                    Box {
-                        AsyncImage(
-                            model = ImageRequest.Builder(context)
-                                .data(state.disease.imageUrl)
-                                .crossfade(true)
-                                .diskCachePolicy(CachePolicy.ENABLED)
-                                .build(),
-                            contentDescription = stringResource(R.string.coffee_leaf_image),
-                            contentScale = ContentScale.Crop,
-                            modifier = Modifier
-                                .fillMaxWidth()
-                                .aspectRatio(1f)
-                                .clip(RoundedCornerShape(16.dp))
+                    Badge(
+                        modifier = Modifier
+                            .align(Alignment.BottomEnd)
+                            .padding(16.dp),
+                        containerColor = MaterialTheme.colorScheme.tertiaryContainer
+                    ) {
+                        Text(
+                            text = stringResource(R.string.sample_disease_on_the_leaf),
+                            style = MaterialTheme.typography.labelMedium,
+                            fontWeight = FontWeight.Bold
                         )
-
-                        Badge(
-                            modifier = Modifier
-                                .align(Alignment.BottomEnd)
-                                .padding(16.dp),
-                            containerColor = MaterialTheme.colorScheme.tertiaryContainer
-                        ) {
-                            Text(
-                                text = stringResource(R.string.sample_disease_on_the_leaf),
-                                style = MaterialTheme.typography.labelMedium,
-                                fontWeight = FontWeight.Bold
-                            )
-                        }
                     }
+                }
 
-                    Text(
-                        text = state.disease.name,
-                        style = MaterialTheme.typography.titleLarge,
-                        fontWeight = FontWeight.Bold,
-                        modifier = Modifier.padding(vertical = 16.dp)
-                    )
+                Text(
+                    text = state.disease.name,
+                    style = MaterialTheme.typography.titleLarge,
+                    fontWeight = FontWeight.Bold,
+                    modifier = Modifier.padding(vertical = 16.dp)
+                )
 
-                    Text(
-                        text = state.disease.description,
-                        style = MaterialTheme.typography.bodyMedium,
-                        modifier = Modifier.padding(bottom = 16.dp)
-                    )
+                Text(
+                    text = state.disease.description,
+                    style = MaterialTheme.typography.bodyMedium,
+                    modifier = Modifier.padding(bottom = 16.dp)
+                )
 
-                    Text(
-                        text = stringResource(R.string.how_to_control),
-                        style = MaterialTheme.typography.bodyLarge,
-                        fontWeight = FontWeight.SemiBold,
-                        modifier = Modifier.padding(bottom = 6.dp)
-                    )
-                    state.disease.controls.forEach { control ->
-                        Row {
-                            Icon(
-                                imageVector = Icons.Filled.Circle,
-                                contentDescription = null,
-                                modifier = Modifier
-                                    .padding(end = 12.dp, top = 6.dp)
-                                    .size(8.dp)
-                            )
-                            Text(
-                                text = control,
-                                style = MaterialTheme.typography.bodyMedium,
-                            )
-                        }
+                Text(
+                    text = stringResource(R.string.how_to_control),
+                    style = MaterialTheme.typography.bodyLarge,
+                    fontWeight = FontWeight.SemiBold,
+                    modifier = Modifier.padding(bottom = 6.dp)
+                )
+                state.disease.controls.forEach { control ->
+                    Row {
+                        Icon(
+                            imageVector = Icons.Filled.Circle,
+                            contentDescription = null,
+                            modifier = Modifier
+                                .padding(end = 12.dp, top = 6.dp)
+                                .size(8.dp)
+                        )
+                        Text(
+                            text = control,
+                            style = MaterialTheme.typography.bodyMedium,
+                        )
                     }
                 }
             }
@@ -158,7 +157,7 @@ fun DiseaseDetailScreen(
 private fun DiseaseDetailScreenPreview() {
     AppTheme {
         DiseaseDetailScreen(
-            state = DiseaseDetailState.Success(
+            state = DiseaseDetailState(
                 disease = DiseaseDummy
             )
         )

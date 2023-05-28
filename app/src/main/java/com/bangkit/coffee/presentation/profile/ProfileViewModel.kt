@@ -6,10 +6,8 @@ import androidx.lifecycle.ViewModel
 import com.bangkit.coffee.presentation.profile.components.ChangePasswordForm
 import com.bangkit.coffee.presentation.profile.components.EditProfileForm
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.flow.update
 import javax.inject.Inject
 
@@ -17,9 +15,6 @@ import javax.inject.Inject
 class ProfileViewModel @Inject constructor(
     savedStateHandle: SavedStateHandle
 ) : ViewModel() {
-
-    private val _eventFlow = Channel<ProfileEvent>()
-    val eventFlow = _eventFlow.receiveAsFlow()
 
     private val _stateFlow = MutableStateFlow(ProfileState())
     val stateFlow = _stateFlow.asStateFlow()

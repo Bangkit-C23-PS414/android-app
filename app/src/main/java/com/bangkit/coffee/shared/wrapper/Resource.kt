@@ -1,4 +1,4 @@
-package com.bangkit.coffee.util
+package com.bangkit.coffee.shared.wrapper
 
 sealed class Resource<out T> {
     object Loading : Resource<Nothing>()

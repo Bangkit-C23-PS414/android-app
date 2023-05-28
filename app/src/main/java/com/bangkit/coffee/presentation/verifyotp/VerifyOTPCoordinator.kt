@@ -13,8 +13,6 @@ class VerifyOTPCoordinator(
 ) {
     val screenStateFlow = viewModel.stateFlow
 
-    val screenEventFlow = viewModel.eventFlow
-
     fun verifyOTP() {
 
     }

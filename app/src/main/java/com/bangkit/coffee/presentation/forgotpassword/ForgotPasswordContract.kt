@@ -11,13 +11,6 @@ import androidx.compose.runtime.staticCompositionLocalOf
 class ForgotPasswordState
 
 /**
- * UI Event that represents ForgotPasswordScreen
- */
-sealed class ForgotPasswordEvent {
-
-}
-
-/**
  * ForgotPassword Actions emitted from the UI Layer
  * passed to the coordinator to handle
  **/

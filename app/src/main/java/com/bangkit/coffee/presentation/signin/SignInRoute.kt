@@ -5,7 +5,7 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import com.bangkit.coffee.ui.LocalKopintarAppActions
+import com.bangkit.coffee.app.LocalKopintarAppActions
 
 @Composable
 fun SignInRoute(
@@ -25,15 +25,15 @@ fun SignInRoute(
 
     // Handle events
     val appActions = LocalKopintarAppActions.current
-    LaunchedEffect(Unit) {
-        coordinator.screenEventFlow.collect { event ->
-            when (event) {
-                SignInEvent.SignedIn -> actions.navigateToDashboard()
-                is SignInEvent.ShowToast -> {
-                    event.message.getContentIfNotHandled()?.let { message ->
-                        appActions.showToast(message)
-                    }
-                }
+    if (uiState.signedIn) {
+        LaunchedEffect(Unit) {
+            actions.navigateToDashboard()
+        }
+    }
+    uiState.message?.let { event ->
+        LaunchedEffect(event) {
+            event.getContentIfNotHandled()?.let { message ->
+                appActions.showToast(message)
             }
         }
     }

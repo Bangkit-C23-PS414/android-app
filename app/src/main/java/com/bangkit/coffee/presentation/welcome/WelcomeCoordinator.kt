@@ -12,8 +12,6 @@ class WelcomeCoordinator(
     val viewModel: WelcomeViewModel
 ) {
     val screenStateFlow = viewModel.stateFlow
-
-    val screenEventFlow = viewModel.eventFlow
 }
 
 @Composable

@@ -9,15 +9,8 @@ import androidx.compose.runtime.staticCompositionLocalOf
  * UI State that represents SignUpScreen
  **/
 data class SignUpState(
-    val isLoading: Boolean = false,
+    val loading: Boolean = false,
 )
-
-/**
- * UI Event that represents SignUpScreen
- */
-sealed class SignUpEvent {
-
-}
 
 /**
  * SignUp Actions emitted from the UI Layer

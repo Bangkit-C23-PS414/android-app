@@ -38,7 +38,7 @@ import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 import com.bangkit.coffee.R
 import com.bangkit.coffee.presentation.forgotpassword.components.ForgotPasswordForm
-import com.bangkit.coffee.ui.theme.AppTheme
+import com.bangkit.coffee.shared.theme.AppTheme
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import me.naingaungluu.formconductor.FieldResult

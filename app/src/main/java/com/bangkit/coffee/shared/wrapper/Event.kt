@@ -1,4 +1,4 @@
-package com.bangkit.coffee.util
+package com.bangkit.coffee.shared.wrapper
 
 /**
  * Used as a wrapper for data that is exposed via a LiveData that represents an event.

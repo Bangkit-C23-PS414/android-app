@@ -1,4 +1,4 @@
-package com.bangkit.coffee.ui.components
+package com.bangkit.coffee.shared.components
 
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Text
@@ -8,7 +8,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import com.bangkit.coffee.R
-import com.bangkit.coffee.ui.theme.AppTheme
+import com.bangkit.coffee.shared.theme.AppTheme
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable

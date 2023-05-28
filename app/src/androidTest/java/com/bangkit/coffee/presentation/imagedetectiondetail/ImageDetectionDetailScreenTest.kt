@@ -5,8 +5,8 @@ import com.bangkit.coffee.R
 import com.bangkit.coffee.domain.DiseaseDummy
 import com.bangkit.coffee.domain.ImageDetectionDummy
 import com.bangkit.coffee.presentation.ComposeTest
+import com.bangkit.coffee.shared.util.toDateTimeString
 import com.bangkit.coffee.util.AppTest
-import com.bangkit.coffee.util.toDateTimeString
 import org.junit.Test
 
 class ImageDetectionDetailScreenTest : ComposeTest() {
@@ -19,9 +19,10 @@ class ImageDetectionDetailScreenTest : ComposeTest() {
         rule.setContent {
             AppTest {
                 ImageDetectionDetailScreen(
-                    state = ImageDetectionDetailState.Sick(
-                        imageDetection,
-                        disease
+                    state = ImageDetectionDetailState(
+                        loading = false,
+                        imageDetection = imageDetection,
+                        disease = disease
                     )
                 )
             }
@@ -36,7 +37,10 @@ class ImageDetectionDetailScreenTest : ComposeTest() {
         rule.setContent {
             AppTest {
                 ImageDetectionDetailScreen(
-                    state = ImageDetectionDetailState.Healthy(imageDetection)
+                    state = ImageDetectionDetailState(
+                        loading = false,
+                        imageDetection = imageDetection
+                    )
                 )
             }
         }

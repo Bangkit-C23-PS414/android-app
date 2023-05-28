@@ -1,4 +1,4 @@
-package com.bangkit.coffee.util.exception
+package com.bangkit.coffee.shared.exception
 
 import com.bangkit.coffee.data.source.remote.response.ErrorResponse
 import com.google.gson.Gson

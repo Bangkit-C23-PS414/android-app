@@ -16,8 +16,6 @@ class ProfileCoordinator(
 ) {
     val screenStateFlow = viewModel.stateFlow
 
-    val screenEventFlow = viewModel.eventFlow
-
     fun updateAvatar(uri: Uri) = viewModel.updateAvatar(uri)
 
     fun openEditProfile() = viewModel.openEditProfile()

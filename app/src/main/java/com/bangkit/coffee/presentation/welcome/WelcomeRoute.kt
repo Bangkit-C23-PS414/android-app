@@ -1,7 +1,6 @@
 package com.bangkit.coffee.presentation.welcome
 
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
@@ -17,15 +16,6 @@ fun WelcomeRoute(
 
     // UI Actions
     val actions = rememberWelcomeActions(coordinator, navigateToSignIn, navigateToSignUp)
-
-    // Handle events
-    LaunchedEffect(Unit) {
-        coordinator.screenEventFlow.collect { event ->
-            when (event) {
-                else -> {}
-            }
-        }
-    }
 
     // UI Rendering
     WelcomeScreen(uiState, actions)

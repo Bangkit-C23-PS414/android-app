@@ -36,7 +36,7 @@ import com.bangkit.coffee.R
 import com.bangkit.coffee.domain.DiseaseDummy
 import com.bangkit.coffee.presentation.home.components.DetectionStepCard
 import com.bangkit.coffee.presentation.home.components.DiseaseCard
-import com.bangkit.coffee.ui.theme.AppTheme
+import com.bangkit.coffee.shared.theme.AppTheme
 
 @OptIn(ExperimentalMaterial3Api::class, ExperimentalLayoutApi::class)
 @Composable

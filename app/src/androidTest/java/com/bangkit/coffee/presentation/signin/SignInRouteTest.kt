@@ -8,9 +8,9 @@ import androidx.compose.ui.test.onNodeWithTag
 import androidx.compose.ui.test.performImeAction
 import androidx.compose.ui.test.performTextInput
 import androidx.compose.ui.test.performTextReplacement
+import com.bangkit.coffee.app.KopintarAppActions
+import com.bangkit.coffee.app.ProvideKopintarAppActions
 import com.bangkit.coffee.presentation.ComposeTest
-import com.bangkit.coffee.ui.KopintarAppActions
-import com.bangkit.coffee.ui.ProvideKopintarAppActions
 import com.bangkit.coffee.util.AppTest
 import org.junit.Test
 

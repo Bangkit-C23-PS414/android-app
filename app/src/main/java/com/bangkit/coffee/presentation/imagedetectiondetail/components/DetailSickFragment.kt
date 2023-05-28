@@ -39,8 +39,8 @@ import com.bangkit.coffee.domain.DiseaseDummy
 import com.bangkit.coffee.domain.ImageDetectionDummy
 import com.bangkit.coffee.domain.entity.Disease
 import com.bangkit.coffee.domain.entity.ImageDetection
-import com.bangkit.coffee.ui.theme.AppTheme
-import com.bangkit.coffee.util.toDateTimeString
+import com.bangkit.coffee.shared.theme.AppTheme
+import com.bangkit.coffee.shared.util.toDateTimeString
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable

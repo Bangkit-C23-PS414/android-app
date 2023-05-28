@@ -9,20 +9,10 @@ import com.bangkit.coffee.domain.entity.Disease
 /**
  * UI State that represents DiseaseDetailScreen
  **/
-sealed class DiseaseDetailState {
-    object Loading : DiseaseDetailState()
-
-    data class Success(
-        val disease: Disease,
-    ) : DiseaseDetailState()
-}
-
-/**
- * UI Event that represents DiseaseDetailScreen
- */
-sealed class DiseaseDetailEvent {
-
-}
+data class DiseaseDetailState(
+    val loading: Boolean = true,
+    val disease: Disease? = null
+)
 
 /**
  * DiseaseDetail Actions emitted from the UI Layer

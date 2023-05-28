@@ -23,8 +23,8 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.window.Dialog
 import androidx.compose.ui.window.DialogProperties
 import com.bangkit.coffee.R
-import com.bangkit.coffee.ui.theme.AppTheme
-import com.bangkit.coffee.util.toAdjustedLocalDate
+import com.bangkit.coffee.shared.theme.AppTheme
+import com.bangkit.coffee.shared.util.toAdjustedLocalDate
 import java.time.LocalDate
 import java.time.LocalTime
 import java.time.ZoneOffset

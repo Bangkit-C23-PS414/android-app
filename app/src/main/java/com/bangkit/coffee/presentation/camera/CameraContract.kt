@@ -16,13 +16,6 @@ data class CameraState(
 )
 
 /**
- * UI Event that represents CameraScreen
- */
-sealed class CameraEvent {
-
-}
-
-/**
  * Camera Actions emitted from the UI Layer
  * passed to the coordinator to handle
  **/

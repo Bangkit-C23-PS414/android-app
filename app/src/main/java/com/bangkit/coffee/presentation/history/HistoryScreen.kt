@@ -26,8 +26,8 @@ import com.bangkit.coffee.domain.entity.ImageDetection
 import com.bangkit.coffee.presentation.history.components.FilterHistoryBottomSheet
 import com.bangkit.coffee.presentation.history.components.ImageDetectionCard
 import com.bangkit.coffee.presentation.history.components.ImageDetectionGroupHeader
-import com.bangkit.coffee.ui.theme.AppTheme
-import com.bangkit.coffee.util.header
+import com.bangkit.coffee.shared.theme.AppTheme
+import com.bangkit.coffee.shared.util.header
 import java.util.Date
 import java.util.UUID
 

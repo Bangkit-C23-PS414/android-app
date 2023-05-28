@@ -26,8 +26,8 @@ import com.bangkit.coffee.R
 import com.bangkit.coffee.presentation.camera.CameraActions
 import com.bangkit.coffee.presentation.camera.LocalCameraActions
 import com.bangkit.coffee.presentation.camera.ProvideCameraActions
-import com.bangkit.coffee.ui.theme.AppTheme
-import com.bangkit.coffee.util.zeroElevation
+import com.bangkit.coffee.shared.theme.AppTheme
+import com.bangkit.coffee.shared.util.zeroElevation
 
 @Composable
 fun ConfirmImageToolbar(

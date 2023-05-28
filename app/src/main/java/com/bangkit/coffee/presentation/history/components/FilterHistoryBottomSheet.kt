@@ -42,8 +42,8 @@ import com.bangkit.coffee.domain.entity.DetectionResult
 import com.bangkit.coffee.presentation.history.HistoryActions
 import com.bangkit.coffee.presentation.history.LocalHistoryActions
 import com.bangkit.coffee.presentation.history.ProvideHistoryActions
-import com.bangkit.coffee.ui.theme.AppTheme
-import com.bangkit.coffee.util.toDateString
+import com.bangkit.coffee.shared.theme.AppTheme
+import com.bangkit.coffee.shared.util.toDateString
 import kotlinx.coroutines.launch
 import me.naingaungluu.formconductor.FormResult
 import me.naingaungluu.formconductor.composeui.field

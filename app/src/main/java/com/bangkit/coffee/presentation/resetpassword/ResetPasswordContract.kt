@@ -11,13 +11,6 @@ import androidx.compose.runtime.staticCompositionLocalOf
 class ResetPasswordState
 
 /**
- * UI Event that represents ResetPasswordScreen
- */
-sealed class ResetPasswordEvent {
-
-}
-
-/**
  * ResetPassword Actions emitted from the UI Layer
  * passed to the coordinator to handle
  **/

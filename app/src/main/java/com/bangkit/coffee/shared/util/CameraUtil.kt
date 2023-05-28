@@ -1,4 +1,4 @@
-package com.bangkit.coffee.util
+package com.bangkit.coffee.shared.util
 
 import android.content.Context
 import androidx.camera.core.ImageCapture

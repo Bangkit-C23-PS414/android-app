@@ -1,7 +1,6 @@
 package com.bangkit.coffee.presentation.camera
 
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
@@ -16,15 +15,6 @@ fun CameraRoute(
 
     // UI Actions
     val actions = rememberCameraActions(coordinator, navigateUp)
-
-    // Handle events
-    LaunchedEffect(Unit) {
-        coordinator.screenEventFlow.collect { event ->
-            when (event) {
-                else -> {}
-            }
-        }
-    }
 
     // UI Rendering
     CameraScreen(uiState, actions)

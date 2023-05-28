@@ -14,8 +14,6 @@ class HistoryCoordinator(
 ) {
     val screenStateFlow = viewModel.stateFlow
 
-    val screenEventFlow = viewModel.eventFlow
-
     fun toggleFilter() = viewModel.toggleFilter()
 
     fun applyFilter(formData: FilterHistoryForm) = viewModel.applyFilter(formData)

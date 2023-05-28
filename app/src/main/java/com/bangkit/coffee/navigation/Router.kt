@@ -29,7 +29,7 @@ fun Router(
     NavHost(
         modifier = modifier,
         navController = navController,
-        startDestination = Screen.Home.route,
+        startDestination = Screen.SignIn.route,
     ) {
         // Welcome
         composable(Screen.Welcome.route) {

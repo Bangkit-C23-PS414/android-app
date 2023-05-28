@@ -13,8 +13,6 @@ class ForgotPasswordCoordinator(
 ) {
     val screenStateFlow = viewModel.stateFlow
 
-    val screenEventFlow = viewModel.eventFlow
-
     fun forgotPassword() {
 
     }
