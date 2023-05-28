@@ -32,6 +32,7 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.tooling.preview.Preview
@@ -77,6 +78,10 @@ fun FilterHistoryBottomSheet(
                         allTimeField.setField(false)
                         filterDateField.setField(it)
                         dateRangePickerVisible = false
+
+                        /*Timber.d(it.toString())
+                        Timber.d(it.startDate.atZone(ZoneId.systemDefault()).toInstant().toEpochMilli().toString())
+                        Timber.d(it.endDate.atZone(ZoneId.systemDefault()).toInstant().toEpochMilli().toString())*/
                     }
                 )
             }
@@ -100,7 +105,8 @@ fun FilterHistoryBottomSheet(
                             onClick = { setField(true) },
                             role = Role.RadioButton
                         )
-                        .padding(horizontal = 16.dp),
+                        .padding(horizontal = 16.dp)
+                        .testTag("AllTimeSelect"),
                     verticalAlignment = Alignment.CenterVertically
                 ) {
                     RadioButton(
@@ -120,12 +126,8 @@ fun FilterHistoryBottomSheet(
                         .fillMaxWidth()
                         .defaultMinSize(minHeight = 48.dp)
                         .clickable { dateRangePickerVisible = true }
-                        /*.selectable(
-                            selected = state.value?.value == false,
-                            onClick = { setField(false) },
-                            role = Role.RadioButton
-                        )*/
-                        .padding(horizontal = 16.dp),
+                        .padding(horizontal = 16.dp)
+                        .testTag("DateRangeSelect"),
                     verticalAlignment = Alignment.CenterVertically
                 ) {
                     RadioButton(
@@ -185,6 +187,7 @@ fun FilterHistoryBottomSheet(
                                 role = Role.Checkbox
                             )
                             .padding(horizontal = 16.dp)
+                            .testTag("DiseaseCheckbox")
                     ) {
                         Checkbox(
                             checked = formValue.value.contains(detectionResult),
@@ -213,7 +216,9 @@ fun FilterHistoryBottomSheet(
                             actions.resetFilter()
                         }
                     },
-                    modifier = Modifier.weight(1f)
+                    modifier = Modifier
+                        .weight(1f)
+                        .testTag("ClearFilterButton")
                 ) {
                     Text(text = stringResource(R.string.reset_filter))
                 }
@@ -228,7 +233,9 @@ fun FilterHistoryBottomSheet(
                         }
                     },
                     enabled = formResult is FormResult.Success,
-                    modifier = Modifier.weight(1f)
+                    modifier = Modifier
+                        .weight(1f)
+                        .testTag("ApplyFilterButton")
                 ) {
                     Text(text = stringResource(R.string.apply_filter))
                 }
@@ -239,7 +246,6 @@ fun FilterHistoryBottomSheet(
     }
 }
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Preview(name = "FilterHistoryBottomSheet", showBackground = true)
 @Composable
 private fun PreviewFilterHistoryBottomSheet() {

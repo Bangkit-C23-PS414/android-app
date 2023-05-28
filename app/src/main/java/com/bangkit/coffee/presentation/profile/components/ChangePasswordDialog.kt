@@ -23,6 +23,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.focus.focusRequester
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
@@ -33,6 +34,7 @@ import androidx.compose.ui.window.Dialog
 import androidx.compose.ui.window.DialogProperties
 import com.bangkit.coffee.R
 import com.bangkit.coffee.presentation.profile.LocalProfileActions
+import com.bangkit.coffee.ui.theme.AppTheme
 import me.naingaungluu.formconductor.FieldResult
 import me.naingaungluu.formconductor.FormResult
 import me.naingaungluu.formconductor.composeui.field
@@ -45,10 +47,6 @@ fun ChangePasswordDialog(
 ) {
     val actions = LocalProfileActions.current
     val focusRequester = remember { FocusRequester() }
-
-    LaunchedEffect(Unit) {
-        focusRequester.requestFocus()
-    }
 
     Dialog(
         onDismissRequest = actions.closeChangePassword,
@@ -65,7 +63,10 @@ fun ChangePasswordDialog(
                             Text(text = stringResource(R.string.change_password))
                         },
                         navigationIcon = {
-                            IconButton(onClick = actions.closeChangePassword) {
+                            IconButton(
+                                onClick = actions.closeChangePassword,
+                                modifier = Modifier.testTag("CloseButton")
+                            ) {
                                 Icon(Icons.Filled.Close, contentDescription = null)
                             }
                         },
@@ -76,7 +77,8 @@ fun ChangePasswordDialog(
                             modifier = Modifier
                                 .fillMaxWidth()
                                 .padding(horizontal = 16.dp)
-                                .focusRequester(focusRequester),
+                                .focusRequester(focusRequester)
+                                .testTag("OldPasswordField"),
                             value = this.state.value?.value.orEmpty(),
                             onValueChange = this::setField,
                             isError = resultState.value is FieldResult.Error,
@@ -100,13 +102,18 @@ fun ChangePasswordDialog(
                                 imeAction = ImeAction.Next,
                             ),
                         )
+
+                        LaunchedEffect(Unit) {
+                            focusRequester.requestFocus()
+                        }
                     }
 
                     field(ChangePasswordForm::newPassword) {
                         OutlinedTextField(
                             modifier = Modifier
                                 .fillMaxWidth()
-                                .padding(horizontal = 16.dp),
+                                .padding(horizontal = 16.dp)
+                                .testTag("NewPasswordField"),
                             value = this.state.value?.value.orEmpty(),
                             onValueChange = this::setField,
                             isError = resultState.value is FieldResult.Error,
@@ -136,7 +143,8 @@ fun ChangePasswordDialog(
                         OutlinedTextField(
                             modifier = Modifier
                                 .fillMaxWidth()
-                                .padding(horizontal = 16.dp),
+                                .padding(horizontal = 16.dp)
+                                .testTag("ConfirmNewPasswordField"),
                             value = this.state.value?.value.orEmpty(),
                             onValueChange = this::setField,
                             isError = resultState.value is FieldResult.Error,
@@ -168,6 +176,7 @@ fun ChangePasswordDialog(
                         modifier = Modifier
                             .fillMaxWidth()
                             .padding(horizontal = 16.dp)
+                            .testTag("SaveButton")
                     ) {
                         Text(text = stringResource(R.string.update_password))
                     }
@@ -180,5 +189,7 @@ fun ChangePasswordDialog(
 @Preview(name = "ChangePasswordDialog", showBackground = true)
 @Composable
 private fun PreviewChangePasswordDialog() {
-    ChangePasswordDialog()
+    AppTheme {
+        ChangePasswordDialog()
+    }
 }

@@ -25,7 +25,6 @@ import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
@@ -79,15 +78,6 @@ fun SignInScreen(
         Spacer(modifier = Modifier.height(24.dp))
 
         form(SignInForm::class) {
-            LaunchedEffect(Unit) {
-                submit(
-                    SignInForm(
-                        email = "myxzlpltk@gmail.com",
-                        password = "password"
-                    )
-                )
-            }
-
             field(SignInForm::email) {
                 OutlinedTextField(
                     modifier = Modifier

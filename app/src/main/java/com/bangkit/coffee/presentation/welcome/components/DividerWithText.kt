@@ -11,6 +11,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.bangkit.coffee.R
+import com.bangkit.coffee.ui.theme.AppTheme
 
 @Composable
 fun DividerWithText(
@@ -35,8 +36,10 @@ fun DividerWithText(
 @Preview(name = "DividerWithText", showBackground = true)
 @Composable
 private fun PreviewDividerWithText() {
-    DividerWithText(
-        modifier = Modifier.padding(24.dp),
-        text = stringResource(id = R.string.or)
-    )
+    AppTheme {
+        DividerWithText(
+            modifier = Modifier.padding(24.dp),
+            text = stringResource(id = R.string.or)
+        )
+    }
 }

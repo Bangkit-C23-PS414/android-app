@@ -39,6 +39,7 @@ import com.bangkit.coffee.domain.DiseaseDummy
 import com.bangkit.coffee.domain.ImageDetectionDummy
 import com.bangkit.coffee.domain.entity.Disease
 import com.bangkit.coffee.domain.entity.ImageDetection
+import com.bangkit.coffee.ui.theme.AppTheme
 import com.bangkit.coffee.util.toDateTimeString
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -167,8 +168,10 @@ fun DetailSickFragment(
 @Preview(name = "DetailSickFragment", showBackground = true)
 @Composable
 private fun PreviewDetailSickFragment() {
-    DetailSickFragment(
-        imageDetection = ImageDetectionDummy,
-        disease = DiseaseDummy
-    )
+    AppTheme {
+        DetailSickFragment(
+            imageDetection = ImageDetectionDummy,
+            disease = DiseaseDummy
+        )
+    }
 }

@@ -17,6 +17,7 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -43,7 +44,10 @@ fun HistoryScreen(
             TopAppBar(
                 title = { Text(text = stringResource(R.string.history)) },
                 actions = {
-                    IconButton(onClick = actions.toggleFilter) {
+                    IconButton(
+                        onClick = actions.toggleFilter,
+                        modifier = Modifier.testTag("FilterButton")
+                    ) {
                         Icon(
                             imageVector = Icons.Filled.FilterList,
                             contentDescription = stringResource(R.string.filter_history)
@@ -71,7 +75,8 @@ fun HistoryScreen(
             items(state.imageDetections, key = { it.id }) { imageDetection ->
                 ImageDetectionCard(
                     imageDetection = imageDetection,
-                    onClick = { actions.navigateToDetailImageDetection("42") }
+                    onClick = { actions.navigateToDetailImageDetection("42") },
+                    modifier = Modifier.testTag("ImageDetectionCard")
                 )
             }
 
@@ -85,7 +90,8 @@ fun HistoryScreen(
             items(state.imageDetections, key = { "copy" + it.id }) { imageDetection ->
                 ImageDetectionCard(
                     imageDetection = imageDetection,
-                    onClick = { actions.navigateToDetailImageDetection("42") }
+                    onClick = { actions.navigateToDetailImageDetection("42") },
+                    modifier = Modifier.testTag("ImageDetectionCard")
                 )
             }
         }
@@ -95,6 +101,7 @@ fun HistoryScreen(
         ProvideHistoryActions(actions = actions) {
             FilterHistoryBottomSheet(
                 formData = state.filterFormData,
+                modifier = Modifier.testTag("FilterHistoryBottomSheet")
             )
         }
     }

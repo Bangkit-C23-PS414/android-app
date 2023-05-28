@@ -27,6 +27,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.focus.focusRequester
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextRange
 import androidx.compose.ui.text.input.ImeAction
@@ -56,10 +57,6 @@ fun EditProfileDialog(
     val actions = LocalProfileActions.current
     val focusRequester = remember { FocusRequester() }
 
-    LaunchedEffect(Unit) {
-        focusRequester.requestFocus()
-    }
-
     Dialog(
         onDismissRequest = actions.closeEditProfile,
         properties = DialogProperties(usePlatformDefaultWidth = false)
@@ -75,7 +72,10 @@ fun EditProfileDialog(
                             Text(text = stringResource(R.string.edit_profile))
                         },
                         navigationIcon = {
-                            IconButton(onClick = actions.closeEditProfile) {
+                            IconButton(
+                                onClick = actions.closeEditProfile,
+                                modifier = Modifier.testTag("CloseButton")
+                            ) {
                                 Icon(Icons.Filled.Close, contentDescription = null)
                             }
                         },
@@ -105,7 +105,8 @@ fun EditProfileDialog(
                             modifier = Modifier
                                 .fillMaxWidth()
                                 .padding(horizontal = 16.dp)
-                                .focusRequester(focusRequester),
+                                .focusRequester(focusRequester)
+                                .testTag("NameField"),
                             value = value,
                             onValueChange = { newValue ->
                                 Timber.d("onValueChange: $newValue")
@@ -135,6 +136,10 @@ fun EditProfileDialog(
                                 imeAction = ImeAction.Done,
                             ),
                         )
+
+                        LaunchedEffect(Unit) {
+                            focusRequester.requestFocus()
+                        }
                     }
 
                     Button(
@@ -143,6 +148,7 @@ fun EditProfileDialog(
                         modifier = Modifier
                             .fillMaxWidth()
                             .padding(horizontal = 16.dp)
+                            .testTag("SaveButton")
                     ) {
                         Text(text = stringResource(R.string.save))
                     }

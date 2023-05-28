@@ -1,19 +1,14 @@
 package com.bangkit.coffee.presentation.welcome
 
-import androidx.activity.ComponentActivity
 import androidx.compose.ui.test.assertHasClickAction
 import androidx.compose.ui.test.assertIsDisplayed
 import androidx.compose.ui.test.assertIsEnabled
-import androidx.compose.ui.test.junit4.createAndroidComposeRule
 import androidx.compose.ui.test.onNodeWithTag
+import com.bangkit.coffee.presentation.ComposeTest
 import com.bangkit.coffee.ui.theme.AppTheme
-import org.junit.Rule
 import org.junit.Test
 
-class WelcomeRouteTest {
-
-    @get:Rule
-    val rule = createAndroidComposeRule<ComponentActivity>()
+class WelcomeRouteTest : ComposeTest() {
 
     @Test
     fun signInButton_exists() {

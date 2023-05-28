@@ -1,5 +1,6 @@
 package com.bangkit.coffee.presentation.home.components
 
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Badge
@@ -10,11 +11,11 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import coil.compose.AsyncImage
 import com.bangkit.coffee.R
 import com.bangkit.coffee.presentation.home.DetectionStep
 import com.bangkit.coffee.ui.theme.AppTheme
@@ -26,13 +27,13 @@ fun DetectionStepCard(
     detectionStep: DetectionStep
 ) {
     Card(modifier = modifier) {
-        AsyncImage(
+        Image(
+            painter = painterResource(detectionStep.image),
+            contentDescription = null,
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(16.dp)
-                .align(Alignment.CenterHorizontally),
-            model = detectionStep.image,
-            contentDescription = null
+                .align(Alignment.CenterHorizontally)
         )
         Badge(
             modifier = Modifier

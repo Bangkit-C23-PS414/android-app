@@ -19,6 +19,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+import com.bangkit.coffee.ui.theme.AppTheme
 
 @Composable
 fun PageIndicator(
@@ -110,8 +111,10 @@ fun PageIndicatorView(
 @Preview(name = "PageIndicator", showBackground = true)
 @Composable
 private fun PreviewPageIndicator() {
-    PageIndicator(
-        numberOfPages = 3,
-        selectedPage = 1,
-    )
+    AppTheme {
+        PageIndicator(
+            numberOfPages = 3,
+            selectedPage = 1,
+        )
+    }
 }

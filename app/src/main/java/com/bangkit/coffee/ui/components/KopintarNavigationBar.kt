@@ -14,6 +14,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.bangkit.coffee.navigation.Screen.Manifest.bottomBarScreens
+import com.bangkit.coffee.ui.theme.AppTheme
 
 @Composable
 fun KopintarNavigationBar(
@@ -48,5 +49,7 @@ fun KopintarNavigationBar(
 @Preview(name = "KopintarNavigationBar")
 @Composable
 private fun PreviewKopintarNavigationBar() {
-    KopintarNavigationBar()
+    AppTheme {
+        KopintarNavigationBar()
+    }
 }
