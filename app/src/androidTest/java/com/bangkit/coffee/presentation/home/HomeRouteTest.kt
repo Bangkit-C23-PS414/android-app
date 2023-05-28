@@ -16,14 +16,14 @@ import androidx.compose.ui.test.onAllNodesWithTag
 import androidx.compose.ui.test.onNodeWithText
 import com.bangkit.coffee.R
 import com.bangkit.coffee.presentation.ComposeTest
-import com.bangkit.coffee.ui.theme.AppTheme
+import com.bangkit.coffee.util.AppTest
 import org.junit.Test
 
 class HomeRouteTest : ComposeTest() {
 
     @Test
     fun should_showDetectionSteps_when_loaded() {
-        rule.setContent { AppTheme { HomeRoute() } }
+        rule.setContent { AppTest { HomeRoute() } }
 
         rule.onNodeWithText(getString(R.string.how_to_detect)).assertIsDisplayed()
         rule.onAllNodesWithTag("DetectionStepCard", useUnmergedTree = true).apply {
@@ -37,7 +37,7 @@ class HomeRouteTest : ComposeTest() {
 
     @Test
     fun should_showDetectNowButton_when_loaded() {
-        rule.setContent { AppTheme { HomeRoute() } }
+        rule.setContent { AppTest { HomeRoute() } }
 
         rule.onNodeWithText(getString(R.string.detect_now)).assertIsDisplayed()
         rule.onNodeWithText(getString(R.string.detect_now)).assertIsEnabled()
@@ -48,7 +48,7 @@ class HomeRouteTest : ComposeTest() {
     @OptIn(ExperimentalTestApi::class)
     @Test
     fun should_showListDisease_when_loaded() {
-        rule.setContent { AppTheme { HomeRoute() } }
+        rule.setContent { AppTest { HomeRoute() } }
 
         rule.onNodeWithText(getString(R.string.how_to_detect)).assertIsDisplayed()
         rule.waitUntilAtLeastOneExists(hasTestTag("DiseaseCard"))

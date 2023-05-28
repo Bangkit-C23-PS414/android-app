@@ -11,7 +11,7 @@ import androidx.compose.ui.test.performTextReplacement
 import com.bangkit.coffee.presentation.ComposeTest
 import com.bangkit.coffee.ui.KopintarAppActions
 import com.bangkit.coffee.ui.ProvideKopintarAppActions
-import com.bangkit.coffee.ui.theme.AppTheme
+import com.bangkit.coffee.util.AppTest
 import org.junit.Test
 
 class SignInRouteTest : ComposeTest() {
@@ -20,7 +20,7 @@ class SignInRouteTest : ComposeTest() {
     fun should_disableButton_when_formClean() {
         rule.setContent {
             ProvideKopintarAppActions(actions = KopintarAppActions()) {
-                AppTheme { SignInRoute() }
+                AppTest { SignInRoute() }
             }
         }
 
@@ -31,7 +31,7 @@ class SignInRouteTest : ComposeTest() {
     fun should_enableButton_when_formValid() {
         rule.setContent {
             ProvideKopintarAppActions(actions = KopintarAppActions()) {
-                AppTheme { SignInRoute() }
+                AppTest { SignInRoute() }
             }
         }
 

@@ -13,14 +13,14 @@ import androidx.compose.ui.test.performTextInput
 import androidx.compose.ui.test.performTextReplacement
 import androidx.compose.ui.unit.dp
 import com.bangkit.coffee.presentation.ComposeTest
-import com.bangkit.coffee.ui.theme.AppTheme
+import com.bangkit.coffee.util.AppTest
 import org.junit.Test
 
 class ProfileRouteTest : ComposeTest() {
 
     @Test
     fun should_showAvatar_when_loaded() {
-        rule.setContent { AppTheme { ProfileRoute() } }
+        rule.setContent { AppTest { ProfileRoute() } }
 
         rule.onNodeWithTag("Avatar").assertIsDisplayed()
         rule.onNodeWithTag("Avatar").assertWidthIsAtLeast(150.dp)
@@ -32,7 +32,7 @@ class ProfileRouteTest : ComposeTest() {
 
     @Test
     fun should_showEditProfile_when_clicked() {
-        rule.setContent { AppTheme { ProfileRoute() } }
+        rule.setContent { AppTest { ProfileRoute() } }
 
         rule.onNodeWithTag("EditProfile").assertHasClickAction()
         rule.onNodeWithTag("EditProfile").performClick()
@@ -46,7 +46,7 @@ class ProfileRouteTest : ComposeTest() {
 
     @Test
     fun should_changeEnableButton_when_editProfileFormChange() {
-        rule.setContent { AppTheme { ProfileRoute() } }
+        rule.setContent { AppTest { ProfileRoute() } }
 
         rule.onNodeWithTag("EditProfile").performClick()
         rule.onNodeWithTag("SaveButton").assertHasClickAction()
@@ -64,7 +64,7 @@ class ProfileRouteTest : ComposeTest() {
 
     @Test
     fun should_showChangePassword_when_clicked() {
-        rule.setContent { AppTheme { ProfileRoute() } }
+        rule.setContent { AppTest { ProfileRoute() } }
 
         rule.onNodeWithTag("ChangePassword").assertHasClickAction()
         rule.onNodeWithTag("ChangePassword").performClick()
@@ -77,7 +77,7 @@ class ProfileRouteTest : ComposeTest() {
 
     @Test
     fun should_changeEnableButton_when_changePasswordFormChange() {
-        rule.setContent { AppTheme { ProfileRoute() } }
+        rule.setContent { AppTest { ProfileRoute() } }
 
         rule.onNodeWithTag("ChangePassword").performClick()
         rule.onNodeWithTag("SaveButton").assertIsNotEnabled()
@@ -97,7 +97,7 @@ class ProfileRouteTest : ComposeTest() {
 
     @Test
     fun should_showSignOutButton_when_loaded() {
-        rule.setContent { AppTheme { ProfileRoute() } }
+        rule.setContent { AppTest { ProfileRoute() } }
 
         rule.onNodeWithTag("SignOut").assertHasClickAction()
     }

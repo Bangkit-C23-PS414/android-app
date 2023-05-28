@@ -20,6 +20,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -50,6 +51,7 @@ fun CameraToolbar(
     ) {
         IconButton(
             onClick = pickFromGallery,
+            modifier = Modifier.testTag("PickGalleryButton")
         ) {
             Icon(
                 imageVector = Icons.Filled.PhotoLibrary,
@@ -68,6 +70,7 @@ fun CameraToolbar(
                 shape = FloatingActionButtonDefaults.largeShape,
                 elevation = FloatingActionButtonDefaults.zeroElevation(),
                 containerColor = MaterialTheme.colorScheme.background,
+                modifier = Modifier.testTag("CaptureButton")
             ) {
                 Icon(
                     imageVector = Icons.Filled.Camera,
@@ -81,6 +84,7 @@ fun CameraToolbar(
             enabled = flashEnabled,
             checked = isFlashOn,
             onCheckedChange = actions.toggleFlash,
+            modifier = Modifier.testTag("FlashToggle")
         ) {
             Icon(
                 imageVector = if (isFlashOn) {

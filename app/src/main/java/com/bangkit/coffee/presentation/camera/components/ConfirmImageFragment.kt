@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import coil.compose.AsyncImage
@@ -27,7 +28,9 @@ fun ConfirmImageFragment(
             model = image,
             contentDescription = stringResource(R.string.image),
             contentScale = ContentScale.Crop,
-            modifier = Modifier.aspectRatio(1f)
+            modifier = Modifier
+                .aspectRatio(1f)
+                .testTag("CameraConfirm")
         )
         Spacer(modifier = Modifier.weight(1f))
 

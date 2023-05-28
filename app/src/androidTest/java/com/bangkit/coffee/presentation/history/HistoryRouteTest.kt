@@ -15,7 +15,7 @@ import androidx.compose.ui.test.onFirst
 import androidx.compose.ui.test.onNodeWithTag
 import androidx.compose.ui.test.performClick
 import com.bangkit.coffee.presentation.ComposeTest
-import com.bangkit.coffee.ui.theme.AppTheme
+import com.bangkit.coffee.util.AppTest
 import org.junit.Test
 
 @OptIn(ExperimentalTestApi::class)
@@ -24,7 +24,7 @@ class HistoryRouteTest : ComposeTest() {
     @OptIn(ExperimentalTestApi::class)
     @Test
     fun should_showListImageDetection_when_loaded() {
-        rule.setContent { AppTheme { HistoryRoute() } }
+        rule.setContent { AppTest { HistoryRoute() } }
 
         rule.waitUntilAtLeastOneExists(hasTestTag("ImageDetectionCard"))
         rule.onAllNodesWithTag("ImageDetectionCard").assertAll(hasClickAction())
@@ -32,7 +32,7 @@ class HistoryRouteTest : ComposeTest() {
 
     @Test
     fun should_showFilterBottomSheet_when_filterClicked() {
-        rule.setContent { AppTheme { HistoryRoute() } }
+        rule.setContent { AppTest { HistoryRoute() } }
 
         rule.onNodeWithTag("FilterButton").assertHasClickAction()
         rule.onNodeWithTag("FilterButton").assertIsEnabled()
@@ -54,7 +54,7 @@ class HistoryRouteTest : ComposeTest() {
 
     @Test
     fun should_closeDialog_when_clearFilterButtonClicked() {
-        rule.setContent { AppTheme { HistoryRoute() } }
+        rule.setContent { AppTest { HistoryRoute() } }
 
         rule.onNodeWithTag("FilterButton").performClick()
         rule.waitUntilExactlyOneExists(hasTestTag("FilterHistoryBottomSheet"))
@@ -65,7 +65,7 @@ class HistoryRouteTest : ComposeTest() {
 
     @Test
     fun should_closeDialog_when_applyFilterButtonClicked() {
-        rule.setContent { AppTheme { HistoryRoute() } }
+        rule.setContent { AppTest { HistoryRoute() } }
 
         rule.onNodeWithTag("FilterButton").performClick()
         rule.waitUntilExactlyOneExists(hasTestTag("FilterHistoryBottomSheet"))
@@ -76,7 +76,7 @@ class HistoryRouteTest : ComposeTest() {
 
     @Test
     fun should_disableApplyFilterButton_when_allDiseaseOptionOff() {
-        rule.setContent { AppTheme { HistoryRoute() } }
+        rule.setContent { AppTest { HistoryRoute() } }
 
         rule.onNodeWithTag("FilterButton").performClick()
         rule.waitUntilExactlyOneExists(hasTestTag("FilterHistoryBottomSheet"))
@@ -95,7 +95,7 @@ class HistoryRouteTest : ComposeTest() {
 
     @Test
     fun should_openDateRangePicker_when_pickDateRangeClicked() {
-        rule.setContent { AppTheme { HistoryRoute() } }
+        rule.setContent { AppTest { HistoryRoute() } }
 
         rule.onNodeWithTag("FilterButton").performClick()
         rule.waitUntilExactlyOneExists(hasTestTag("FilterHistoryBottomSheet"))

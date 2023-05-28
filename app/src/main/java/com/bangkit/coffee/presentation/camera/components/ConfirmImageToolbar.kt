@@ -18,6 +18,7 @@ import androidx.compose.material3.minimumInteractiveComponentSize
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -43,6 +44,7 @@ fun ConfirmImageToolbar(
     ) {
         IconButton(
             onClick = actions.clearImage,
+            modifier = Modifier.testTag("DeleteImage")
         ) {
             Icon(
                 imageVector = Icons.Filled.Delete,
@@ -60,6 +62,7 @@ fun ConfirmImageToolbar(
                 onClick = {},
                 shape = FloatingActionButtonDefaults.largeShape,
                 elevation = FloatingActionButtonDefaults.zeroElevation(),
+                modifier = Modifier.testTag("Upload")
             ) {
                 Icon(
                     imageVector = Icons.Filled.Upload,

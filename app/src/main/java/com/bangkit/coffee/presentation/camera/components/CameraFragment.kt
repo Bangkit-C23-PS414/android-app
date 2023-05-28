@@ -32,6 +32,7 @@ import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.layout.Layout
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalLifecycleOwner
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.viewinterop.AndroidView
@@ -170,6 +171,7 @@ fun CameraFragment(
                 Box {
                     AndroidView(
                         factory = { viewFinder },
+                        modifier = Modifier.testTag("CameraPreview")
                     )
 
                     androidx.compose.animation.AnimatedVisibility(
