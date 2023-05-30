@@ -38,9 +38,9 @@ import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.viewinterop.AndroidView
 import androidx.core.net.toUri
 import com.bangkit.coffee.R
-import com.bangkit.coffee.app.KopintarAppActions
-import com.bangkit.coffee.app.LocalKopintarAppActions
-import com.bangkit.coffee.app.ProvideKopintarAppActions
+import com.bangkit.coffee.app.LocalRecoffeeryAppActions
+import com.bangkit.coffee.app.ProvideRecoffeeryAppActions
+import com.bangkit.coffee.app.RecoffeeryAppActions
 import com.bangkit.coffee.presentation.camera.CameraActions
 import com.bangkit.coffee.presentation.camera.LocalCameraActions
 import com.bangkit.coffee.presentation.camera.ProvideCameraActions
@@ -62,7 +62,7 @@ fun CameraFragment(
     isCapturing: Boolean = false,
     pickFromGallery: () -> Unit = {},
 ) {
-    val appActions = LocalKopintarAppActions.current
+    val appActions = LocalRecoffeeryAppActions.current
     val context = LocalContext.current
     val actions = LocalCameraActions.current
     val lifecycleOwner = LocalLifecycleOwner.current
@@ -228,7 +228,7 @@ fun CameraFragment(
 @Composable
 private fun PreviewCameraFragment() {
     AppTheme {
-        ProvideKopintarAppActions(actions = KopintarAppActions()) {
+        ProvideRecoffeeryAppActions(actions = RecoffeeryAppActions()) {
             ProvideCameraActions(actions = CameraActions()) {
                 CameraFragment()
             }

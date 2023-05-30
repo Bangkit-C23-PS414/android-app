@@ -9,8 +9,8 @@ import androidx.navigation.NavBackStackEntry
  * Screen's coordinator which is responsible for handling actions from the UI layer
  * and one-shot actions based on the new UI state
  */
-class KopintarAppCoordinator(
-    val viewModel: KopintarAppViewModel
+class RecoffeeryAppCoordinator(
+    val viewModel: RecoffeeryAppViewModel
 ) {
     val screenStateFlow = viewModel.stateFlow
     val toastMessage = viewModel.toastMessage
@@ -23,11 +23,11 @@ class KopintarAppCoordinator(
 }
 
 @Composable
-fun rememberKopintarAppCoordinator(
-    viewModel: KopintarAppViewModel = hiltViewModel()
-): KopintarAppCoordinator {
+fun rememberRecoffeeryAppCoordinator(
+    viewModel: RecoffeeryAppViewModel = hiltViewModel()
+): RecoffeeryAppCoordinator {
     return remember(viewModel) {
-        KopintarAppCoordinator(
+        RecoffeeryAppCoordinator(
             viewModel = viewModel
         )
     }

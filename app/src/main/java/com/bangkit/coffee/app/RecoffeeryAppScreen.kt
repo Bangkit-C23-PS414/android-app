@@ -15,15 +15,15 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.bangkit.coffee.navigation.Router
-import com.bangkit.coffee.shared.components.KopintarNavigationBar
-import com.bangkit.coffee.shared.components.KopintarTopAppBar
+import com.bangkit.coffee.shared.components.RecoffeeryNavigationBar
+import com.bangkit.coffee.shared.components.RecoffeeryTopAppBar
 import com.bangkit.coffee.shared.theme.AppTheme
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 
 @Composable
-fun KopintarAppScreen(
-    state: KopintarAppState = KopintarAppState(),
-    actions: KopintarAppActions = KopintarAppActions(),
+fun RecoffeeryAppScreen(
+    state: RecoffeeryAppState = RecoffeeryAppState(),
+    actions: RecoffeeryAppActions = RecoffeeryAppActions(),
     navController: NavHostController = rememberNavController(),
     snackbarHostState: SnackbarHostState = remember { SnackbarHostState() }
 ) {
@@ -51,18 +51,18 @@ fun KopintarAppScreen(
             snackbarHost = { SnackbarHost(snackbarHostState) },
             topBar = {
                 if (state.shouldShowTopAppBar) {
-                    KopintarTopAppBar(
+                    RecoffeeryTopAppBar(
                         title = state.topBarTitle
                     )
                 }
             },
             bottomBar = {
                 if (state.shouldShowNavigationBar) {
-                    KopintarNavigationBar(navController = navController)
+                    RecoffeeryNavigationBar(navController = navController)
                 }
             }
         ) { contentPadding ->
-            ProvideKopintarAppActions(actions = actions) {
+            ProvideRecoffeeryAppActions(actions = actions) {
                 Router(
                     modifier = Modifier.padding(contentPadding),
                     navController = navController,
@@ -73,8 +73,8 @@ fun KopintarAppScreen(
 }
 
 @Composable
-@Preview(name = "KopintarApp")
-private fun KopintarAppScreenPreview() {
-    KopintarAppScreen()
+@Preview(name = "RecoffeeryApp")
+private fun RecoffeeryAppScreenPreview() {
+    RecoffeeryAppScreen()
 }
 

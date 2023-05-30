@@ -17,7 +17,7 @@ import com.bangkit.coffee.navigation.Screen.Manifest.bottomBarScreens
 import com.bangkit.coffee.shared.theme.AppTheme
 
 @Composable
-fun KopintarNavigationBar(
+fun RecoffeeryNavigationBar(
     modifier: Modifier = Modifier,
     navController: NavHostController = rememberNavController(),
 ) {
@@ -46,10 +46,10 @@ fun KopintarNavigationBar(
     }
 }
 
-@Preview(name = "KopintarNavigationBar")
+@Preview(name = "RecoffeeryNavigationBar")
 @Composable
-private fun PreviewKopintarNavigationBar() {
+private fun PreviewRecoffeeryNavigationBar() {
     AppTheme {
-        KopintarNavigationBar()
+        RecoffeeryNavigationBar()
     }
 }

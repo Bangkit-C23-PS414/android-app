@@ -18,14 +18,14 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class KopintarAppViewModel @Inject constructor(
+class RecoffeeryAppViewModel @Inject constructor(
     savedStateHandle: SavedStateHandle,
     private val userPreferencesRepository: UserPreferencesRepository,
 ) : ViewModel() {
 
-    private val _stateFlow: MutableStateFlow<KopintarAppState> =
-        MutableStateFlow(KopintarAppState())
-    val stateFlow: StateFlow<KopintarAppState> = _stateFlow.asStateFlow()
+    private val _stateFlow: MutableStateFlow<RecoffeeryAppState> =
+        MutableStateFlow(RecoffeeryAppState())
+    val stateFlow: StateFlow<RecoffeeryAppState> = _stateFlow.asStateFlow()
 
     init {
         viewModelScope.launch {

@@ -9,14 +9,14 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 
 @Composable
-fun KopintarApp(
-    coordinator: KopintarAppCoordinator = rememberKopintarAppCoordinator()
+fun RecoffeeryApp(
+    coordinator: RecoffeeryAppCoordinator = rememberRecoffeeryAppCoordinator()
 ) {
     // State observing and declarations
-    val uiState by coordinator.screenStateFlow.collectAsStateWithLifecycle(KopintarAppState())
+    val uiState by coordinator.screenStateFlow.collectAsStateWithLifecycle(RecoffeeryAppState())
 
     // UI Actions
-    val actions = rememberKopintarAppActions(coordinator)
+    val actions = rememberRecoffeeryAppActions(coordinator)
 
     // Toast
     val context = LocalContext.current
@@ -33,14 +33,14 @@ fun KopintarApp(
     }
 
     // UI Rendering
-    KopintarAppScreen(uiState, actions)
+    RecoffeeryAppScreen(uiState, actions)
 }
 
 
 @Composable
-fun rememberKopintarAppActions(coordinator: KopintarAppCoordinator): KopintarAppActions {
+fun rememberRecoffeeryAppActions(coordinator: RecoffeeryAppCoordinator): RecoffeeryAppActions {
     return remember(coordinator) {
-        KopintarAppActions(
+        RecoffeeryAppActions(
             onBackStackEntryChanged = coordinator::onBackStackEntryChanged,
             showToast = coordinator::showToast
         )
