@@ -47,7 +47,7 @@ fun DisplayErrorFragment(
                 .aspectRatio(1.35f),
             model = ImageRequest.Builder(context)
                 .decoderFactory(SvgDecoder.Factory())
-                .data(STATIC_URL + "sign_in.svg")
+                .data(STATIC_URL + "error.svg")
                 .crossfade(true)
                 .build(),
             contentDescription = null,
