@@ -14,6 +14,7 @@ import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import javax.inject.Named
 import javax.inject.Singleton
 
 @Module
@@ -22,13 +23,19 @@ object NetworkModule {
 
     @Singleton
     @Provides
-    fun provideRetrofit(userPreferencesRepository: UserPreferencesRepository): Retrofit {
-        val logging = HttpLoggingInterceptor().setLevel(
+    fun provideLoggingInterceptor(): HttpLoggingInterceptor {
+        return HttpLoggingInterceptor().setLevel(
             if (BuildConfig.DEBUG) HttpLoggingInterceptor.Level.BASIC
             else HttpLoggingInterceptor.Level.NONE
         )
+    }
 
-        val authInterceptor = Interceptor { chain ->
+    @Singleton
+    @Provides
+    fun provideAuthInterceptor(
+        userPreferencesRepository: UserPreferencesRepository
+    ): Interceptor {
+        return Interceptor { chain ->
             val token = runBlocking { userPreferencesRepository.tokenFlow.first() }
             val req = chain.request()
             val requestHeaders = req.newBuilder()
@@ -36,9 +43,17 @@ object NetworkModule {
                 .build()
             chain.proceed(requestHeaders)
         }
+    }
 
+    @Singleton
+    @Provides
+    @Named("AuthService")
+    fun provideAuthRetrofit(
+        authInterceptor: Interceptor,
+        loggingInterceptor: HttpLoggingInterceptor
+    ): Retrofit {
         val client = OkHttpClient.Builder()
-            .addInterceptor(logging)
+            .addInterceptor(loggingInterceptor)
             .addInterceptor(authInterceptor)
             .build()
 
@@ -48,7 +63,26 @@ object NetworkModule {
 
     @Singleton
     @Provides
-    fun provideImageDetectionService(retrofit: Retrofit): ImageDetectionService {
+    @Named("ImageService")
+    fun provideImageRetrofit(
+        loggingInterceptor: HttpLoggingInterceptor
+    ): Retrofit {
+        val client = OkHttpClient.Builder()
+            .addInterceptor(loggingInterceptor)
+            .build()
+
+        return Retrofit.Builder()
+            .baseUrl("")
+            .client(client)
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+    }
+
+    @Singleton
+    @Provides
+    fun provideImageDetectionService(
+        @Named("ImageService") retrofit: Retrofit
+    ): ImageDetectionService {
         return retrofit.create(ImageDetectionService::class.java)
     }
 }
