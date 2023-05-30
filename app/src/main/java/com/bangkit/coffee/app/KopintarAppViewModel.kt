@@ -53,7 +53,11 @@ class KopintarAppViewModel @Inject constructor(
     }
 
     private fun getTitle(route: String?): String {
-        return "title"
+        return when(route) {
+            "home" -> "Home"
+            "history" -> "History"
+            else -> "No Title"
+        }
     }
 
     // Mutable/SharedFlow of String resource reference Event
