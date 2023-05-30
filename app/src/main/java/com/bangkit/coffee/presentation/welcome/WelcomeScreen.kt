@@ -17,11 +17,9 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
@@ -29,9 +27,12 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
+import coil.decode.SvgDecoder
+import coil.request.ImageRequest
 import com.bangkit.coffee.R
 import com.bangkit.coffee.presentation.welcome.components.DividerWithText
 import com.bangkit.coffee.presentation.welcome.components.PageIndicator
+import com.bangkit.coffee.shared.const.STATIC_URL
 import com.bangkit.coffee.shared.theme.AppTheme
 
 @OptIn(ExperimentalFoundationApi::class)
@@ -42,7 +43,7 @@ fun WelcomeScreen(
 ) {
     val pagerState = rememberPagerState()
     val pageCount = state.carouselItems.size
-    val isLoaded = rememberSaveable { mutableStateOf(false) }
+    val context = LocalContext.current
 
     Column(
         modifier = Modifier
@@ -67,19 +68,21 @@ fun WelcomeScreen(
             pageCount = pageCount,
             state = pagerState,
         ) { i ->
-            LaunchedEffect(Unit) { isLoaded.value = true }
-
             Column(
                 modifier = Modifier.padding(horizontal = 24.dp),
                 horizontalAlignment = Alignment.CenterHorizontally,
                 verticalArrangement = Arrangement.Center
             ) {
                 AsyncImage(
-                    model = state.carouselItems[i].image,
+                    model = ImageRequest.Builder(context)
+                        .decoderFactory(SvgDecoder.Factory())
+                        .data(state.carouselItems[i].image)
+                        .crossfade(true)
+                        .build(),
                     contentDescription = null,
                     modifier = Modifier
                         .fillMaxWidth(0.85f)
-                        .aspectRatio(1f),
+                        .aspectRatio(1f)
                 )
                 Text(
                     text = stringResource(state.carouselItems[i].title),
@@ -96,18 +99,14 @@ fun WelcomeScreen(
             }
         }
         Spacer(modifier = Modifier.height(24.dp))
-        if (isLoaded.value) {
-            PageIndicator(
-                numberOfPages = pageCount,
-                selectedPage = pagerState.currentPage,
-                defaultRadius = 10.dp,
-                selectedLength = 30.dp,
-                space = 10.dp,
-                animationDurationInMillis = 500,
-            )
-        } else {
-            Spacer(modifier = Modifier.height(20.dp))
-        }
+        PageIndicator(
+            numberOfPages = pageCount,
+            selectedPage = pagerState.currentPage,
+            defaultRadius = 10.dp,
+            selectedLength = 30.dp,
+            space = 10.dp,
+            animationDurationInMillis = 500,
+        )
         Spacer(modifier = Modifier.weight(1f))
 
         // Login button
@@ -147,7 +146,7 @@ private fun WelcomeScreenPreview() {
             state = WelcomeState(
                 carouselItems = listOf(
                     WelcomeCarouselItem(
-                        image = R.drawable.welcome_1,
+                        image = STATIC_URL + "welcome_1.svg",
                         title = R.string.welcome_title_1,
                         description = R.string.welcome_description_1
                     ),

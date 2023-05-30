@@ -28,6 +28,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.onFocusEvent
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
@@ -36,8 +37,11 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
+import coil.decode.SvgDecoder
+import coil.request.ImageRequest
 import com.bangkit.coffee.R
 import com.bangkit.coffee.presentation.forgotpassword.components.ForgotPasswordForm
+import com.bangkit.coffee.shared.const.STATIC_URL
 import com.bangkit.coffee.shared.theme.AppTheme
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -55,6 +59,7 @@ fun ForgotPasswordScreen(
     val scrollState = rememberScrollState()
     val bringIntoViewRequester = remember { BringIntoViewRequester() }
     val coroutineScope = rememberCoroutineScope()
+    val context = LocalContext.current
 
     Column(
         modifier = Modifier
@@ -68,7 +73,11 @@ fun ForgotPasswordScreen(
                 .align(Alignment.CenterHorizontally)
                 .fillMaxWidth()
                 .aspectRatio(1.1f),
-            model = R.drawable.forgot_password,
+            model = ImageRequest.Builder(context)
+                .decoderFactory(SvgDecoder.Factory())
+                .data(STATIC_URL + "forgot_password.svg")
+                .crossfade(true)
+                .build(),
             contentDescription = null,
             contentScale = ContentScale.FillWidth
         )

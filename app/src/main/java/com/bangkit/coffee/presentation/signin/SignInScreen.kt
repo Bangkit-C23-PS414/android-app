@@ -28,6 +28,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
@@ -38,8 +39,11 @@ import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
+import coil.decode.SvgDecoder
+import coil.request.ImageRequest
 import com.bangkit.coffee.R
 import com.bangkit.coffee.presentation.signin.components.SignInForm
+import com.bangkit.coffee.shared.const.STATIC_URL
 import com.bangkit.coffee.shared.theme.AppTheme
 import me.naingaungluu.formconductor.FieldResult
 import me.naingaungluu.formconductor.FormResult
@@ -52,6 +56,7 @@ fun SignInScreen(
     actions: SignInActions = SignInActions()
 ) {
     val scrollState = rememberScrollState()
+    val context = LocalContext.current
 
     Column(
         modifier = Modifier
@@ -64,7 +69,11 @@ fun SignInScreen(
                 .align(Alignment.CenterHorizontally)
                 .fillMaxWidth()
                 .aspectRatio(1.35f),
-            model = R.drawable.sign_in,
+            model = ImageRequest.Builder(context)
+                .decoderFactory(SvgDecoder.Factory())
+                .data(STATIC_URL + "sign_in.svg")
+                .crossfade(true)
+                .build(),
             contentDescription = null,
             contentScale = ContentScale.FillWidth
         )
