@@ -1,6 +1,5 @@
 package com.bangkit.coffee.presentation.welcome
 
-import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import com.bangkit.coffee.R
 import com.bangkit.coffee.shared.const.STATIC_URL
@@ -10,9 +9,7 @@ import kotlinx.coroutines.flow.asStateFlow
 import javax.inject.Inject
 
 @HiltViewModel
-class WelcomeViewModel @Inject constructor(
-    savedStateHandle: SavedStateHandle
-) : ViewModel() {
+class WelcomeViewModel @Inject constructor() : ViewModel() {
 
     private val carouselItems = listOf(
         WelcomeCarouselItem(

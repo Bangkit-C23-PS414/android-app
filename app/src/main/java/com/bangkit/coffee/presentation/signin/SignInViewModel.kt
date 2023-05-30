@@ -1,6 +1,5 @@
 package com.bangkit.coffee.presentation.signin
 
-import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.bangkit.coffee.presentation.signin.components.SignInForm
@@ -15,9 +14,7 @@ import javax.inject.Inject
 import kotlin.random.Random
 
 @HiltViewModel
-class SignInViewModel @Inject constructor(
-    savedStateHandle: SavedStateHandle
-) : ViewModel() {
+class SignInViewModel @Inject constructor() : ViewModel() {
 
     private val _stateFlow = MutableStateFlow(SignInState())
     val stateFlow = _stateFlow.asStateFlow()

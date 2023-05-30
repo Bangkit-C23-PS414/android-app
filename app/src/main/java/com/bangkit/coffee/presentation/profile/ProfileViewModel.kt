@@ -1,7 +1,6 @@
 package com.bangkit.coffee.presentation.profile
 
 import android.net.Uri
-import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import com.bangkit.coffee.presentation.profile.components.ChangePasswordForm
 import com.bangkit.coffee.presentation.profile.components.EditProfileForm
@@ -12,9 +11,7 @@ import kotlinx.coroutines.flow.update
 import javax.inject.Inject
 
 @HiltViewModel
-class ProfileViewModel @Inject constructor(
-    savedStateHandle: SavedStateHandle
-) : ViewModel() {
+class ProfileViewModel @Inject constructor() : ViewModel() {
 
     private val _stateFlow = MutableStateFlow(ProfileState())
     val stateFlow = _stateFlow.asStateFlow()

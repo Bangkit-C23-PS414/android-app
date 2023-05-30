@@ -1,6 +1,5 @@
 package com.bangkit.coffee.app
 
-import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.navigation.NavBackStackEntry
@@ -19,7 +18,6 @@ import javax.inject.Inject
 
 @HiltViewModel
 class RecoffeeryAppViewModel @Inject constructor(
-    savedStateHandle: SavedStateHandle,
     private val userPreferencesRepository: UserPreferencesRepository,
 ) : ViewModel() {
 

@@ -1,6 +1,5 @@
 package com.bangkit.coffee.presentation.history
 
-import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import com.bangkit.coffee.domain.ImageDetectionDummies
 import com.bangkit.coffee.domain.entity.ImageDetection
@@ -12,9 +11,7 @@ import kotlinx.coroutines.flow.update
 import javax.inject.Inject
 
 @HiltViewModel
-class HistoryViewModel @Inject constructor(
-    savedStateHandle: SavedStateHandle
-) : ViewModel() {
+class HistoryViewModel @Inject constructor() : ViewModel() {
     private val imageDetections: List<ImageDetection> = ImageDetectionDummies
 
     private val _stateFlow = MutableStateFlow(HistoryState(imageDetections = imageDetections))
