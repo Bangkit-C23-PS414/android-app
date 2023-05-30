@@ -1,13 +1,11 @@
 package com.bangkit.coffee.app
 
 import androidx.compose.foundation.isSystemInDarkTheme
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.SnackbarHost
 import androidx.compose.material3.SnackbarHostState
-import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.LaunchedEffect
@@ -36,44 +34,39 @@ fun KopintarAppScreen(
     }
 
     AppTheme {
-        Surface(
-            modifier = Modifier.fillMaxSize(),
-            color = MaterialTheme.colorScheme.background
-        ) {
-            // Remember a SystemUiController
-            val systemUiController = rememberSystemUiController()
-            val useDarkIcons = !isSystemInDarkTheme()
-            val surfaceColor = MaterialTheme.colorScheme.surface
+        // Remember a SystemUiController
+        val systemUiController = rememberSystemUiController()
+        val useDarkIcons = !isSystemInDarkTheme()
+        val surfaceColor = MaterialTheme.colorScheme.surface
 
-            DisposableEffect(systemUiController, useDarkIcons) {
-                systemUiController.setSystemBarsColor(
-                    color = surfaceColor,
-                    darkIcons = useDarkIcons
-                )
-                onDispose {}
-            }
+        DisposableEffect(systemUiController, useDarkIcons) {
+            systemUiController.setSystemBarsColor(
+                color = surfaceColor,
+                darkIcons = useDarkIcons
+            )
+            onDispose {}
+        }
 
-            Scaffold(
-                snackbarHost = { SnackbarHost(snackbarHostState) },
-                topBar = {
-                    if (state.shouldShowTopAppBar) {
-                        KopintarTopAppBar(
-                            title = state.topBarTitle
-                        )
-                    }
-                },
-                bottomBar = {
-                    if (state.shouldShowNavigationBar) {
-                        KopintarNavigationBar(navController = navController)
-                    }
-                }
-            ) { contentPadding ->
-                ProvideKopintarAppActions(actions = actions) {
-                    Router(
-                        modifier = Modifier.padding(contentPadding),
-                        navController = navController,
+        Scaffold(
+            snackbarHost = { SnackbarHost(snackbarHostState) },
+            topBar = {
+                if (state.shouldShowTopAppBar) {
+                    KopintarTopAppBar(
+                        title = state.topBarTitle
                     )
                 }
+            },
+            bottomBar = {
+                if (state.shouldShowNavigationBar) {
+                    KopintarNavigationBar(navController = navController)
+                }
+            }
+        ) { contentPadding ->
+            ProvideKopintarAppActions(actions = actions) {
+                Router(
+                    modifier = Modifier.padding(contentPadding),
+                    navController = navController,
+                )
             }
         }
     }
