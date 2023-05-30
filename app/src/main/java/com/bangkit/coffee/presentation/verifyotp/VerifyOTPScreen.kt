@@ -14,7 +14,6 @@ import androidx.compose.foundation.relocation.bringIntoViewRequester
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Button
-import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -27,23 +26,27 @@ import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.focus.onFocusEvent
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
+import coil.decode.SvgDecoder
+import coil.request.ImageRequest
 import com.bangkit.coffee.R
 import com.bangkit.coffee.presentation.verifyotp.components.OTPTextField
 import com.bangkit.coffee.presentation.verifyotp.components.VerifyOTPForm
-import com.bangkit.coffee.ui.theme.AppTheme
+import com.bangkit.coffee.shared.const.STATIC_URL
+import com.bangkit.coffee.shared.theme.AppTheme
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import me.naingaungluu.formconductor.FormResult
 import me.naingaungluu.formconductor.composeui.field
 import me.naingaungluu.formconductor.composeui.form
 
-@OptIn(ExperimentalMaterial3Api::class, ExperimentalFoundationApi::class)
+@OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun VerifyOTPScreen(
     state: VerifyOTPState = VerifyOTPState(),
@@ -53,6 +56,7 @@ fun VerifyOTPScreen(
     val scrollState = rememberScrollState()
     val bringIntoViewRequester = remember { BringIntoViewRequester() }
     val coroutineScope = rememberCoroutineScope()
+    val context = LocalContext.current
 
     Column(
         modifier = Modifier
@@ -66,7 +70,11 @@ fun VerifyOTPScreen(
                 .align(Alignment.CenterHorizontally)
                 .fillMaxWidth()
                 .aspectRatio(1f),
-            model = R.drawable.enter_otp,
+            model = ImageRequest.Builder(context)
+                .decoderFactory(SvgDecoder.Factory())
+                .data(STATIC_URL + "enter_otp.svg")
+                .crossfade(true)
+                .build(),
             contentDescription = null,
             contentScale = ContentScale.FillWidth
         )

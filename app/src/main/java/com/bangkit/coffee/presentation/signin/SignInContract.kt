@@ -4,22 +4,17 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.staticCompositionLocalOf
 import com.bangkit.coffee.presentation.signin.components.SignInForm
-import com.bangkit.coffee.util.Event
+import com.bangkit.coffee.shared.wrapper.Event
 
 /**
  * UI State that represents SignInScreen
  **/
-sealed class SignInState {
-    data class Idle(
-        val passwordVisible: Boolean = false
-    ) : SignInState()
-
-    object InProgress : SignInState()
-
-    data class Error(val message: Event<String>) : SignInState()
-
-    object SignedIn : SignInState()
-}
+data class SignInState(
+    val passwordVisible: Boolean = false,
+    val inProgress: Boolean = false,
+    val message: Event<String>? = null,
+    val signedIn: Boolean = false
+)
 
 /**
  * SignIn Actions emitted from the UI Layer

@@ -36,7 +36,7 @@ import com.bangkit.coffee.R
 import com.bangkit.coffee.presentation.camera.components.CameraFragment
 import com.bangkit.coffee.presentation.camera.components.ConfirmImageFragment
 import com.bangkit.coffee.presentation.camera.components.RequestPermissionDialog
-import com.bangkit.coffee.ui.theme.AppTheme
+import com.bangkit.coffee.shared.theme.AppTheme
 import com.google.accompanist.permissions.ExperimentalPermissionsApi
 import com.google.accompanist.permissions.isGranted
 import com.google.accompanist.permissions.rememberPermissionState

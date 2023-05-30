@@ -4,7 +4,7 @@ import com.bangkit.coffee.data.source.local.dao.ImageDetectionDao
 import com.bangkit.coffee.data.source.remote.ImageDetectionService
 import com.bangkit.coffee.domain.entity.ImageDetection
 import com.bangkit.coffee.domain.mapper.toExternal
-import com.bangkit.coffee.util.exception.NetworkErrorException
+import com.bangkit.coffee.shared.exception.NetworkErrorException
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.map

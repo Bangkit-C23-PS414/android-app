@@ -25,10 +25,10 @@ import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
@@ -39,9 +39,12 @@ import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
+import coil.decode.SvgDecoder
+import coil.request.ImageRequest
 import com.bangkit.coffee.R
 import com.bangkit.coffee.presentation.signin.components.SignInForm
-import com.bangkit.coffee.ui.theme.AppTheme
+import com.bangkit.coffee.shared.const.STATIC_URL
+import com.bangkit.coffee.shared.theme.AppTheme
 import me.naingaungluu.formconductor.FieldResult
 import me.naingaungluu.formconductor.FormResult
 import me.naingaungluu.formconductor.composeui.field
@@ -49,10 +52,11 @@ import me.naingaungluu.formconductor.composeui.form
 
 @Composable
 fun SignInScreen(
-    state: SignInState = SignInState.Idle(),
+    state: SignInState = SignInState(),
     actions: SignInActions = SignInActions()
 ) {
     val scrollState = rememberScrollState()
+    val context = LocalContext.current
 
     Column(
         modifier = Modifier
@@ -65,7 +69,11 @@ fun SignInScreen(
                 .align(Alignment.CenterHorizontally)
                 .fillMaxWidth()
                 .aspectRatio(1.35f),
-            model = R.drawable.sign_in,
+            model = ImageRequest.Builder(context)
+                .decoderFactory(SvgDecoder.Factory())
+                .data(STATIC_URL + "sign_in.svg")
+                .crossfade(true)
+                .build(),
             contentDescription = null,
             contentScale = ContentScale.FillWidth
         )
@@ -79,15 +87,6 @@ fun SignInScreen(
         Spacer(modifier = Modifier.height(24.dp))
 
         form(SignInForm::class) {
-            LaunchedEffect(Unit) {
-                submit(
-                    SignInForm(
-                        email = "myxzlpltk@gmail.com",
-                        password = "password"
-                    )
-                )
-            }
-
             field(SignInForm::email) {
                 OutlinedTextField(
                     modifier = Modifier
@@ -139,18 +138,18 @@ fun SignInScreen(
                     leadingIcon = {
                         Icon(imageVector = Icons.Filled.Lock, contentDescription = null)
                     },
-                    visualTransformation = if (state is SignInState.Idle && state.passwordVisible) {
+                    visualTransformation = if (state.passwordVisible) {
                         VisualTransformation.None
                     } else {
                         PasswordVisualTransformation()
                     },
                     trailingIcon = {
                         IconToggleButton(
-                            checked = state is SignInState.Idle && state.passwordVisible,
+                            checked = state.passwordVisible,
                             onCheckedChange = actions.setPasswordVisibility,
                         ) {
                             Icon(
-                                imageVector = if (state is SignInState.Idle && state.passwordVisible) {
+                                imageVector = if (state.passwordVisible) {
                                     Icons.Filled.Visibility
                                 } else {
                                     Icons.Filled.VisibilityOff
@@ -177,7 +176,7 @@ fun SignInScreen(
             val formData = formState.value
             Button(
                 onClick = {
-                    if (formData is FormResult.Success && state is SignInState.Idle) {
+                    if (formData is FormResult.Success && !state.inProgress) {
                         actions.signIn(formData.data)
                     }
                 },
@@ -186,7 +185,7 @@ fun SignInScreen(
                     .testTag("SignInButton"),
                 enabled = this.formState.value is FormResult.Success
             ) {
-                if (state is SignInState.InProgress) {
+                if (state.inProgress) {
                     CircularProgressIndicator(
                         color = MaterialTheme.colorScheme.onPrimary,
                         strokeWidth = 2.dp,

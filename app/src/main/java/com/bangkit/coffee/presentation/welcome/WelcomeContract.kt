@@ -1,6 +1,5 @@
 package com.bangkit.coffee.presentation.welcome
 
-import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
@@ -15,7 +14,7 @@ data class WelcomeState(
 )
 
 data class WelcomeCarouselItem(
-    @DrawableRes val image: Int,
+    val image: String,
     @StringRes val title: Int,
     @StringRes val description: Int,
 )

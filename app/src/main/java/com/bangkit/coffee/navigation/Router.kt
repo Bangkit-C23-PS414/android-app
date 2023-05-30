@@ -99,6 +99,7 @@ fun Router(
                 }
             )
         }
+
         composable(Screen.History.route) {
             HistoryRoute(
                 navigateToDetailImageDetection = { id ->
@@ -108,6 +109,7 @@ fun Router(
                 }
             )
         }
+
         composable(Screen.Profile.route) {
             ProfileRoute()
         }

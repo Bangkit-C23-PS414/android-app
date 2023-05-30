@@ -28,6 +28,7 @@ import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -35,7 +36,7 @@ import com.bangkit.coffee.R
 import com.bangkit.coffee.domain.DiseaseDummy
 import com.bangkit.coffee.presentation.home.components.DetectionStepCard
 import com.bangkit.coffee.presentation.home.components.DiseaseCard
-import com.bangkit.coffee.ui.theme.AppTheme
+import com.bangkit.coffee.shared.theme.AppTheme
 
 @OptIn(ExperimentalMaterial3Api::class, ExperimentalLayoutApi::class)
 @Composable
@@ -80,7 +81,9 @@ fun HomeScreen(
             ) {
                 state.detectionSteps.forEach { detectionStep ->
                     DetectionStepCard(
-                        modifier = Modifier.weight(1f),
+                        modifier = Modifier
+                            .weight(1f)
+                            .testTag("DetectionStepCard"),
                         detectionStep = detectionStep
                     )
                 }
@@ -130,6 +133,7 @@ fun HomeScreen(
                         modifier = Modifier
                             .weight(1f, true)
                             .padding(bottom = 8.dp)
+                            .testTag("DiseaseCard")
                     )
                 }
             }

@@ -16,13 +16,18 @@ import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.rememberDateRangePickerState
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.tooling.preview.Devices
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.window.Dialog
 import androidx.compose.ui.window.DialogProperties
 import com.bangkit.coffee.R
-import com.bangkit.coffee.ui.theme.AppTheme
-import java.util.Date
+import com.bangkit.coffee.shared.theme.AppTheme
+import com.bangkit.coffee.shared.util.toAdjustedLocalDate
+import java.time.LocalDate
+import java.time.LocalTime
+import java.time.ZoneOffset
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -33,8 +38,8 @@ fun DateRangePickerDialog(
     onConfirm: (FilterDateWrapper) -> Unit = {}
 ) {
     val state = rememberDateRangePickerState(
-        initialSelectedStartDateMillis = defaultValue?.startDate?.time,
-        initialSelectedEndDateMillis = defaultValue?.endDate?.time,
+        defaultValue?.startDate?.toInstant(ZoneOffset.UTC)?.toEpochMilli(),
+        defaultValue?.endDate?.toInstant(ZoneOffset.UTC)?.toEpochMilli(),
     )
 
     Dialog(
@@ -50,7 +55,10 @@ fun DateRangePickerDialog(
                 TopAppBar(
                     title = {},
                     navigationIcon = {
-                        IconButton(onClick = onDismiss) {
+                        IconButton(
+                            onClick = onDismiss,
+                            modifier = Modifier.testTag("CloseDialog")
+                        ) {
                             Icon(Icons.Filled.Close, contentDescription = null)
                         }
                     },
@@ -63,13 +71,16 @@ fun DateRangePickerDialog(
                                 if (startTimestamp != null && endTimestamp != null) {
                                     onConfirm(
                                         FilterDateWrapper(
-                                            startDate = Date(startTimestamp),
-                                            endDate = Date(endTimestamp)
+                                            startDate = startTimestamp.toAdjustedLocalDate(),
+                                            endDate = endTimestamp.toAdjustedLocalDate()
+                                                .toLocalDate()
+                                                .atTime(LocalTime.MAX)
                                         )
                                     )
                                 }
                             },
-                            enabled = state.selectedEndDateMillis != null
+                            enabled = state.selectedEndDateMillis != null,
+                            modifier = Modifier.testTag("SaveButton")
                         ) {
                             Text(text = stringResource(R.string.save))
                         }
@@ -78,9 +89,8 @@ fun DateRangePickerDialog(
 
                 DateRangePicker(
                     state = state,
-                    dateValidator = { timestamp ->
-                        val now = Date()
-                        Date(timestamp).before(now)
+                    dateValidator = { epochs ->
+                        epochs.toAdjustedLocalDate() <= LocalDate.now().atTime(LocalTime.MAX)
                     },
                     modifier = Modifier.weight(1f)
                 )
@@ -89,7 +99,7 @@ fun DateRangePickerDialog(
     }
 }
 
-@Preview(name = "DateRangePickerDialog", showBackground = true)
+@Preview(name = "DateRangePickerDialog", showBackground = true, device = Devices.PIXEL_4)
 @Composable
 private fun PreviewDateRangePickerDialog() {
     AppTheme {

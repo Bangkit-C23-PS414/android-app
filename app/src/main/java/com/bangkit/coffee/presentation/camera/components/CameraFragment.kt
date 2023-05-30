@@ -32,21 +32,22 @@ import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.layout.Layout
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalLifecycleOwner
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.viewinterop.AndroidView
 import androidx.core.net.toUri
 import com.bangkit.coffee.R
+import com.bangkit.coffee.app.KopintarAppActions
+import com.bangkit.coffee.app.LocalKopintarAppActions
+import com.bangkit.coffee.app.ProvideKopintarAppActions
 import com.bangkit.coffee.presentation.camera.CameraActions
 import com.bangkit.coffee.presentation.camera.LocalCameraActions
 import com.bangkit.coffee.presentation.camera.ProvideCameraActions
-import com.bangkit.coffee.ui.KopintarAppActions
-import com.bangkit.coffee.ui.LocalKopintarAppActions
-import com.bangkit.coffee.ui.ProvideKopintarAppActions
-import com.bangkit.coffee.ui.theme.AppTheme
-import com.bangkit.coffee.util.executor
-import com.bangkit.coffee.util.getCameraProvider
-import com.bangkit.coffee.util.takePicture
+import com.bangkit.coffee.shared.theme.AppTheme
+import com.bangkit.coffee.shared.util.executor
+import com.bangkit.coffee.shared.util.getCameraProvider
+import com.bangkit.coffee.shared.util.takePicture
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -170,6 +171,7 @@ fun CameraFragment(
                 Box {
                     AndroidView(
                         factory = { viewFinder },
+                        modifier = Modifier.testTag("CameraPreview")
                     )
 
                     androidx.compose.animation.AnimatedVisibility(

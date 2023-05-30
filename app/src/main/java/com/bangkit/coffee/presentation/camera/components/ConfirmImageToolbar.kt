@@ -18,6 +18,7 @@ import androidx.compose.material3.minimumInteractiveComponentSize
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -25,8 +26,8 @@ import com.bangkit.coffee.R
 import com.bangkit.coffee.presentation.camera.CameraActions
 import com.bangkit.coffee.presentation.camera.LocalCameraActions
 import com.bangkit.coffee.presentation.camera.ProvideCameraActions
-import com.bangkit.coffee.ui.theme.AppTheme
-import com.bangkit.coffee.util.zeroElevation
+import com.bangkit.coffee.shared.theme.AppTheme
+import com.bangkit.coffee.shared.util.zeroElevation
 
 @Composable
 fun ConfirmImageToolbar(
@@ -43,6 +44,7 @@ fun ConfirmImageToolbar(
     ) {
         IconButton(
             onClick = actions.clearImage,
+            modifier = Modifier.testTag("DeleteImage")
         ) {
             Icon(
                 imageVector = Icons.Filled.Delete,
@@ -60,6 +62,7 @@ fun ConfirmImageToolbar(
                 onClick = {},
                 shape = FloatingActionButtonDefaults.largeShape,
                 elevation = FloatingActionButtonDefaults.zeroElevation(),
+                modifier = Modifier.testTag("Upload")
             ) {
                 Icon(
                     imageVector = Icons.Filled.Upload,

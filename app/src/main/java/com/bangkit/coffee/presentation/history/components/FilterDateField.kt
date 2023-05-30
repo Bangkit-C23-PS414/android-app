@@ -3,7 +3,7 @@ package com.bangkit.coffee.presentation.history.components
 import me.naingaungluu.formconductor.FieldResult
 import me.naingaungluu.formconductor.annotations.FieldValidation
 import me.naingaungluu.formconductor.validation.rules.StateBasedValidationRule
-import java.util.Date
+import java.time.LocalDateTime
 
 @Target(AnnotationTarget.PROPERTY)
 @Retention(AnnotationRetention.RUNTIME)
@@ -24,7 +24,7 @@ object FilterDateRule :
     ): FieldResult {
         return if (formState.allTime) {
             FieldResult.Success
-        } else if (value.startDate.after(value.endDate)) {
+        } else if (value.startDate.isAfter(value.endDate)) {
             FieldResult.Error("Date range is invalid", this)
         } else {
             FieldResult.Success
@@ -34,13 +34,13 @@ object FilterDateRule :
 }
 
 data class FilterDateWrapper(
-    val startDate: Date,
-    val endDate: Date
+    val startDate: LocalDateTime,
+    val endDate: LocalDateTime
 ) {
     companion object {
         val empty = FilterDateWrapper(
-            startDate = Date(),
-            endDate = Date()
+            startDate = LocalDateTime.now(),
+            endDate = LocalDateTime.now()
         )
     }
 }

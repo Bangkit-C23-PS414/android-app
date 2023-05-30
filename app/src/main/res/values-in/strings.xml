@@ -53,7 +53,6 @@
     <string name="toggle_password_visibility">Tampilkan atau sembunyikan kata sandi</string>
     <string name="filter_history">Filter riwayat</string>
     <string name="coffee_leaf_image">Foto daun kopi</string>
-    <string name="date_header">Tanggal %s</string>
     <string name="edit_profile">Edit Profil</string>
     <string name="change_password">Ubah Kata Sandi</string>
     <string name="sign_out">Keluar</string>

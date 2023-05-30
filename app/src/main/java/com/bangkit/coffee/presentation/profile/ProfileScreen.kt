@@ -32,6 +32,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
@@ -41,6 +42,7 @@ import coil.compose.AsyncImage
 import com.bangkit.coffee.R
 import com.bangkit.coffee.presentation.profile.components.ChangePasswordDialog
 import com.bangkit.coffee.presentation.profile.components.EditProfileDialog
+import com.bangkit.coffee.shared.theme.AppTheme
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -80,6 +82,7 @@ fun ProfileScreen(
                     modifier = Modifier
                         .size(150.dp)
                         .clip(CircleShape)
+                        .testTag("Avatar")
                 )
 
                 FilledTonalIconButton(
@@ -88,6 +91,7 @@ fun ProfileScreen(
                             PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly)
                         )
                     },
+                    modifier = Modifier.testTag("UpdateAvatar")
                 ) {
                     Icon(
                         imageVector = Icons.Filled.Edit,
@@ -105,7 +109,9 @@ fun ProfileScreen(
             )
 
             ListItem(
-                modifier = Modifier.clickable { actions.openEditProfile() },
+                modifier = Modifier
+                    .clickable { actions.openEditProfile() }
+                    .testTag("EditProfile"),
                 headlineContent = {
                     Text(text = stringResource(R.string.edit_profile))
                 },
@@ -118,7 +124,9 @@ fun ProfileScreen(
             )
 
             ListItem(
-                modifier = Modifier.clickable { actions.openChangePassword() },
+                modifier = Modifier
+                    .clickable { actions.openChangePassword() }
+                    .testTag("ChangePassword"),
                 headlineContent = {
                     Text(text = stringResource(R.string.change_password))
                 },
@@ -133,7 +141,9 @@ fun ProfileScreen(
             Divider(thickness = 8.dp)
 
             ListItem(
-                modifier = Modifier.clickable { },
+                modifier = Modifier
+                    .clickable { }
+                    .testTag("SignOut"),
                 headlineContent = {
                     Text(text = stringResource(R.string.sign_out))
                 },
@@ -169,6 +179,8 @@ fun ProfileScreen(
 @Composable
 @Preview(name = "Profile", showBackground = true)
 private fun ProfileScreenPreview() {
-    ProfileScreen()
+    AppTheme {
+        ProfileScreen()
+    }
 }
 

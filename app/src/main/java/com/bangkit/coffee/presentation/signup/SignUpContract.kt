@@ -9,7 +9,7 @@ import androidx.compose.runtime.staticCompositionLocalOf
  * UI State that represents SignUpScreen
  **/
 data class SignUpState(
-    val isLoading: Boolean = false,
+    val loading: Boolean = false,
 )
 
 /**
