@@ -1,6 +1,5 @@
 package com.bangkit.coffee.app
 
-import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.navigation.NavBackStackEntry
@@ -18,14 +17,13 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class KopintarAppViewModel @Inject constructor(
-    savedStateHandle: SavedStateHandle,
+class RecoffeeryAppViewModel @Inject constructor(
     private val userPreferencesRepository: UserPreferencesRepository,
 ) : ViewModel() {
 
-    private val _stateFlow: MutableStateFlow<KopintarAppState> =
-        MutableStateFlow(KopintarAppState())
-    val stateFlow: StateFlow<KopintarAppState> = _stateFlow.asStateFlow()
+    private val _stateFlow: MutableStateFlow<RecoffeeryAppState> =
+        MutableStateFlow(RecoffeeryAppState())
+    val stateFlow: StateFlow<RecoffeeryAppState> = _stateFlow.asStateFlow()
 
     init {
         viewModelScope.launch {

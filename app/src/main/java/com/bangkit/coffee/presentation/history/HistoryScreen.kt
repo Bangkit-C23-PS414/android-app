@@ -22,14 +22,13 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.bangkit.coffee.R
-import com.bangkit.coffee.domain.entity.ImageDetection
+import com.bangkit.coffee.domain.ImageDetectionDummy
 import com.bangkit.coffee.presentation.history.components.FilterHistoryBottomSheet
 import com.bangkit.coffee.presentation.history.components.ImageDetectionCard
 import com.bangkit.coffee.presentation.history.components.ImageDetectionGroupHeader
 import com.bangkit.coffee.shared.theme.AppTheme
 import com.bangkit.coffee.shared.util.header
 import java.util.Date
-import java.util.UUID
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -113,16 +112,7 @@ private fun HistoryScreenPreview() {
     AppTheme {
         HistoryScreen(
             state = HistoryState(
-                imageDetections = List(6) {
-                    ImageDetection(
-                        UUID.randomUUID().toString(),
-                        UUID.randomUUID().toString(),
-                        "https://picsum.photos/300",
-                        "Cercospora Leaf Spot",
-                        Date(),
-                        Date()
-                    )
-                }
+                imageDetections = List(6) { ImageDetectionDummy }
             )
         )
     }

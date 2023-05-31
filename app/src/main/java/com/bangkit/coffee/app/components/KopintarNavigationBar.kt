@@ -1,4 +1,4 @@
-package com.bangkit.coffee.shared.components
+package com.bangkit.coffee.app.components
 
 import androidx.compose.material3.Icon
 import androidx.compose.material3.NavigationBar
@@ -10,6 +10,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NavDestination.Companion.hierarchy
+import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
@@ -17,7 +18,7 @@ import com.bangkit.coffee.navigation.Screen.Manifest.bottomBarScreens
 import com.bangkit.coffee.shared.theme.AppTheme
 
 @Composable
-fun KopintarNavigationBar(
+fun RecoffeeryNavigationBar(
     modifier: Modifier = Modifier,
     navController: NavHostController = rememberNavController(),
 ) {
@@ -34,7 +35,7 @@ fun KopintarNavigationBar(
                 selected = currentDestination?.hierarchy?.any { it.route == screen.route } == true,
                 onClick = {
                     navController.navigate(screen.route) {
-                        popUpTo(bottomBarScreens.first().route) {
+                        popUpTo(navController.graph.findStartDestination().id) {
                             saveState = true
                         }
                         launchSingleTop = true
@@ -46,10 +47,10 @@ fun KopintarNavigationBar(
     }
 }
 
-@Preview(name = "KopintarNavigationBar")
+@Preview(name = "RecoffeeryNavigationBar")
 @Composable
-private fun PreviewKopintarNavigationBar() {
+private fun PreviewRecoffeeryNavigationBar() {
     AppTheme {
-        KopintarNavigationBar()
+        RecoffeeryNavigationBar()
     }
 }

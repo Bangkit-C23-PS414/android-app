@@ -1,6 +1,5 @@
 package com.bangkit.coffee.presentation.home
 
-import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import com.bangkit.coffee.R
 import com.bangkit.coffee.domain.DiseaseDummies
@@ -10,9 +9,7 @@ import kotlinx.coroutines.flow.asStateFlow
 import javax.inject.Inject
 
 @HiltViewModel
-class HomeViewModel @Inject constructor(
-    savedStateHandle: SavedStateHandle
-) : ViewModel() {
+class HomeViewModel @Inject constructor() : ViewModel() {
 
     private val detectionSteps = listOf(
         DetectionStep(R.drawable.detect_1, R.string.how_to_detect_step_1, 1),

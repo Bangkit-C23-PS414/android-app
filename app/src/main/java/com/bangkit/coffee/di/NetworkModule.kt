@@ -3,6 +3,7 @@ package com.bangkit.coffee.di
 import com.bangkit.coffee.BuildConfig
 import com.bangkit.coffee.data.repository.UserPreferencesRepository
 import com.bangkit.coffee.data.source.remote.ImageDetectionService
+import com.bangkit.coffee.shared.const.IMAGE_API_URL
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -25,7 +26,7 @@ object NetworkModule {
     @Provides
     fun provideLoggingInterceptor(): HttpLoggingInterceptor {
         return HttpLoggingInterceptor().setLevel(
-            if (BuildConfig.DEBUG) HttpLoggingInterceptor.Level.BASIC
+            if (BuildConfig.DEBUG) HttpLoggingInterceptor.Level.BODY
             else HttpLoggingInterceptor.Level.NONE
         )
     }
@@ -72,7 +73,7 @@ object NetworkModule {
             .build()
 
         return Retrofit.Builder()
-            .baseUrl("")
+            .baseUrl(IMAGE_API_URL)
             .client(client)
             .addConverterFactory(GsonConverterFactory.create())
             .build()

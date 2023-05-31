@@ -16,13 +16,15 @@ class CameraCoordinator(
 
     fun toggleFlash(isFlashOn: Boolean) = viewModel.toggleFlash(isFlashOn)
 
-    fun capture() = viewModel.capture()
+    fun capturing() = viewModel.capturing()
 
-    fun cancelCapture() = viewModel.cancelCapture()
+    fun cancelCapturing() = viewModel.cancelCapturing()
 
     fun setImage(uri: Uri) = viewModel.setImage(uri)
 
     fun clearImage() = viewModel.clearImage()
+
+    fun uploadImage() = viewModel.uploadImage()
 }
 
 @Composable

@@ -8,9 +8,9 @@ import androidx.navigation.NavDestination
 
 
 /**
- * UI State that represents KopintarAppScreen
+ * UI State that represents RecoffeeryAppScreen
  **/
-data class KopintarAppState(
+data class RecoffeeryAppState(
     val currentDestination: NavDestination? = null,
     val currentRoute: String? = null,
     val shouldShowTopAppBar: Boolean = false,
@@ -21,10 +21,10 @@ data class KopintarAppState(
 )
 
 /**
- * KopintarApp Actions emitted from the UI Layer
+ * RecoffeeryApp Actions emitted from the UI Layer
  * passed to the coordinator to handle
  **/
-data class KopintarAppActions(
+data class RecoffeeryAppActions(
     val onBackStackEntryChanged: (NavBackStackEntry) -> Unit = {},
     val showToast: (String) -> Unit = {}
 )
@@ -32,13 +32,13 @@ data class KopintarAppActions(
 /**
  * Compose Utility to retrieve actions from nested components
  **/
-val LocalKopintarAppActions = staticCompositionLocalOf<KopintarAppActions> {
-    error("{NAME} Actions Were not provided, make sure ProvideKopintarAppActions is called")
+val LocalRecoffeeryAppActions = staticCompositionLocalOf<RecoffeeryAppActions> {
+    error("{NAME} Actions Were not provided, make sure ProvideRecoffeeryAppActions is called")
 }
 
 @Composable
-fun ProvideKopintarAppActions(actions: KopintarAppActions, content: @Composable () -> Unit) {
-    CompositionLocalProvider(LocalKopintarAppActions provides actions) {
+fun ProvideRecoffeeryAppActions(actions: RecoffeeryAppActions, content: @Composable () -> Unit) {
+    CompositionLocalProvider(LocalRecoffeeryAppActions provides actions) {
         content.invoke()
     }
 }

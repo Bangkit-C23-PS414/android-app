@@ -1,10 +1,14 @@
 package com.bangkit.coffee.shared.wrapper
 
-sealed class Resource<T>(
-    val data: T? = null,
-    val error: Throwable? = null
+sealed class Resource<out T>(
+    open val message: String,
+    open val data: T? = null
 ) {
-    class Success<T>(data: T) : Resource<T>(data)
-    class Loading<T>(data: T? = null) : Resource<T>(data)
-    class Error<T>(throwable: Throwable, data: T? = null) : Resource<T>(data, throwable)
+    data class Error(
+        override val message: String
+    ) : Resource<Nothing>(message, null)
+
+    data class Success<T>(
+        override val data: T
+    ) : Resource<T>("Success", data)
 }

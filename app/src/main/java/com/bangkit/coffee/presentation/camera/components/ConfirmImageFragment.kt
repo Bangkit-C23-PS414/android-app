@@ -18,7 +18,8 @@ import com.bangkit.coffee.shared.theme.AppTheme
 @Composable
 fun ConfirmImageFragment(
     modifier: Modifier = Modifier,
-    image: Uri = Uri.EMPTY
+    image: Uri = Uri.EMPTY,
+    inProgress: Boolean = false
 ) {
     Column(
         modifier = modifier.fillMaxSize()
@@ -34,7 +35,9 @@ fun ConfirmImageFragment(
         )
         Spacer(modifier = Modifier.weight(1f))
 
-        ConfirmImageToolbar()
+        ConfirmImageToolbar(
+            inProgress = inProgress
+        )
     }
 }
 

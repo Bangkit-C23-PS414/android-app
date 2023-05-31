@@ -38,9 +38,9 @@ import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.viewinterop.AndroidView
 import androidx.core.net.toUri
 import com.bangkit.coffee.R
-import com.bangkit.coffee.app.KopintarAppActions
-import com.bangkit.coffee.app.LocalKopintarAppActions
-import com.bangkit.coffee.app.ProvideKopintarAppActions
+import com.bangkit.coffee.app.LocalRecoffeeryAppActions
+import com.bangkit.coffee.app.ProvideRecoffeeryAppActions
+import com.bangkit.coffee.app.RecoffeeryAppActions
 import com.bangkit.coffee.presentation.camera.CameraActions
 import com.bangkit.coffee.presentation.camera.LocalCameraActions
 import com.bangkit.coffee.presentation.camera.ProvideCameraActions
@@ -62,7 +62,7 @@ fun CameraFragment(
     isCapturing: Boolean = false,
     pickFromGallery: () -> Unit = {},
 ) {
-    val appActions = LocalKopintarAppActions.current
+    val appActions = LocalRecoffeeryAppActions.current
     val context = LocalContext.current
     val actions = LocalCameraActions.current
     val lifecycleOwner = LocalLifecycleOwner.current
@@ -94,6 +94,7 @@ fun CameraFragment(
 
     var focusRingVisible by remember { mutableStateOf(false) }
     var focusRingOffset by remember { mutableStateOf(Offset(0f, 0f)) }
+
     LaunchedEffect(previewUseCase, imageCaptureUseCase) {
         val cameraProvider = context.getCameraProvider()
         try {
@@ -210,13 +211,13 @@ fun CameraFragment(
             pickFromGallery = pickFromGallery,
             onCapture = {
                 coroutineScope.launch(Dispatchers.IO) {
-                    actions.capture()
+                    actions.capturing()
                     try {
                         val file = imageCaptureUseCase.takePicture(context.executor)
                         actions.setImage(file.toUri())
                     } catch (e: Exception) {
                         appActions.showToast(context.resources.getString(R.string.capture_error))
-                        actions.cancelCapture()
+                        actions.cancelCapturing()
                     }
                 }
             },
@@ -228,7 +229,7 @@ fun CameraFragment(
 @Composable
 private fun PreviewCameraFragment() {
     AppTheme {
-        ProvideKopintarAppActions(actions = KopintarAppActions()) {
+        ProvideRecoffeeryAppActions(actions = RecoffeeryAppActions()) {
             ProvideCameraActions(actions = CameraActions()) {
                 CameraFragment()
             }

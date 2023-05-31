@@ -1,4 +1,4 @@
-package com.bangkit.coffee.shared.components
+package com.bangkit.coffee.app.components
 
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Text
@@ -12,7 +12,7 @@ import com.bangkit.coffee.shared.theme.AppTheme
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun KopintarTopAppBar(
+fun RecoffeeryTopAppBar(
     modifier: Modifier = Modifier,
     title: String = stringResource(R.string.app_name)
 ) {
@@ -24,10 +24,10 @@ fun KopintarTopAppBar(
     )
 }
 
-@Preview(name = "KopintarAppBar")
+@Preview(name = "RecoffeeryAppBar")
 @Composable
-private fun PreviewKopintarAppBar() {
+private fun PreviewRecoffeeryAppBar() {
     AppTheme {
-        KopintarTopAppBar()
+        RecoffeeryTopAppBar()
     }
 }

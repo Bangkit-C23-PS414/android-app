@@ -16,7 +16,7 @@ class DiseaseDetailRouteTest : ComposeTest() {
     @Before
     fun setUp() {
         val savedStateHandle = SavedStateHandle(mapOf("id" to "default-id"))
-        viewModel = DiseaseDetailViewModel(savedStateHandle = savedStateHandle)
+        viewModel = DiseaseDetailViewModel()
     }
 
     @OptIn(ExperimentalTestApi::class)

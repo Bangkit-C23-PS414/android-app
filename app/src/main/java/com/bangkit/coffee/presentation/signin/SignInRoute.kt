@@ -5,7 +5,7 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import com.bangkit.coffee.app.LocalKopintarAppActions
+import com.bangkit.coffee.app.LocalRecoffeeryAppActions
 
 @Composable
 fun SignInRoute(
@@ -24,7 +24,7 @@ fun SignInRoute(
     )
 
     // Handle events
-    val appActions = LocalKopintarAppActions.current
+    val appActions = LocalRecoffeeryAppActions.current
     if (uiState.signedIn) {
         LaunchedEffect(Unit) {
             actions.navigateToDashboard()

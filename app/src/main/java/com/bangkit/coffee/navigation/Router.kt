@@ -2,6 +2,7 @@ package com.bangkit.coffee.navigation
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.NavHostController
 import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
@@ -82,7 +83,11 @@ fun Router(
             ResetPasswordRoute(
                 navigateToLogin = {
                     navController.navigate(Screen.SignIn.route) {
-                        popUpTo(Screen.Welcome.route)
+                        popUpTo(navController.graph.findStartDestination().id) {
+                            saveState = true
+                        }
+                        launchSingleTop = true
+                        restoreState = true
                     }
                 }
             )
@@ -143,7 +148,16 @@ fun Router(
         // Camera
         composable(Screen.Camera.route) {
             CameraRoute(
-                navigateUp = { navController.navigateUp() }
+                navigateUp = { navController.navigateUp() },
+                navigateToHistory = {
+                    navController.navigate(Screen.History.route) {
+                        popUpTo(navController.graph.findStartDestination().id) {
+                            saveState = true
+                        }
+                        launchSingleTop = true
+                        restoreState = true
+                    }
+                }
             )
         }
     }
