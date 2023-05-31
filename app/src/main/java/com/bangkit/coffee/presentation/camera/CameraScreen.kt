@@ -78,9 +78,7 @@ fun CameraScreen(
             )
         },
     ) { contentPadding ->
-        val cameraPermissionState = rememberPermissionState(
-            Manifest.permission.CAMERA
-        )
+        val cameraPermissionState = rememberPermissionState(Manifest.permission.CAMERA)
 
         if (cameraPermissionState.status.isGranted) {
             val singlePhotoPickerLauncher = rememberLauncherForActivityResult(
@@ -103,7 +101,8 @@ fun CameraScreen(
                 } else {
                     ConfirmImageFragment(
                         modifier = Modifier.padding(contentPadding),
-                        image = state.image
+                        image = state.image,
+                        inProgress = state.inProgress
                     )
                 }
             }

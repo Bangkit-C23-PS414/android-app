@@ -1,20 +1,34 @@
 package com.bangkit.coffee.presentation.camera
 
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import com.bangkit.coffee.app.LocalRecoffeeryAppActions
 
 @Composable
 fun CameraRoute(
     coordinator: CameraCoordinator = rememberCameraCoordinator(),
-    navigateUp: () -> Unit = {}
+    navigateUp: () -> Unit = {},
+    navigateToHistory: () -> Unit = {}
 ) {
     // State observing and declarations
     val uiState by coordinator.screenStateFlow.collectAsStateWithLifecycle()
 
     // UI Actions
-    val actions = rememberCameraActions(coordinator, navigateUp)
+    val actions = rememberCameraActions(coordinator, navigateUp, navigateToHistory)
+
+    // Handle events
+    val appActions = LocalRecoffeeryAppActions.current
+    if (uiState.uploaded) {
+        LaunchedEffect(Unit) { actions.navigateToHistory() }
+    }
+    uiState.message?.let { event ->
+        LaunchedEffect(event) {
+            event.getContentIfNotHandled()?.let { message -> appActions.showToast(message) }
+        }
+    }
 
     // UI Rendering
     CameraScreen(uiState, actions)
@@ -24,16 +38,19 @@ fun CameraRoute(
 @Composable
 fun rememberCameraActions(
     coordinator: CameraCoordinator,
-    navigateUp: () -> Unit
+    navigateUp: () -> Unit,
+    navigateToHistory: () -> Unit
 ): CameraActions {
     return remember(coordinator) {
         CameraActions(
             navigateUp = navigateUp,
+            navigateToHistory = navigateToHistory,
             toggleFlash = coordinator::toggleFlash,
-            capture = coordinator::capture,
-            cancelCapture = coordinator::cancelCapture,
+            capturing = coordinator::capturing,
+            cancelCapturing = coordinator::cancelCapturing,
             setImage = coordinator::setImage,
-            clearImage = coordinator::clearImage
+            clearImage = coordinator::clearImage,
+            uploadImage = coordinator::uploadImage
         )
     }
 }

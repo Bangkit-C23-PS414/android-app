@@ -1,7 +1,7 @@
 package com.bangkit.coffee.domain.mapper
 
 import com.bangkit.coffee.data.source.local.entity.LocalImageDetection
-import com.bangkit.coffee.data.source.remote.response.RemoteImageDetection
+import com.bangkit.coffee.data.source.remote.model.RemoteImageDetection
 import com.bangkit.coffee.domain.entity.ImageDetection
 
 /* Local <--> External Segment */
@@ -10,9 +10,10 @@ import com.bangkit.coffee.domain.entity.ImageDetection
 fun List<ImageDetection>.toLocal() = map(ImageDetection::toLocal)
 fun ImageDetection.toLocal() = LocalImageDetection(
     id = id,
-    userId = userId,
+    email = email,
     imageUrl = imageUrl,
     result = result,
+    inferenceTime = inferenceTime,
     createdAt = createdAt,
     detectedAt = detectedAt,
 )
@@ -21,9 +22,10 @@ fun ImageDetection.toLocal() = LocalImageDetection(
 fun List<LocalImageDetection>.toExternal() = map(LocalImageDetection::toExternal)
 fun LocalImageDetection.toExternal() = ImageDetection(
     id = id,
-    userId = userId,
+    email = email,
     imageUrl = imageUrl,
     result = result,
+    inferenceTime = inferenceTime,
     createdAt = createdAt,
     detectedAt = detectedAt,
 )
@@ -34,9 +36,10 @@ fun LocalImageDetection.toExternal() = ImageDetection(
 fun List<ImageDetection>.toRemote() = map(ImageDetection::toRemote)
 fun ImageDetection.toRemote() = RemoteImageDetection(
     id = id,
-    userId = userId,
+    email = email,
     imageUrl = imageUrl,
     result = result,
+    inferenceTime = inferenceTime,
     createdAt = createdAt,
     detectedAt = detectedAt,
 )
@@ -45,9 +48,10 @@ fun ImageDetection.toRemote() = RemoteImageDetection(
 fun List<RemoteImageDetection>.toExternal() = map(RemoteImageDetection::toExternal)
 fun RemoteImageDetection.toExternal() = ImageDetection(
     id = id,
-    userId = userId,
+    email = email,
     imageUrl = imageUrl,
     result = result,
+    inferenceTime = inferenceTime,
     createdAt = createdAt,
     detectedAt = detectedAt,
 )

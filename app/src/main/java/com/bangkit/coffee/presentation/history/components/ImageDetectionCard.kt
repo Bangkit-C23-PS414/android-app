@@ -22,12 +22,11 @@ import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 import coil.request.ImageRequest
 import com.bangkit.coffee.R
+import com.bangkit.coffee.domain.ImageDetectionDummy
 import com.bangkit.coffee.domain.entity.ImageDetection
 import com.bangkit.coffee.shared.theme.AppTheme
 import com.bangkit.coffee.shared.util.toTimeString
 import com.wajahatiqbal.blurhash.BlurHashPainter
-import java.util.Date
-import java.util.UUID
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -73,15 +72,17 @@ fun ImageDetectionCard(
                 .fillMaxWidth()
                 .padding(16.dp, 16.dp, 16.dp, 0.dp)
         )
-        Text(
-            text = imageDetection.detectedAt.toTimeString(),
-            style = MaterialTheme.typography.bodySmall,
-            maxLines = 1,
-            overflow = TextOverflow.Ellipsis,
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(16.dp, 0.dp, 16.dp, 16.dp)
-        )
+        imageDetection.detectedAt?.let { detectedAt ->
+            Text(
+                text = detectedAt.toTimeString(),
+                style = MaterialTheme.typography.bodySmall,
+                maxLines = 1,
+                overflow = TextOverflow.Ellipsis,
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(16.dp, 0.dp, 16.dp, 16.dp)
+            )
+        }
     }
 }
 
@@ -90,14 +91,7 @@ fun ImageDetectionCard(
 private fun PreviewImageDetectionCard() {
     AppTheme {
         ImageDetectionCard(
-            imageDetection = ImageDetection(
-                UUID.randomUUID().toString(),
-                UUID.randomUUID().toString(),
-                "https://picsum.photos/300",
-                "Cercospora Leaf Spot",
-                Date(),
-                Date()
-            )
+            imageDetection = ImageDetectionDummy
         )
     }
 }

@@ -26,6 +26,7 @@ val ImageDetectionDummy
         randomUUID().toString(),
         "https://picsum.photos/300",
         "Cercospora Leaf Spot",
+        1200,
         Date(),
         Date()
     )

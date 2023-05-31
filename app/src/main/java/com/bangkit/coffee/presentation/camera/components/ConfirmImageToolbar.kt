@@ -18,6 +18,7 @@ import androidx.compose.material3.minimumInteractiveComponentSize
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
@@ -32,9 +33,11 @@ import com.bangkit.coffee.shared.util.zeroElevation
 @Composable
 fun ConfirmImageToolbar(
     modifier: Modifier = Modifier,
+    inProgress: Boolean = false
 ) {
     val actions = LocalCameraActions.current
-    
+    val context = LocalContext.current
+
     Row(
         modifier = modifier
             .fillMaxWidth()
@@ -53,13 +56,13 @@ fun ConfirmImageToolbar(
             )
         }
 
-        if (false) {
+        if (inProgress) {
             CircularProgressIndicator(
                 modifier = Modifier.padding(10.dp)
             )
         } else {
             FloatingActionButton(
-                onClick = {},
+                onClick = actions.uploadImage,
                 shape = FloatingActionButtonDefaults.largeShape,
                 elevation = FloatingActionButtonDefaults.zeroElevation(),
                 modifier = Modifier.testTag("Upload")

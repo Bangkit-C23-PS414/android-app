@@ -4,11 +4,13 @@ import com.bangkit.coffee.data.source.local.dao.ImageDetectionDao
 import com.bangkit.coffee.data.source.remote.ImageDetectionService
 import com.bangkit.coffee.domain.entity.ImageDetection
 import com.bangkit.coffee.domain.mapper.toExternal
-import com.bangkit.coffee.shared.exception.NetworkErrorException
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.catch
-import kotlinx.coroutines.flow.map
+import com.bangkit.coffee.shared.util.parse
+import com.bangkit.coffee.shared.wrapper.Resource
+import okhttp3.MediaType.Companion.toMediaType
+import okhttp3.MultipartBody.Part.Companion.createFormData
+import okhttp3.RequestBody.Companion.asRequestBody
 import retrofit2.HttpException
+import java.io.File
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -18,23 +20,19 @@ class ImageDetectionRepository @Inject constructor(
     private val remoteDataSource: ImageDetectionService,
 ) {
 
-    fun getAllStream(): Flow<Result<List<ImageDetection>>> {
-        return localDataSource.observeAll().map { imageDetections ->
-            Result.success(imageDetections.toExternal())
-        }.catch { e -> emit(Result.failure(e)) }
-    }
+    suspend fun create(file: File): Resource<ImageDetection> {
+        return try {
+            val response = remoteDataSource.create(
+                createFormData(
+                    name = "image",
+                    filename = file.name,
+                    body = file.asRequestBody("image/jpg".toMediaType())
+                )
+            )
 
-    fun getOneStream(id: String): Flow<Result<ImageDetection>> {
-        TODO("Not yet implemented")
-    }
-
-    suspend fun getOne(id: String): Result<ImageDetection> {
-        try {
-            remoteDataSource.getOne(id)
+            Resource.Success(response.data.toExternal())
         } catch (e: HttpException) {
-            throw NetworkErrorException.parseException(e)
+            Resource.Error(e.parse().message)
         }
-
-        TODO("Not yet implemented")
     }
 }

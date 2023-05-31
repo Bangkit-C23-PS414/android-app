@@ -94,6 +94,7 @@ fun CameraFragment(
 
     var focusRingVisible by remember { mutableStateOf(false) }
     var focusRingOffset by remember { mutableStateOf(Offset(0f, 0f)) }
+
     LaunchedEffect(previewUseCase, imageCaptureUseCase) {
         val cameraProvider = context.getCameraProvider()
         try {
@@ -210,13 +211,13 @@ fun CameraFragment(
             pickFromGallery = pickFromGallery,
             onCapture = {
                 coroutineScope.launch(Dispatchers.IO) {
-                    actions.capture()
+                    actions.capturing()
                     try {
                         val file = imageCaptureUseCase.takePicture(context.executor)
                         actions.setImage(file.toUri())
                     } catch (e: Exception) {
                         appActions.showToast(context.resources.getString(R.string.capture_error))
-                        actions.cancelCapture()
+                        actions.cancelCapturing()
                     }
                 }
             },

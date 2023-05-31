@@ -112,23 +112,25 @@ fun DetailHealthyFragment(
             }
         }
 
-        Row(
-            verticalAlignment = Alignment.CenterVertically,
-            modifier = Modifier.padding(bottom = 16.dp)
-        ) {
-            Icon(
-                imageVector = Icons.Filled.CalendarMonth,
-                contentDescription = null,
-                modifier = Modifier.size(20.dp)
-            )
-            Text(
-                text = stringResource(
-                    R.string.detected_at_format,
-                    imageDetection.detectedAt.toDateTimeString()
-                ),
-                style = MaterialTheme.typography.labelLarge,
-                modifier = Modifier.padding(start = 8.dp)
-            )
+        imageDetection.detectedAt?.let { detectedAt ->
+            Row(
+                verticalAlignment = Alignment.CenterVertically,
+                modifier = Modifier.padding(bottom = 16.dp)
+            ) {
+                Icon(
+                    imageVector = Icons.Filled.CalendarMonth,
+                    contentDescription = null,
+                    modifier = Modifier.size(20.dp)
+                )
+                Text(
+                    text = stringResource(
+                        R.string.detected_at_format,
+                        detectedAt.toDateTimeString()
+                    ),
+                    style = MaterialTheme.typography.labelLarge,
+                    modifier = Modifier.padding(start = 8.dp)
+                )
+            }
         }
 
         Text(

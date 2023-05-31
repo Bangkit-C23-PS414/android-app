@@ -14,9 +14,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
+import com.bangkit.coffee.app.components.RecoffeeryNavigationBar
+import com.bangkit.coffee.app.components.RecoffeeryTopAppBar
 import com.bangkit.coffee.navigation.Router
-import com.bangkit.coffee.shared.components.RecoffeeryNavigationBar
-import com.bangkit.coffee.shared.components.RecoffeeryTopAppBar
 import com.bangkit.coffee.shared.theme.AppTheme
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 
