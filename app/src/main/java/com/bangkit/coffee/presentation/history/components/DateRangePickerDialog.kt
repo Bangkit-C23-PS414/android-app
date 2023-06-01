@@ -47,6 +47,7 @@ fun DateRangePickerDialog(
     val state = rememberDateRangePickerState(
         defaultValue?.startDate?.toInstant(ZoneOffset.UTC)?.toEpochMilli(),
         defaultValue?.endDate?.toInstant(ZoneOffset.UTC)?.toEpochMilli(),
+        yearRange = IntRange(2023, LocalDate.now().year)
     )
 
     Dialog(
