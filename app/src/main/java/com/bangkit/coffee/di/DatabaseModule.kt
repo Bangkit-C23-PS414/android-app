@@ -2,7 +2,7 @@ package com.bangkit.coffee.di
 
 import android.content.Context
 import androidx.room.Room
-import com.bangkit.coffee.data.source.local.MainDatabase
+import com.bangkit.coffee.data.source.local.AppDatabase
 import com.bangkit.coffee.data.source.local.dao.ImageDetectionDao
 import dagger.Module
 import dagger.Provides
@@ -17,16 +17,16 @@ object DatabaseModule {
 
     @Singleton
     @Provides
-    fun provideDatabase(@ApplicationContext context: Context): MainDatabase {
+    fun provideDatabase(@ApplicationContext context: Context): AppDatabase {
         return Room.databaseBuilder(
             context.applicationContext,
-            MainDatabase::class.java,
-            "MainDatabase.db"
+            AppDatabase::class.java,
+            "AppDatabase.db"
         ).build()
     }
 
     @Provides
-    fun provideImageDetectionDao(database: MainDatabase): ImageDetectionDao {
+    fun provideImageDetectionDao(database: AppDatabase): ImageDetectionDao {
         return database.imageDetectionDao()
     }
 }

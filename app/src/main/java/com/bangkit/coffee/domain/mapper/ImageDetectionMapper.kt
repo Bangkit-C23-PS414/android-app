@@ -3,6 +3,8 @@ package com.bangkit.coffee.domain.mapper
 import com.bangkit.coffee.data.source.local.entity.LocalImageDetection
 import com.bangkit.coffee.data.source.remote.model.RemoteImageDetection
 import com.bangkit.coffee.domain.entity.ImageDetection
+import com.bangkit.coffee.shared.util.toEpochMilli
+import com.bangkit.coffee.shared.util.toLocalDateTime
 
 /* Local <--> External Segment */
 
@@ -40,8 +42,8 @@ fun ImageDetection.toRemote() = RemoteImageDetection(
     imageUrl = imageUrl,
     result = result,
     inferenceTime = inferenceTime,
-    createdAt = createdAt,
-    detectedAt = detectedAt,
+    createdAt = createdAt.toEpochMilli(),
+    detectedAt = detectedAt?.toEpochMilli(),
 )
 
 @JvmName("imageDetection_RemoteToExternal")
@@ -52,8 +54,8 @@ fun RemoteImageDetection.toExternal() = ImageDetection(
     imageUrl = imageUrl,
     result = result,
     inferenceTime = inferenceTime,
-    createdAt = createdAt,
-    detectedAt = detectedAt,
+    createdAt = createdAt.toLocalDateTime(),
+    detectedAt = detectedAt?.toLocalDateTime(),
 )
 
 /* Local <--> Remote Segment */

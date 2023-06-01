@@ -2,7 +2,7 @@ package com.bangkit.coffee.domain
 
 import com.bangkit.coffee.domain.entity.Disease
 import com.bangkit.coffee.domain.entity.ImageDetection
-import java.util.Date
+import java.time.LocalDateTime
 import java.util.UUID.randomUUID
 import kotlin.random.Random
 
@@ -27,6 +27,6 @@ val ImageDetectionDummy
         "https://picsum.photos/300",
         "Cercospora Leaf Spot",
         1200,
-        Date(),
-        Date()
+        LocalDateTime.now(),
+        LocalDateTime.now()
     )

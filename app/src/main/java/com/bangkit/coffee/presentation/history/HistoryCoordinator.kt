@@ -13,6 +13,7 @@ class HistoryCoordinator(
     val viewModel: HistoryViewModel
 ) {
     val screenStateFlow = viewModel.stateFlow
+    val pagerFlow = viewModel.pagerFlow
 
     fun toggleFilter() = viewModel.toggleFilter()
 

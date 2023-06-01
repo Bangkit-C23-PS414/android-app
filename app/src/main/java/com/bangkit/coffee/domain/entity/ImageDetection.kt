@@ -1,6 +1,6 @@
 package com.bangkit.coffee.domain.entity
 
-import java.util.Date
+import java.time.LocalDateTime
 
 data class ImageDetection(
     val id: String,
@@ -8,6 +8,6 @@ data class ImageDetection(
     val imageUrl: String,
     val result: String?,
     val inferenceTime: Int?,
-    val createdAt: Date,
-    val detectedAt: Date?,
+    val createdAt: LocalDateTime,
+    val detectedAt: LocalDateTime?,
 )

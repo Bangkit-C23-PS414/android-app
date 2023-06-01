@@ -1,7 +1,6 @@
 package com.bangkit.coffee.data.source.remote.model
 
 import com.google.gson.annotations.SerializedName
-import java.util.Date
 
 data class RemoteImageDetection(
     @field:SerializedName("id")
@@ -20,8 +19,8 @@ data class RemoteImageDetection(
     val inferenceTime: Int?,
 
     @field:SerializedName("createdAt")
-    val createdAt: Date,
+    val createdAt: Long,
 
     @field:SerializedName("detectedAt")
-    val detectedAt: Date?,
+    val detectedAt: Long?,
 )

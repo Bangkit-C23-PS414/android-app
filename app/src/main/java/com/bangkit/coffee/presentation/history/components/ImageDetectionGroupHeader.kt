@@ -15,12 +15,12 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.bangkit.coffee.shared.theme.AppTheme
 import com.bangkit.coffee.shared.util.toDateString
-import java.util.Date
+import java.time.LocalDate
 
 @Composable
 fun ImageDetectionGroupHeader(
     modifier: Modifier = Modifier,
-    date: Date
+    date: LocalDate
 ) {
     Row(
         modifier = modifier,
@@ -43,7 +43,7 @@ fun ImageDetectionGroupHeader(
 private fun PreviewImageDetectionGroupHeader() {
     AppTheme {
         ImageDetectionGroupHeader(
-            date = Date()
+            date = LocalDate.now()
         )
     }
 }

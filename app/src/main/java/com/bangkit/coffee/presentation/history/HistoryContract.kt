@@ -5,6 +5,7 @@ import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.staticCompositionLocalOf
 import com.bangkit.coffee.domain.entity.ImageDetection
 import com.bangkit.coffee.presentation.history.components.FilterHistoryForm
+import java.time.LocalDate
 
 
 /**
@@ -15,6 +16,17 @@ data class HistoryState(
     val filterFormData: FilterHistoryForm = FilterHistoryForm(),
     val imageDetections: List<ImageDetection> = emptyList(),
 )
+
+/**
+ * UI Model Holder that support separator
+ */
+sealed class HistoryItem(val key: String, val type: String) {
+    class Data(val value: ImageDetection) : HistoryItem(value.id, "data")
+    class Separator(
+        val date: LocalDate,
+        val first: Boolean
+    ) : HistoryItem(date.toEpochDay().toString(), "separator")
+}
 
 /**
  * History Actions emitted from the UI Layer
