@@ -7,10 +7,11 @@ data class DetectionResult(
 ) {
     companion object {
         val list = listOf(
-            DetectionResult("no-disease", "No Disease", null),
+            DetectionResult("healthy", "Healthy", null),
             DetectionResult("disease-1", "Disease 1", null),
             DetectionResult("disease-2", "Disease 2", null),
             DetectionResult("disease-3", "Disease 3", null),
+            DetectionResult("disease-4", "Disease 4", null),
         )
         val set = list.toSet()
     }

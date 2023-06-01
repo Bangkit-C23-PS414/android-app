@@ -49,15 +49,32 @@ class ImageDetectionRepository @Inject constructor(
     }
 
     @OptIn(ExperimentalPagingApi::class, ExperimentalCoroutinesApi::class)
-    fun getPager(): Flow<PagingData<ImageDetection>> {
+    fun getPager(
+        labels: List<String>,
+        startDate: Long? = null,
+        endDate: Long? = null
+    ): Flow<PagingData<ImageDetection>> {
         return Pager(
             config = PagingConfig(pageSize = DEFAULT_PER_PAGE),
             remoteMediator = ImageDetectionRemoteMediator(
+                labels = labels,
+                startDate = startDate,
+                endDate = endDate,
                 remoteDataSource = remoteDataSource,
                 localDataSource = localDataSource,
                 database = database
             ),
-            pagingSourceFactory = { localDataSource.pagingSource() }
-        ).flow.mapLatest { pagingData -> pagingData.map { it.toExternal() } }
+            pagingSourceFactory = {
+                localDataSource.pagingSource(
+                    labels = labels,
+                    startDate = startDate,
+                    endDate = endDate,
+                )
+            }
+        ).flow.mapLatest { pagingData ->
+            pagingData.map {
+                it.toExternal()
+            }
+        }
     }
 }

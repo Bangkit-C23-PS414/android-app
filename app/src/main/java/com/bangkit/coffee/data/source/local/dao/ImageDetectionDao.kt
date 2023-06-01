@@ -10,8 +10,32 @@ import com.bangkit.coffee.data.source.local.entity.LocalImageDetection
 @Dao
 interface ImageDetectionDao {
 
-    @Query("SELECT * FROM image_detections ORDER BY createdAt DESC")
-    fun pagingSource(): PagingSource<Int, LocalImageDetection>
+    @Query(
+        "SELECT * FROM image_detections " +
+                "WHERE result IN (:labels) " +
+                "AND (:startDate IS NULL OR createdAt >= :startDate) " +
+                "AND (:endDate IS NULL OR createdAt <= :endDate) " +
+                "ORDER BY createdAt DESC"
+    )
+    fun pagingSource(
+        labels: List<String>,
+        startDate: Long? = null,
+        endDate: Long? = null
+    ): PagingSource<Int, LocalImageDetection>
+
+    @Query(
+        "SELECT * FROM image_detections " +
+                "WHERE result IN (:labels) " +
+                "AND (:startDate IS NULL OR createdAt >= :startDate) " +
+                "AND (:endDate IS NULL OR createdAt <= :endDate) " +
+                "ORDER BY createdAt ASC " +
+                "LIMIT 1"
+    )
+    fun getLastItem(
+        labels: List<String>,
+        startDate: Long? = null,
+        endDate: Long? = null
+    ): LocalImageDetection?
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertAll(list: List<LocalImageDetection>)

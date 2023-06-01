@@ -4,6 +4,7 @@ import androidx.paging.ExperimentalPagingApi
 import androidx.paging.LoadType
 import androidx.paging.PagingState
 import androidx.paging.RemoteMediator
+import androidx.room.withTransaction
 import com.bangkit.coffee.data.source.local.AppDatabase
 import com.bangkit.coffee.data.source.local.dao.ImageDetectionDao
 import com.bangkit.coffee.data.source.local.entity.LocalImageDetection
@@ -16,6 +17,9 @@ import javax.inject.Inject
 
 @OptIn(ExperimentalPagingApi::class)
 class ImageDetectionRemoteMediator @Inject constructor(
+    val labels: List<String>,
+    val startDate: Long? = null,
+    val endDate: Long? = null,
     private val localDataSource: ImageDetectionDao,
     private val remoteDataSource: ImageDetectionService,
     private val database: AppDatabase
@@ -30,19 +34,36 @@ class ImageDetectionRemoteMediator @Inject constructor(
                 LoadType.REFRESH -> null
                 LoadType.PREPEND -> return MediatorResult.Success(endOfPaginationReached = true)
                 LoadType.APPEND -> {
-                    val lastItem = state.lastItemOrNull()
+                    val lastItem = state.lastItemOrNull() ?: database.withTransaction {
+                        localDataSource.getLastItem(labels, startDate, endDate)
+                    }
+
                     lastItem?.id ?: return MediatorResult.Success(endOfPaginationReached = true)
                 }
             }
 
             // Fetch API
-            val response = remoteDataSource.fetch(after = loadKey)
+            val response = remoteDataSource.fetch(
+                after = loadKey,
+                startDate = startDate,
+                endDate = endDate,
+                labels = labels,
+                perPage = state.config.pageSize
+            )
             // Convert result
             val data = response.toExternal()
             // Save result
-            localDataSource.insertAll(data.toLocal())
+            database.withTransaction {
+                // Delete
+                if (loadType == LoadType.REFRESH) {
+                    localDataSource.deleteAll()
+                }
 
-             MediatorResult.Success(endOfPaginationReached = data.isEmpty())
+                // Save
+                localDataSource.insertAll(data.toLocal())
+            }
+
+            MediatorResult.Success(endOfPaginationReached = data.isEmpty())
         } catch (e: IOException) {
             MediatorResult.Error(e)
         } catch (e: HttpException) {

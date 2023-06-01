@@ -14,7 +14,6 @@ import java.time.LocalDate
 data class HistoryState(
     val filterVisible: Boolean = false,
     val filterFormData: FilterHistoryForm = FilterHistoryForm(),
-    val imageDetections: List<ImageDetection> = emptyList(),
 )
 
 /**

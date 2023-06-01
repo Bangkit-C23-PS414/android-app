@@ -15,6 +15,7 @@ import androidx.compose.material3.TextButton
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.rememberDateRangePickerState
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
@@ -37,6 +38,12 @@ fun DateRangePickerDialog(
     onDismiss: () -> Unit = {},
     onConfirm: (FilterDateWrapper) -> Unit = {}
 ) {
+    val todayEpoch = remember {
+        LocalDate.now()
+            .atTime(LocalTime.MAX)
+            .toInstant(ZoneOffset.UTC)
+            .toEpochMilli()
+    }
     val state = rememberDateRangePickerState(
         defaultValue?.startDate?.toInstant(ZoneOffset.UTC)?.toEpochMilli(),
         defaultValue?.endDate?.toInstant(ZoneOffset.UTC)?.toEpochMilli(),
@@ -92,12 +99,7 @@ fun DateRangePickerDialog(
 
                 DateRangePicker(
                     state = state,
-                    dateValidator = { epochs ->
-                        LocalDate.now()
-                            .atTime(LocalTime.MAX)
-                            .toInstant(ZoneOffset.UTC)
-                            .toEpochMilli() > epochs
-                    },
+                    dateValidator = { epoch -> epoch < todayEpoch },
                     modifier = Modifier.weight(1f)
                 )
             }

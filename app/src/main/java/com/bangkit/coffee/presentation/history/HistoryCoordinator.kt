@@ -19,7 +19,7 @@ class HistoryCoordinator(
 
     fun applyFilter(formData: FilterHistoryForm) = viewModel.applyFilter(formData)
 
-    fun resetFilter() = viewModel.resetFilter()
+    fun resetFilter() = viewModel.applyFilter(FilterHistoryForm())
 }
 
 @Composable

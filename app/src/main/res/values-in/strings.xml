@@ -99,4 +99,5 @@
     <string name="sample_disease_on_the_leaf">Sampel penyakit pada daun</string>
     <string name="cannot_load_more_data">Tidak dapat memuat data lagi</string>
     <string name="retry">Coba lagi</string>
+    <string name="history_empty">Silahkan mengambil gambar dahulu. Nanti akan muncul disini</string>
 </resources>

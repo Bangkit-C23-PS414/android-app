@@ -24,7 +24,7 @@ interface ImageDetectionService {
         @Query("after") after: String? = null,
         @Query("startDate") startDate: Long? = null,
         @Query("endDate") endDate: Long? = null,
-        @Query("label") label: String? = null,
+        @Query("labels") labels: List<String>? = null,
         @Query("perPage") perPage: Int = DEFAULT_PER_PAGE
     ): List<RemoteImageDetection>
 }

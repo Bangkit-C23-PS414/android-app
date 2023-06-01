@@ -41,6 +41,7 @@ import com.bangkit.coffee.domain.ImageDetectionDummy
 import com.bangkit.coffee.presentation.history.components.FilterHistoryBottomSheet
 import com.bangkit.coffee.presentation.history.components.ImageDetectionCard
 import com.bangkit.coffee.presentation.history.components.ImageDetectionGroupHeader
+import com.bangkit.coffee.shared.components.DisplayErrorFragment
 import com.bangkit.coffee.shared.theme.AppTheme
 import com.google.accompanist.swiperefresh.SwipeRefresh
 import com.google.accompanist.swiperefresh.rememberSwipeRefreshState
@@ -54,6 +55,7 @@ fun HistoryScreen(
     pagerState: LazyPagingItems<HistoryItem>
 ) {
     val lazyGridState = rememberLazyGridState()
+
     @Suppress("DEPRECATION")
     val swipeRefreshState = rememberSwipeRefreshState(
         pagerState.loadState.refresh is LoadState.Loading
@@ -81,7 +83,9 @@ fun HistoryScreen(
         SwipeRefresh(
             state = swipeRefreshState,
             onRefresh = { pagerState.refresh() },
-            modifier = Modifier.padding(contentPadding)
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(contentPadding)
         ) {
             LazyVerticalGrid(
                 columns = GridCells.Fixed(2),
@@ -127,7 +131,7 @@ fun HistoryScreen(
                 }
 
 
-                // Show loading state
+                // Show loading state for append
                 when (pagerState.loadState.append) {
                     LoadState.Loading -> {
                         item(span = { GridItemSpan(maxLineSpan) }) {
@@ -166,6 +170,13 @@ fun HistoryScreen(
                     is LoadState.NotLoading -> {}
                 }
             }
+
+            // If empty
+            if (pagerState.loadState.append.endOfPaginationReached && pagerState.itemCount == 0) {
+                DisplayErrorFragment(
+                    message = stringResource(R.string.history_empty)
+                )
+            }
         }
     }
 
@@ -173,7 +184,7 @@ fun HistoryScreen(
         ProvideHistoryActions(actions = actions) {
             FilterHistoryBottomSheet(
                 formData = state.filterFormData,
-                modifier = Modifier.testTag("FilterHistoryBottomSheet")
+                modifier = Modifier.testTag("FilterHistoryBottomSheet"),
             )
         }
     }
