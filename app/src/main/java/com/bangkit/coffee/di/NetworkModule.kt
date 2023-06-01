@@ -2,7 +2,9 @@ package com.bangkit.coffee.di
 
 import com.bangkit.coffee.BuildConfig
 import com.bangkit.coffee.data.repository.UserPreferencesRepository
+import com.bangkit.coffee.data.source.remote.AuthService
 import com.bangkit.coffee.data.source.remote.ImageDetectionService
+import com.bangkit.coffee.shared.const.AUTH_BASE_URL
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -57,7 +59,7 @@ object NetworkModule {
             .addInterceptor(authInterceptor)
             .build()
 
-        return Retrofit.Builder().baseUrl("").client(client)
+        return Retrofit.Builder().baseUrl(AUTH_BASE_URL).client(client)
             .addConverterFactory(GsonConverterFactory.create()).build()
     }
 
@@ -84,5 +86,13 @@ object NetworkModule {
         @Named("ImageService") retrofit: Retrofit
     ): ImageDetectionService {
         return retrofit.create(ImageDetectionService::class.java)
+    }
+
+    @Singleton
+    @Provides
+    fun provideAuthService(
+        @Named("AuthService") retrofit: Retrofit
+    ): AuthService {
+        return retrofit.create(AuthService::class.java)
     }
 }
