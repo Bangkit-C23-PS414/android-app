@@ -39,7 +39,6 @@ class HistoryViewModel @Inject constructor(
         .map { it.filterFormData }
         .distinctUntilChanged()
         .flatMapLatest { formData -> filterHistory(formData) }
-        .flowOn(Dispatchers.IO)
         .cachedIn(viewModelScope)
 
     @OptIn(ExperimentalCoroutinesApi::class)
@@ -65,6 +64,7 @@ class HistoryViewModel @Inject constructor(
                     }
                 }
             }
+            .flowOn(Dispatchers.Default)
     }
 
     fun toggleFilter() {

@@ -14,8 +14,10 @@ import com.bangkit.coffee.domain.mapper.toExternal
 import com.bangkit.coffee.shared.const.DEFAULT_PER_PAGE
 import com.bangkit.coffee.shared.util.parse
 import com.bangkit.coffee.shared.wrapper.Resource
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.flow.mapLatest
 import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.MultipartBody.Part.Companion.createFormData
@@ -54,7 +56,7 @@ class ImageDetectionRepository @Inject constructor(
         startDate: Long? = null,
         endDate: Long? = null
     ): Flow<PagingData<ImageDetection>> {
-        return Pager(
+        val pager = Pager(
             config = PagingConfig(pageSize = DEFAULT_PER_PAGE),
             remoteMediator = ImageDetectionRemoteMediator(
                 labels = labels,
@@ -71,10 +73,10 @@ class ImageDetectionRepository @Inject constructor(
                     endDate = endDate,
                 )
             }
-        ).flow.mapLatest { pagingData ->
-            pagingData.map {
-                it.toExternal()
-            }
-        }
+        )
+
+        return pager.flow
+            .flowOn(Dispatchers.IO)
+            .mapLatest { pagingData -> pagingData.map { it.toExternal() } }
     }
 }
