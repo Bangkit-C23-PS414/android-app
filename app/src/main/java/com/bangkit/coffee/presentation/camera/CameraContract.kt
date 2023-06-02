@@ -25,7 +25,7 @@ data class CameraState(
  **/
 data class CameraActions(
     val navigateUp: () -> Unit = {},
-    val navigateToHistory: () -> Unit = {},
+    val navigateToDetail: () -> Unit = {},
     val toggleFlash: (Boolean) -> Unit = {},
     val capturing: () -> Unit = {},
     val cancelCapturing: () -> Unit = {},

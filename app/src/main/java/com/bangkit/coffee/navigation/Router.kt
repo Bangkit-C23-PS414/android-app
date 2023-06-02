@@ -30,7 +30,7 @@ fun Router(
     NavHost(
         modifier = modifier,
         navController = navController,
-        startDestination = Screen.Welcome.route,
+        startDestination = Screen.Home.route,
     ) {
         // Welcome
         composable(Screen.Welcome.route) {
@@ -97,7 +97,7 @@ fun Router(
         composable(Screen.Home.route) {
             HomeRoute(
                 navigateToCamera = { navController.navigate(Screen.Camera.route) },
-                navigateToDetailDisease = {id ->
+                navigateToDetailDisease = { id ->
                     navController.navigate(
                         Screen.DiseaseDetail.createRoute(id)
                     )
@@ -149,7 +149,7 @@ fun Router(
         composable(Screen.Camera.route) {
             CameraRoute(
                 navigateUp = { navController.navigateUp() },
-                navigateToHistory = {
+                navigateToDetail = {
                     navController.navigate(Screen.History.route) {
                         popUpTo(navController.graph.findStartDestination().id) {
                             saveState = true
@@ -157,6 +157,7 @@ fun Router(
                         launchSingleTop = true
                         restoreState = true
                     }
+                    navController.navigate(Screen.ImageDetectionDetail.createRoute("17912232-5cd1-4a08-8909-b462c0470fd8"))
                 }
             )
         }
