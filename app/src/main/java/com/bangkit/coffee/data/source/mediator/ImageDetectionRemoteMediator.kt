@@ -13,6 +13,7 @@ import com.bangkit.coffee.domain.mapper.toExternal
 import com.bangkit.coffee.domain.mapper.toLocal
 import retrofit2.HttpException
 import java.io.IOException
+import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 
 @OptIn(ExperimentalPagingApi::class)
@@ -24,6 +25,18 @@ class ImageDetectionRemoteMediator @Inject constructor(
     private val remoteDataSource: ImageDetectionService,
     private val database: AppDatabase
 ) : RemoteMediator<Int, LocalImageDetection>() {
+
+    override suspend fun initialize(): InitializeAction {
+        val cacheTimeout = TimeUnit.MILLISECONDS.convert(1, TimeUnit.HOURS)
+        val lastUpdated = localDataSource.getLastUpdated() ?: 0
+        val now = System.currentTimeMillis()
+
+        return if (now - lastUpdated <= cacheTimeout) {
+            InitializeAction.SKIP_INITIAL_REFRESH
+        } else {
+            InitializeAction.LAUNCH_INITIAL_REFRESH
+        }
+    }
 
     override suspend fun load(
         loadType: LoadType,

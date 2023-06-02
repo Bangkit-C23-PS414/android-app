@@ -5,6 +5,7 @@ import com.bangkit.coffee.data.source.remote.model.RemoteImageDetection
 import com.bangkit.coffee.domain.entity.ImageDetection
 import com.bangkit.coffee.shared.util.toEpochMilli
 import com.bangkit.coffee.shared.util.toLocalDateTime
+import java.time.LocalDateTime
 
 /* Local <--> External Segment */
 
@@ -18,6 +19,7 @@ fun ImageDetection.toLocal() = LocalImageDetection(
     inferenceTime = inferenceTime,
     createdAt = createdAt,
     detectedAt = detectedAt,
+    syncAt = LocalDateTime.now(),
 )
 
 @JvmName("imageDetection_LocalToExternal")

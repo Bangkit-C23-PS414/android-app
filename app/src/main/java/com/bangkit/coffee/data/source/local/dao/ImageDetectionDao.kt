@@ -37,6 +37,9 @@ interface ImageDetectionDao {
         endDate: Long? = null
     ): LocalImageDetection?
 
+    @Query("SELECT MIN(syncAt) FROM image_detections")
+    fun getLastUpdated(): Long?
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertAll(list: List<LocalImageDetection>)
 

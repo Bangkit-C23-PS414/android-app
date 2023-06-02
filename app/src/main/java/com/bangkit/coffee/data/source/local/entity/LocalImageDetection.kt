@@ -7,7 +7,7 @@ import java.time.LocalDateTime
 
 @Entity(
     tableName = "image_detections",
-    indices = [Index("createdAt"), Index("result")]
+    indices = [Index("createdAt"), Index("result"), Index("syncAt")]
 )
 data class LocalImageDetection(
     @PrimaryKey
@@ -18,4 +18,5 @@ data class LocalImageDetection(
     val inferenceTime: Int?,
     val createdAt: LocalDateTime,
     val detectedAt: LocalDateTime?,
+    val syncAt: LocalDateTime,
 )
