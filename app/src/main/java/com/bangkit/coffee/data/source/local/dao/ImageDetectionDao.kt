@@ -50,7 +50,7 @@ interface ImageDetectionDao {
 
     // Get one
     @Query("SELECT * FROM image_detections WHERE id = :id")
-    fun getOne(id: String): Flow<LocalImageDetection>
+    fun getOne(id: String): Flow<LocalImageDetection?>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertOne(imageDetection: LocalImageDetection)

@@ -15,7 +15,8 @@ data class ImageDetectionDetailState(
     val loading: Boolean = true,
     val imageDetection: ImageDetection? = null,
     val disease: Disease? = null,
-    val message: Event<String>? = null
+    val message: Event<String>? = null,
+    val waiting: Boolean = false
 )
 
 /**

@@ -7,6 +7,7 @@ import com.bangkit.coffee.domain.usecase.ImageDetectionWithDiseaseUseCase
 import com.bangkit.coffee.shared.wrapper.Event
 import com.bangkit.coffee.shared.wrapper.Resource
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.mapNotNull
@@ -26,6 +27,10 @@ class ImageDetectionDetailViewModel @Inject constructor(
     val stateFlow = _stateFlow.asStateFlow()
 
     init {
+        hook()
+    }
+
+    private fun hook() {
         viewModelScope.launch {
             imageDetectionWithDiseaseUseCase
                 .getStream(id)
@@ -37,6 +42,14 @@ class ImageDetectionDetailViewModel @Inject constructor(
                             imageDetection = imageDetection,
                             disease = disease
                         )
+                    }
+
+                    // periodic check
+                    if (imageDetection?.isDetected == false) {
+                        _stateFlow.update { it.copy(waiting = true) }
+                        delay(5000)
+                        _stateFlow.update { it.copy(waiting = false) }
+                        imageDetectionWithDiseaseUseCase.refreshOne(id)
                     }
                 }
         }

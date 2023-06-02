@@ -83,7 +83,7 @@ class ImageDetectionRepository @Inject constructor(
     }
 
     fun getOne(id: String) : Flow<ImageDetection?> {
-        return localDataSource.getOne(id).map { it.toExternal() }
+        return localDataSource.getOne(id).map { it?.toExternal() }
     }
 
     suspend fun refreshOne(id: String): Resource<ImageDetection> {
