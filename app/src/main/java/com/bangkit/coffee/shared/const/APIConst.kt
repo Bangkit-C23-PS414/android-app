@@ -7,3 +7,5 @@ const val STATIC_URL = "https://storage.googleapis.com/c23-ps414-statics/static/
 
 const val DEFAULT_PER_PAGE = 10
 const val MAX_PER_PAGE = 50
+
+const val DEFAULT_BLUR_HASH = "U4C8Wh028}.700~p.7EK4VkR_LJ5V@ry01=|"

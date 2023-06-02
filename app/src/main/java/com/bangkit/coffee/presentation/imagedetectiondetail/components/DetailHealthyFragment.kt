@@ -31,7 +31,6 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
-import coil.request.CachePolicy
 import coil.request.ImageRequest
 import com.bangkit.coffee.R
 import com.bangkit.coffee.domain.ImageDetectionDummy
@@ -57,9 +56,10 @@ fun DetailHealthyFragment(
         Box {
             AsyncImage(
                 model = ImageRequest.Builder(context)
-                    .data(imageDetection.imageUrl)
+                    .data(imageDetection.fileURL)
                     .crossfade(true)
-                    .diskCachePolicy(CachePolicy.ENABLED)
+                    .diskCacheKey(imageDetection.cacheKey)
+                    .memoryCacheKey(imageDetection.cacheKey)
                     .build(),
                 contentDescription = stringResource(R.string.coffee_leaf_image),
                 contentScale = ContentScale.Crop,

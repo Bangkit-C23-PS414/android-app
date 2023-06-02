@@ -12,7 +12,7 @@ interface ImageDetectionDao {
 
     @Query(
         "SELECT * FROM image_detections " +
-                "WHERE result IN (:labels) " +
+                "WHERE label IN (:labels) " +
                 "AND (:startDate IS NULL OR createdAt >= :startDate) " +
                 "AND (:endDate IS NULL OR createdAt <= :endDate) " +
                 "ORDER BY createdAt DESC"
@@ -25,7 +25,7 @@ interface ImageDetectionDao {
 
     @Query(
         "SELECT * FROM image_detections " +
-                "WHERE result IN (:labels) " +
+                "WHERE label IN (:labels) " +
                 "AND (:startDate IS NULL OR createdAt >= :startDate) " +
                 "AND (:endDate IS NULL OR createdAt <= :endDate) " +
                 "ORDER BY createdAt ASC " +

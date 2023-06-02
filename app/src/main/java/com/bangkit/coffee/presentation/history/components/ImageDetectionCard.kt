@@ -24,6 +24,7 @@ import coil.request.ImageRequest
 import com.bangkit.coffee.R
 import com.bangkit.coffee.domain.ImageDetectionDummy
 import com.bangkit.coffee.domain.entity.ImageDetection
+import com.bangkit.coffee.shared.const.DEFAULT_BLUR_HASH
 import com.bangkit.coffee.shared.theme.AppTheme
 import com.bangkit.coffee.shared.util.toTimeString
 import com.wajahatiqbal.blurhash.BlurHashPainter
@@ -47,23 +48,23 @@ fun ImageDetectionCard(
                 .clip(CardDefaults.shape)
                 .aspectRatio(1.3f),
             model = ImageRequest.Builder(context)
-                .data(imageDetection.imageUrl)
+                .data(imageDetection.fileURL)
                 .crossfade(true)
-                .diskCacheKey("image-detection-${imageDetection.id}")
-                .memoryCacheKey("image-detection-${imageDetection.id}")
+                .diskCacheKey(imageDetection.cacheKey)
+                .memoryCacheKey(imageDetection.cacheKey)
                 .build(),
             contentDescription = stringResource(R.string.coffee_leaf_image),
             contentScale = ContentScale.Crop,
             error = painterResource(R.drawable.no_image),
             placeholder = BlurHashPainter(
-                blurHash = "LEHC4WWB2yk8pyoJadR*.7kCMdnj",
+                blurHash = DEFAULT_BLUR_HASH,
                 width = 290,
                 height = 200,
                 scale = 0.1f,
             )
         )
         Text(
-            text = imageDetection.result.orEmpty(),
+            text = imageDetection.label.orEmpty(),
             style = MaterialTheme.typography.titleSmall,
             fontWeight = FontWeight.Bold,
             maxLines = 1,

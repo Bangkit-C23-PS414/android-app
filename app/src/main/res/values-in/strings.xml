@@ -84,7 +84,7 @@
     <string name="save">Simpan</string>
     <string name="detection_result">Hasil Deteksi</string>
     <string name="we_found_a_disease">Kami menemukan penyakit pada kopi anda</string>
-    <string name="accuracy_format">Akurasi %d\\%%</string>
+    <string name="accuracy_format">Akurasi %d\%%</string>
     <string name="detected_at_format">Terdeteksi pada %s</string>
     <string name="how_to_control">Bagaimana cara mengontrolnya?</string>
     <string name="everything_is_fine">Semua baik-baik saja!</string>

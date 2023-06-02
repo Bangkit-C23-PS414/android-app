@@ -14,8 +14,9 @@ fun List<ImageDetection>.toLocal() = map(ImageDetection::toLocal)
 fun ImageDetection.toLocal() = LocalImageDetection(
     id = id,
     email = email,
-    imageUrl = imageUrl,
-    result = result,
+    fileURL = fileURL,
+    label = label,
+    isDetected = isDetected,
     inferenceTime = inferenceTime,
     createdAt = createdAt,
     detectedAt = detectedAt,
@@ -27,8 +28,9 @@ fun List<LocalImageDetection>.toExternal() = map(LocalImageDetection::toExternal
 fun LocalImageDetection.toExternal() = ImageDetection(
     id = id,
     email = email,
-    imageUrl = imageUrl,
-    result = result,
+    fileURL = fileURL,
+    label = label,
+    isDetected = isDetected,
     inferenceTime = inferenceTime,
     createdAt = createdAt,
     detectedAt = detectedAt,
@@ -41,11 +43,12 @@ fun List<ImageDetection>.toRemote() = map(ImageDetection::toRemote)
 fun ImageDetection.toRemote() = RemoteImageDetection(
     id = id,
     email = email,
-    imageUrl = imageUrl,
-    result = result,
+    fileURL = fileURL,
+    label = label,
+    isDetected = isDetected,
     inferenceTime = inferenceTime,
     createdAt = createdAt.toEpochMilli(),
-    detectedAt = detectedAt?.toEpochMilli(),
+    detectedAt = detectedAt.toEpochMilli(),
 )
 
 @JvmName("imageDetection_RemoteToExternal")
@@ -53,11 +56,12 @@ fun List<RemoteImageDetection>.toExternal() = map(RemoteImageDetection::toExtern
 fun RemoteImageDetection.toExternal() = ImageDetection(
     id = id,
     email = email,
-    imageUrl = imageUrl,
-    result = result,
+    fileURL = fileURL,
+    label = label,
+    isDetected = isDetected,
     inferenceTime = inferenceTime,
     createdAt = createdAt.toLocalDateTime(),
-    detectedAt = detectedAt?.toLocalDateTime(),
+    detectedAt = detectedAt.toLocalDateTime(),
 )
 
 /* Local <--> Remote Segment */

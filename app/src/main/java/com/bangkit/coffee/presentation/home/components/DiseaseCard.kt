@@ -23,6 +23,7 @@ import coil.request.ImageRequest
 import com.bangkit.coffee.R
 import com.bangkit.coffee.domain.DiseaseDummy
 import com.bangkit.coffee.domain.entity.Disease
+import com.bangkit.coffee.shared.const.DEFAULT_BLUR_HASH
 import com.bangkit.coffee.shared.theme.AppTheme
 import com.wajahatiqbal.blurhash.BlurHashPainter
 
@@ -54,7 +55,7 @@ fun DiseaseCard(
             contentScale = ContentScale.Crop,
             error = painterResource(R.drawable.no_image),
             placeholder = BlurHashPainter(
-                blurHash = "LEHC4WWB2yk8pyoJadR*.7kCMdnj",
+                blurHash = DEFAULT_BLUR_HASH,
                 width = 290,
                 height = 200,
                 scale = 0.1f,

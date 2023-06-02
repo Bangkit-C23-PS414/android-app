@@ -18,7 +18,6 @@ import androidx.compose.material3.minimumInteractiveComponentSize
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
@@ -36,7 +35,6 @@ fun ConfirmImageToolbar(
     inProgress: Boolean = false
 ) {
     val actions = LocalCameraActions.current
-    val context = LocalContext.current
 
     Row(
         modifier = modifier

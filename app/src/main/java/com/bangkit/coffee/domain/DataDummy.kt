@@ -23,8 +23,9 @@ val ImageDetectionDummies get() = List(6) { ImageDetectionDummy }
 val ImageDetectionDummy
     get() = ImageDetection(
         randomUUID().toString(),
-        randomUUID().toString(),
+        "test@gmail.com",
         "https://picsum.photos/300",
+        true,
         "Cercospora Leaf Spot",
         1200,
         LocalDateTime.now(),
