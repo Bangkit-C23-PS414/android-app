@@ -85,7 +85,7 @@
     <string name="date_range_format" translatable="false">%s - %s</string>
     <string name="detection_result">Detection Result</string>
     <string name="we_found_a_disease">We found a disease in your coffee</string>
-    <string name="accuracy_format">%d\%% Accuracy</string>
+    <string name="accuracy_format">%.1f\%% Accuracy</string>
     <string name="detected_at_format">Detected at %s</string>
     <string name="how_to_control">How to control?</string>
     <string name="everything_is_fine">Everything is fine!</string>
@@ -101,4 +101,5 @@
     <string name="cannot_load_more_data">Cannot load more data</string>
     <string name="retry">Retry</string>
     <string name="history_empty">Go take a picture. It will show up here</string>
+    <string name="lipsum" translatable="false">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</string>
 </resources>

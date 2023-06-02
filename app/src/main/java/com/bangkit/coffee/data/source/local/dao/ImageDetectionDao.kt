@@ -6,10 +6,12 @@ import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import com.bangkit.coffee.data.source.local.entity.LocalImageDetection
+import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface ImageDetectionDao {
 
+    /* Paging functionality */
     @Query(
         "SELECT * FROM image_detections " +
                 "WHERE label IN (:labels) " +
@@ -45,4 +47,11 @@ interface ImageDetectionDao {
 
     @Query("DELETE FROM image_detections")
     suspend fun deleteAll()
+
+    // Get one
+    @Query("SELECT * FROM image_detections WHERE id = :id")
+    fun getOne(id: String): Flow<LocalImageDetection>
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insertOne(imageDetection: LocalImageDetection)
 }

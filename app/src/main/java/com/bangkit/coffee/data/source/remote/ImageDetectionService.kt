@@ -27,4 +27,9 @@ interface ImageDetectionService {
         @Query("labels") labels: List<String>? = null,
         @Query("perPage") perPage: Int = DEFAULT_PER_PAGE
     ): List<RemoteImageDetection>
+
+    @GET("/freaky")
+    suspend fun getOne(
+        @Query("id") id: String
+    ) : RemoteImageDetection
 }

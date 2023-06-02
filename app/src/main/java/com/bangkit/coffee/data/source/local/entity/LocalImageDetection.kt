@@ -16,6 +16,7 @@ data class LocalImageDetection(
     val fileURL: String,
     val isDetected: Boolean,
     val label: String,
+    val accuracy: Float,
     val inferenceTime: Int,
     val createdAt: LocalDateTime,
     val detectedAt: LocalDateTime,

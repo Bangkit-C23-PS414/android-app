@@ -11,6 +11,7 @@ import com.bangkit.coffee.data.source.mediator.ImageDetectionRemoteMediator
 import com.bangkit.coffee.data.source.remote.ImageDetectionService
 import com.bangkit.coffee.domain.entity.ImageDetection
 import com.bangkit.coffee.domain.mapper.toExternal
+import com.bangkit.coffee.domain.mapper.toLocal
 import com.bangkit.coffee.shared.const.DEFAULT_PER_PAGE
 import com.bangkit.coffee.shared.util.parse
 import com.bangkit.coffee.shared.wrapper.Resource
@@ -18,6 +19,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flowOn
+import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.mapLatest
 import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.MultipartBody.Part.Companion.createFormData
@@ -78,5 +80,22 @@ class ImageDetectionRepository @Inject constructor(
         return pager.flow
             .flowOn(Dispatchers.IO)
             .mapLatest { pagingData -> pagingData.map { it.toExternal() } }
+    }
+
+    fun getOne(id: String) : Flow<ImageDetection?> {
+        return localDataSource.getOne(id).map { it.toExternal() }
+    }
+
+    suspend fun refreshOne(id: String): Resource<ImageDetection> {
+        return try {
+            val response = remoteDataSource.getOne(id)
+            val imageDetection = response.toExternal()
+
+            localDataSource.insertOne(imageDetection.toLocal())
+
+            Resource.Success(imageDetection)
+        } catch (e: HttpException) {
+            Resource.Error(e.parse().message)
+        }
     }
 }

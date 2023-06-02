@@ -18,6 +18,9 @@ data class RemoteImageDetection(
     @field:SerializedName("label")
     val label: String,
 
+    @field:SerializedName("accuracy")
+    val accuracy: Float,
+
     @field:SerializedName("inferenceTime")
     val inferenceTime: Int,
 

@@ -5,6 +5,7 @@ import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.staticCompositionLocalOf
 import com.bangkit.coffee.domain.entity.Disease
 import com.bangkit.coffee.domain.entity.ImageDetection
+import com.bangkit.coffee.shared.wrapper.Event
 
 
 /**
@@ -13,7 +14,8 @@ import com.bangkit.coffee.domain.entity.ImageDetection
 data class ImageDetectionDetailState(
     val loading: Boolean = true,
     val imageDetection: ImageDetection? = null,
-    val disease: Disease? = null
+    val disease: Disease? = null,
+    val message: Event<String>? = null
 )
 
 /**
