@@ -96,6 +96,7 @@ dependencies {
     implementation "me.naingaungluu.formconductor:core:$formconductor_version"
     implementation "me.naingaungluu.formconductor:compose-ui:$formconductor_version"
     implementation "com.github.wajahat-iqbal:BlurHashPainter:1.2"
+    implementation "com.mxalbert.sharedelements:shared-elements:0.1.0-SNAPSHOT"
 
     // Jetpack - Room
     implementation "androidx.room:room-ktx:$room_version"

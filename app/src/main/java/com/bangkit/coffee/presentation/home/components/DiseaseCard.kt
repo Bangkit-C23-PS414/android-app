@@ -24,6 +24,7 @@ import com.bangkit.coffee.R
 import com.bangkit.coffee.domain.DiseaseDummy
 import com.bangkit.coffee.domain.entity.Disease
 import com.bangkit.coffee.shared.theme.AppTheme
+import com.mxalbert.sharedelements.SharedElement
 import com.wajahatiqbal.blurhash.BlurHashPainter
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -39,27 +40,29 @@ fun DiseaseCard(
         onClick = onClick,
         modifier = modifier,
     ) {
-        AsyncImage(
-            modifier = Modifier
-                .fillMaxWidth()
-                .clip(CardDefaults.shape)
-                .aspectRatio(1.3f),
-            model = ImageRequest.Builder(context)
-                .data(disease.imageURL)
-                .crossfade(true)
-                .diskCacheKey(disease.cacheKey)
-                .memoryCacheKey(disease.cacheKey)
-                .build(),
-            contentDescription = stringResource(R.string.image),
-            contentScale = ContentScale.Crop,
-            error = painterResource(R.drawable.no_image),
-            placeholder = BlurHashPainter(
-                blurHash = disease.blurHash,
-                width = 1,
-                height = 1,
-                scale = 0.1f,
+        SharedElement(key = disease.cacheKey, screenKey = "home") {
+            AsyncImage(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .clip(CardDefaults.shape)
+                    .aspectRatio(1.3f),
+                model = ImageRequest.Builder(context)
+                    .data(disease.imageURL)
+                    .crossfade(true)
+                    .diskCacheKey(disease.cacheKey)
+                    .memoryCacheKey(disease.cacheKey)
+                    .build(),
+                contentDescription = stringResource(R.string.image),
+                contentScale = ContentScale.Crop,
+                error = painterResource(R.drawable.no_image),
+                placeholder = BlurHashPainter(
+                    blurHash = disease.blurHash,
+                    width = 1,
+                    height = 1,
+                    scale = 0.1f,
+                )
             )
-        )
+        }
         Text(
             text = disease.name,
             style = MaterialTheme.typography.titleSmall,

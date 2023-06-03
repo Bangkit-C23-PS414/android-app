@@ -19,6 +19,7 @@ import com.bangkit.coffee.app.components.RecoffeeryTopAppBar
 import com.bangkit.coffee.navigation.Router
 import com.bangkit.coffee.shared.theme.AppTheme
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
+import com.mxalbert.sharedelements.SharedElementsRoot
 
 @Composable
 fun RecoffeeryAppScreen(
@@ -63,10 +64,12 @@ fun RecoffeeryAppScreen(
             }
         ) { contentPadding ->
             ProvideRecoffeeryAppActions(actions = actions) {
-                Router(
-                    modifier = Modifier.padding(contentPadding),
-                    navController = navController,
-                )
+                SharedElementsRoot {
+                    Router(
+                        modifier = Modifier.padding(contentPadding),
+                        navController = navController,
+                    )
+                }
             }
         }
     }

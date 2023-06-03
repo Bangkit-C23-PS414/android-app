@@ -38,6 +38,7 @@ import coil.request.ImageRequest
 import com.bangkit.coffee.R
 import com.bangkit.coffee.domain.DiseaseDummy
 import com.bangkit.coffee.shared.theme.AppTheme
+import com.mxalbert.sharedelements.SharedElement
 import com.wajahatiqbal.blurhash.BlurHashPainter
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -72,27 +73,32 @@ fun DiseaseDetailScreen(
                 .padding(16.dp, 0.dp, 16.dp, 16.dp)
         ) {
             Box {
-                AsyncImage(
-                    model = ImageRequest.Builder(context)
-                        .data(state.disease.imageURL)
-                        .crossfade(true)
-                        .diskCacheKey(state.disease.cacheKey)
-                        .memoryCacheKey(state.disease.cacheKey)
-                        .build(),
-                    contentDescription = stringResource(R.string.coffee_leaf_image),
-                    contentScale = ContentScale.Crop,
-                    error = painterResource(R.drawable.no_image),
-                    placeholder = BlurHashPainter(
-                        blurHash = state.disease.blurHash,
-                        width = 800,
-                        height = 800,
-                        scale = 0.1f,
-                    ),
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .aspectRatio(1f)
-                        .clip(RoundedCornerShape(16.dp))
-                )
+                SharedElement(
+                    key = state.disease.cacheKey,
+                    screenKey = "disease-detail"
+                ) {
+                    AsyncImage(
+                        model = ImageRequest.Builder(context)
+                            .data(state.disease.imageURL)
+                            .crossfade(true)
+                            .diskCacheKey(state.disease.cacheKey)
+                            .memoryCacheKey(state.disease.cacheKey)
+                            .build(),
+                        contentDescription = stringResource(R.string.coffee_leaf_image),
+                        contentScale = ContentScale.Crop,
+                        error = painterResource(R.drawable.no_image),
+                        placeholder = BlurHashPainter(
+                            blurHash = state.disease.blurHash,
+                            width = 800,
+                            height = 800,
+                            scale = 0.1f,
+                        ),
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .aspectRatio(1f)
+                            .clip(RoundedCornerShape(16.dp))
+                    )
+                }
 
                 Badge(
                     modifier = Modifier
