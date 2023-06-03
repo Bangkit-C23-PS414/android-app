@@ -23,7 +23,6 @@ import coil.request.ImageRequest
 import com.bangkit.coffee.R
 import com.bangkit.coffee.domain.DiseaseDummy
 import com.bangkit.coffee.domain.entity.Disease
-import com.bangkit.coffee.shared.const.DEFAULT_BLUR_HASH
 import com.bangkit.coffee.shared.theme.AppTheme
 import com.wajahatiqbal.blurhash.BlurHashPainter
 
@@ -46,18 +45,18 @@ fun DiseaseCard(
                 .clip(CardDefaults.shape)
                 .aspectRatio(1.3f),
             model = ImageRequest.Builder(context)
-                .data(disease.imageUrl)
+                .data(disease.imageURL)
                 .crossfade(true)
-                .diskCacheKey("disease-${disease.id}")
-                .memoryCacheKey("disease-${disease.id}")
+                .diskCacheKey(disease.cacheKey)
+                .memoryCacheKey(disease.cacheKey)
                 .build(),
             contentDescription = stringResource(R.string.image),
             contentScale = ContentScale.Crop,
             error = painterResource(R.drawable.no_image),
             placeholder = BlurHashPainter(
-                blurHash = DEFAULT_BLUR_HASH,
-                width = 290,
-                height = 200,
+                blurHash = disease.blurHash,
+                width = 1,
+                height = 1,
                 scale = 0.1f,
             )
         )

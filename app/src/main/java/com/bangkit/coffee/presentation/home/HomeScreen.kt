@@ -1,6 +1,7 @@
 package com.bangkit.coffee.presentation.home
 
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ExperimentalLayoutApi
 import androidx.compose.foundation.layout.FlowRow
@@ -34,6 +35,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.bangkit.coffee.R
 import com.bangkit.coffee.domain.DiseaseDummy
+import com.bangkit.coffee.presentation.home.components.DetectionStep
 import com.bangkit.coffee.presentation.home.components.DetectionStepCard
 import com.bangkit.coffee.presentation.home.components.DiseaseCard
 import com.bangkit.coffee.shared.theme.AppTheme
@@ -129,13 +131,15 @@ fun HomeScreen(
                 state.diseases.forEach { disease ->
                     DiseaseCard(
                         disease = disease,
-                        onClick = { actions.navigateToDetailDisease("42") },
+                        onClick = { actions.navigateToDetailDisease(disease.id) },
                         modifier = Modifier
                             .weight(1f, true)
                             .padding(bottom = 8.dp)
                             .testTag("DiseaseCard")
                     )
                 }
+
+                Box(modifier = Modifier.weight(1f, true))
             }
         }
     }
@@ -147,14 +151,8 @@ private fun HomeScreenPreview() {
     AppTheme {
         HomeScreen(
             state = HomeState(
-                detectionSteps = List(3) { step ->
-                    DetectionStep(
-                        R.drawable.detect_1,
-                        R.string.how_to_detect_step_1,
-                        step
-                    )
-                },
-                diseases = List(6) { DiseaseDummy }
+                detectionSteps = DetectionStep.defaultList,
+                diseases = List(3) { DiseaseDummy }
             )
         )
     }

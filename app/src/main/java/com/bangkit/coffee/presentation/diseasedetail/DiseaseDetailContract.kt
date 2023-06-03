@@ -3,6 +3,7 @@ package com.bangkit.coffee.presentation.diseasedetail
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.staticCompositionLocalOf
+import com.bangkit.coffee.domain.DiseaseDummy
 import com.bangkit.coffee.domain.entity.Disease
 
 
@@ -10,8 +11,7 @@ import com.bangkit.coffee.domain.entity.Disease
  * UI State that represents DiseaseDetailScreen
  **/
 data class DiseaseDetailState(
-    val loading: Boolean = true,
-    val disease: Disease? = null
+    val disease: Disease = DiseaseDummy
 )
 
 /**

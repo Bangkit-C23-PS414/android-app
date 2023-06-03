@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="diseases_id">
+        <item>miner</item>
+        <item>rust</item>
+        <item>phoma</item>
+    </string-array>
+
+    <string-array name="diseases_name">
+        <item>Coffee Leaf Miner</item>
+        <item>Coffee Leaf Rust</item>
+        <item>Phoma Costaricensis</item>
+    </string-array>
+
+    <string-array name="diseases_description">
+        <item>The Leucoptera coffeella Guer is a small insect that is a significant pest of coffee plants. It is a tiny, light-colored moth with large antennas. It is native to South America and is found in coffee-growing regions worldwide. The female moth lays its eggs on the undersides of coffee leaves. After about a week, the larvae hatch and burrow into the leaves to feed for about 3 weeks. This feeding causes damage to the leaf tissue, resulting in visible brown spots or “mines” that can reduce the foliage and photosynthetic ability of the coffee tree if found in large numbers. The population of coffee leaf miners reaches its peak during the summer but decreases significantly during the rainy season.</item>
+        <item>Scientifically known as Hemileia vastatrix Berk &amp; Broome, this fungal disease affects coffee plants and causes yellow-orange spots on the leaves, which lead to defoliation and decreased coffee production. In addition, it does not allow the coffee berries to ripen at the same pace, which makes it take longer to collect the crop. The yellow spots under the leaves are dusty spores that disseminate quickly, especially in warm climates. It is spread by windborne spores of the fungus climate change, and increased global trade has led to its spread worldwide. I have mentioned it in previous articles, as the impact has been huge in recent years, and no coffee plantation worldwide is exempt from its threat.</item>
+        <item>This fungal disease occurs in coffee plantations that lack proper nutrient balance. It spreads through wind and rain splash and thrives in humid and warm environments. The symptoms can be observed in newly generated leaves and tissue, appearing as brown spots that start at the edges of the coffee leaves and spread toward the center. The disease can also be seen on the branches, starting at the spots where leaves have fallen.</item>
+    </string-array>
+
+    <string-array name="diseases_image_url">
+        <item>https://storage.googleapis.com/c23-ps414-statics/static/miner.webp</item>
+        <item>https://storage.googleapis.com/c23-ps414-statics/static/rust.webp</item>
+        <item>https://storage.googleapis.com/c23-ps414-statics/static/phoma.webp</item>
+    </string-array>
+
+    <string-array name="diseases_blurhash">
+        <item>KJG8_v}b+%yVJ59a9EtRE2</item>
+        <item>KDEMEw?ZIb~pSgoh03Rjs%</item>
+        <item>K9E4VD01$:IA??03-.RR$+</item>
+    </string-array>
+
+    <array name="diseases_controls">
+        <item>@array/miner_controls</item>
+        <item>@array/rust_controls</item>
+        <item>@array/phoma_controls</item>
+    </array>
+</resources>
