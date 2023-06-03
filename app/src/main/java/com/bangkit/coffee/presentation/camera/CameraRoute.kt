@@ -50,7 +50,9 @@ fun rememberCameraActions(
             cancelCapturing = coordinator::cancelCapturing,
             setImage = coordinator::setImage,
             clearImage = coordinator::clearImage,
-            uploadImage = coordinator::uploadImage
+            uploadImage = coordinator::uploadImage,
+            toggleLocalClassifier = coordinator::toggleLocalClassifier,
+            setLocalClassifierResult = coordinator::setLocalClassifierResult
         )
     }
 }

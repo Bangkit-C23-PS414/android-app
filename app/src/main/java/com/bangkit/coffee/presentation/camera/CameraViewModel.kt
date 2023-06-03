@@ -40,6 +40,15 @@ class CameraViewModel @Inject constructor(
         it.copy(image = null, isCapturing = false)
     }
 
+    /* TFLite functionality */
+    fun toggleLocalClassifier(state: Boolean) {
+        _stateFlow.update { it.copy(useLocalClassifier = state) }
+    }
+
+    fun setLocalClassifierResult(result: LocalClassifierResult) {
+        _stateFlow.update { it.copy(localClassifierResult = result) }
+    }
+
     /* Network functionality */
     fun uploadImage() {
         viewModelScope.launch(Dispatchers.IO) {

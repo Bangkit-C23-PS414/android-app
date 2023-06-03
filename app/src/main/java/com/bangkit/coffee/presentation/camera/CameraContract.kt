@@ -17,6 +17,17 @@ data class CameraState(
     val isCapturing: Boolean = false,
     val inProgress: Boolean = false,
     val uploaded: Boolean = false,
+    val useLocalClassifier: Boolean = false,
+    val localClassifierResult: LocalClassifierResult? = null,
+)
+
+/**
+ * Contract for local classifier result
+ */
+data class LocalClassifierResult(
+    val label: String,
+    val confidence: Float,
+    val inferenceTime: Long,
 )
 
 /**
@@ -31,7 +42,9 @@ data class CameraActions(
     val cancelCapturing: () -> Unit = {},
     val setImage: (Uri) -> Unit = {},
     val clearImage: () -> Unit = {},
-    val uploadImage: () -> Unit = {}
+    val uploadImage: () -> Unit = {},
+    val toggleLocalClassifier: (Boolean) -> Unit = {},
+    val setLocalClassifierResult: (LocalClassifierResult) -> Unit = {}
 )
 
 /**

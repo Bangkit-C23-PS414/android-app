@@ -25,6 +25,12 @@ class CameraCoordinator(
     fun clearImage() = viewModel.clearImage()
 
     fun uploadImage() = viewModel.uploadImage()
+
+    fun toggleLocalClassifier(state: Boolean) = viewModel.toggleLocalClassifier(state)
+
+    fun setLocalClassifierResult(result: LocalClassifierResult) {
+        viewModel.setLocalClassifierResult(result)
+    }
 }
 
 @Composable

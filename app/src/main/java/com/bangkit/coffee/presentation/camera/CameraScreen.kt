@@ -21,6 +21,7 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Switch
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -28,6 +29,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.semantics.contentDescription
+import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
@@ -74,6 +77,19 @@ fun CameraScreen(
                             contentDescription = stringResource(R.string.close),
                         )
                     }
+                },
+                actions = {
+                    if (state.image == null) {
+                        val contentDescriptionText = stringResource(R.string.use_local_preview)
+
+                        Switch(
+                            modifier = Modifier
+                                .semantics { contentDescription = contentDescriptionText }
+                                .padding(end = 16.dp),
+                            checked = state.useLocalClassifier,
+                            onCheckedChange = actions.toggleLocalClassifier
+                        )
+                    }
                 }
             )
         },
@@ -92,6 +108,8 @@ fun CameraScreen(
                         modifier = Modifier.padding(contentPadding),
                         isFlashOn = state.isFlashOn,
                         isCapturing = state.isCapturing,
+                        useLocalClassifier = state.useLocalClassifier,
+                        localClassifierResult = state.localClassifierResult,
                         pickFromGallery = {
                             singlePhotoPickerLauncher.launch(
                                 PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly)
@@ -165,4 +183,3 @@ private fun CameraScreenPreview() {
         CameraScreen()
     }
 }
-

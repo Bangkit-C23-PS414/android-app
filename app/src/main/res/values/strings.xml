@@ -102,4 +102,7 @@
     <string name="retry">Retry</string>
     <string name="history_empty">Go take a picture. It will show up here</string>
     <string name="lipsum" translatable="false">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</string>
+    <string name="percentage_template" translatable="false">%.2f\%%</string>
+    <string name="inference_time">Inference time is %d milliseconds</string>
+    <string name="use_local_preview">Use local preview</string>
 </resources>
