@@ -15,7 +15,6 @@ import com.bangkit.coffee.domain.mapper.toLocal
 import com.bangkit.coffee.shared.const.DEFAULT_PER_PAGE
 import com.bangkit.coffee.shared.util.parse
 import com.bangkit.coffee.shared.wrapper.Resource
-import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import okhttp3.MediaType.Companion.toMediaType
@@ -49,7 +48,7 @@ class ImageDetectionRepository @Inject constructor(
         }
     }
 
-    @OptIn(ExperimentalPagingApi::class, ExperimentalCoroutinesApi::class)
+    @OptIn(ExperimentalPagingApi::class)
     fun getPager(
         labels: List<String>,
         startDate: Long? = null,

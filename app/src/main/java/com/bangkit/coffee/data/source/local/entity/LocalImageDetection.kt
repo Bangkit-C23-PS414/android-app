@@ -7,7 +7,11 @@ import java.time.LocalDateTime
 
 @Entity(
     tableName = "image_detections",
-    indices = [Index("createdAt"), Index("label"), Index("syncAt")]
+    indices = [
+        Index("createdAt", orders = [Index.Order.DESC]),
+        Index("label"),
+        Index("syncAt", orders = [Index.Order.ASC]),
+    ]
 )
 data class LocalImageDetection(
     @PrimaryKey

@@ -41,7 +41,6 @@ class HistoryViewModel @Inject constructor(
         .flowOn(Dispatchers.IO)
         .cachedIn(viewModelScope)
 
-    @OptIn(ExperimentalCoroutinesApi::class)
     private fun filterHistory(formData: FilterHistoryForm): Flow<PagingData<HistoryItem>> {
         return imageDetectionRepository
             .getPager(
