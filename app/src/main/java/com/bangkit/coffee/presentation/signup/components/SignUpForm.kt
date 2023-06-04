@@ -11,7 +11,7 @@ data class SignUpForm(
     @EmailAddress
     val email: String = "",
 
-    @MinLength(6)
+    @MinLength(8)
     val password: String = "",
 
     @SignUpConfirmPassword

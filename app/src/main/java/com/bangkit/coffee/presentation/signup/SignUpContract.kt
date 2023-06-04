@@ -3,6 +3,8 @@ package com.bangkit.coffee.presentation.signup
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.staticCompositionLocalOf
+import com.bangkit.coffee.presentation.signup.components.SignUpForm
+import com.bangkit.coffee.shared.wrapper.Event
 
 
 /**
@@ -10,6 +12,7 @@ import androidx.compose.runtime.staticCompositionLocalOf
  **/
 data class SignUpState(
     val loading: Boolean = false,
+    val message: Event<String>? = null,
 )
 
 /**
@@ -17,8 +20,7 @@ data class SignUpState(
  * passed to the coordinator to handle
  **/
 data class SignUpActions(
-    val signUp: () -> Unit = {},
-    val setPasswordVisibility: () -> Unit = {},
+    val signUp: (SignUpForm) -> Unit = {},
     val navigateToDashboard: () -> Unit = {}
 )
 

@@ -234,8 +234,14 @@ fun SignUpScreen(
                 }
             }
             Spacer(modifier = Modifier.height(12.dp))
+
+            val formData = formState.value
             Button(
-                onClick = actions.navigateToDashboard,
+                onClick = {
+                    if (formData is FormResult.Success && !state.loading){
+                        actions.signUp(formData.data)
+                    }
+                },
                 modifier = Modifier
                     .fillMaxWidth()
                     .testTag("SignUpButton"),
