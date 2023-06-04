@@ -142,7 +142,7 @@ fun ProfileScreen(
 
             ListItem(
                 modifier = Modifier
-                    .clickable { }
+                    .clickable { actions.signOut() }
                     .testTag("SignOut"),
                 headlineContent = {
                     Text(text = stringResource(R.string.sign_out))

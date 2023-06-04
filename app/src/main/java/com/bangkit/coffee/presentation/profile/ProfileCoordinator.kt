@@ -25,6 +25,7 @@ class ProfileCoordinator(
     fun openChangePassword() = viewModel.openChangePassword()
     fun closeChangePassword() = viewModel.closeChangePassword()
     fun changePassword(form: ChangePasswordForm) = viewModel.changePassword(form)
+    fun signOut() = viewModel.signOut()
 }
 
 @Composable

@@ -111,7 +111,9 @@ fun Router(
         }
 
         composable(Screen.Profile.route) {
-            ProfileRoute()
+            ProfileRoute(
+                navigateToWelcome = { navController.navigate(Screen.Welcome.route)}
+            )
         }
 
         // Disease Detail

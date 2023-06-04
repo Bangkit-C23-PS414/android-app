@@ -6,6 +6,7 @@ import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.staticCompositionLocalOf
 import com.bangkit.coffee.presentation.profile.components.ChangePasswordForm
 import com.bangkit.coffee.presentation.profile.components.EditProfileForm
+import com.bangkit.coffee.shared.wrapper.Event
 
 
 /**
@@ -14,6 +15,8 @@ import com.bangkit.coffee.presentation.profile.components.EditProfileForm
 data class ProfileState(
     val editProfileVisible: Boolean = false,
     val changePasswordVisible: Boolean = false,
+    val message: Event<String>? = null,
+    val signedOut: Boolean = false,
 )
 
 /**
@@ -27,7 +30,9 @@ data class ProfileActions(
     val editProfile: (EditProfileForm) -> Unit = {},
     val openChangePassword: () -> Unit = {},
     val closeChangePassword: () -> Unit = {},
-    val changePassword: (ChangePasswordForm) -> Unit = {}
+    val changePassword: (ChangePasswordForm) -> Unit = {},
+    val signOut: () -> Unit = {},
+    val navigateToWelcome: () -> Unit = {},
 )
 
 /**
