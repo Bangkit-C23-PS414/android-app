@@ -1,5 +1,7 @@
 package com.bangkit.coffee.presentation.history
 
+import androidx.compose.animation.core.tween
+import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -47,7 +49,7 @@ import com.google.accompanist.swiperefresh.SwipeRefresh
 import com.google.accompanist.swiperefresh.rememberSwipeRefreshState
 import kotlinx.coroutines.flow.flowOf
 
-@OptIn(ExperimentalMaterial3Api::class)
+@OptIn(ExperimentalMaterial3Api::class, ExperimentalFoundationApi::class)
 @Composable
 fun HistoryScreen(
     state: HistoryState = HistoryState(),
@@ -112,17 +114,18 @@ fun HistoryScreen(
                             ImageDetectionCard(
                                 imageDetection = item.value,
                                 onClick = { actions.navigateToDetailImageDetection(item.value.id) },
-                                modifier = Modifier.testTag("ImageDetectionCard")
+                                modifier = Modifier
+                                    .animateItemPlacement(animationSpec = tween(600))
+                                    .testTag("ImageDetectionCard")
                             )
                         }
 
                         is HistoryItem.Separator -> {
                             ImageDetectionGroupHeader(
                                 date = item.date,
-                                modifier = Modifier.padding(
-                                    bottom = 4.dp,
-                                    top = if (item.first) 0.dp else 8.dp
-                                )
+                                modifier = Modifier
+                                    .padding(bottom = 4.dp, top = if (item.first) 0.dp else 8.dp)
+                                    .animateItemPlacement(animationSpec = tween(600))
                             )
                         }
 

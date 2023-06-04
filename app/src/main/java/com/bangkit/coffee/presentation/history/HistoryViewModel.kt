@@ -20,7 +20,6 @@ import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.flatMapLatest
 import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.flow.map
-import kotlinx.coroutines.flow.mapLatest
 import kotlinx.coroutines.flow.update
 import javax.inject.Inject
 
@@ -39,6 +38,7 @@ class HistoryViewModel @Inject constructor(
         .map { it.filterFormData }
         .distinctUntilChanged()
         .flatMapLatest { formData -> filterHistory(formData) }
+        .flowOn(Dispatchers.IO)
         .cachedIn(viewModelScope)
 
     @OptIn(ExperimentalCoroutinesApi::class)
@@ -49,22 +49,18 @@ class HistoryViewModel @Inject constructor(
                 startDate = if (formData.allTime) null else formData.dateRange.startDate.toEpochMilli(),
                 endDate = if (formData.allTime) null else formData.dateRange.endDate.toEpochMilli(),
             )
-            .mapLatest { pagingData -> pagingData.map { HistoryItem.Data(it) } }
-            .mapLatest { pagingData ->
+            .map { pagingData -> pagingData.map { HistoryItem.Data(it) } }
+            .map { pagingData ->
                 pagingData.insertSeparators(TerminalSeparatorType.SOURCE_COMPLETE) { before, after ->
                     if (before == null && after != null) {
                         HistoryItem.Separator(after.value.createdAt.toLocalDate(), true)
                     } else if (before != null && after != null && shouldSeparate(before, after)) {
-                        HistoryItem.Separator(
-                            after.value.createdAt.toLocalDate(),
-                            false
-                        )
+                        HistoryItem.Separator(after.value.createdAt.toLocalDate(), false)
                     } else {
                         null
                     }
                 }
             }
-            .flowOn(Dispatchers.Default)
     }
 
     fun toggleFilter() {
