@@ -104,4 +104,5 @@
     <string name="unknown">Tidak Diketahui</string>
     <string name="still_processing">Masih diproses</string>
     <string name="please_wait">Mohon tunggu</string>
+    <string name="error_to_load_data_pull_to_try_again">Terjadi kesalahan ketika memuat data. Tarik kebawah untuk mecoba lagi</string>
 </resources>

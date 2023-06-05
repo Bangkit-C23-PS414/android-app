@@ -8,6 +8,7 @@ import retrofit2.http.GET
 import retrofit2.http.Multipart
 import retrofit2.http.POST
 import retrofit2.http.Part
+import retrofit2.http.Path
 import retrofit2.http.Query
 
 interface ImageDetectionService {
@@ -15,21 +16,21 @@ interface ImageDetectionService {
     @Multipart
     @POST("/image-detections/create")
     suspend fun create(
-        @Part file: MultipartBody.Part
+        @Part file: MultipartBody.Part,
+        @Part email: MultipartBody.Part
     ): ResponseWrapper<RemoteImageDetection>
 
-    /*@GET("/image-detections/fetch")*/
-    @GET("/megatron")
+    @GET("/image-detections/fetch")
     suspend fun fetch(
         @Query("after") after: String? = null,
         @Query("startDate") startDate: Long? = null,
         @Query("endDate") endDate: Long? = null,
-        @Query("labels") labels: List<String>? = null,
+        @Query("labels") labels: String? = null,
         @Query("perPage") perPage: Int = DEFAULT_PER_PAGE
-    ): List<RemoteImageDetection>
+    ): ResponseWrapper<List<RemoteImageDetection>>
 
-    @GET("/freaky")
+    @GET("/image-detections/fetch/{id}")
     suspend fun getOne(
-        @Query("id") id: String
-    ) : RemoteImageDetection
+        @Path("id") id: String
+    ): RemoteImageDetection
 }

@@ -50,26 +50,29 @@ object NetworkModule {
     @Provides
     @Named("AuthService")
     fun provideAuthRetrofit(
-        authInterceptor: Interceptor,
         loggingInterceptor: HttpLoggingInterceptor
     ): Retrofit {
         val client = OkHttpClient.Builder()
             .addInterceptor(loggingInterceptor)
-            .addInterceptor(authInterceptor)
             .build()
 
-        return Retrofit.Builder().baseUrl("").client(client)
-            .addConverterFactory(GsonConverterFactory.create()).build()
+        return Retrofit.Builder()
+            .baseUrl("")
+            .client(client)
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
     }
 
     @Singleton
     @Provides
     @Named("ImageService")
     fun provideImageRetrofit(
-        loggingInterceptor: HttpLoggingInterceptor
+        loggingInterceptor: HttpLoggingInterceptor,
+        authInterceptor: Interceptor,
     ): Retrofit {
         val client = OkHttpClient.Builder()
             .addInterceptor(loggingInterceptor)
+            .addInterceptor(authInterceptor)
             .build()
 
         return Retrofit.Builder()

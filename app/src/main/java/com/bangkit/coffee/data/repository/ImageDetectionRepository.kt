@@ -38,12 +38,17 @@ class ImageDetectionRepository @Inject constructor(
                 createFormData(
                     name = "image",
                     filename = file.name,
-                    body = file.asRequestBody("image/jpg".toMediaType())
+                    body = file.asRequestBody("image/jpeg".toMediaType())
+                ),
+                createFormData(
+                    name = "email",
+                    value = "myxzlpltk@gmail.com"
                 )
             )
 
             Resource.Success(response.data.toExternal())
         } catch (e: HttpException) {
+            e.printStackTrace()
             Resource.Error(e.parse().message)
         }
     }

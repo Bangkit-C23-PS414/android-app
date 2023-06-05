@@ -173,11 +173,13 @@ fun HistoryScreen(
                 }
             }
 
+            if (pagerState.loadState.refresh is LoadState.Error) {
+                DisplayErrorFragment(message = stringResource(R.string.error_to_load_data_pull_to_try_again))
+            }
+
             // If empty
-            if (pagerState.loadState.append.endOfPaginationReached && pagerState.itemCount == 0) {
-                DisplayErrorFragment(
-                    message = stringResource(R.string.history_empty)
-                )
+            if (pagerState.loadState.refresh.endOfPaginationReached && pagerState.itemCount == 0) {
+                DisplayErrorFragment(message = stringResource(R.string.history_empty))
             }
         }
     }

@@ -60,11 +60,11 @@ class ImageDetectionRemoteMediator @Inject constructor(
                 after = loadKey,
                 startDate = startDate,
                 endDate = endDate,
-                labels = labels,
+                labels = if (labels.isEmpty()) null else labels.joinToString(","),
                 perPage = state.config.pageSize
             )
             // Convert result
-            val data = response.toExternal()
+            val data = response.data.toExternal()
             // Save result
             database.withTransaction {
                 // Delete
@@ -80,6 +80,9 @@ class ImageDetectionRemoteMediator @Inject constructor(
         } catch (e: IOException) {
             MediatorResult.Error(e)
         } catch (e: HttpException) {
+            MediatorResult.Error(e)
+        } catch (e: Exception) {
+            e.printStackTrace()
             MediatorResult.Error(e)
         }
     }

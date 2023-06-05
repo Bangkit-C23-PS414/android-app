@@ -109,4 +109,5 @@
     <string name="unknown">Unknown</string>
     <string name="still_processing">Still processing…</string>
     <string name="please_wait">Please wait</string>
+    <string name="error_to_load_data_pull_to_try_again">Error to load data. Pull to try again.</string>
 </resources>
