@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string-array name="diseases_name">
-        <item>Coffee Leaf Miner</item>
-        <item>Coffee Leaf Rust</item>
-        <item>Phoma Costaricensis</item>
+        <item>@string/label_miner</item>
+        <item>@string/label_rust</item>
+        <item>@string/label_phoma</item>
     </string-array>
 
     <string-array name="diseases_description">

@@ -1,6 +1,5 @@
 package com.bangkit.coffee.presentation.history
 
-import androidx.compose.animation.core.tween
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -115,7 +114,7 @@ fun HistoryScreen(
                                 imageDetection = item.value,
                                 onClick = { actions.navigateToDetailImageDetection(item.value.id) },
                                 modifier = Modifier
-                                    .animateItemPlacement(animationSpec = tween(600))
+                                    .animateItemPlacement()
                                     .testTag("ImageDetectionCard")
                             )
                         }
@@ -125,7 +124,7 @@ fun HistoryScreen(
                                 date = item.date,
                                 modifier = Modifier
                                     .padding(bottom = 4.dp, top = if (item.first) 0.dp else 8.dp)
-                                    .animateItemPlacement(animationSpec = tween(600))
+                                    .animateItemPlacement()
                             )
                         }
 

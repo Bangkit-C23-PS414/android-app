@@ -14,7 +14,7 @@ interface ImageDetectionDao {
     /* Paging functionality */
     @Query(
         "SELECT * FROM image_detections " +
-                "WHERE label IN (:labels) " +
+                "WHERE (isDetected == 0 OR label IN (:labels)) " +
                 "AND (:startDate IS NULL OR createdAt >= :startDate) " +
                 "AND (:endDate IS NULL OR createdAt <= :endDate) " +
                 "ORDER BY createdAt DESC"
@@ -27,7 +27,7 @@ interface ImageDetectionDao {
 
     @Query(
         "SELECT * FROM image_detections " +
-                "WHERE label IN (:labels) " +
+                "WHERE (isDetected == 0 OR label IN (:labels)) " +
                 "AND (:startDate IS NULL OR createdAt >= :startDate) " +
                 "AND (:endDate IS NULL OR createdAt <= :endDate) " +
                 "ORDER BY createdAt ASC " +
@@ -39,8 +39,17 @@ interface ImageDetectionDao {
         endDate: Long? = null
     ): LocalImageDetection?
 
-    @Query("SELECT MIN(syncAt) FROM image_detections")
-    fun getLastUpdated(): Long?
+    @Query(
+        "SELECT MIN(syncAt) FROM image_detections " +
+                "WHERE (isDetected == 0 OR label IN (:labels)) " +
+                "AND (:startDate IS NULL OR createdAt >= :startDate) " +
+                "AND (:endDate IS NULL OR createdAt <= :endDate) "
+    )
+    fun getLastUpdated(
+        labels: List<String>,
+        startDate: Long? = null,
+        endDate: Long? = null
+    ): Long?
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertAll(list: List<LocalImageDetection>)

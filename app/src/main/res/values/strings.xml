@@ -84,7 +84,7 @@
     <string name="save">Save</string>
     <string name="date_range_format" translatable="false">%s - %s</string>
     <string name="detection_result">Detection Result</string>
-    <string name="we_found_a_disease">We found a disease in your coffee</string>
+    <string name="we_found_a_disease">We found a disease</string>
     <string name="accuracy_format">%.1f\%% Accuracy</string>
     <string name="detected_at_format">Detected at %s</string>
     <string name="how_to_control">How to control?</string>
@@ -102,4 +102,11 @@
     <string name="retry">Retry</string>
     <string name="history_empty">Go take a picture. It will show up here</string>
     <string name="lipsum" translatable="false">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</string>
+    <string name="label_healthy">Healthy</string>
+    <string name="label_rust" translatable="false">Coffee Leaf Rust</string>
+    <string name="label_miner" translatable="false">Coffee Leaf Miner</string>
+    <string name="label_phoma" translatable="false">Phoma Costaricensis</string>
+    <string name="unknown">Unknown</string>
+    <string name="still_processing">Still processing…</string>
+    <string name="please_wait">Please wait</string>
 </resources>

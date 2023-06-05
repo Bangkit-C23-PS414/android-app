@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string-array name="diseases_id">
-        <item>miner</item>
-        <item>rust</item>
-        <item>phoma</item>
+        <item>Miner</item>
+        <item>Rust</item>
+        <item>Phoma</item>
     </string-array>
 
     <string-array name="diseases_name">

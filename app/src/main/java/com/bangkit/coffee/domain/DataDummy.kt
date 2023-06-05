@@ -28,7 +28,7 @@ val ImageDetectionDummy
         "test@gmail.com",
         "https://picsum.photos/300",
         true,
-        "Cercospora Leaf Spot",
+        "Rust",
         90f,
         1200,
         LocalDateTime.now(),

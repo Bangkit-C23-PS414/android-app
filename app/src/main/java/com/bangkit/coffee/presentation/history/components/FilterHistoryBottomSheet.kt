@@ -190,7 +190,7 @@ fun FilterHistoryBottomSheet(
                             onCheckedChange = null
                         )
                         Text(
-                            text = detectionResult.name,
+                            text = stringResource(detectionResult.name),
                             style = MaterialTheme.typography.bodyLarge,
                             modifier = Modifier.padding(start = 16.dp)
                         )

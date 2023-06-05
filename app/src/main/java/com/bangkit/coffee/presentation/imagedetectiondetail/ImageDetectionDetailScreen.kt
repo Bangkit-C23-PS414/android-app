@@ -49,6 +49,7 @@ import com.bangkit.coffee.R
 import com.bangkit.coffee.presentation.imagedetectiondetail.components.AccuracyBadge
 import com.bangkit.coffee.presentation.imagedetectiondetail.components.DiseaseFoundInfo
 import com.bangkit.coffee.presentation.imagedetectiondetail.components.HealthyInfo
+import com.bangkit.coffee.presentation.imagedetectiondetail.components.ProcessingInfo
 import com.bangkit.coffee.shared.const.DEFAULT_BLUR_HASH
 import com.bangkit.coffee.shared.theme.AppTheme
 import com.bangkit.coffee.shared.util.toDateTimeString
@@ -173,21 +174,22 @@ fun ImageDetectionDetailScreen(
                             highlight = PlaceholderHighlight.fade(),
                         )
                 ) {
-                    if (state.imageDetection != null && state.disease != null) {
-                        DiseaseFoundInfo(
-                            diseaseName = state.disease.name,
-                        )
+                    if (state.imageDetection != null && !state.imageDetection.isDetected) {
+                        ProcessingInfo()
+                    } else if (state.imageDetection != null && state.disease != null) {
+                        DiseaseFoundInfo(diseaseName = state.disease.name,)
                     } else if (state.imageDetection != null) {
                         HealthyInfo()
                     }
                 }
 
+                // Detected at
                 Row(
                     verticalAlignment = Alignment.CenterVertically,
                     modifier = Modifier
                         .padding(bottom = 16.dp)
                         .placeholder(
-                            visible = state.imageDetection == null,
+                            visible = state.imageDetection?.isDetected != true,
                             highlight = PlaceholderHighlight.fade(),
                         )
                 ) {
@@ -209,7 +211,7 @@ fun ImageDetectionDetailScreen(
 
                 // Description section
                 Text(
-                    text = if (state.imageDetection == null) {
+                    text = if (state.imageDetection?.isDetected != true) {
                         stringResource(R.string.lipsum)
                     } else if (state.disease == null) {
                         stringResource(R.string.healthy_explanation)
@@ -220,7 +222,7 @@ fun ImageDetectionDetailScreen(
                     modifier = Modifier
                         .padding(bottom = 16.dp)
                         .placeholder(
-                            visible = state.imageDetection == null,
+                            visible = state.imageDetection?.isDetected != true,
                             highlight = PlaceholderHighlight.fade(),
                         )
                 )

@@ -23,8 +23,10 @@ import coil.compose.AsyncImage
 import coil.request.ImageRequest
 import com.bangkit.coffee.R
 import com.bangkit.coffee.domain.ImageDetectionDummy
+import com.bangkit.coffee.domain.entity.DetectionResult
 import com.bangkit.coffee.domain.entity.ImageDetection
 import com.bangkit.coffee.shared.const.DEFAULT_BLUR_HASH
+import com.bangkit.coffee.shared.const.LABEL_HEALTHY
 import com.bangkit.coffee.shared.theme.AppTheme
 import com.bangkit.coffee.shared.util.toTimeString
 import com.wajahatiqbal.blurhash.BlurHashPainter
@@ -41,6 +43,15 @@ fun ImageDetectionCard(
     Card(
         onClick = onClick,
         modifier = modifier,
+        colors = CardDefaults.cardColors(
+            containerColor = if (!imageDetection.isDetected) {
+                MaterialTheme.colorScheme.outlineVariant
+            } else if (imageDetection.label == LABEL_HEALTHY) {
+                MaterialTheme.colorScheme.secondaryContainer
+            } else {
+                MaterialTheme.colorScheme.errorContainer
+            }
+        )
     ) {
         AsyncImage(
             modifier = Modifier
@@ -63,8 +74,13 @@ fun ImageDetectionCard(
                 scale = 0.1f,
             )
         )
+
         Text(
-            text = imageDetection.label.orEmpty(),
+            text = if (imageDetection.isDetected) {
+                stringResource(DetectionResult.getName(imageDetection.label))
+            } else {
+                stringResource(R.string.still_processing)
+            },
             style = MaterialTheme.typography.titleSmall,
             fontWeight = FontWeight.Bold,
             maxLines = 1,
@@ -73,17 +89,19 @@ fun ImageDetectionCard(
                 .fillMaxWidth()
                 .padding(16.dp, 16.dp, 16.dp, 0.dp)
         )
-        imageDetection.detectedAt?.let { detectedAt ->
-            Text(
-                text = detectedAt.toTimeString(),
-                style = MaterialTheme.typography.bodySmall,
-                maxLines = 1,
-                overflow = TextOverflow.Ellipsis,
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(16.dp, 0.dp, 16.dp, 16.dp)
-            )
-        }
+        Text(
+            text = if (imageDetection.isDetected) {
+                imageDetection.detectedAt.toTimeString()
+            } else {
+                stringResource(R.string.please_wait)
+            },
+            style = MaterialTheme.typography.bodySmall,
+            maxLines = 1,
+            overflow = TextOverflow.Ellipsis,
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(16.dp, 0.dp, 16.dp, 16.dp)
+        )
     }
 }
 

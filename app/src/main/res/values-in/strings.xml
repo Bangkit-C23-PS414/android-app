@@ -83,7 +83,7 @@
     <string name="select_date_range">Pilih Rentang Tanggal</string>
     <string name="save">Simpan</string>
     <string name="detection_result">Hasil Deteksi</string>
-    <string name="we_found_a_disease">Kami menemukan penyakit pada kopi anda</string>
+    <string name="we_found_a_disease">Kami menemukan penyakit</string>
     <string name="accuracy_format">Akurasi %.1f\%%</string>
     <string name="detected_at_format">Terdeteksi pada %s</string>
     <string name="how_to_control">Bagaimana cara mengontrolnya?</string>
@@ -100,4 +100,8 @@
     <string name="cannot_load_more_data">Tidak dapat memuat data lagi</string>
     <string name="retry">Coba lagi</string>
     <string name="history_empty">Silahkan mengambil gambar dahulu. Nanti akan muncul disini</string>
+    <string name="label_healthy">Sehat</string>
+    <string name="unknown">Tidak Diketahui</string>
+    <string name="still_processing">Masih diproses</string>
+    <string name="please_wait">Mohon tunggu</string>
 </resources>

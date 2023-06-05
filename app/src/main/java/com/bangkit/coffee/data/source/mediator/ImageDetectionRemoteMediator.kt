@@ -28,7 +28,7 @@ class ImageDetectionRemoteMediator @Inject constructor(
 
     override suspend fun initialize(): InitializeAction {
         val cacheTimeout = TimeUnit.MILLISECONDS.convert(1, TimeUnit.HOURS)
-        val lastUpdated = localDataSource.getLastUpdated() ?: 0
+        val lastUpdated = localDataSource.getLastUpdated(labels, startDate, endDate) ?: 0
         val now = System.currentTimeMillis()
 
         return if (now - lastUpdated <= cacheTimeout) {
