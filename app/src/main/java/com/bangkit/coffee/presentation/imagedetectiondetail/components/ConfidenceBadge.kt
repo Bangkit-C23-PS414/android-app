@@ -15,16 +15,16 @@ import com.bangkit.coffee.R
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun AccuracyBadge(
+fun ConfidenceBadge(
     modifier: Modifier = Modifier,
-    accuracy: Float
+    confidence: Float
 ) {
     Badge(
         containerColor = MaterialTheme.colorScheme.tertiaryContainer,
         modifier = modifier.padding(16.dp)
     ) {
         Text(
-            text = stringResource(R.string.accuracy_format, accuracy),
+            text = stringResource(R.string.confidence_format, confidence),
             style = MaterialTheme.typography.labelMedium,
             fontWeight = FontWeight.Bold
         )
@@ -34,7 +34,7 @@ fun AccuracyBadge(
 @Preview(name = "AccuracyBadge")
 @Composable
 private fun PreviewAccuracyBadge() {
-    AccuracyBadge(
-        accuracy = 90f
+    ConfidenceBadge(
+        confidence = 90f
     )
 }

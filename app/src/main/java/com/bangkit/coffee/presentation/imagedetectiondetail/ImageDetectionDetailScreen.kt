@@ -46,7 +46,7 @@ import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 import coil.request.ImageRequest
 import com.bangkit.coffee.R
-import com.bangkit.coffee.presentation.imagedetectiondetail.components.AccuracyBadge
+import com.bangkit.coffee.presentation.imagedetectiondetail.components.ConfidenceBadge
 import com.bangkit.coffee.presentation.imagedetectiondetail.components.DiseaseFoundInfo
 import com.bangkit.coffee.presentation.imagedetectiondetail.components.HealthyInfo
 import com.bangkit.coffee.presentation.imagedetectiondetail.components.ProcessingInfo
@@ -155,8 +155,8 @@ fun ImageDetectionDetailScreen(
                     )
 
                     if (state.imageDetection?.isDetected == true) {
-                        AccuracyBadge(
-                            accuracy = state.imageDetection.accuracy,
+                        ConfidenceBadge(
+                            confidence = state.imageDetection.confidence,
                             modifier = Modifier.align(Alignment.BottomEnd)
                         )
                     }
