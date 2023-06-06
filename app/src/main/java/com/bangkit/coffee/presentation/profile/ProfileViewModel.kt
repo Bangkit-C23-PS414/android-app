@@ -2,9 +2,9 @@ package com.bangkit.coffee.presentation.profile
 
 import android.net.Uri
 import android.util.Log
-import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.bangkit.coffee.data.repository.ImageDetectionRepository
 import com.bangkit.coffee.data.repository.UserPreferencesRepository
 import com.bangkit.coffee.presentation.profile.components.ChangePasswordForm
 import com.bangkit.coffee.presentation.profile.components.EditProfileForm
@@ -18,7 +18,8 @@ import javax.inject.Inject
 
 @HiltViewModel
 class ProfileViewModel @Inject constructor(
-    private val userPreferencesRepository: UserPreferencesRepository
+    private val userPreferencesRepository: UserPreferencesRepository,
+    private val imageDetectionRepository: ImageDetectionRepository
 ) : ViewModel() {
 
     private val _stateFlow = MutableStateFlow(ProfileState())
@@ -55,6 +56,7 @@ class ProfileViewModel @Inject constructor(
     fun signOut(){
         viewModelScope.launch {
             userPreferencesRepository.deleteToken()
+            imageDetectionRepository.deleteAll()
             Log.d("SignOutViewModel", "token deleted")
 
             _stateFlow.update {

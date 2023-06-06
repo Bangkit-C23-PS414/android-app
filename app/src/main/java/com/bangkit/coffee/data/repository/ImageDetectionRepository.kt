@@ -100,4 +100,8 @@ class ImageDetectionRepository @Inject constructor(
             Resource.Error(context.getString(R.string.generic_error_message))
         }
     }
+
+    suspend fun deleteAll() {
+        return localDataSource.deleteAll()
+    }
 }
