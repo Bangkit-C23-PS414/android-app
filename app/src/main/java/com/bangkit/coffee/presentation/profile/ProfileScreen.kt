@@ -77,7 +77,7 @@ fun ProfileScreen(
                 contentAlignment = Alignment.BottomEnd
             ) {
                 AsyncImage(
-                    model = "https://picsum.photos/200",
+                    model = R.drawable.no_image,
                     contentDescription = stringResource(R.string.profile_photo),
                     modifier = Modifier
                         .size(150.dp)
