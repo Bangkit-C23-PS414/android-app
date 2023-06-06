@@ -178,7 +178,7 @@ fun HistoryScreen(
             }
 
             // If empty
-            if (pagerState.loadState.refresh.endOfPaginationReached && pagerState.itemCount == 0) {
+            if (pagerState.loadState.append.endOfPaginationReached && pagerState.itemCount == 0) {
                 DisplayErrorFragment(message = stringResource(R.string.history_empty))
             }
         }

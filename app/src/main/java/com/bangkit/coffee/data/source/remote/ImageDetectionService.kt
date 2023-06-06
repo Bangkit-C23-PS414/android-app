@@ -16,8 +16,7 @@ interface ImageDetectionService {
     @Multipart
     @POST("/image-detections/create")
     suspend fun create(
-        @Part file: MultipartBody.Part,
-        @Part email: MultipartBody.Part
+        @Part image: MultipartBody.Part
     ): ResponseWrapper<RemoteImageDetection>
 
     @GET("/image-detections/fetch")
@@ -32,5 +31,5 @@ interface ImageDetectionService {
     @GET("/image-detections/fetch/{id}")
     suspend fun getOne(
         @Path("id") id: String
-    ): RemoteImageDetection
+    ): ResponseWrapper<RemoteImageDetection>
 }

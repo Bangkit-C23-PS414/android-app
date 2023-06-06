@@ -1,10 +1,12 @@
 package com.bangkit.coffee.data.repository
 
+import android.content.Context
 import androidx.paging.ExperimentalPagingApi
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
 import androidx.paging.map
+import com.bangkit.coffee.R
 import com.bangkit.coffee.data.source.local.AppDatabase
 import com.bangkit.coffee.data.source.local.dao.ImageDetectionDao
 import com.bangkit.coffee.data.source.mediator.ImageDetectionRemoteMediator
@@ -15,6 +17,7 @@ import com.bangkit.coffee.domain.mapper.toLocal
 import com.bangkit.coffee.shared.const.DEFAULT_PER_PAGE
 import com.bangkit.coffee.shared.util.parse
 import com.bangkit.coffee.shared.wrapper.Resource
+import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import okhttp3.MediaType.Companion.toMediaType
@@ -27,6 +30,7 @@ import javax.inject.Singleton
 
 @Singleton
 class ImageDetectionRepository @Inject constructor(
+    @ApplicationContext private val context: Context,
     private val localDataSource: ImageDetectionDao,
     private val remoteDataSource: ImageDetectionService,
     private val database: AppDatabase
@@ -39,17 +43,14 @@ class ImageDetectionRepository @Inject constructor(
                     name = "image",
                     filename = file.name,
                     body = file.asRequestBody("image/jpeg".toMediaType())
-                ),
-                createFormData(
-                    name = "email",
-                    value = "myxzlpltk@gmail.com"
                 )
             )
 
             Resource.Success(response.data.toExternal())
         } catch (e: HttpException) {
-            e.printStackTrace()
             Resource.Error(e.parse().message)
+        } catch (e: Exception) {
+            Resource.Error(context.getString(R.string.generic_error_message))
         }
     }
 
@@ -88,13 +89,15 @@ class ImageDetectionRepository @Inject constructor(
     suspend fun refreshOne(id: String): Resource<ImageDetection> {
         return try {
             val response = remoteDataSource.getOne(id)
-            val imageDetection = response.toExternal()
+            val imageDetection = response.data.toExternal()
 
             localDataSource.insertOne(imageDetection.toLocal())
 
             Resource.Success(imageDetection)
         } catch (e: HttpException) {
             Resource.Error(e.parse().message)
+        } catch (e: Exception) {
+            Resource.Error(context.getString(R.string.generic_error_message))
         }
     }
 }

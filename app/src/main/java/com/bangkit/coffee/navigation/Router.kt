@@ -149,7 +149,8 @@ fun Router(
         composable(Screen.Camera.route) {
             CameraRoute(
                 navigateUp = { navController.navigateUp() },
-                navigateToDetail = {
+                navigateToDetail = { id ->
+                    // Navigate to history
                     navController.navigate(Screen.History.route) {
                         popUpTo(navController.graph.findStartDestination().id) {
                             saveState = true
@@ -157,7 +158,9 @@ fun Router(
                         launchSingleTop = true
                         restoreState = true
                     }
-                    navController.navigate(Screen.ImageDetectionDetail.createRoute("17912232-5cd1-4a08-8909-b462c0470fd8"))
+
+                    // Navigate to detail
+                    navController.navigate(Screen.ImageDetectionDetail.createRoute(id))
                 }
             )
         }

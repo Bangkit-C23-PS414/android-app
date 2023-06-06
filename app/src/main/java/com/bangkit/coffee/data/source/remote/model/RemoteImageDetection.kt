@@ -6,11 +6,11 @@ data class RemoteImageDetection(
     @field:SerializedName("filename")
     val id: String,
 
-    @field:SerializedName("email")
-    val email: String,
-
     @field:SerializedName("fileURL")
     val fileURL: String,
+
+    @field:SerializedName("blurHash")
+    val blurHash: String,
 
     @field:SerializedName("isDetected")
     val isDetected: Boolean,

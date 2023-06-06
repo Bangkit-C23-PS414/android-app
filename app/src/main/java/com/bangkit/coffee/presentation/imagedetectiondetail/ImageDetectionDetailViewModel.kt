@@ -7,10 +7,12 @@ import com.bangkit.coffee.domain.usecase.ImageDetectionWithDiseaseUseCase
 import com.bangkit.coffee.shared.wrapper.Event
 import com.bangkit.coffee.shared.wrapper.Resource
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.flow.mapNotNull
+import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -26,32 +28,61 @@ class ImageDetectionDetailViewModel @Inject constructor(
     private val _stateFlow = MutableStateFlow(ImageDetectionDetailState())
     val stateFlow = _stateFlow.asStateFlow()
 
+    private val job = Job()
+
     init {
-        hook()
+        viewModelScope.launch { loadFromDB() }
+        viewModelScope.launch(Dispatchers.IO + job) { periodicRefresh() }
     }
 
-    private fun hook() {
-        viewModelScope.launch {
-            imageDetectionWithDiseaseUseCase
-                .getStream(id)
-                .mapNotNull { it }
-                .collect { (imageDetection, disease) ->
-                    _stateFlow.update {
-                        it.copy(
-                            loading = false,
-                            imageDetection = imageDetection,
-                            disease = disease
-                        )
+    private suspend fun loadFromDB() {
+        imageDetectionWithDiseaseUseCase.getStream(id)
+            .flowOn(Dispatchers.IO)
+            .collect { (imageDetection, disease) ->
+                _stateFlow.update {
+                    it.copy(
+                        loading = false,
+                        waiting = !imageDetection.isDetected,
+                        imageDetection = imageDetection,
+                        disease = disease
+                    )
+                }
+
+                if (imageDetection.isDetected) {
+                    job.cancel()
+                }
+            }
+    }
+
+    private suspend fun periodicRefresh() {
+        _stateFlow.update { it.copy(waiting = true) }
+
+        while (true) {
+            if (job.isCancelled) break
+
+            try {
+                delay(5000)
+
+                when (val response = imageDetectionWithDiseaseUseCase.refreshOne(id)) {
+                    is Resource.Error -> {
+                        _stateFlow.update {
+                            it.copy(message = Event(response.message))
+                        }
                     }
 
-                    // periodic check
-                    if (imageDetection?.isDetected == false) {
-                        _stateFlow.update { it.copy(waiting = true) }
-                        delay(5000)
-                        _stateFlow.update { it.copy(waiting = false) }
-                        imageDetectionWithDiseaseUseCase.refreshOne(id)
+                    is Resource.Success -> {
+                        if (response.data.isDetected) {
+                            break
+                        }
                     }
                 }
+            } catch (e: Exception) {
+                if (job.isActive) {
+                    _stateFlow.update {
+                        it.copy(message = Event("Failed to refresh periodically"))
+                    }
+                }
+            }
         }
     }
 
@@ -69,5 +100,10 @@ class ImageDetectionDetailViewModel @Inject constructor(
                 }
             }
         }
+    }
+
+    override fun onCleared() {
+        job.cancel()
+        super.onCleared()
     }
 }

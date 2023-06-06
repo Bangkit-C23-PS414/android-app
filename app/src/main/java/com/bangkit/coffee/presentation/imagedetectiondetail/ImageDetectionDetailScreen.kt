@@ -1,8 +1,5 @@
 package com.bangkit.coffee.presentation.imagedetectiondetail
 
-import androidx.compose.animation.core.LinearEasing
-import androidx.compose.animation.core.animateFloatAsState
-import androidx.compose.animation.core.tween
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -19,20 +16,15 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.CalendarMonth
 import androidx.compose.material.icons.filled.Circle
-import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
+import androidx.compose.material3.LinearProgressIndicator
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -50,7 +42,6 @@ import com.bangkit.coffee.presentation.imagedetectiondetail.components.Confidenc
 import com.bangkit.coffee.presentation.imagedetectiondetail.components.DiseaseFoundInfo
 import com.bangkit.coffee.presentation.imagedetectiondetail.components.HealthyInfo
 import com.bangkit.coffee.presentation.imagedetectiondetail.components.ProcessingInfo
-import com.bangkit.coffee.shared.const.DEFAULT_BLUR_HASH
 import com.bangkit.coffee.shared.theme.AppTheme
 import com.bangkit.coffee.shared.util.toDateTimeString
 import com.google.accompanist.placeholder.PlaceholderHighlight
@@ -82,33 +73,6 @@ fun ImageDetectionDetailScreen(
                             contentDescription = stringResource(R.string.navigate_up)
                         )
                     }
-                },
-                actions = {
-                    if (state.imageDetection?.isDetected == false && state.waiting) {
-                        var progress by remember { mutableStateOf(1f) }
-                        val progressAnimate by animateFloatAsState(
-                            targetValue = progress,
-                            animationSpec = tween(durationMillis = 5000, easing = LinearEasing),
-                            label = "countdown"
-                        )
-
-                        LaunchedEffect(Unit) { progress = 0f }
-
-                        CircularProgressIndicator(
-                            progress = progressAnimate,
-                            strokeWidth = 3.dp,
-                            modifier = Modifier
-                                .padding(end = 16.dp)
-                                .size(20.dp)
-                        )
-                    } else if (state.imageDetection?.isDetected == false && !state.waiting) {
-                        CircularProgressIndicator(
-                            strokeWidth = 3.dp,
-                            modifier = Modifier
-                                .padding(end = 16.dp)
-                                .size(20.dp)
-                        )
-                    }
                 }
             )
         }
@@ -122,10 +86,21 @@ fun ImageDetectionDetailScreen(
             Column(
                 modifier = Modifier
                     .fillMaxSize()
+                    .padding(bottom = 16.dp)
                     .verticalScroll(scrollState)
-                    .padding(16.dp, 0.dp, 16.dp, 16.dp)
             ) {
-                Box {
+                // Progress bar
+                if (state.imageDetection?.isDetected == false && state.waiting) {
+                    LinearProgressIndicator(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(bottom = 16.dp)
+                    )
+                }
+
+                Box(
+                    modifier = Modifier.padding(horizontal = 16.dp)
+                ) {
                     AsyncImage(
                         model = state.imageDetection?.let {
                             ImageRequest.Builder(context)
@@ -139,9 +114,9 @@ fun ImageDetectionDetailScreen(
                         contentScale = ContentScale.Crop,
                         error = painterResource(R.drawable.no_image),
                         placeholder = BlurHashPainter(
-                            blurHash = DEFAULT_BLUR_HASH,
-                            width = 290,
-                            height = 200,
+                            blurHash = state.imageDetection?.blurHash,
+                            width = 224,
+                            height = 224,
                             scale = 0.1f,
                         ),
                         modifier = Modifier
@@ -165,7 +140,7 @@ fun ImageDetectionDetailScreen(
                 // Disease info panel
                 Box(
                     modifier = Modifier
-                        .padding(vertical = 16.dp)
+                        .padding(16.dp)
                         .fillMaxWidth()
                         .heightIn(min = 75.dp)
                         .clip(RoundedCornerShape(16.dp))
@@ -177,7 +152,7 @@ fun ImageDetectionDetailScreen(
                     if (state.imageDetection != null && !state.imageDetection.isDetected) {
                         ProcessingInfo()
                     } else if (state.imageDetection != null && state.disease != null) {
-                        DiseaseFoundInfo(diseaseName = state.disease.name,)
+                        DiseaseFoundInfo(diseaseName = state.disease.name)
                     } else if (state.imageDetection != null) {
                         HealthyInfo()
                     }
@@ -188,6 +163,7 @@ fun ImageDetectionDetailScreen(
                     verticalAlignment = Alignment.CenterVertically,
                     modifier = Modifier
                         .padding(bottom = 16.dp)
+                        .padding(horizontal = 16.dp)
                         .placeholder(
                             visible = state.imageDetection?.isDetected != true,
                             highlight = PlaceholderHighlight.fade(),
@@ -221,6 +197,7 @@ fun ImageDetectionDetailScreen(
                     style = MaterialTheme.typography.bodyMedium,
                     modifier = Modifier
                         .padding(bottom = 16.dp)
+                        .padding(horizontal = 16.dp)
                         .placeholder(
                             visible = state.imageDetection?.isDetected != true,
                             highlight = PlaceholderHighlight.fade(),

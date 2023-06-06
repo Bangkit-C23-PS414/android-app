@@ -25,7 +25,6 @@ import com.bangkit.coffee.R
 import com.bangkit.coffee.domain.ImageDetectionDummy
 import com.bangkit.coffee.domain.entity.DetectionResult
 import com.bangkit.coffee.domain.entity.ImageDetection
-import com.bangkit.coffee.shared.const.DEFAULT_BLUR_HASH
 import com.bangkit.coffee.shared.const.LABEL_HEALTHY
 import com.bangkit.coffee.shared.theme.AppTheme
 import com.bangkit.coffee.shared.util.toTimeString
@@ -68,9 +67,9 @@ fun ImageDetectionCard(
             contentScale = ContentScale.Crop,
             error = painterResource(R.drawable.no_image),
             placeholder = BlurHashPainter(
-                blurHash = DEFAULT_BLUR_HASH,
-                width = 290,
-                height = 200,
+                blurHash = imageDetection.blurHash,
+                width = 224,
+                height = 224,
                 scale = 0.1f,
             )
         )

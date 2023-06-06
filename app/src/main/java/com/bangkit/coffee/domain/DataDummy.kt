@@ -25,8 +25,8 @@ val ImageDetectionDummies get() = List(6) { ImageDetectionDummy }
 val ImageDetectionDummy
     get() = ImageDetection(
         randomUUID().toString(),
-        "test@gmail.com",
         "https://picsum.photos/300",
+        DEFAULT_BLUR_HASH,
         true,
         "Rust",
         90f,

@@ -43,37 +43,33 @@ class CameraViewModel @Inject constructor(
     /* Network functionality */
     fun uploadImage() {
         viewModelScope.launch(Dispatchers.IO) {
-            try {
-                val uri = _stateFlow.value.image ?: return@launch
-                // Set uploading state
-                _stateFlow.update { it.copy(inProgress = true) }
+            val uri = _stateFlow.value.image ?: return@launch
+            // Set uploading state
+            _stateFlow.update { it.copy(inProgress = true) }
 
-                // Crop image from Uri
-                val file = cropImageUseCase(uri)
+            // Crop image from Uri
+            val file = cropImageUseCase(uri)
 
-                // Upload image
-                when (val resource = imageDetectionRepository.create(file)) {
-                    is Resource.Error -> {
-                        // Show error
-                        _stateFlow.update {
-                            it.copy(
-                                inProgress = false,
-                                message = Event(resource.message)
-                            )
-                        }
-                    }
-
-                    is Resource.Success -> {
-                        // Navigate to history
-                        _stateFlow.update { it.copy(inProgress = false, uploaded = true) }
+            // Upload image
+            when (val resource = imageDetectionRepository.create(file)) {
+                is Resource.Error -> {
+                    // Show error
+                    _stateFlow.update {
+                        it.copy(
+                            inProgress = false,
+                            message = Event(resource.message)
+                        )
                     }
                 }
-            } catch (e: Exception) {
-                _stateFlow.update {
-                    it.copy(
-                        inProgress = false,
-                        message = Event("Something went wrong")
-                    )
+
+                is Resource.Success -> {
+                    // Navigate to history
+                    _stateFlow.update {
+                        it.copy(
+                            inProgress = false,
+                            imageDetection = resource.data
+                        )
+                    }
                 }
             }
         }

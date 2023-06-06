@@ -4,8 +4,8 @@ import java.time.LocalDateTime
 
 data class ImageDetection(
     val id: String,
-    val email: String,
     val fileURL: String,
+    val blurHash: String,
     val isDetected: Boolean,
     val label: String,
     val confidence: Float,
