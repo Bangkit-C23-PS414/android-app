@@ -150,6 +150,9 @@ fun Router(
             CameraRoute(
                 navigateUp = { navController.navigateUp() },
                 navigateToDetail = { id ->
+                    // Go back
+                    navController.navigateUp()
+
                     // Navigate to history
                     navController.navigate(Screen.History.route) {
                         popUpTo(navController.graph.findStartDestination().id) {
