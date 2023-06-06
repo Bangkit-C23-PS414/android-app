@@ -5,7 +5,7 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import com.bangkit.coffee.app.LocalKopintarAppActions
+import com.bangkit.coffee.app.LocalRecoffeeryAppActions
 
 @Composable
 fun SignUpRoute(
@@ -19,7 +19,7 @@ fun SignUpRoute(
     val actions = rememberSignUpActions(coordinator, navigateToDashboard)
 
     // Handle events
-    val appActions = LocalKopintarAppActions.current
+    val appActions = LocalRecoffeeryAppActions.current
     uiState.message?.let { event ->
         LaunchedEffect(event) {
             event.getContentIfNotHandled()?.let { message ->

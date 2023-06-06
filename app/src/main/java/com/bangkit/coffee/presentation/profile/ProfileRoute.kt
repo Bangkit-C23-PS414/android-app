@@ -5,7 +5,7 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import com.bangkit.coffee.app.LocalKopintarAppActions
+import com.bangkit.coffee.app.LocalRecoffeeryAppActions
 
 @Composable
 fun ProfileRoute(
@@ -22,7 +22,7 @@ fun ProfileRoute(
     )
 
     // Handle events
-    val appActions = LocalKopintarAppActions.current
+    val appActions = LocalRecoffeeryAppActions.current
     if (uiState.signedOut) {
         LaunchedEffect(Unit) {
             actions.navigateToWelcome()
