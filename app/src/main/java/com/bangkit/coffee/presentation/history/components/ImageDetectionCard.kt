@@ -23,7 +23,9 @@ import coil.compose.AsyncImage
 import coil.request.ImageRequest
 import com.bangkit.coffee.R
 import com.bangkit.coffee.domain.ImageDetectionDummy
+import com.bangkit.coffee.domain.entity.DetectionResult
 import com.bangkit.coffee.domain.entity.ImageDetection
+import com.bangkit.coffee.shared.const.LABEL_HEALTHY
 import com.bangkit.coffee.shared.theme.AppTheme
 import com.bangkit.coffee.shared.util.toTimeString
 import com.wajahatiqbal.blurhash.BlurHashPainter
@@ -40,6 +42,15 @@ fun ImageDetectionCard(
     Card(
         onClick = onClick,
         modifier = modifier,
+        colors = CardDefaults.cardColors(
+            containerColor = if (!imageDetection.isDetected) {
+                MaterialTheme.colorScheme.outlineVariant
+            } else if (imageDetection.label == LABEL_HEALTHY) {
+                MaterialTheme.colorScheme.secondaryContainer
+            } else {
+                MaterialTheme.colorScheme.errorContainer
+            }
+        )
     ) {
         AsyncImage(
             modifier = Modifier
@@ -47,23 +58,28 @@ fun ImageDetectionCard(
                 .clip(CardDefaults.shape)
                 .aspectRatio(1.3f),
             model = ImageRequest.Builder(context)
-                .data(imageDetection.imageUrl)
+                .data(imageDetection.fileURL)
                 .crossfade(true)
-                .diskCacheKey("image-detection-${imageDetection.id}")
-                .memoryCacheKey("image-detection-${imageDetection.id}")
+                .diskCacheKey(imageDetection.cacheKey)
+                .memoryCacheKey(imageDetection.cacheKey)
                 .build(),
             contentDescription = stringResource(R.string.coffee_leaf_image),
             contentScale = ContentScale.Crop,
             error = painterResource(R.drawable.no_image),
             placeholder = BlurHashPainter(
-                blurHash = "LEHC4WWB2yk8pyoJadR*.7kCMdnj",
-                width = 290,
-                height = 200,
+                blurHash = imageDetection.blurHash,
+                width = 224,
+                height = 224,
                 scale = 0.1f,
             )
         )
+
         Text(
-            text = imageDetection.result.orEmpty(),
+            text = if (imageDetection.isDetected) {
+                stringResource(DetectionResult.getName(imageDetection.label))
+            } else {
+                stringResource(R.string.still_processing)
+            },
             style = MaterialTheme.typography.titleSmall,
             fontWeight = FontWeight.Bold,
             maxLines = 1,
@@ -72,17 +88,19 @@ fun ImageDetectionCard(
                 .fillMaxWidth()
                 .padding(16.dp, 16.dp, 16.dp, 0.dp)
         )
-        imageDetection.detectedAt?.let { detectedAt ->
-            Text(
-                text = detectedAt.toTimeString(),
-                style = MaterialTheme.typography.bodySmall,
-                maxLines = 1,
-                overflow = TextOverflow.Ellipsis,
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(16.dp, 0.dp, 16.dp, 16.dp)
-            )
-        }
+        Text(
+            text = if (imageDetection.isDetected) {
+                imageDetection.detectedAt.toTimeString()
+            } else {
+                stringResource(R.string.please_wait)
+            },
+            style = MaterialTheme.typography.bodySmall,
+            maxLines = 1,
+            overflow = TextOverflow.Ellipsis,
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(16.dp, 0.dp, 16.dp, 16.dp)
+        )
     }
 }
 

@@ -13,12 +13,13 @@ class HistoryCoordinator(
     val viewModel: HistoryViewModel
 ) {
     val screenStateFlow = viewModel.stateFlow
+    val pagerFlow = viewModel.pagerFlow
 
     fun toggleFilter() = viewModel.toggleFilter()
 
     fun applyFilter(formData: FilterHistoryForm) = viewModel.applyFilter(formData)
 
-    fun resetFilter() = viewModel.resetFilter()
+    fun resetFilter() = viewModel.applyFilter(FilterHistoryForm())
 }
 
 @Composable

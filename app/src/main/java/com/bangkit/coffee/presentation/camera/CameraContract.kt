@@ -4,6 +4,7 @@ import android.net.Uri
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.staticCompositionLocalOf
+import com.bangkit.coffee.domain.entity.ImageDetection
 import com.bangkit.coffee.shared.wrapper.Event
 
 
@@ -16,7 +17,7 @@ data class CameraState(
     val image: Uri? = null,
     val isCapturing: Boolean = false,
     val inProgress: Boolean = false,
-    val uploaded: Boolean = false,
+    val imageDetection: ImageDetection? = null,
 )
 
 /**
@@ -25,7 +26,7 @@ data class CameraState(
  **/
 data class CameraActions(
     val navigateUp: () -> Unit = {},
-    val navigateToHistory: () -> Unit = {},
+    val navigateToDetail: (String) -> Unit = {},
     val toggleFlash: (Boolean) -> Unit = {},
     val capturing: () -> Unit = {},
     val cancelCapturing: () -> Unit = {},

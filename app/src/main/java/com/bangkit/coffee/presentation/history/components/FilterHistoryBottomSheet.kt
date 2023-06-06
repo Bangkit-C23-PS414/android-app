@@ -43,7 +43,7 @@ import com.bangkit.coffee.presentation.history.HistoryActions
 import com.bangkit.coffee.presentation.history.LocalHistoryActions
 import com.bangkit.coffee.presentation.history.ProvideHistoryActions
 import com.bangkit.coffee.shared.theme.AppTheme
-import com.bangkit.coffee.shared.util.toDateString
+import com.bangkit.coffee.shared.util.toDateTimeString
 import kotlinx.coroutines.launch
 import me.naingaungluu.formconductor.FormResult
 import me.naingaungluu.formconductor.composeui.field
@@ -78,10 +78,6 @@ fun FilterHistoryBottomSheet(
                         allTimeField.setField(false)
                         filterDateField.setField(it)
                         dateRangePickerVisible = false
-
-                        /*Timber.d(it.toString())
-                        Timber.d(it.startDate.atZone(ZoneId.systemDefault()).toInstant().toEpochMilli().toString())
-                        Timber.d(it.endDate.atZone(ZoneId.systemDefault()).toInstant().toEpochMilli().toString())*/
                     }
                 )
             }
@@ -149,8 +145,8 @@ fun FilterHistoryBottomSheet(
                             Text(
                                 text = stringResource(
                                     R.string.date_range_format,
-                                    filterDateField.value?.startDate?.toDateString().orEmpty(),
-                                    filterDateField.value?.endDate?.toDateString().orEmpty()
+                                    filterDateField.value?.startDate?.toDateTimeString().orEmpty(),
+                                    filterDateField.value?.endDate?.toDateTimeString().orEmpty()
                                 ),
                                 style = MaterialTheme.typography.labelMedium,
                                 modifier = Modifier.padding(start = 16.dp)
@@ -194,7 +190,7 @@ fun FilterHistoryBottomSheet(
                             onCheckedChange = null
                         )
                         Text(
-                            text = detectionResult.name,
+                            text = stringResource(detectionResult.name),
                             style = MaterialTheme.typography.bodyLarge,
                             modifier = Modifier.padding(start = 16.dp)
                         )

@@ -45,18 +45,18 @@ fun DiseaseCard(
                 .clip(CardDefaults.shape)
                 .aspectRatio(1.3f),
             model = ImageRequest.Builder(context)
-                .data(disease.imageUrl)
+                .data(disease.imageURL)
                 .crossfade(true)
-                .diskCacheKey("disease-${disease.id}")
-                .memoryCacheKey("disease-${disease.id}")
+                .diskCacheKey(disease.cacheKey)
+                .memoryCacheKey(disease.cacheKey)
                 .build(),
             contentDescription = stringResource(R.string.image),
             contentScale = ContentScale.Crop,
             error = painterResource(R.drawable.no_image),
             placeholder = BlurHashPainter(
-                blurHash = "LEHC4WWB2yk8pyoJadR*.7kCMdnj",
-                width = 290,
-                height = 200,
+                blurHash = disease.blurHash,
+                width = 1,
+                height = 1,
                 scale = 0.1f,
             )
         )

@@ -4,6 +4,9 @@ data class Disease(
     val id: String,
     val name: String,
     val description: String,
+    val imageURL: String,
+    val blurHash: String,
     val controls: List<String>,
-    val imageUrl: String,
-)
+) {
+    val cacheKey = "disease-$id"
+}

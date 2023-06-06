@@ -15,7 +15,6 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.Circle
 import androidx.compose.material3.Badge
-import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -29,17 +28,17 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
-import coil.request.CachePolicy
 import coil.request.ImageRequest
 import com.bangkit.coffee.R
 import com.bangkit.coffee.domain.DiseaseDummy
-import com.bangkit.coffee.shared.components.DisplayErrorFragment
 import com.bangkit.coffee.shared.theme.AppTheme
+import com.wajahatiqbal.blurhash.BlurHashPainter
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -65,87 +64,82 @@ fun DiseaseDetailScreen(
             )
         }
     ) { contentPadding ->
-        if (state.loading) {
-            Box(
-                contentAlignment = Alignment.Center,
-                modifier = Modifier
-                    .padding(contentPadding)
-                    .fillMaxSize()
-            ) {
-                CircularProgressIndicator()
-            }
-        } else if (state.disease == null) {
-            DisplayErrorFragment()
-        } else {
-            Column(
-                modifier = Modifier
-                    .padding(contentPadding)
-                    .fillMaxSize()
-                    .verticalScroll(scrollState)
-                    .padding(16.dp, 0.dp, 16.dp, 16.dp)
-            ) {
-                Box {
-                    AsyncImage(
-                        model = ImageRequest.Builder(context)
-                            .data(state.disease.imageUrl)
-                            .crossfade(true)
-                            .diskCachePolicy(CachePolicy.ENABLED)
-                            .build(),
-                        contentDescription = stringResource(R.string.coffee_leaf_image),
-                        contentScale = ContentScale.Crop,
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .aspectRatio(1f)
-                            .clip(RoundedCornerShape(16.dp))
+        Column(
+            modifier = Modifier
+                .padding(contentPadding)
+                .fillMaxSize()
+                .verticalScroll(scrollState)
+                .padding(16.dp, 0.dp, 16.dp, 16.dp)
+        ) {
+            Box {
+                AsyncImage(
+                    model = ImageRequest.Builder(context)
+                        .data(state.disease.imageURL)
+                        .crossfade(true)
+                        .diskCacheKey(state.disease.cacheKey)
+                        .memoryCacheKey(state.disease.cacheKey)
+                        .build(),
+                    contentDescription = stringResource(R.string.coffee_leaf_image),
+                    contentScale = ContentScale.Crop,
+                    error = painterResource(R.drawable.no_image),
+                    placeholder = BlurHashPainter(
+                        blurHash = state.disease.blurHash,
+                        width = 800,
+                        height = 800,
+                        scale = 0.1f,
+                    ),
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .aspectRatio(1f)
+                        .clip(RoundedCornerShape(16.dp))
+                )
+
+                Badge(
+                    modifier = Modifier
+                        .align(Alignment.BottomEnd)
+                        .padding(16.dp),
+                    containerColor = MaterialTheme.colorScheme.tertiaryContainer
+                ) {
+                    Text(
+                        text = stringResource(R.string.sample_disease_on_the_leaf),
+                        style = MaterialTheme.typography.labelMedium,
+                        fontWeight = FontWeight.Bold
                     )
-
-                    Badge(
-                        modifier = Modifier
-                            .align(Alignment.BottomEnd)
-                            .padding(16.dp),
-                        containerColor = MaterialTheme.colorScheme.tertiaryContainer
-                    ) {
-                        Text(
-                            text = stringResource(R.string.sample_disease_on_the_leaf),
-                            style = MaterialTheme.typography.labelMedium,
-                            fontWeight = FontWeight.Bold
-                        )
-                    }
                 }
+            }
 
-                Text(
-                    text = state.disease.name,
-                    style = MaterialTheme.typography.titleLarge,
-                    fontWeight = FontWeight.Bold,
-                    modifier = Modifier.padding(vertical = 16.dp)
-                )
+            Text(
+                text = state.disease.name,
+                style = MaterialTheme.typography.titleLarge,
+                fontWeight = FontWeight.Bold,
+                modifier = Modifier.padding(vertical = 16.dp)
+            )
 
-                Text(
-                    text = state.disease.description,
-                    style = MaterialTheme.typography.bodyMedium,
-                    modifier = Modifier.padding(bottom = 16.dp)
-                )
+            Text(
+                text = state.disease.description,
+                style = MaterialTheme.typography.bodyMedium,
+                modifier = Modifier.padding(bottom = 16.dp)
+            )
 
-                Text(
-                    text = stringResource(R.string.how_to_control),
-                    style = MaterialTheme.typography.bodyLarge,
-                    fontWeight = FontWeight.SemiBold,
-                    modifier = Modifier.padding(bottom = 6.dp)
-                )
-                state.disease.controls.forEach { control ->
-                    Row {
-                        Icon(
-                            imageVector = Icons.Filled.Circle,
-                            contentDescription = null,
-                            modifier = Modifier
-                                .padding(end = 12.dp, top = 6.dp)
-                                .size(8.dp)
-                        )
-                        Text(
-                            text = control,
-                            style = MaterialTheme.typography.bodyMedium,
-                        )
-                    }
+            Text(
+                text = stringResource(R.string.how_to_control),
+                style = MaterialTheme.typography.bodyLarge,
+                fontWeight = FontWeight.SemiBold,
+                modifier = Modifier.padding(bottom = 6.dp)
+            )
+            state.disease.controls.forEach { control ->
+                Row {
+                    Icon(
+                        imageVector = Icons.Filled.Circle,
+                        contentDescription = null,
+                        modifier = Modifier
+                            .padding(end = 12.dp, top = 6.dp)
+                            .size(8.dp)
+                    )
+                    Text(
+                        text = control,
+                        style = MaterialTheme.typography.bodyMedium,
+                    )
                 }
             }
         }

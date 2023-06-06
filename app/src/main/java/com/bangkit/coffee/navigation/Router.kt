@@ -97,7 +97,7 @@ fun Router(
         composable(Screen.Home.route) {
             HomeRoute(
                 navigateToCamera = { navController.navigate(Screen.Camera.route) },
-                navigateToDetailDisease = {id ->
+                navigateToDetailDisease = { id ->
                     navController.navigate(
                         Screen.DiseaseDetail.createRoute(id)
                     )
@@ -151,7 +151,11 @@ fun Router(
         composable(Screen.Camera.route) {
             CameraRoute(
                 navigateUp = { navController.navigateUp() },
-                navigateToHistory = {
+                navigateToDetail = { id ->
+                    // Go back
+                    navController.navigateUp()
+
+                    // Navigate to history
                     navController.navigate(Screen.History.route) {
                         popUpTo(navController.graph.findStartDestination().id) {
                             saveState = true
@@ -159,6 +163,9 @@ fun Router(
                         launchSingleTop = true
                         restoreState = true
                     }
+
+                    // Navigate to detail
+                    navController.navigate(Screen.ImageDetectionDetail.createRoute(id))
                 }
             )
         }

@@ -11,18 +11,20 @@ import com.bangkit.coffee.app.LocalRecoffeeryAppActions
 fun CameraRoute(
     coordinator: CameraCoordinator = rememberCameraCoordinator(),
     navigateUp: () -> Unit = {},
-    navigateToHistory: () -> Unit = {}
+    navigateToDetail: (String) -> Unit = {},
 ) {
     // State observing and declarations
     val uiState by coordinator.screenStateFlow.collectAsStateWithLifecycle()
 
     // UI Actions
-    val actions = rememberCameraActions(coordinator, navigateUp, navigateToHistory)
+    val actions = rememberCameraActions(coordinator, navigateUp, navigateToDetail)
 
     // Handle events
     val appActions = LocalRecoffeeryAppActions.current
-    if (uiState.uploaded) {
-        LaunchedEffect(Unit) { actions.navigateToHistory() }
+    uiState.imageDetection?.let { imageDetection ->
+        LaunchedEffect(Unit) {
+            actions.navigateToDetail(imageDetection.id)
+        }
     }
     uiState.message?.let { event ->
         LaunchedEffect(event) {
@@ -39,12 +41,12 @@ fun CameraRoute(
 fun rememberCameraActions(
     coordinator: CameraCoordinator,
     navigateUp: () -> Unit,
-    navigateToHistory: () -> Unit
+    navigateToDetail: (String) -> Unit
 ): CameraActions {
     return remember(coordinator) {
         CameraActions(
             navigateUp = navigateUp,
-            navigateToHistory = navigateToHistory,
+            navigateToDetail = navigateToDetail,
             toggleFlash = coordinator::toggleFlash,
             capturing = coordinator::capturing,
             cancelCapturing = coordinator::cancelCapturing,

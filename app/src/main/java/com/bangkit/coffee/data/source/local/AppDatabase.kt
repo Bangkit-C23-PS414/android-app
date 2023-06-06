@@ -8,7 +8,7 @@ import com.bangkit.coffee.data.source.local.entity.LocalImageDetection
 
 @Database(entities = [LocalImageDetection::class], version = 1, exportSchema = false)
 @TypeConverters(Converters::class)
-abstract class MainDatabase : RoomDatabase() {
+abstract class AppDatabase : RoomDatabase() {
 
     abstract fun imageDetectionDao(): ImageDetectionDao
 

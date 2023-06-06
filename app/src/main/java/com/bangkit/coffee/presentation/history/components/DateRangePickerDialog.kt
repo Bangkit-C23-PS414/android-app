@@ -15,6 +15,7 @@ import androidx.compose.material3.TextButton
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.rememberDateRangePickerState
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
@@ -24,7 +25,7 @@ import androidx.compose.ui.window.Dialog
 import androidx.compose.ui.window.DialogProperties
 import com.bangkit.coffee.R
 import com.bangkit.coffee.shared.theme.AppTheme
-import com.bangkit.coffee.shared.util.toAdjustedLocalDate
+import java.time.Instant
 import java.time.LocalDate
 import java.time.LocalTime
 import java.time.ZoneOffset
@@ -37,9 +38,16 @@ fun DateRangePickerDialog(
     onDismiss: () -> Unit = {},
     onConfirm: (FilterDateWrapper) -> Unit = {}
 ) {
+    val todayEpoch = remember {
+        LocalDate.now()
+            .atTime(LocalTime.MAX)
+            .toInstant(ZoneOffset.UTC)
+            .toEpochMilli()
+    }
     val state = rememberDateRangePickerState(
         defaultValue?.startDate?.toInstant(ZoneOffset.UTC)?.toEpochMilli(),
         defaultValue?.endDate?.toInstant(ZoneOffset.UTC)?.toEpochMilli(),
+        yearRange = IntRange(2023, LocalDate.now().year)
     )
 
     Dialog(
@@ -71,8 +79,11 @@ fun DateRangePickerDialog(
                                 if (startTimestamp != null && endTimestamp != null) {
                                     onConfirm(
                                         FilterDateWrapper(
-                                            startDate = startTimestamp.toAdjustedLocalDate(),
-                                            endDate = endTimestamp.toAdjustedLocalDate()
+                                            startDate = Instant.ofEpochMilli(startTimestamp)
+                                                .atZone(ZoneOffset.UTC)
+                                                .toLocalDateTime(),
+                                            endDate = Instant.ofEpochMilli(endTimestamp)
+                                                .atZone(ZoneOffset.UTC)
                                                 .toLocalDate()
                                                 .atTime(LocalTime.MAX)
                                         )
@@ -89,9 +100,7 @@ fun DateRangePickerDialog(
 
                 DateRangePicker(
                     state = state,
-                    dateValidator = { epochs ->
-                        epochs.toAdjustedLocalDate() <= LocalDate.now().atTime(LocalTime.MAX)
-                    },
+                    dateValidator = { epoch -> epoch < todayEpoch },
                     modifier = Modifier.weight(1f)
                 )
             }

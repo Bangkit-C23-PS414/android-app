@@ -3,6 +3,9 @@ package com.bangkit.coffee.domain.mapper
 import com.bangkit.coffee.data.source.local.entity.LocalImageDetection
 import com.bangkit.coffee.data.source.remote.model.RemoteImageDetection
 import com.bangkit.coffee.domain.entity.ImageDetection
+import com.bangkit.coffee.shared.util.toEpochMilli
+import com.bangkit.coffee.shared.util.toLocalDateTime
+import java.time.LocalDateTime
 
 /* Local <--> External Segment */
 
@@ -10,21 +13,26 @@ import com.bangkit.coffee.domain.entity.ImageDetection
 fun List<ImageDetection>.toLocal() = map(ImageDetection::toLocal)
 fun ImageDetection.toLocal() = LocalImageDetection(
     id = id,
-    email = email,
-    imageUrl = imageUrl,
-    result = result,
+    fileURL = fileURL,
+    blurHash = blurHash,
+    label = label,
+    confidence = confidence,
+    isDetected = isDetected,
     inferenceTime = inferenceTime,
     createdAt = createdAt,
     detectedAt = detectedAt,
+    syncAt = LocalDateTime.now(),
 )
 
 @JvmName("imageDetection_LocalToExternal")
 fun List<LocalImageDetection>.toExternal() = map(LocalImageDetection::toExternal)
 fun LocalImageDetection.toExternal() = ImageDetection(
     id = id,
-    email = email,
-    imageUrl = imageUrl,
-    result = result,
+    fileURL = fileURL,
+    blurHash = blurHash,
+    label = label,
+    confidence = confidence,
+    isDetected = isDetected,
     inferenceTime = inferenceTime,
     createdAt = createdAt,
     detectedAt = detectedAt,
@@ -36,24 +44,28 @@ fun LocalImageDetection.toExternal() = ImageDetection(
 fun List<ImageDetection>.toRemote() = map(ImageDetection::toRemote)
 fun ImageDetection.toRemote() = RemoteImageDetection(
     id = id,
-    email = email,
-    imageUrl = imageUrl,
-    result = result,
+    fileURL = fileURL,
+    blurHash = blurHash,
+    label = label,
+    confidence = confidence,
+    isDetected = isDetected,
     inferenceTime = inferenceTime,
-    createdAt = createdAt,
-    detectedAt = detectedAt,
+    createdAt = createdAt.toEpochMilli(),
+    detectedAt = detectedAt.toEpochMilli(),
 )
 
 @JvmName("imageDetection_RemoteToExternal")
 fun List<RemoteImageDetection>.toExternal() = map(RemoteImageDetection::toExternal)
 fun RemoteImageDetection.toExternal() = ImageDetection(
     id = id,
-    email = email,
-    imageUrl = imageUrl,
-    result = result,
+    fileURL = fileURL,
+    blurHash = blurHash,
+    label = label,
+    confidence = confidence,
+    isDetected = isDetected,
     inferenceTime = inferenceTime,
-    createdAt = createdAt,
-    detectedAt = detectedAt,
+    createdAt = createdAt.toLocalDateTime(),
+    detectedAt = detectedAt.toLocalDateTime(),
 )
 
 /* Local <--> Remote Segment */

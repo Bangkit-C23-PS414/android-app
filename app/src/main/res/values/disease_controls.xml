@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="miner_controls">
+        <item>Using agroforestry practices that will maintain the temperature in your plantation. High temperatures might allow it to proliferate.</item>
+        <item>Chemical control is again the most effective solution, but it should only be used when they are found in high numbers.</item>
+    </string-array>
+
+    <string-array name="rust_controls">
+        <item>Even though no coffee plant is immune to this disease, some varieties have shown certain levels of resistance and recover faster from leaf rust. It is recommended to plant them to keep the rust under control.</item>
+        <item>The use of fungicides is the main form to combat this fungus. So far, the ones that contain copper (dicopper chloride trihydroxide, cuprous oxide, copper hydroxide, and copper sulfate) have shown effectiveness in preventing the disease, as they act by contact inhibiting spores’ germination and prevent them from entering the plant. Fungicides with triazoles (cyproconazole, triadimefon, hexaconazole, and propiconazole), on the other hand, work systemically by being absorbed by the plant and work not only as a preventive measure but also as therapy for the bushes once they are sick.</item>
+    </string-array>
+
+    <string-array name="phoma_controls">
+        <item>Keep a balance and controlled fertilization plan, add organic matter to your soil, and balance the shadow &amp; lighting of your plantation.</item>
+        <item>Fungicides that contain copper and triazoles are effective in combating this disease.</item>
+    </string-array>
+</resources>

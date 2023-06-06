@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="miner_controls">
+        <item>Menggunakan praktik agroforestri yang akan menjaga suhu di perkebunan Anda. Temperatur yang tinggi memungkinkannya berkembang biak.</item>
+        <item>Kontrol kimia sekali lagi merupakan solusi yang paling efektif, tetapi sebaiknya hanya digunakan jika ditemukan dalam jumlah besar.</item>
+    </string-array>
+
+    <string-array name="rust_controls">
+        <item>Meskipun tidak ada tanaman kopi yang kebal terhadap penyakit ini, beberapa varietas menunjukkan tingkat ketahanan tertentu dan pulih lebih cepat dari penyakit karat daun. Dianjurkan untuk menanamnya agar karat tetap terkendali.</item>
+        <item>Penggunaan fungisida merupakan bentuk utama untuk memerangi jamur ini. Sejauh ini, yang mengandung tembaga (dicopper chloride trihydroxide, cuprous oxide, copper hydroxide, dan copper sulfate) telah menunjukkan keefektifan dalam mencegah penyakit, karena bertindak dengan kontak menghambat perkecambahan spora dan mencegahnya memasuki tanaman. Fungisida dengan triazol (cyproconazole, triadimefon, hexaconazole, dan propiconazole), di sisi lain, bekerja secara sistemik dengan diserap oleh tanaman dan bekerja tidak hanya sebagai tindakan pencegahan tetapi juga sebagai terapi untuk semak-semak setelah sakit.</item>
+    </string-array>
+
+    <string-array name="phoma_controls">
+        <item>Jaga keseimbangan dan rencana pemupukan yang terkontrol, tambahkan bahan organik ke tanah Anda, dan seimbangkan bayangan &amp; pencahayaan perkebunan Anda.</item>
+        <item>Fungisida yang mengandung tembaga dan triazol efektif untuk memerangi penyakit ini.</item>
+    </string-array>
+</resources>

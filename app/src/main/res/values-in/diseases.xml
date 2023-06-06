@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="diseases_name">
+        <item>@string/label_miner</item>
+        <item>@string/label_rust</item>
+        <item>@string/label_phoma</item>
+    </string-array>
+
+    <string-array name="diseases_description">
+        <item>Leucoptera coffeella Guer adalah serangga kecil yang merupakan hama penting tanaman kopi. Ini adalah ngengat kecil berwarna terang dengan antena besar. Ini asli Amerika Selatan dan ditemukan di daerah penghasil kopi di seluruh dunia. Ngengat betina bertelur di bagian bawah daun kopi. Setelah sekitar satu minggu, larva menetas dan menggali ke dalam daun untuk mencari makan selama kurang lebih 3 minggu. Pemberian makan ini menyebabkan kerusakan pada jaringan daun, sehingga terlihat bintik-bintik coklat atau “ranjau” yang dapat mengurangi kemampuan dedaunan dan fotosintesis pohon kopi jika ditemukan dalam jumlah banyak. Populasi penambang daun kopi mencapai puncaknya pada musim panas namun menurun secara signifikan pada musim hujan.</item>
+        <item>Secara ilmiah dikenal sebagai Hemileia vastatrix Berk &amp; Broome, penyakit jamur ini menyerang tanaman kopi dan menyebabkan bercak kuning-oranye pada daun, yang menyebabkan defoliasi dan penurunan produksi kopi. Selain itu, tidak memungkinkan buah kopi matang dengan kecepatan yang sama, sehingga membutuhkan waktu lebih lama untuk mengumpulkan hasil panen. Bintik kuning di bawah daun adalah spora berdebu yang menyebar dengan cepat, terutama di iklim hangat. Ini disebarkan oleh spora perubahan iklim jamur yang terbawa angin, dan peningkatan perdagangan global telah menyebabkan penyebarannya ke seluruh dunia. Saya telah menyebutkannya di artikel sebelumnya, karena dampaknya sangat besar dalam beberapa tahun terakhir, dan tidak ada perkebunan kopi di seluruh dunia yang terbebas dari ancamannya.</item>
+        <item>Penyakit jamur ini terjadi pada perkebunan kopi yang kurang memiliki keseimbangan unsur hara. Ini menyebar melalui angin dan percikan hujan dan tumbuh subur di lingkungan yang lembab dan hangat. Gejalanya dapat diamati pada daun dan jaringan yang baru tumbuh, berupa bintik-bintik coklat yang dimulai dari tepi daun kopi dan menyebar ke tengah. Penyakit ini juga dapat dilihat pada cabang-cabang, mulai dari titik-titik di mana daun-daun berguguran.</item>
+    </string-array>
+</resources>

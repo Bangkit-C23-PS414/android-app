@@ -1,13 +1,17 @@
 package com.bangkit.coffee.domain.entity
 
-import java.util.Date
+import java.time.LocalDateTime
 
 data class ImageDetection(
     val id: String,
-    val email: String,
-    val imageUrl: String,
-    val result: String?,
-    val inferenceTime: Int?,
-    val createdAt: Date,
-    val detectedAt: Date?,
-)
+    val fileURL: String,
+    val blurHash: String,
+    val isDetected: Boolean,
+    val label: String,
+    val confidence: Float,
+    val inferenceTime: Int,
+    val createdAt: LocalDateTime,
+    val detectedAt: LocalDateTime,
+) {
+    val cacheKey = "image-detection-$id"
+}

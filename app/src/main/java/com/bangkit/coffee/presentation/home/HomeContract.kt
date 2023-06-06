@@ -1,11 +1,10 @@
 package com.bangkit.coffee.presentation.home
 
-import androidx.annotation.DrawableRes
-import androidx.annotation.StringRes
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.staticCompositionLocalOf
 import com.bangkit.coffee.domain.entity.Disease
+import com.bangkit.coffee.presentation.home.components.DetectionStep
 
 
 /**
@@ -14,12 +13,6 @@ import com.bangkit.coffee.domain.entity.Disease
 data class HomeState(
     val detectionSteps: List<DetectionStep> = emptyList(),
     val diseases: List<Disease> = emptyList()
-)
-
-data class DetectionStep(
-    @DrawableRes val image: Int,
-    @StringRes val description: Int,
-    val step: Int
 )
 
 /**
