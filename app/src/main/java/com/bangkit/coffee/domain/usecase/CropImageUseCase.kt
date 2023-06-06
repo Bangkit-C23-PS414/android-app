@@ -14,13 +14,13 @@ import javax.inject.Singleton
 class CropImageUseCase @Inject constructor(
     @ApplicationContext private val context: Context
 ) {
-    operator fun invoke(uri: Uri): File {
+    operator fun invoke(uri: Uri, size: Int = 224): File {
         // Get file object
         val file = uri.toFile(context)
         // Read bitmap
         val bitmap = file.toBitmapWithExif()
         // Crop image
-        val croppedBitmap = bitmap.cropCenter(500, 500)
+        val croppedBitmap = bitmap.cropCenter(size, size)
         // Save image
         return croppedBitmap.toFile()
     }
