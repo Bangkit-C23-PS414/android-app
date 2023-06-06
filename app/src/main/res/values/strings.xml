@@ -85,7 +85,7 @@
     <string name="date_range_format" translatable="false">%s - %s</string>
     <string name="detection_result">Detection Result</string>
     <string name="we_found_a_disease">We found a disease</string>
-    <string name="confidence_format">%.1f\%% Confidence</string>
+    <string name="confidence_format">%.1f%% Confidence</string>
     <string name="detected_at_format">Detected at %s</string>
     <string name="how_to_control">How to control?</string>
     <string name="everything_is_fine">Everything is fine!</string>
