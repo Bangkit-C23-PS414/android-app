@@ -3,6 +3,7 @@ package com.bangkit.coffee.presentation.signup
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.hilt.navigation.compose.hiltViewModel
+import com.bangkit.coffee.presentation.signup.components.SignUpForm
 
 /**
  * Screen's coordinator which is responsible for handling actions from the UI layer
@@ -12,6 +13,10 @@ class SignUpCoordinator(
     val viewModel: SignUpViewModel
 ) {
     val screenStateFlow = viewModel.stateFlow
+
+    fun signUp(form: SignUpForm){
+        viewModel.signUp(form)
+    }
 }
 
 @Composable
