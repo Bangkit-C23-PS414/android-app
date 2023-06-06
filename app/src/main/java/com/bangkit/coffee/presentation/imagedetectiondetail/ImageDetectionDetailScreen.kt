@@ -42,13 +42,14 @@ import com.bangkit.coffee.presentation.imagedetectiondetail.components.Confidenc
 import com.bangkit.coffee.presentation.imagedetectiondetail.components.DiseaseFoundInfo
 import com.bangkit.coffee.presentation.imagedetectiondetail.components.HealthyInfo
 import com.bangkit.coffee.presentation.imagedetectiondetail.components.ProcessingInfo
+import com.bangkit.coffee.shared.components.pullrefresh.PullRefreshIndicator
+import com.bangkit.coffee.shared.components.pullrefresh.pullRefresh
+import com.bangkit.coffee.shared.components.pullrefresh.rememberPullRefreshState
 import com.bangkit.coffee.shared.theme.AppTheme
 import com.bangkit.coffee.shared.util.toDateTimeString
 import com.google.accompanist.placeholder.PlaceholderHighlight
 import com.google.accompanist.placeholder.material3.fade
 import com.google.accompanist.placeholder.material3.placeholder
-import com.google.accompanist.swiperefresh.SwipeRefresh
-import com.google.accompanist.swiperefresh.rememberSwipeRefreshState
 import com.wajahatiqbal.blurhash.BlurHashPainter
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -57,8 +58,7 @@ fun ImageDetectionDetailScreen(
     state: ImageDetectionDetailState = ImageDetectionDetailState(),
     actions: ImageDetectionDetailActions = ImageDetectionDetailActions()
 ) {
-    @Suppress("DEPRECATION")
-    val swipeRefreshState = rememberSwipeRefreshState(isRefreshing = state.loading)
+    val pullRefreshState = rememberPullRefreshState(state.loading, actions.refresh)
     val scrollState = rememberScrollState()
     val context = LocalContext.current
 
@@ -77,11 +77,11 @@ fun ImageDetectionDetailScreen(
             )
         }
     ) { contentPadding ->
-        @Suppress("DEPRECATION")
-        SwipeRefresh(
-            state = swipeRefreshState,
-            onRefresh = actions.refresh,
-            modifier = Modifier.padding(contentPadding)
+        Box(
+            modifier = Modifier
+                .padding(contentPadding)
+                .pullRefresh(pullRefreshState)
+                .fillMaxSize()
         ) {
             Column(
                 modifier = Modifier
@@ -229,6 +229,12 @@ fun ImageDetectionDetailScreen(
                     }
                 }
             }
+
+            PullRefreshIndicator(
+                state.loading,
+                pullRefreshState,
+                Modifier.align(Alignment.TopCenter),
+            )
         }
     }
 }

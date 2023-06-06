@@ -1,14 +1,15 @@
 package com.bangkit.coffee.presentation.profile
 
 import android.net.Uri
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.bangkit.coffee.data.repository.ImageDetectionRepository
-import com.bangkit.coffee.data.repository.UserPreferencesRepository
+import com.bangkit.coffee.data.repository.ProfileRepository
+import com.bangkit.coffee.data.repository.SessionRepository
 import com.bangkit.coffee.presentation.profile.components.ChangePasswordForm
 import com.bangkit.coffee.presentation.profile.components.EditProfileForm
 import com.bangkit.coffee.shared.wrapper.Event
+import com.bangkit.coffee.shared.wrapper.Resource
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -18,12 +19,40 @@ import javax.inject.Inject
 
 @HiltViewModel
 class ProfileViewModel @Inject constructor(
-    private val userPreferencesRepository: UserPreferencesRepository,
-    private val imageDetectionRepository: ImageDetectionRepository
+    private val imageDetectionRepository: ImageDetectionRepository,
+    private val profileRepository: ProfileRepository,
+    private val sessionRepository: SessionRepository
 ) : ViewModel() {
 
     private val _stateFlow = MutableStateFlow(ProfileState())
     val stateFlow = _stateFlow.asStateFlow()
+
+    init {
+        viewModelScope.launch {
+            launch { refresh() }
+
+            profileRepository.get().collect { user ->
+                _stateFlow.update {
+                    it.copy(user = user)
+                }
+            }
+        }
+    }
+
+    fun refresh() {
+        viewModelScope.launch {
+            _stateFlow.update { it.copy(refreshing = true) }
+            val response = profileRepository.refresh()
+
+            if (response is Resource.Error) {
+                _stateFlow.update {
+                    it.copy(message = Event(response.message))
+                }
+            }
+
+            _stateFlow.update { it.copy(refreshing = false) }
+        }
+    }
 
     fun updateAvatar(uri: Uri) {
 
@@ -53,11 +82,10 @@ class ProfileViewModel @Inject constructor(
 
     }
 
-    fun signOut(){
+    fun signOut() {
         viewModelScope.launch {
-            userPreferencesRepository.deleteToken()
+            sessionRepository.clearAll()
             imageDetectionRepository.deleteAll()
-            Log.d("SignOutViewModel", "token deleted")
 
             _stateFlow.update {
                 it.copy(

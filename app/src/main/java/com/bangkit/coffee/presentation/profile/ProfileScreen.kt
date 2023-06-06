@@ -42,7 +42,13 @@ import coil.compose.AsyncImage
 import com.bangkit.coffee.R
 import com.bangkit.coffee.presentation.profile.components.ChangePasswordDialog
 import com.bangkit.coffee.presentation.profile.components.EditProfileDialog
+import com.bangkit.coffee.shared.components.pullrefresh.PullRefreshIndicator
+import com.bangkit.coffee.shared.components.pullrefresh.pullRefresh
+import com.bangkit.coffee.shared.components.pullrefresh.rememberPullRefreshState
 import com.bangkit.coffee.shared.theme.AppTheme
+import com.google.accompanist.placeholder.PlaceholderHighlight
+import com.google.accompanist.placeholder.material3.fade
+import com.google.accompanist.placeholder.material3.placeholder
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -56,6 +62,8 @@ fun ProfileScreen(
         onResult = { uri -> uri?.let { actions.updateAvatar(it) } },
     )
 
+    val pullRefreshState = rememberPullRefreshState(state.refreshing, actions.refresh)
+
     Scaffold(
         topBar = {
             TopAppBar(
@@ -63,100 +71,116 @@ fun ProfileScreen(
             )
         }
     ) { contentPadding ->
-        Column(
-            horizontalAlignment = Alignment.CenterHorizontally,
+        Box(
             modifier = Modifier
-                .fillMaxSize()
-                .verticalScroll(scrollState)
                 .padding(contentPadding)
+                .pullRefresh(pullRefreshState)
         ) {
-            Box(
+            Column(
+                horizontalAlignment = Alignment.CenterHorizontally,
                 modifier = Modifier
-                    .align(Alignment.CenterHorizontally)
-                    .padding(top = 48.dp, bottom = 24.dp),
-                contentAlignment = Alignment.BottomEnd
+                    .fillMaxSize()
+                    .verticalScroll(scrollState)
             ) {
-                AsyncImage(
-                    model = R.drawable.no_image,
-                    contentDescription = stringResource(R.string.profile_photo),
+                Box(
                     modifier = Modifier
-                        .size(150.dp)
-                        .clip(CircleShape)
-                        .testTag("Avatar")
+                        .align(Alignment.CenterHorizontally)
+                        .padding(top = 48.dp, bottom = 24.dp),
+                    contentAlignment = Alignment.BottomEnd
+                ) {
+                    AsyncImage(
+                        model = R.drawable.no_image,
+                        contentDescription = stringResource(R.string.profile_photo),
+                        modifier = Modifier
+                            .size(150.dp)
+                            .clip(CircleShape)
+                            .testTag("Avatar")
+                    )
+
+                    FilledTonalIconButton(
+                        onClick = {
+                            singlePhotoPickerLauncher.launch(
+                                PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly)
+                            )
+                        },
+                        modifier = Modifier.testTag("UpdateAvatar")
+                    ) {
+                        Icon(
+                            imageVector = Icons.Filled.Edit,
+                            contentDescription = stringResource(R.string.update_profile_photo)
+                        )
+                    }
+                }
+
+                Text(
+                    text = state.user?.name ?: "Loading Name",
+                    style = MaterialTheme.typography.titleMedium,
+                    textAlign = TextAlign.Center,
+                    fontWeight = FontWeight.Bold,
+                    modifier = Modifier
+                        .padding(bottom = 48.dp)
+                        .placeholder(
+                            visible = state.user == null,
+                            highlight = PlaceholderHighlight.fade(),
+                        )
                 )
 
-                FilledTonalIconButton(
-                    onClick = {
-                        singlePhotoPickerLauncher.launch(
-                            PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly)
+                ListItem(
+                    modifier = Modifier
+                        .clickable { actions.openEditProfile() }
+                        .testTag("EditProfile"),
+                    headlineContent = {
+                        Text(text = stringResource(R.string.edit_profile))
+                    },
+                    leadingContent = {
+                        Icon(
+                            imageVector = Icons.Filled.Person,
+                            contentDescription = null
+                        )
+                    }
+                )
+
+                ListItem(
+                    modifier = Modifier
+                        .clickable { actions.openChangePassword() }
+                        .testTag("ChangePassword"),
+                    headlineContent = {
+                        Text(text = stringResource(R.string.change_password))
+                    },
+                    leadingContent = {
+                        Icon(
+                            imageVector = Icons.Filled.Key,
+                            contentDescription = null
+                        )
+                    }
+                )
+
+                Divider(thickness = 8.dp)
+
+                ListItem(
+                    modifier = Modifier
+                        .clickable { actions.signOut() }
+                        .testTag("SignOut"),
+                    headlineContent = {
+                        Text(text = stringResource(R.string.sign_out))
+                    },
+                    leadingContent = {
+                        Icon(
+                            imageVector = Icons.Filled.Logout,
+                            contentDescription = null
                         )
                     },
-                    modifier = Modifier.testTag("UpdateAvatar")
-                ) {
-                    Icon(
-                        imageVector = Icons.Filled.Edit,
-                        contentDescription = stringResource(R.string.update_profile_photo)
+                    colors = ListItemDefaults.colors(
+                        headlineColor = Color.Red,
+                        leadingIconColor = Color.Red,
                     )
-                }
+                )
             }
 
-            Text(
-                text = "Muhammad John Doe",
-                style = MaterialTheme.typography.titleMedium,
-                textAlign = TextAlign.Center,
-                fontWeight = FontWeight.Bold,
-                modifier = Modifier.padding(bottom = 48.dp)
-            )
-
-            ListItem(
-                modifier = Modifier
-                    .clickable { actions.openEditProfile() }
-                    .testTag("EditProfile"),
-                headlineContent = {
-                    Text(text = stringResource(R.string.edit_profile))
-                },
-                leadingContent = {
-                    Icon(
-                        imageVector = Icons.Filled.Person,
-                        contentDescription = null
-                    )
-                }
-            )
-
-            ListItem(
-                modifier = Modifier
-                    .clickable { actions.openChangePassword() }
-                    .testTag("ChangePassword"),
-                headlineContent = {
-                    Text(text = stringResource(R.string.change_password))
-                },
-                leadingContent = {
-                    Icon(
-                        imageVector = Icons.Filled.Key,
-                        contentDescription = null
-                    )
-                }
-            )
-
-            Divider(thickness = 8.dp)
-
-            ListItem(
-                modifier = Modifier
-                    .clickable { actions.signOut() }
-                    .testTag("SignOut"),
-                headlineContent = {
-                    Text(text = stringResource(R.string.sign_out))
-                },
-                leadingContent = {
-                    Icon(
-                        imageVector = Icons.Filled.Logout,
-                        contentDescription = null
-                    )
-                },
-                colors = ListItemDefaults.colors(
-                    headlineColor = Color.Red,
-                    leadingIconColor = Color.Red,
-                )
+            PullRefreshIndicator(
+                state.refreshing,
+                pullRefreshState,
+                Modifier.align(Alignment.TopCenter)
             )
         }
     }

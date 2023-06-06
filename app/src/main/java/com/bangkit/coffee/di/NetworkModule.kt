@@ -1,11 +1,12 @@
 package com.bangkit.coffee.di
 
 import com.bangkit.coffee.BuildConfig
-import com.bangkit.coffee.data.repository.UserPreferencesRepository
+import com.bangkit.coffee.data.repository.SessionRepository
 import com.bangkit.coffee.data.source.remote.AuthService
 import com.bangkit.coffee.data.source.remote.ImageDetectionService
-import com.bangkit.coffee.shared.const.IMAGE_API_URL
+import com.bangkit.coffee.data.source.remote.ProfileService
 import com.bangkit.coffee.shared.const.AUTH_BASE_URL
+import com.bangkit.coffee.shared.const.IMAGE_API_URL
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -36,10 +37,10 @@ object NetworkModule {
     @Singleton
     @Provides
     fun provideAuthInterceptor(
-        userPreferencesRepository: UserPreferencesRepository
+        sessionRepository: SessionRepository
     ): Interceptor {
         return Interceptor { chain ->
-            val token = runBlocking { userPreferencesRepository.tokenFlow.first() }
+            val token = runBlocking { sessionRepository.flow().first() }
             val req = chain.request()
             val requestHeaders = req.newBuilder()
                 .addHeader("Authorization", "Bearer $token")
@@ -50,7 +51,7 @@ object NetworkModule {
 
     @Singleton
     @Provides
-    @Named("AuthService")
+    @Named("AuthRetrofit")
     fun provideAuthRetrofit(
         loggingInterceptor: HttpLoggingInterceptor
     ): Retrofit {
@@ -67,7 +68,26 @@ object NetworkModule {
 
     @Singleton
     @Provides
-    @Named("ImageService")
+    @Named("ProfileRetrofit")
+    fun provideProfileRetrofit(
+        loggingInterceptor: HttpLoggingInterceptor,
+        authInterceptor: Interceptor,
+    ): Retrofit {
+        val client = OkHttpClient.Builder()
+            .addInterceptor(loggingInterceptor)
+            .addInterceptor(authInterceptor)
+            .build()
+
+        return Retrofit.Builder()
+            .baseUrl(AUTH_BASE_URL)
+            .client(client)
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+    }
+
+    @Singleton
+    @Provides
+    @Named("ImageRetrofit")
     fun provideImageRetrofit(
         loggingInterceptor: HttpLoggingInterceptor,
         authInterceptor: Interceptor,
@@ -87,7 +107,7 @@ object NetworkModule {
     @Singleton
     @Provides
     fun provideImageDetectionService(
-        @Named("ImageService") retrofit: Retrofit
+        @Named("ImageRetrofit") retrofit: Retrofit
     ): ImageDetectionService {
         return retrofit.create(ImageDetectionService::class.java)
     }
@@ -95,8 +115,16 @@ object NetworkModule {
     @Singleton
     @Provides
     fun provideAuthService(
-        @Named("AuthService") retrofit: Retrofit
+        @Named("AuthRetrofit") retrofit: Retrofit
     ): AuthService {
         return retrofit.create(AuthService::class.java)
+    }
+
+    @Singleton
+    @Provides
+    fun provideProfileService(
+        @Named("ProfileRetrofit") retrofit: Retrofit
+    ): ProfileService {
+        return retrofit.create(ProfileService::class.java)
     }
 }
