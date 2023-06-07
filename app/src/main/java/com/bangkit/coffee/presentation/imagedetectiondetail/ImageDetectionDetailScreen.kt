@@ -131,7 +131,7 @@ fun ImageDetectionDetailScreen(
 
                     if (state.imageDetection?.isDetected == true) {
                         ConfidenceBadge(
-                            confidence = state.imageDetection.confidence,
+                            confidence = state.imageDetection.confidence * 100,
                             modifier = Modifier.align(Alignment.BottomEnd)
                         )
                     }
@@ -210,10 +210,14 @@ fun ImageDetectionDetailScreen(
                         text = stringResource(R.string.how_to_control),
                         style = MaterialTheme.typography.bodyLarge,
                         fontWeight = FontWeight.SemiBold,
-                        modifier = Modifier.padding(bottom = 6.dp)
+                        modifier = Modifier
+                            .padding(bottom = 6.dp)
+                            .padding(horizontal = 16.dp)
                     )
                     state.disease.controls.forEach { control ->
-                        Row {
+                        Row(
+                            modifier = Modifier.padding(horizontal = 16.dp)
+                        ) {
                             Icon(
                                 imageVector = Icons.Filled.Circle,
                                 contentDescription = null,
