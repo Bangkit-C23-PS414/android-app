@@ -4,6 +4,6 @@ import androidx.datastore.preferences.core.stringPreferencesKey
 
 object UserPreferencesKeys {
     val token = stringPreferencesKey("token")
-    val locale = stringPreferencesKey("locale")
-    val theme = stringPreferencesKey("theme")
+    val name = stringPreferencesKey("name")
+    val email = stringPreferencesKey("email")
 }

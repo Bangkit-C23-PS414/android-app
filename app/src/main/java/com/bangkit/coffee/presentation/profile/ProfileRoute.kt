@@ -48,6 +48,7 @@ fun rememberProfileActions(
 ): ProfileActions {
     return remember(coordinator) {
         ProfileActions(
+            refresh = coordinator::refresh,
             updateAvatar = coordinator::updateAvatar,
             openEditProfile = coordinator::openEditProfile,
             closeEditProfile = coordinator::closeEditProfile,

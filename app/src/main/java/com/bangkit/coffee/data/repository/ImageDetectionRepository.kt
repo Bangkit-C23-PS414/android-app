@@ -11,6 +11,7 @@ import com.bangkit.coffee.data.source.local.AppDatabase
 import com.bangkit.coffee.data.source.local.dao.ImageDetectionDao
 import com.bangkit.coffee.data.source.mediator.ImageDetectionRemoteMediator
 import com.bangkit.coffee.data.source.remote.ImageDetectionService
+import com.bangkit.coffee.data.source.remote.response.camera.CameraResponse
 import com.bangkit.coffee.domain.entity.ImageDetection
 import com.bangkit.coffee.domain.mapper.toExternal
 import com.bangkit.coffee.domain.mapper.toLocal
@@ -36,7 +37,7 @@ class ImageDetectionRepository @Inject constructor(
     private val database: AppDatabase
 ) {
 
-    suspend fun create(file: File): Resource<ImageDetection> {
+    suspend fun create(file: File): Resource<CameraResponse> {
         return try {
             val response = remoteDataSource.create(
                 createFormData(
@@ -46,7 +47,7 @@ class ImageDetectionRepository @Inject constructor(
                 )
             )
 
-            Resource.Success(response.data.toExternal())
+            Resource.Success(response)
         } catch (e: HttpException) {
             Resource.Error(e.parse().message)
         } catch (e: Exception) {
@@ -99,5 +100,9 @@ class ImageDetectionRepository @Inject constructor(
         } catch (e: Exception) {
             Resource.Error(context.getString(R.string.generic_error_message))
         }
+    }
+
+    suspend fun deleteAll() {
+        return localDataSource.deleteAll()
     }
 }

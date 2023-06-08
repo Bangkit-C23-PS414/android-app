@@ -42,13 +42,13 @@ import com.bangkit.coffee.presentation.imagedetectiondetail.components.Confidenc
 import com.bangkit.coffee.presentation.imagedetectiondetail.components.DiseaseFoundInfo
 import com.bangkit.coffee.presentation.imagedetectiondetail.components.HealthyInfo
 import com.bangkit.coffee.presentation.imagedetectiondetail.components.ProcessingInfo
+import com.bangkit.coffee.shared.components.pullrefresh.PullRefreshIndicator
+import com.bangkit.coffee.shared.components.pullrefresh.rememberPullRefreshState
 import com.bangkit.coffee.shared.theme.AppTheme
 import com.bangkit.coffee.shared.util.toDateTimeString
 import com.google.accompanist.placeholder.PlaceholderHighlight
 import com.google.accompanist.placeholder.material3.fade
 import com.google.accompanist.placeholder.material3.placeholder
-import com.google.accompanist.swiperefresh.SwipeRefresh
-import com.google.accompanist.swiperefresh.rememberSwipeRefreshState
 import com.wajahatiqbal.blurhash.BlurHashPainter
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -57,8 +57,7 @@ fun ImageDetectionDetailScreen(
     state: ImageDetectionDetailState = ImageDetectionDetailState(),
     actions: ImageDetectionDetailActions = ImageDetectionDetailActions()
 ) {
-    @Suppress("DEPRECATION")
-    val swipeRefreshState = rememberSwipeRefreshState(isRefreshing = state.loading)
+    val pullRefreshState = rememberPullRefreshState(state.refreshing, actions.refresh)
     val scrollState = rememberScrollState()
     val context = LocalContext.current
 
@@ -77,11 +76,10 @@ fun ImageDetectionDetailScreen(
             )
         }
     ) { contentPadding ->
-        @Suppress("DEPRECATION")
-        SwipeRefresh(
-            state = swipeRefreshState,
-            onRefresh = actions.refresh,
-            modifier = Modifier.padding(contentPadding)
+        Box(
+            modifier = Modifier
+                .padding(contentPadding)
+                .fillMaxSize()
         ) {
             Column(
                 modifier = Modifier
@@ -131,7 +129,7 @@ fun ImageDetectionDetailScreen(
 
                     if (state.imageDetection?.isDetected == true) {
                         ConfidenceBadge(
-                            confidence = state.imageDetection.confidence,
+                            confidence = state.imageDetection.confidence * 100,
                             modifier = Modifier.align(Alignment.BottomEnd)
                         )
                     }
@@ -210,10 +208,14 @@ fun ImageDetectionDetailScreen(
                         text = stringResource(R.string.how_to_control),
                         style = MaterialTheme.typography.bodyLarge,
                         fontWeight = FontWeight.SemiBold,
-                        modifier = Modifier.padding(bottom = 6.dp)
+                        modifier = Modifier
+                            .padding(bottom = 6.dp)
+                            .padding(horizontal = 16.dp)
                     )
                     state.disease.controls.forEach { control ->
-                        Row {
+                        Row(
+                            modifier = Modifier.padding(horizontal = 16.dp)
+                        ) {
                             Icon(
                                 imageVector = Icons.Filled.Circle,
                                 contentDescription = null,
@@ -229,6 +231,12 @@ fun ImageDetectionDetailScreen(
                     }
                 }
             }
+
+            PullRefreshIndicator(
+                state.refreshing,
+                pullRefreshState,
+                Modifier.align(Alignment.TopCenter),
+            )
         }
     }
 }

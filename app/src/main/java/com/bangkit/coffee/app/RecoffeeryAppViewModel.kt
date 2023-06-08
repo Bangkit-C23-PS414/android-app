@@ -3,7 +3,7 @@ package com.bangkit.coffee.app
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.navigation.NavBackStackEntry
-import com.bangkit.coffee.data.repository.UserPreferencesRepository
+import com.bangkit.coffee.data.repository.SessionRepository
 import com.bangkit.coffee.navigation.Screen
 import com.bangkit.coffee.shared.util.tryParseJWT
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -18,7 +18,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class RecoffeeryAppViewModel @Inject constructor(
-    private val userPreferencesRepository: UserPreferencesRepository,
+    private val sessionRepository: SessionRepository,
 ) : ViewModel() {
 
     private val _stateFlow: MutableStateFlow<RecoffeeryAppState> =
@@ -27,7 +27,7 @@ class RecoffeeryAppViewModel @Inject constructor(
 
     init {
         viewModelScope.launch {
-            userPreferencesRepository.tokenFlow.collect { token ->
+            sessionRepository.flow().collect { token ->
                 _stateFlow.update {
                     it.copy(
                         token = token,

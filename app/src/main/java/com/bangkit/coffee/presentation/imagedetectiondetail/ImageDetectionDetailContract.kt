@@ -12,7 +12,7 @@ import com.bangkit.coffee.shared.wrapper.Event
  * UI State that represents ImageDetectionDetailScreen
  **/
 data class ImageDetectionDetailState(
-    val loading: Boolean = true,
+    val refreshing: Boolean = false,
     val imageDetection: ImageDetection? = null,
     val disease: Disease? = null,
     val message: Event<String>? = null,

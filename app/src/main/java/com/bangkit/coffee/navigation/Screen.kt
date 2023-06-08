@@ -25,6 +25,9 @@ sealed class Screen(val route: String) {
         val bottomBarRoutes = bottomBarScreens.map { it.route }
     }
 
+    // Splash
+    object Splash : Screen("splash")
+
     // Welcome
     object Welcome : Screen("welcome")
 

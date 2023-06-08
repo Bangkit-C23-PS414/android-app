@@ -4,6 +4,7 @@ import android.net.Uri
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.staticCompositionLocalOf
+import com.bangkit.coffee.domain.entity.User
 import com.bangkit.coffee.presentation.profile.components.ChangePasswordForm
 import com.bangkit.coffee.presentation.profile.components.EditProfileForm
 import com.bangkit.coffee.shared.wrapper.Event
@@ -13,6 +14,8 @@ import com.bangkit.coffee.shared.wrapper.Event
  * UI State that represents ProfileScreen
  **/
 data class ProfileState(
+    val refreshing: Boolean = false,
+    val user: User? = null,
     val editProfileVisible: Boolean = false,
     val changePasswordVisible: Boolean = false,
     val message: Event<String>? = null,
@@ -24,6 +27,7 @@ data class ProfileState(
  * passed to the coordinator to handle
  **/
 data class ProfileActions(
+    val refresh: () -> Unit = {},
     val updateAvatar: (Uri) -> Unit = {},
     val openEditProfile: () -> Unit = {},
     val closeEditProfile: () -> Unit = {},

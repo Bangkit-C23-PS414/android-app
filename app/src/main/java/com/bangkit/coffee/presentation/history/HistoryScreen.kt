@@ -43,9 +43,10 @@ import com.bangkit.coffee.presentation.history.components.FilterHistoryBottomShe
 import com.bangkit.coffee.presentation.history.components.ImageDetectionCard
 import com.bangkit.coffee.presentation.history.components.ImageDetectionGroupHeader
 import com.bangkit.coffee.shared.components.DisplayErrorFragment
+import com.bangkit.coffee.shared.components.pullrefresh.PullRefreshIndicator
+import com.bangkit.coffee.shared.components.pullrefresh.pullRefresh
+import com.bangkit.coffee.shared.components.pullrefresh.rememberPullRefreshState
 import com.bangkit.coffee.shared.theme.AppTheme
-import com.google.accompanist.swiperefresh.SwipeRefresh
-import com.google.accompanist.swiperefresh.rememberSwipeRefreshState
 import kotlinx.coroutines.flow.flowOf
 
 @OptIn(ExperimentalMaterial3Api::class, ExperimentalFoundationApi::class)
@@ -57,9 +58,9 @@ fun HistoryScreen(
 ) {
     val lazyGridState = rememberLazyGridState()
 
-    @Suppress("DEPRECATION")
-    val swipeRefreshState = rememberSwipeRefreshState(
-        pagerState.loadState.refresh is LoadState.Loading
+    val pullRefreshState = rememberPullRefreshState(
+        pagerState.loadState.refresh is LoadState.Loading,
+        { pagerState.refresh() },
     )
 
     Scaffold(
@@ -80,13 +81,11 @@ fun HistoryScreen(
             )
         }
     ) { contentPadding ->
-        @Suppress("DEPRECATION")
-        SwipeRefresh(
-            state = swipeRefreshState,
-            onRefresh = { pagerState.refresh() },
+        Box(
             modifier = Modifier
-                .fillMaxSize()
                 .padding(contentPadding)
+                .fillMaxSize()
+                .pullRefresh(pullRefreshState)
         ) {
             LazyVerticalGrid(
                 columns = GridCells.Fixed(2),
@@ -181,6 +180,12 @@ fun HistoryScreen(
             if (pagerState.loadState.append.endOfPaginationReached && pagerState.itemCount == 0) {
                 DisplayErrorFragment(message = stringResource(R.string.history_empty))
             }
+
+            PullRefreshIndicator(
+                pagerState.loadState.refresh is LoadState.Loading,
+                pullRefreshState,
+                Modifier.align(Alignment.TopCenter)
+            )
         }
     }
 

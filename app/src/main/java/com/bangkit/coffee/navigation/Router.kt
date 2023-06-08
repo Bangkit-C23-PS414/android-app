@@ -19,6 +19,7 @@ import com.bangkit.coffee.presentation.profile.ProfileRoute
 import com.bangkit.coffee.presentation.resetpassword.ResetPasswordRoute
 import com.bangkit.coffee.presentation.signin.SignInRoute
 import com.bangkit.coffee.presentation.signup.SignUpRoute
+import com.bangkit.coffee.presentation.splash.SplashRoute
 import com.bangkit.coffee.presentation.verifyotp.VerifyOTPRoute
 import com.bangkit.coffee.presentation.welcome.WelcomeRoute
 
@@ -32,6 +33,26 @@ fun Router(
         navController = navController,
         startDestination = Screen.Welcome.route,
     ) {
+        // Splash
+        composable(Screen.Splash.route) {
+            SplashRoute(
+                navigateToHome = {
+                    navController.navigate(Screen.Home.route) {
+                        popUpTo(navController.graph.id) {
+                            inclusive = true
+                        }
+                    }
+                },
+                navigateToWelcome = {
+                    navController.navigate(Screen.Welcome.route) {
+                        popUpTo(navController.graph.id) {
+                            inclusive = true
+                        }
+                    }
+                }
+            )
+        }
+
         // Welcome
         composable(Screen.Welcome.route) {
             WelcomeRoute(
@@ -117,7 +138,7 @@ fun Router(
 
         composable(Screen.Profile.route) {
             ProfileRoute(
-                navigateToWelcome = { navController.navigate(Screen.Welcome.route)}
+                navigateToWelcome = { navController.navigate(Screen.Welcome.route) }
             )
         }
 

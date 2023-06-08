@@ -1,10 +1,8 @@
 package com.bangkit.coffee.presentation.signin
 
-import android.util.Log
-import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.bangkit.coffee.data.repository.UserPreferencesRepository
+import com.bangkit.coffee.data.repository.SessionRepository
 import com.bangkit.coffee.data.source.remote.AuthService
 import com.bangkit.coffee.data.source.remote.RemoteUtil
 import com.bangkit.coffee.data.source.remote.model.LoginUser
@@ -16,12 +14,13 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import retrofit2.HttpException
+import timber.log.Timber
 import javax.inject.Inject
 
 @HiltViewModel
 class SignInViewModel @Inject constructor(
     private val authService: AuthService,
-    private val userPreferencesRepository: UserPreferencesRepository
+    private val sessionRepository: SessionRepository
 ) : ViewModel() {
 
     private val _stateFlow = MutableStateFlow(SignInState())
@@ -48,13 +47,13 @@ class SignInViewModel @Inject constructor(
                         message = Event("Signed in")
                     )
                 }
-                userPreferencesRepository.updateToken(response.token)
+                sessionRepository.updateToken(response.token)
                 _stateFlow.update {
                     it.copy(
                         signedIn = true
                     )
                 }
-                Log.d("SignInViewModel", "logged in with token ${response.token}")
+                Timber.d("logged in with token " + response.token)
             } catch (e: HttpException) {
                 if (e.code() == 401) {
                     val errorBody = e.response()?.errorBody()?.string()
@@ -67,7 +66,7 @@ class SignInViewModel @Inject constructor(
                     }
                 }
             } catch (e: Exception) {
-                Log.d("SignInViewModel", e.toString())
+                Timber.e(e.toString())
             }
         }
     }
