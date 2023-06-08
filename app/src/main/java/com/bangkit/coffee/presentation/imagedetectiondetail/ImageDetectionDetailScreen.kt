@@ -43,7 +43,6 @@ import com.bangkit.coffee.presentation.imagedetectiondetail.components.DiseaseFo
 import com.bangkit.coffee.presentation.imagedetectiondetail.components.HealthyInfo
 import com.bangkit.coffee.presentation.imagedetectiondetail.components.ProcessingInfo
 import com.bangkit.coffee.shared.components.pullrefresh.PullRefreshIndicator
-import com.bangkit.coffee.shared.components.pullrefresh.pullRefresh
 import com.bangkit.coffee.shared.components.pullrefresh.rememberPullRefreshState
 import com.bangkit.coffee.shared.theme.AppTheme
 import com.bangkit.coffee.shared.util.toDateTimeString
@@ -58,7 +57,7 @@ fun ImageDetectionDetailScreen(
     state: ImageDetectionDetailState = ImageDetectionDetailState(),
     actions: ImageDetectionDetailActions = ImageDetectionDetailActions()
 ) {
-    val pullRefreshState = rememberPullRefreshState(state.loading, actions.refresh)
+    val pullRefreshState = rememberPullRefreshState(state.refreshing, actions.refresh)
     val scrollState = rememberScrollState()
     val context = LocalContext.current
 
@@ -80,7 +79,6 @@ fun ImageDetectionDetailScreen(
         Box(
             modifier = Modifier
                 .padding(contentPadding)
-                .pullRefresh(pullRefreshState)
                 .fillMaxSize()
         ) {
             Column(
@@ -235,7 +233,7 @@ fun ImageDetectionDetailScreen(
             }
 
             PullRefreshIndicator(
-                state.loading,
+                state.refreshing,
                 pullRefreshState,
                 Modifier.align(Alignment.TopCenter),
             )

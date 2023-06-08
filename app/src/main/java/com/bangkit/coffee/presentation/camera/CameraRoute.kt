@@ -21,9 +21,9 @@ fun CameraRoute(
 
     // Handle events
     val appActions = LocalRecoffeeryAppActions.current
-    uiState.imageDetection?.let { imageDetection ->
+    uiState.filename?.let { filename ->
         LaunchedEffect(Unit) {
-            actions.navigateToDetail(imageDetection.id)
+            actions.navigateToDetail(filename)
         }
     }
     uiState.message?.let { event ->

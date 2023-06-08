@@ -84,8 +84,8 @@ fun HistoryScreen(
         Box(
             modifier = Modifier
                 .padding(contentPadding)
-                .pullRefresh(pullRefreshState)
                 .fillMaxSize()
+                .pullRefresh(pullRefreshState)
         ) {
             LazyVerticalGrid(
                 columns = GridCells.Fixed(2),

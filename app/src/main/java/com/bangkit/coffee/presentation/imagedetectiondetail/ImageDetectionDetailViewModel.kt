@@ -41,7 +41,7 @@ class ImageDetectionDetailViewModel @Inject constructor(
             .collect { (imageDetection, disease) ->
                 _stateFlow.update {
                     it.copy(
-                        loading = false,
+                        refreshing = false,
                         waiting = !imageDetection.isDetected,
                         imageDetection = imageDetection,
                         disease = disease
@@ -88,13 +88,13 @@ class ImageDetectionDetailViewModel @Inject constructor(
 
     fun refresh() {
         viewModelScope.launch {
-            _stateFlow.update { it.copy(loading = true) }
+            _stateFlow.update { it.copy(refreshing = true) }
 
             val response = imageDetectionWithDiseaseUseCase.refreshOne(id)
             if (response is Resource.Error) {
                 _stateFlow.update {
                     it.copy(
-                        loading = false,
+                        refreshing = false,
                         message = Event(response.message)
                     )
                 }

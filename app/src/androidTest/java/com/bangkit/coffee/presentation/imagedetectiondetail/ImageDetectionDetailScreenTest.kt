@@ -20,7 +20,7 @@ class ImageDetectionDetailScreenTest : ComposeTest() {
             AppTest {
                 ImageDetectionDetailScreen(
                     state = ImageDetectionDetailState(
-                        loading = false,
+                        refreshing = false,
                         imageDetection = imageDetection,
                         disease = disease
                     )
@@ -38,7 +38,7 @@ class ImageDetectionDetailScreenTest : ComposeTest() {
             AppTest {
                 ImageDetectionDetailScreen(
                     state = ImageDetectionDetailState(
-                        loading = false,
+                        refreshing = false,
                         imageDetection = imageDetection
                     )
                 )

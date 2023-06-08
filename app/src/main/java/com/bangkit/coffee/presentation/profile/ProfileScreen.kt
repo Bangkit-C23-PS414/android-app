@@ -74,6 +74,7 @@ fun ProfileScreen(
         Box(
             modifier = Modifier
                 .padding(contentPadding)
+                .fillMaxSize()
                 .pullRefresh(pullRefreshState)
         ) {
             Column(

@@ -2,6 +2,7 @@ package com.bangkit.coffee.data.source.remote
 
 import com.bangkit.coffee.data.source.remote.model.RemoteImageDetection
 import com.bangkit.coffee.data.source.remote.response.ResponseWrapper
+import com.bangkit.coffee.data.source.remote.response.camera.CameraResponse
 import com.bangkit.coffee.shared.const.DEFAULT_PER_PAGE
 import okhttp3.MultipartBody
 import retrofit2.http.GET
@@ -17,7 +18,7 @@ interface ImageDetectionService {
     @POST("/image-detections/create")
     suspend fun create(
         @Part image: MultipartBody.Part
-    ): ResponseWrapper<RemoteImageDetection>
+    ): CameraResponse
 
     @GET("/image-detections/fetch")
     suspend fun fetch(
