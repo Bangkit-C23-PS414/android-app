@@ -12,6 +12,10 @@ class ResetPasswordCoordinator(
     val viewModel: ResetPasswordViewModel
 ) {
     val screenStateFlow = viewModel.stateFlow
+
+    fun resetPassword(newPassword: String) {
+        viewModel.resetPassword(newPassword)
+    }
 }
 
 @Composable

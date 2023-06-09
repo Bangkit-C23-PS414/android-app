@@ -12,6 +12,7 @@ import com.bangkit.coffee.shared.wrapper.Event
 data class VerifyOTPState(
     val loading: Boolean = false,
     val message: Event<String>? = null,
+    val token: String? = null,
     val verified: Boolean = false
 )
 
@@ -21,7 +22,7 @@ data class VerifyOTPState(
  **/
 data class VerifyOTPActions(
     val verifyOTP: (String?, String) -> Unit = { _: String?, _: String -> },
-    val navigateToResetPassword: () -> Unit = {}
+    val navigateToResetPassword: (String) -> Unit = {}
 )
 
 /**

@@ -11,7 +11,7 @@ import com.bangkit.coffee.app.LocalKopintarAppActions
 fun VerifyOTPRoute(
     coordinator: VerifyOTPCoordinator = rememberVerifyOTPCoordinator(),
     email: String?,
-    navigateToResetPassword: () -> Unit = {}
+    navigateToResetPassword: (String) -> Unit = {}
 ) {
     // State observing and declarations
     val uiState by coordinator.screenStateFlow.collectAsStateWithLifecycle()
@@ -30,7 +30,7 @@ fun VerifyOTPRoute(
     }
     if(uiState.verified) {
         LaunchedEffect(Unit) {
-            actions.navigateToResetPassword()
+            uiState.token?.let { actions.navigateToResetPassword(it) }
         }
     }
 
@@ -42,7 +42,7 @@ fun VerifyOTPRoute(
 @Composable
 fun rememberVerifyOTPActions(
     coordinator: VerifyOTPCoordinator,
-    navigateToResetPassword: () -> Unit
+    navigateToResetPassword: (String) -> Unit
 ): VerifyOTPActions {
     return remember(coordinator) {
         VerifyOTPActions(

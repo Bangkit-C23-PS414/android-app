@@ -35,11 +35,10 @@ class VerifyOTPViewModel @Inject constructor(
                     it.copy(
                         loading = false,
                         message = Event("Code verified"),
+                        token = response.body()?.token,
                         verified = true
                     )
                 }
-
-                val token = response.body()?.token
 
             }
 
