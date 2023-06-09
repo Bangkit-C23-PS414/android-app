@@ -10,7 +10,6 @@ import com.bangkit.coffee.app.LocalKopintarAppActions
 @Composable
 fun VerifyOTPRoute(
     coordinator: VerifyOTPCoordinator = rememberVerifyOTPCoordinator(),
-    email: String?,
     navigateToResetPassword: (String) -> Unit = {}
 ) {
     // State observing and declarations
@@ -35,7 +34,7 @@ fun VerifyOTPRoute(
     }
 
     // UI Rendering
-    VerifyOTPScreen(email, uiState, actions)
+    VerifyOTPScreen(uiState, actions)
 }
 
 

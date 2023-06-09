@@ -21,10 +21,12 @@ class VerifyOTPViewModel @Inject constructor(
     private val userPreferencesRepository: UserPreferencesRepository
 ) : ViewModel() {
 
-    private val _stateFlow = MutableStateFlow(VerifyOTPState())
+    private val email = checkNotNull<String>(savedStateHandle["email"])
+
+    private val _stateFlow = MutableStateFlow(VerifyOTPState(email=email))
     val stateFlow = _stateFlow.asStateFlow()
 
-    fun verifyOTP(email: String?, code: String){
+    fun verifyOTP(code: String){
         viewModelScope.launch {
             _stateFlow.update { it.copy(loading = true) }
 

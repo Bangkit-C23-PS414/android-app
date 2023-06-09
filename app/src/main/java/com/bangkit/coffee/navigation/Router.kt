@@ -76,10 +76,14 @@ fun Router(
             )
         }
 
-        composable(Screen.VerifyOTP.route) {
-            val email = it.arguments?.getString("email")
+        composable(
+            Screen.VerifyOTP.route,
+            arguments = listOf(navArgument("email") {
+                type = NavType.StringType
+                defaultValue = "default-email"
+            })
+        ) {
             VerifyOTPRoute(
-                email = email,
                 navigateToResetPassword = {token ->
                     navController.navigate(
                         Screen.ResetPassword.createRoute(token)

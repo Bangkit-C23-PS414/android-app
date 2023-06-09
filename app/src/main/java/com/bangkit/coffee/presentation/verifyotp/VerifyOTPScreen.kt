@@ -49,7 +49,6 @@ import me.naingaungluu.formconductor.composeui.form
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun VerifyOTPScreen(
-    email: String? = "",
     state: VerifyOTPState = VerifyOTPState(),
     actions: VerifyOTPActions = VerifyOTPActions()
 ) {
@@ -92,9 +91,9 @@ fun VerifyOTPScreen(
             text = stringResource(R.string.enter_otp_description),
             style = MaterialTheme.typography.bodyMedium,
         )
-        if (email != null) {
+        state.email?.let {
             Text(
-                text = email,
+                text = it,
                 style = MaterialTheme.typography.bodyMedium,
             )
         }
@@ -131,7 +130,7 @@ fun VerifyOTPScreen(
             Button(
                 onClick = {
                     if (formData is FormResult.Success){
-                        actions.verifyOTP(email, formData.data.code)
+                        actions.verifyOTP(formData.data.code)
                     }
                 },
                 modifier = Modifier
