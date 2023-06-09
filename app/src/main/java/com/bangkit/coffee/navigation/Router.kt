@@ -68,12 +68,18 @@ fun Router(
         // Forgot Password
         composable(Screen.ForgotPassword.route) {
             ForgotPasswordRoute(
-                navigateToVerifyOTP = { navController.navigate(Screen.VerifyOTP.route) }
+                navigateToVerifyOTP = {email ->
+                    navController.navigate(
+                        Screen.VerifyOTP.createRoute(email)
+                    )
+                }
             )
         }
 
         composable(Screen.VerifyOTP.route) {
+            val email = it.arguments?.getString("email")
             VerifyOTPRoute(
+                email = email,
                 navigateToResetPassword = { navController.navigate(Screen.ResetPassword.route) }
             )
         }

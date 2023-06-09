@@ -3,20 +3,25 @@ package com.bangkit.coffee.presentation.forgotpassword
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.staticCompositionLocalOf
+import com.bangkit.coffee.shared.wrapper.Event
 
 
 /**
  * UI State that represents ForgotPasswordScreen
  **/
-class ForgotPasswordState
+data class ForgotPasswordState(
+    val loading: Boolean = false,
+    val message: Event<String>? = null,
+    val emailInput: String? = null,
+)
 
 /**
  * ForgotPassword Actions emitted from the UI Layer
  * passed to the coordinator to handle
  **/
 data class ForgotPasswordActions(
-    val forgotPassword: () -> Unit = {},
-    val navigateToVerifyOTP: () -> Unit = {}
+    val forgotPassword: (String) -> Unit = {},
+    val navigateToVerifyOTP: (String) -> Unit = {},
 )
 
 /**
