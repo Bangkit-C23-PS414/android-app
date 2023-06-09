@@ -1,6 +1,5 @@
 package com.bangkit.coffee.presentation.signin
 
-import android.util.Log
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -16,6 +15,7 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import retrofit2.HttpException
+import timber.log.Timber
 import javax.inject.Inject
 
 @HiltViewModel
@@ -55,7 +55,7 @@ class SignInViewModel @Inject constructor(
                         signedIn = true
                     )
                 }
-                Log.d("SignInViewModel", "logged in with token ${response.token}")
+                Timber.d("logged in with token " + response.token)
             } catch (e: HttpException) {
                 if (e.code() == 401) {
                     val errorBody = e.response()?.errorBody()?.string()
@@ -68,7 +68,7 @@ class SignInViewModel @Inject constructor(
                     }
                 }
             } catch (e: Exception) {
-                Log.d("SignInViewModel", e.toString())
+                Timber.d(e.toString())
             }
         }
     }

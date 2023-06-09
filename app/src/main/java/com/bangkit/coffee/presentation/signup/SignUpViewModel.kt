@@ -1,6 +1,5 @@
 package com.bangkit.coffee.presentation.signup
 
-import android.util.Log
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -16,6 +15,7 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import retrofit2.HttpException
+import timber.log.Timber
 import javax.inject.Inject
 
 @HiltViewModel
@@ -54,7 +54,7 @@ class SignUpViewModel @Inject constructor(
                     }
                 }
             } catch (e: Exception) {
-                Log.d("SignUpViewModel", e.toString())
+                Timber.d(e.toString())
             }
         }
     }
