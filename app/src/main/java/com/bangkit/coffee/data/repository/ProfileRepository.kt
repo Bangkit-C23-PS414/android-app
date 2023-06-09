@@ -24,7 +24,9 @@ class ProfileRepository @Inject constructor(
         return context.dataStore.data.map { pref ->
             User(
                 name = pref[UserPreferencesKeys.name] ?: return@map null,
-                email = pref[UserPreferencesKeys.email] ?: return@map null
+                email = pref[UserPreferencesKeys.email] ?: return@map null,
+                avatarUrl = pref[UserPreferencesKeys.avatarUrl].orEmpty(),
+                blurHash = pref[UserPreferencesKeys.blurHash].orEmpty()
             )
         }
     }
@@ -33,14 +35,17 @@ class ProfileRepository @Inject constructor(
         return try {
             // Fetch data
             val profile = remoteDataSource.get()
+            val user = profile.toExternal()
 
             // Save
             context.dataStore.edit { pref ->
-                pref[UserPreferencesKeys.name] = profile.name
-                pref[UserPreferencesKeys.email] = profile.email
+                pref[UserPreferencesKeys.name] = user.name
+                pref[UserPreferencesKeys.email] = user.email
+                pref[UserPreferencesKeys.avatarUrl] = user.avatarUrl
+                pref[UserPreferencesKeys.blurHash] = user.blurHash
             }
 
-            Resource.Success(profile.toExternal())
+            Resource.Success(user)
         } catch (e: Exception) {
             Resource.Error("Something went wrong")
         }

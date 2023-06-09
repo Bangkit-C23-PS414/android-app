@@ -6,5 +6,7 @@ import com.bangkit.coffee.domain.entity.User
 /* Remote <--> External Section */
 fun ProfileResponse.toExternal() = User(
     name = name,
-    email = email
+    email = email,
+    avatarUrl = avatarUrl.orEmpty(),
+    blurHash = blurHash.orEmpty(),
 )
