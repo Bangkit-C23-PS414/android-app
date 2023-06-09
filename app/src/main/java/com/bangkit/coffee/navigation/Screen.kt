@@ -32,7 +32,9 @@ sealed class Screen(val route: String) {
     object SignIn : Screen("auth/sign-in")
     object SignUp : Screen("auth/sign-up")
     object ForgotPassword : Screen("auth/forgot-password")
-    object VerifyOTP : Screen("auth/forgot-password/verify")
+    object VerifyOTP : Screen("auth/forgot-password/verify/{email}") {
+        fun createRoute(email: String) = "auth/forgot-password/verify/$email"
+    }
     object ResetPassword : Screen("auth/forgot-password/reset")
 
     // Home

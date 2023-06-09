@@ -13,8 +13,8 @@ class VerifyOTPCoordinator(
 ) {
     val screenStateFlow = viewModel.stateFlow
 
-    fun verifyOTP() {
-
+    fun verifyOTP(email: String?, code: String) {
+        viewModel.verifyOTP(email, code)
     }
 }
 

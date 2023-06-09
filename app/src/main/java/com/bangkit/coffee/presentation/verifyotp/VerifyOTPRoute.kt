@@ -1,13 +1,16 @@
 package com.bangkit.coffee.presentation.verifyotp
 
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import com.bangkit.coffee.app.LocalKopintarAppActions
 
 @Composable
 fun VerifyOTPRoute(
     coordinator: VerifyOTPCoordinator = rememberVerifyOTPCoordinator(),
+    email: String?,
     navigateToResetPassword: () -> Unit = {}
 ) {
     // State observing and declarations
@@ -16,8 +19,23 @@ fun VerifyOTPRoute(
     // UI Actions
     val actions = rememberVerifyOTPActions(coordinator, navigateToResetPassword)
 
+    // Handle events
+    val appActions = LocalKopintarAppActions.current
+    uiState.message?.let { event ->
+        LaunchedEffect(event) {
+            event.getContentIfNotHandled()?.let { message ->
+                appActions.showToast(message)
+            }
+        }
+    }
+    if(uiState.verified) {
+        LaunchedEffect(Unit) {
+            actions.navigateToResetPassword()
+        }
+    }
+
     // UI Rendering
-    VerifyOTPScreen(uiState, actions)
+    VerifyOTPScreen(email, uiState, actions)
 }
 
 
