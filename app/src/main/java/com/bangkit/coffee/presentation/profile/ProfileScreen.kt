@@ -210,7 +210,8 @@ fun ProfileScreen(
     if (state.editProfileVisible) {
         ProvideProfileActions(actions = actions) {
             EditProfileDialog(
-                name = "Muhammad John Doe"
+                name = state.user?.name.orEmpty(),
+                inProgress = state.inProgress
             )
         }
     }

@@ -18,6 +18,7 @@ data class ProfileState(
     val user: User? = null,
     val editProfileVisible: Boolean = false,
     val changePasswordVisible: Boolean = false,
+    val inProgress: Boolean = false,
     val message: Event<String>? = null,
     val signedOut: Boolean = false,
 )

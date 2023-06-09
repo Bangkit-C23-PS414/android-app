@@ -67,7 +67,22 @@ class ProfileViewModel @Inject constructor(
     }
 
     fun editProfile(form: EditProfileForm) {
+        viewModelScope.launch {
+            _stateFlow.update { it.copy(inProgress = true) }
 
+            when (val response = profileRepository.edit(form.name)) {
+                is Resource.Success -> _stateFlow.update {
+                    it.copy(inProgress = false, editProfileVisible = false)
+                }
+
+                is Resource.Error -> _stateFlow.update {
+                    it.copy(
+                        inProgress = false,
+                        message = Event(response.message),
+                    )
+                }
+            }
+        }
     }
 
     fun openChangePassword() = _stateFlow.update {

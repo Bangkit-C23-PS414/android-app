@@ -1,8 +1,8 @@
-package com.bangkit.coffee.data.source.remote.response.profile
+package com.bangkit.coffee.data.source.remote.model
 
 import com.google.gson.annotations.SerializedName
 
-data class ProfileResponse(
+data class RemoteUser(
 
     @field:SerializedName("name")
     val name: String,
