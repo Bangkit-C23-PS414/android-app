@@ -31,7 +31,7 @@ fun Router(
     NavHost(
         modifier = modifier,
         navController = navController,
-        startDestination = Screen.Welcome.route,
+        startDestination = Screen.Splash.route,
     ) {
         // Splash
         composable(Screen.Splash.route) {
