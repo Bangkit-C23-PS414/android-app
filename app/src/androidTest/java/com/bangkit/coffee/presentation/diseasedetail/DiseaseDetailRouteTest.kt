@@ -8,6 +8,7 @@ import com.bangkit.coffee.presentation.ComposeTest
 import com.bangkit.coffee.util.AppTest
 import org.junit.Before
 import org.junit.Test
+import org.mockito.Mockito
 
 class DiseaseDetailRouteTest : ComposeTest() {
 
@@ -16,7 +17,7 @@ class DiseaseDetailRouteTest : ComposeTest() {
     @Before
     fun setUp() {
         val savedStateHandle = SavedStateHandle(mapOf("id" to "default-id"))
-        viewModel = DiseaseDetailViewModel()
+        viewModel = Mockito.mock(DiseaseDetailViewModel::class.java)
     }
 
     @OptIn(ExperimentalTestApi::class)
