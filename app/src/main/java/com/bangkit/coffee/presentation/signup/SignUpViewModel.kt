@@ -39,7 +39,8 @@ class SignUpViewModel @Inject constructor(
                 _stateFlow.update {
                     it.copy(
                         loading = false,
-                        message = Event("Signed up with email: ${response.email}")
+                        message = Event("Signed up with email: ${response.email}"),
+                        signedUp = true
                     )
                 }
             } catch (e: HttpException) {

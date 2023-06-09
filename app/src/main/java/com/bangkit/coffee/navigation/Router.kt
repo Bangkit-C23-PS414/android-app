@@ -55,8 +55,8 @@ fun Router(
 
         composable(Screen.SignUp.route) {
             SignUpRoute(
-                navigateToDashboard = {
-                    navController.navigate(Screen.Home.route) {
+                navigateToSignIn = {
+                    navController.navigate(Screen.SignIn.route) {
                         popUpTo(navController.graph.id) {
                             inclusive = true
                         }

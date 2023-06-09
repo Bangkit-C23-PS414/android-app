@@ -10,13 +10,13 @@ import com.bangkit.coffee.app.LocalKopintarAppActions
 @Composable
 fun SignUpRoute(
     coordinator: SignUpCoordinator = rememberSignUpCoordinator(),
-    navigateToDashboard: () -> Unit = {}
+    navigateToSignIn: () -> Unit = {}
 ) {
     // State observing and declarations
     val uiState by coordinator.screenStateFlow.collectAsStateWithLifecycle()
 
     // UI Actions
-    val actions = rememberSignUpActions(coordinator, navigateToDashboard)
+    val actions = rememberSignUpActions(coordinator, navigateToSignIn)
 
     // Handle events
     val appActions = LocalKopintarAppActions.current
@@ -25,6 +25,11 @@ fun SignUpRoute(
             event.getContentIfNotHandled()?.let { message ->
                 appActions.showToast(message)
             }
+        }
+    }
+    if (uiState.signedUp) {
+        LaunchedEffect(Unit) {
+            actions.navigateToSignIn()
         }
     }
 
@@ -36,12 +41,12 @@ fun SignUpRoute(
 @Composable
 fun rememberSignUpActions(
     coordinator: SignUpCoordinator,
-    navigateToDashboard: () -> Unit
+    navigateToSignIn: () -> Unit
 ): SignUpActions {
     return remember(coordinator) {
         SignUpActions(
             signUp = coordinator::signUp,
-            navigateToDashboard = navigateToDashboard
+            navigateToSignIn = navigateToSignIn
         )
     }
 }

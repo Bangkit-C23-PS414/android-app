@@ -13,6 +13,7 @@ import com.bangkit.coffee.shared.wrapper.Event
 data class SignUpState(
     val loading: Boolean = false,
     val message: Event<String>? = null,
+    val signedUp: Boolean = false
 )
 
 /**
@@ -21,7 +22,7 @@ data class SignUpState(
  **/
 data class SignUpActions(
     val signUp: (SignUpForm) -> Unit = {},
-    val navigateToDashboard: () -> Unit = {}
+    val navigateToSignIn: () -> Unit = {}
 )
 
 /**
