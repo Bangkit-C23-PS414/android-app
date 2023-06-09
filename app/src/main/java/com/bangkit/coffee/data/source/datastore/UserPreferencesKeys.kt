@@ -6,4 +6,6 @@ object UserPreferencesKeys {
     val token = stringPreferencesKey("token")
     val name = stringPreferencesKey("name")
     val email = stringPreferencesKey("email")
+    val avatarUrl = stringPreferencesKey("avatarUrl")
+    val blurHash = stringPreferencesKey("blurHash")
 }

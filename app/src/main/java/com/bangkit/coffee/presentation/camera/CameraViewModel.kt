@@ -67,7 +67,7 @@ class CameraViewModel @Inject constructor(
                     _stateFlow.update {
                         it.copy(
                             inProgress = false,
-                            filename = resource.data.data.filename
+                            filename = resource.data.filename
                         )
                     }
                 }

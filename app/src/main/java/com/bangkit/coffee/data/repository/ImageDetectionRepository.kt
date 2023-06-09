@@ -11,7 +11,7 @@ import com.bangkit.coffee.data.source.local.AppDatabase
 import com.bangkit.coffee.data.source.local.dao.ImageDetectionDao
 import com.bangkit.coffee.data.source.mediator.ImageDetectionRemoteMediator
 import com.bangkit.coffee.data.source.remote.ImageDetectionService
-import com.bangkit.coffee.data.source.remote.response.camera.CameraResponse
+import com.bangkit.coffee.data.source.remote.response.camera.CameraResponseData
 import com.bangkit.coffee.domain.entity.ImageDetection
 import com.bangkit.coffee.domain.mapper.toExternal
 import com.bangkit.coffee.domain.mapper.toLocal
@@ -22,7 +22,7 @@ import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import okhttp3.MediaType.Companion.toMediaType
-import okhttp3.MultipartBody.Part.Companion.createFormData
+import okhttp3.MultipartBody
 import okhttp3.RequestBody.Companion.asRequestBody
 import retrofit2.HttpException
 import java.io.File
@@ -37,17 +37,17 @@ class ImageDetectionRepository @Inject constructor(
     private val database: AppDatabase
 ) {
 
-    suspend fun create(file: File): Resource<CameraResponse> {
+    suspend fun create(file: File): Resource<CameraResponseData> {
         return try {
             val response = remoteDataSource.create(
-                createFormData(
+                MultipartBody.Part.createFormData(
                     name = "image",
                     filename = file.name,
                     body = file.asRequestBody("image/jpeg".toMediaType())
                 )
             )
 
-            Resource.Success(response)
+            Resource.Success(response.data)
         } catch (e: HttpException) {
             Resource.Error(e.parse().message)
         } catch (e: Exception) {

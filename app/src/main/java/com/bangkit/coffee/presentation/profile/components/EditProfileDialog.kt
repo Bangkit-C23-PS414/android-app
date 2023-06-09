@@ -5,15 +5,18 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Close
 import androidx.compose.material.icons.filled.Person
 import androidx.compose.material3.Button
 import androidx.compose.material3.CenterAlignedTopAppBar
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
@@ -52,7 +55,8 @@ import timber.log.Timber
 @Composable
 fun EditProfileDialog(
     modifier: Modifier = Modifier,
-    name: String = ""
+    name: String = "",
+    inProgress: Boolean = false,
 ) {
     val actions = LocalProfileActions.current
     val focusRequester = remember { FocusRequester() }
@@ -142,14 +146,29 @@ fun EditProfileDialog(
                         }
                     }
 
+                    val formData = formState.value
                     Button(
-                        onClick = actions.closeEditProfile,
+                        onClick = {
+                            if (formData is FormResult.Success && !inProgress) {
+                                actions.editProfile(formData.data)
+                            }
+                        },
                         enabled = formState.value is FormResult.Success,
                         modifier = Modifier
                             .fillMaxWidth()
                             .padding(horizontal = 16.dp)
                             .testTag("SaveButton")
                     ) {
+                        if (inProgress) {
+                            CircularProgressIndicator(
+                                color = MaterialTheme.colorScheme.onPrimary,
+                                strokeWidth = 2.dp,
+                                modifier = Modifier
+                                    .padding(end = 8.dp)
+                                    .size(15.dp)
+                            )
+                        }
+
                         Text(text = stringResource(R.string.save))
                     }
                 }

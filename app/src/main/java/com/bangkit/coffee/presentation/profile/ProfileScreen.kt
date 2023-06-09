@@ -32,13 +32,17 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.testTag
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
+import coil.request.ImageRequest
 import com.bangkit.coffee.R
 import com.bangkit.coffee.presentation.profile.components.ChangePasswordDialog
 import com.bangkit.coffee.presentation.profile.components.EditProfileDialog
@@ -49,6 +53,7 @@ import com.bangkit.coffee.shared.theme.AppTheme
 import com.google.accompanist.placeholder.PlaceholderHighlight
 import com.google.accompanist.placeholder.material3.fade
 import com.google.accompanist.placeholder.material3.placeholder
+import com.wajahatiqbal.blurhash.BlurHashPainter
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -56,6 +61,7 @@ fun ProfileScreen(
     state: ProfileState = ProfileState(),
     actions: ProfileActions = ProfileActions()
 ) {
+    val context = LocalContext.current
     val scrollState = rememberScrollState()
     val singlePhotoPickerLauncher = rememberLauncherForActivityResult(
         contract = ActivityResultContracts.PickVisualMedia(),
@@ -90,8 +96,23 @@ fun ProfileScreen(
                     contentAlignment = Alignment.BottomEnd
                 ) {
                     AsyncImage(
-                        model = R.drawable.no_image,
+                        model = if (state.user?.avatarUrl?.isNotBlank() == true) {
+                            ImageRequest.Builder(context)
+                                .data(state.user.avatarUrl)
+                                .crossfade(true)
+                                .diskCacheKey(state.user.cacheKey)
+                                .memoryCacheKey(state.user.cacheKey)
+                                .build()
+                        } else R.drawable.no_image,
                         contentDescription = stringResource(R.string.profile_photo),
+                        contentScale = ContentScale.Crop,
+                        error = painterResource(R.drawable.no_image),
+                        placeholder = BlurHashPainter(
+                            blurHash = state.user?.blurHash,
+                            width = 224,
+                            height = 224,
+                            scale = 0.1f,
+                        ),
                         modifier = Modifier
                             .size(150.dp)
                             .clip(CircleShape)
@@ -189,14 +210,17 @@ fun ProfileScreen(
     if (state.editProfileVisible) {
         ProvideProfileActions(actions = actions) {
             EditProfileDialog(
-                name = "Muhammad John Doe"
+                name = state.user?.name.orEmpty(),
+                inProgress = state.inProgress
             )
         }
     }
 
     if (state.changePasswordVisible) {
         ProvideProfileActions(actions = actions) {
-            ChangePasswordDialog()
+            ChangePasswordDialog(
+                inProgress = state.inProgress
+            )
         }
     }
 }

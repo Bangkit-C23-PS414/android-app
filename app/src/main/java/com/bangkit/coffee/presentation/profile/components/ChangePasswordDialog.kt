@@ -5,15 +5,18 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Close
 import androidx.compose.material.icons.filled.Lock
 import androidx.compose.material3.Button
 import androidx.compose.material3.CenterAlignedTopAppBar
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
@@ -43,7 +46,8 @@ import me.naingaungluu.formconductor.composeui.form
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ChangePasswordDialog(
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    inProgress: Boolean = false
 ) {
     val actions = LocalProfileActions.current
     val focusRequester = remember { FocusRequester() }
@@ -170,14 +174,29 @@ fun ChangePasswordDialog(
                         )
                     }
 
+                    val formData = formState.value
                     Button(
-                        onClick = actions.closeChangePassword,
+                        onClick = {
+                            if (formData is FormResult.Success && !inProgress) {
+                                actions.changePassword(formData.data)
+                            }
+                        },
                         enabled = formState.value is FormResult.Success,
                         modifier = Modifier
                             .fillMaxWidth()
                             .padding(horizontal = 16.dp)
                             .testTag("SaveButton")
                     ) {
+                        if (inProgress) {
+                            CircularProgressIndicator(
+                                color = MaterialTheme.colorScheme.onPrimary,
+                                strokeWidth = 2.dp,
+                                modifier = Modifier
+                                    .padding(end = 8.dp)
+                                    .size(15.dp)
+                            )
+                        }
+
                         Text(text = stringResource(R.string.update_password))
                     }
                 }
