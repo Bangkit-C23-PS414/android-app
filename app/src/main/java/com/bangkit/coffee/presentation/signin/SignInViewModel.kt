@@ -66,7 +66,7 @@ class SignInViewModel @Inject constructor(
                     }
                 }
             } catch (e: Exception) {
-                Timber.e(e.toString())
+                Timber.d(e.toString())
             }
         }
     }

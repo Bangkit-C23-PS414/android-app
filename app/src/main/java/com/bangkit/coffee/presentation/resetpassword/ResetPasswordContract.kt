@@ -3,18 +3,24 @@ package com.bangkit.coffee.presentation.resetpassword
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.staticCompositionLocalOf
+import com.bangkit.coffee.shared.wrapper.Event
 
 
 /**
  * UI State that represents ResetPasswordScreen
  **/
-class ResetPasswordState
+data class ResetPasswordState(
+    val loading: Boolean = false,
+    val message: Event<String>? = null,
+    val changeSucceed: Boolean = false
+)
 
 /**
  * ResetPassword Actions emitted from the UI Layer
  * passed to the coordinator to handle
  **/
 data class ResetPasswordActions(
+    val resetPassword: (String) -> Unit = {},
     val navigateToLogin: () -> Unit = {}
 )
 

@@ -35,8 +35,12 @@ sealed class Screen(val route: String) {
     object SignIn : Screen("auth/sign-in")
     object SignUp : Screen("auth/sign-up")
     object ForgotPassword : Screen("auth/forgot-password")
-    object VerifyOTP : Screen("auth/forgot-password/verify")
-    object ResetPassword : Screen("auth/forgot-password/reset")
+    object VerifyOTP : Screen("auth/forgot-password/verify/{email}") {
+        fun createRoute(email: String) = "auth/forgot-password/verify/$email"
+    }
+    object ResetPassword : Screen("auth/forgot-password/reset/{token}"){
+        fun createRoute(token: String) = "auth/forgot-password/reset/$token"
+    }
 
     // Home
     object Home : NavigationBarScreen("home", Icons.Filled.Home, R.string.home)

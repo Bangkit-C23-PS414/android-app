@@ -7,7 +7,7 @@ class RemoteUtil {
     companion object{
         fun extractErrorMessageFromJson(errorBody: String?): String {
             return try {
-                val json = JSONObject(errorBody)
+                val json = JSONObject(errorBody.orEmpty())
                 json.getString("error")
             } catch (e: JSONException) {
                 "Unknown error"

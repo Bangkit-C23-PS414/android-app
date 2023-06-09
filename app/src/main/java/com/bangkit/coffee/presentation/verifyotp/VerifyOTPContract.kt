@@ -3,20 +3,27 @@ package com.bangkit.coffee.presentation.verifyotp
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.staticCompositionLocalOf
+import com.bangkit.coffee.shared.wrapper.Event
 
 
 /**
  * UI State that represents VerifyOTPScreen
  **/
-class VerifyOTPState
+data class VerifyOTPState(
+    val loading: Boolean = false,
+    val message: Event<String>? = null,
+    val email: String? = null,
+    val token: String? = null,
+    val verified: Boolean = false
+)
 
 /**
  * VerifyOTP Actions emitted from the UI Layer
  * passed to the coordinator to handle
  **/
 data class VerifyOTPActions(
-    val verifyOTP: () -> Unit = {},
-    val navigateToResetPassword: () -> Unit = {}
+    val verifyOTP: (String) -> Unit = {},
+    val navigateToResetPassword: (String) -> Unit = {}
 )
 
 /**

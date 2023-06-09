@@ -91,10 +91,12 @@ fun VerifyOTPScreen(
             text = stringResource(R.string.enter_otp_description),
             style = MaterialTheme.typography.bodyMedium,
         )
-        Text(
-            text = "sample@gmail.com",
-            style = MaterialTheme.typography.bodyMedium,
-        )
+        state.email?.let {
+            Text(
+                text = it,
+                style = MaterialTheme.typography.bodyMedium,
+            )
+        }
 
         Spacer(modifier = Modifier.height(24.dp))
 
@@ -124,8 +126,13 @@ fun VerifyOTPScreen(
 
             Spacer(modifier = Modifier.height(12.dp))
 
+            val formData = formState.value
             Button(
-                onClick = actions.navigateToResetPassword,
+                onClick = {
+                    if (formData is FormResult.Success){
+                        actions.verifyOTP(formData.data.code)
+                    }
+                },
                 modifier = Modifier
                     .fillMaxWidth()
                     .bringIntoViewRequester(bringIntoViewRequester)

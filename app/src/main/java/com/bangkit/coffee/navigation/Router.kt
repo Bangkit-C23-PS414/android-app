@@ -77,8 +77,8 @@ fun Router(
 
         composable(Screen.SignUp.route) {
             SignUpRoute(
-                navigateToDashboard = {
-                    navController.navigate(Screen.Home.route) {
+                navigateToSignIn = {
+                    navController.navigate(Screen.SignIn.route) {
                         popUpTo(navController.graph.id) {
                             inclusive = true
                         }
@@ -90,17 +90,37 @@ fun Router(
         // Forgot Password
         composable(Screen.ForgotPassword.route) {
             ForgotPasswordRoute(
-                navigateToVerifyOTP = { navController.navigate(Screen.VerifyOTP.route) }
+                navigateToVerifyOTP = {email ->
+                    navController.navigate(
+                        Screen.VerifyOTP.createRoute(email)
+                    )
+                }
             )
         }
 
-        composable(Screen.VerifyOTP.route) {
+        composable(
+            Screen.VerifyOTP.route,
+            arguments = listOf(navArgument("email") {
+                type = NavType.StringType
+                defaultValue = "default-email"
+            })
+        ) {
             VerifyOTPRoute(
-                navigateToResetPassword = { navController.navigate(Screen.ResetPassword.route) }
+                navigateToResetPassword = {token ->
+                    navController.navigate(
+                        Screen.ResetPassword.createRoute(token)
+                    )
+                }
             )
         }
 
-        composable(Screen.ResetPassword.route) {
+        composable(
+            Screen.ResetPassword.route,
+            arguments = listOf(navArgument("token") {
+                type = NavType.StringType
+                defaultValue = "default-token"
+            })
+        ) {
             ResetPasswordRoute(
                 navigateToLogin = {
                     navController.navigate(Screen.SignIn.route) {
