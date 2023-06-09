@@ -6,6 +6,7 @@ import androidx.lifecycle.viewModelScope
 import com.bangkit.coffee.data.repository.ImageDetectionRepository
 import com.bangkit.coffee.data.repository.ProfileRepository
 import com.bangkit.coffee.data.repository.SessionRepository
+import com.bangkit.coffee.domain.usecase.CropImageUseCase
 import com.bangkit.coffee.presentation.profile.components.ChangePasswordForm
 import com.bangkit.coffee.presentation.profile.components.EditProfileForm
 import com.bangkit.coffee.shared.wrapper.Event
@@ -21,7 +22,8 @@ import javax.inject.Inject
 class ProfileViewModel @Inject constructor(
     private val imageDetectionRepository: ImageDetectionRepository,
     private val profileRepository: ProfileRepository,
-    private val sessionRepository: SessionRepository
+    private val sessionRepository: SessionRepository,
+    private val cropImageUseCase: CropImageUseCase
 ) : ViewModel() {
 
     private val _stateFlow = MutableStateFlow(ProfileState())
@@ -55,7 +57,22 @@ class ProfileViewModel @Inject constructor(
     }
 
     fun updateAvatar(uri: Uri) {
+        viewModelScope.launch {
+            _stateFlow.update { it.copy(message = Event("Updating avatar...")) }
 
+            // Crop image from Uri
+            val file = cropImageUseCase(uri, 300)
+
+            when (val response = profileRepository.updateAvatar(file)) {
+                is Resource.Error -> _stateFlow.update {
+                    it.copy(
+                        message = Event(response.message),
+                    )
+                }
+
+                else -> {}
+            }
+        }
     }
 
     fun openEditProfile() = _stateFlow.update {

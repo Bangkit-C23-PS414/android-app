@@ -2,10 +2,14 @@ package com.bangkit.coffee.data.source.remote
 
 import com.bangkit.coffee.data.source.remote.model.RemoteUser
 import com.bangkit.coffee.data.source.remote.response.profile.EditProfileResponse
+import com.bangkit.coffee.data.source.remote.response.profile.UpdateAvatarResponse
+import okhttp3.MultipartBody
 import retrofit2.http.Field
 import retrofit2.http.FormUrlEncoded
 import retrofit2.http.GET
+import retrofit2.http.Multipart
 import retrofit2.http.POST
+import retrofit2.http.Part
 
 interface ProfileService {
 
@@ -16,5 +20,11 @@ interface ProfileService {
     @POST("/profile/edit")
     suspend fun edit(
         @Field("name") name: String,
-    ) : EditProfileResponse
+    ): EditProfileResponse
+
+    @Multipart
+    @POST("/profile/update-avatar")
+    suspend fun updateAvatar(
+        @Part avatar: MultipartBody.Part
+    ) : UpdateAvatarResponse
 }

@@ -22,7 +22,7 @@ import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import okhttp3.MediaType.Companion.toMediaType
-import okhttp3.MultipartBody.Part.Companion.createFormData
+import okhttp3.MultipartBody
 import okhttp3.RequestBody.Companion.asRequestBody
 import retrofit2.HttpException
 import java.io.File
@@ -40,7 +40,7 @@ class ImageDetectionRepository @Inject constructor(
     suspend fun create(file: File): Resource<CameraResponseData> {
         return try {
             val response = remoteDataSource.create(
-                createFormData(
+                MultipartBody.Part.createFormData(
                     name = "image",
                     filename = file.name,
                     body = file.asRequestBody("image/jpeg".toMediaType())
