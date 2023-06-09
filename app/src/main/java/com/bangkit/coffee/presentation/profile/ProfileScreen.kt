@@ -218,7 +218,9 @@ fun ProfileScreen(
 
     if (state.changePasswordVisible) {
         ProvideProfileActions(actions = actions) {
-            ChangePasswordDialog()
+            ChangePasswordDialog(
+                inProgress = state.inProgress
+            )
         }
     }
 }

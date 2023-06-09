@@ -4,6 +4,7 @@ import android.content.Context
 import androidx.datastore.preferences.core.edit
 import com.bangkit.coffee.data.source.datastore.UserPreferencesKeys
 import com.bangkit.coffee.data.source.remote.ProfileService
+import com.bangkit.coffee.data.source.remote.response.profile.ChangePasswordResponse
 import com.bangkit.coffee.data.source.remote.response.profile.EditProfileResponseData
 import com.bangkit.coffee.data.source.remote.response.profile.UpdateAvatarResponseData
 import com.bangkit.coffee.di.dataStore
@@ -96,6 +97,28 @@ class ProfileRepository @Inject constructor(
             }
 
             Resource.Success(response.data)
+        } catch (e: HttpException) {
+            Resource.Error(e.parse().message)
+        } catch (e: Exception) {
+            e.printStackTrace()
+            Resource.Error("Something went wrong")
+        }
+    }
+
+    suspend fun changePassword(
+        oldPassword: String,
+        newPassword: String,
+        confirmNewPassword: String
+    ): Resource<ChangePasswordResponse> {
+        return try {
+            // Fetch data
+            val response = remoteDataSource.changePassword(
+                oldPassword,
+                newPassword,
+                confirmNewPassword
+            )
+
+            Resource.Success(response)
         } catch (e: HttpException) {
             Resource.Error(e.parse().message)
         } catch (e: Exception) {

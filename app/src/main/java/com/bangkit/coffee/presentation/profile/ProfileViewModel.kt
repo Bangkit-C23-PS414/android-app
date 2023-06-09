@@ -111,7 +111,30 @@ class ProfileViewModel @Inject constructor(
     }
 
     fun changePassword(form: ChangePasswordForm) {
+        viewModelScope.launch {
+            _stateFlow.update { it.copy(inProgress = true) }
 
+            when (val response = profileRepository.changePassword(
+                form.oldPassword,
+                form.newPassword,
+                form.confirmNewPassword
+            )) {
+                is Resource.Success -> _stateFlow.update {
+                    it.copy(
+                        inProgress = false,
+                        changePasswordVisible = false,
+                        message = Event(response.message)
+                    )
+                }
+
+                is Resource.Error -> _stateFlow.update {
+                    it.copy(
+                        inProgress = false,
+                        message = Event(response.message),
+                    )
+                }
+            }
+        }
     }
 
     fun signOut() {
