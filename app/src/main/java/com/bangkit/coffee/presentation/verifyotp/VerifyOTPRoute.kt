@@ -28,8 +28,12 @@ fun VerifyOTPRoute(
         }
     }
     if(uiState.verified) {
-        LaunchedEffect(Unit) {
-            uiState.token?.let { actions.navigateToResetPassword(it) }
+        uiState.token?.let {
+            LaunchedEffect(it) {
+                it.getContentIfNotHandled()?.let { token ->
+                    actions.navigateToResetPassword(token)
+                }
+            }
         }
     }
 

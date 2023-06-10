@@ -12,7 +12,7 @@ import com.bangkit.coffee.shared.wrapper.Event
 data class ForgotPasswordState(
     val loading: Boolean = false,
     val message: Event<String>? = null,
-    val emailInput: String? = null,
+    val emailInput: Event<String>? = null,
 )
 
 /**

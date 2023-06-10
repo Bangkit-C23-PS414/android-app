@@ -31,7 +31,7 @@ class ForgotPasswordViewModel @Inject constructor(
                     it.copy(
                         loading = false,
                         message = Event("Verification code was sent to $email"),
-                        emailInput = email
+                        emailInput = Event(email)
                     )
                 }
             }
