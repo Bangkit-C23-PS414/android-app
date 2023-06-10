@@ -61,8 +61,6 @@ class ImageDetectionDetailViewModel @Inject constructor(
             if (job.isCancelled) break
 
             try {
-                delay(2000)
-
                 when (val response = imageDetectionWithDiseaseUseCase.refreshOne(id)) {
                     is Resource.Error -> {
                         _stateFlow.update {
@@ -82,6 +80,8 @@ class ImageDetectionDetailViewModel @Inject constructor(
                         it.copy(message = Event("Failed to refresh periodically"))
                     }
                 }
+            } finally {
+                delay(2000)
             }
         }
     }
