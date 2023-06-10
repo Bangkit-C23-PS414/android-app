@@ -43,6 +43,7 @@ import com.bangkit.coffee.presentation.imagedetectiondetail.components.DiseaseFo
 import com.bangkit.coffee.presentation.imagedetectiondetail.components.HealthyInfo
 import com.bangkit.coffee.presentation.imagedetectiondetail.components.ProcessingInfo
 import com.bangkit.coffee.shared.components.pullrefresh.PullRefreshIndicator
+import com.bangkit.coffee.shared.components.pullrefresh.pullRefresh
 import com.bangkit.coffee.shared.components.pullrefresh.rememberPullRefreshState
 import com.bangkit.coffee.shared.theme.AppTheme
 import com.bangkit.coffee.shared.util.toDateTimeString
@@ -80,6 +81,7 @@ fun ImageDetectionDetailScreen(
             modifier = Modifier
                 .padding(contentPadding)
                 .fillMaxSize()
+                .pullRefresh(pullRefreshState)
         ) {
             Column(
                 modifier = Modifier

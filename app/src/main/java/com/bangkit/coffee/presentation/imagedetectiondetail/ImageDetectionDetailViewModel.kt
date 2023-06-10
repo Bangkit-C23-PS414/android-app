@@ -61,7 +61,7 @@ class ImageDetectionDetailViewModel @Inject constructor(
             if (job.isCancelled) break
 
             try {
-                delay(5000)
+                delay(2000)
 
                 when (val response = imageDetectionWithDiseaseUseCase.refreshOne(id)) {
                     is Resource.Error -> {
