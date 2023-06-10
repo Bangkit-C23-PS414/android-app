@@ -8,7 +8,6 @@ import com.bangkit.coffee.shared.wrapper.Event
 import com.bangkit.coffee.shared.wrapper.Resource
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -28,11 +27,11 @@ class ImageDetectionDetailViewModel @Inject constructor(
     private val _stateFlow = MutableStateFlow(ImageDetectionDetailState())
     val stateFlow = _stateFlow.asStateFlow()
 
-    private val job = Job()
-
     init {
-        viewModelScope.launch { loadFromDB() }
-        viewModelScope.launch(Dispatchers.IO + job) { periodicRefresh() }
+        viewModelScope.launch {
+            launch { loadFromDB() }
+            launch { periodicRefresh() }
+        }
     }
 
     private suspend fun loadFromDB() {
@@ -47,10 +46,6 @@ class ImageDetectionDetailViewModel @Inject constructor(
                         disease = disease
                     )
                 }
-
-                if (imageDetection.isDetected) {
-                    job.cancel()
-                }
             }
     }
 
@@ -58,8 +53,6 @@ class ImageDetectionDetailViewModel @Inject constructor(
         _stateFlow.update { it.copy(waiting = true) }
 
         while (true) {
-            if (job.isCancelled) break
-
             try {
                 when (val response = imageDetectionWithDiseaseUseCase.refreshOne(id)) {
                     is Resource.Error -> {
@@ -75,10 +68,8 @@ class ImageDetectionDetailViewModel @Inject constructor(
                     }
                 }
             } catch (e: Exception) {
-                if (job.isActive) {
-                    _stateFlow.update {
-                        it.copy(message = Event("Failed to refresh periodically"))
-                    }
+                _stateFlow.update {
+                    it.copy(message = Event("Failed to refresh periodically"))
                 }
             } finally {
                 delay(2000)
@@ -100,10 +91,5 @@ class ImageDetectionDetailViewModel @Inject constructor(
                 }
             }
         }
-    }
-
-    override fun onCleared() {
-        job.cancel()
-        super.onCleared()
     }
 }

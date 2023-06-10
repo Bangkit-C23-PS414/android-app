@@ -58,7 +58,7 @@ fun ImageDetectionDetailScreen(
     state: ImageDetectionDetailState = ImageDetectionDetailState(),
     actions: ImageDetectionDetailActions = ImageDetectionDetailActions()
 ) {
-    val pullRefreshState = rememberPullRefreshState(state.refreshing, actions.refresh)
+    val pullRefreshState = rememberPullRefreshState(state.refreshing, { actions.refresh() })
     val scrollState = rememberScrollState()
     val context = LocalContext.current
 
