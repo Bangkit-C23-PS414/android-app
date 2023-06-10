@@ -28,8 +28,10 @@ fun ForgotPasswordRoute(
         }
     }
     uiState.emailInput?.let {
-        LaunchedEffect(Unit) {
-            actions.navigateToVerifyOTP(it)
+        LaunchedEffect(it) {
+            it.getContentIfNotHandled()?.let { email ->
+                actions.navigateToVerifyOTP(email)
+            }
         }
     }
 

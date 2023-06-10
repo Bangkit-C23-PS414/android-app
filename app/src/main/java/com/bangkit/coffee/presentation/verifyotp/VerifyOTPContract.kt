@@ -13,7 +13,7 @@ data class VerifyOTPState(
     val loading: Boolean = false,
     val message: Event<String>? = null,
     val email: String? = null,
-    val token: String? = null,
+    val token: Event<String?>? = null,
     val verified: Boolean = false
 )
 
