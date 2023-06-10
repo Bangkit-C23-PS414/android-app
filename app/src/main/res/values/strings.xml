@@ -34,7 +34,7 @@
     <string name="reset_password_description">Set the new password for your account so you can login and access all the features.</string>
     <string name="new_password">New password</string>
     <string name="new_password_hint">Type new password</string>
-    <string name="new_password_error">New password minimum 6 characters</string>
+    <string name="new_password_error">New password minimum 8 characters</string>
     <string name="confirm_new_password">Confirm new password</string>
     <string name="confirm_new_password_hint">Type your new password again</string>
     <string name="confirm_new_password_error">Confirm new password is not match</string>
@@ -93,7 +93,7 @@
     <string name="healthy_explanation">Discovering the perfect blend of technology and nature, our AI-driven coffee disease detection system assists farmers in identifying potential issues. However, it\'s important to acknowledge that even the most advanced algorithms can occasionally produce inaccurate results. In the rare case of a false negative, where the system fails to detect a disease, we advise farmers to consult additional indicators and seek expert advice. Our commitment remains unwavering, as we continuously refine our AI model to enhance its accuracy and empower farmers with reliable insights for a thriving coffee harvest.</string>
     <string name="generic_error_message">Whoopss.. you got us. Something went wrong</string>
     <string name="old_password">Old password</string>
-    <string name="old_password_error">Old password minimum 6 characters</string>
+    <string name="old_password_error">Old password minimum 8 characters</string>
     <string name="old_password_hint">Type old password</string>
     <string name="update_password">Update Password</string>
     <string name="disease_detail">Disease Detail</string>

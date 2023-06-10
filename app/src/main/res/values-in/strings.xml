@@ -15,7 +15,7 @@
     <string name="password_hint">Ketik kata sandi anda</string>
     <string name="forgot_password_question">Lupa kata sandi?</string>
     <string name="email_error">Alamat email tidak valid</string>
-    <string name="password_error">Kata sandi minimum 6 karakter</string>
+    <string name="password_error">Kata sandi minimum 8 karakter</string>
     <string name="full_name">Nama lengkap</string>
     <string name="sign_up">Mendaftar</string>
     <string name="terms_agreement">Dengan mendaftar, anda setuju dengan</string>
@@ -34,7 +34,7 @@
     <string name="reset_password_description">Atur kata sandi baru untuk akun Anda sehingga Anda dapat mengakses semua fitur.</string>
     <string name="new_password">Kata sandi baru</string>
     <string name="new_password_hint">Ketik kata sandi baru</string>
-    <string name="new_password_error">Kata sandi baru minimum 6 karakter</string>
+    <string name="new_password_error">Kata sandi baru minimum 8 karakter</string>
     <string name="confirm_new_password">Konfirmasi kata sandi baru</string>
     <string name="confirm_new_password_hint">Ketik ulang kata sandi baru</string>
     <string name="confirm_new_password_error">Konfirmasi kata sandi baru tidak cocok</string>
@@ -92,8 +92,8 @@
     <string name="healthy_explanation">Menggabungkan kecanggihan teknologi dan keindahan alam, sistem pendeteksi penyakit kopi berbasis kecerdasan buatan (AI) kami membantu petani dalam mengidentifikasi masalah potensial. Namun, penting untuk diakui bahwa meskipun algoritma yang paling canggih, kadang-kadang hasil yang diberikan oleh AI bisa tidak akurat. Dalam kasus yang jarang terjadi yaitu hasil negatif palsu, di mana sistem gagal mendeteksi suatu penyakit, kami menyarankan petani untuk berkonsultasi dengan indikator tambahan dan mencari saran dari ahli. Komitmen kami tetap tidak berubah, karena kami terus menyempurnakan model AI kami untuk meningkatkan akurasi dan memberikan petani wawasan yang dapat diandalkan untuk panen kopi yang berkembang dengan baik.</string>
     <string name="generic_error_message">Waduhhh.. ketahuan. Kayaknya ada yang salah.</string>
     <string name="old_password">Kata sandi lama</string>
-    <string name="old_password_error">Ketik kata sandi lama</string>
-    <string name="old_password_hint">Kata sandi lama minimum 6 karakter</string>
+    <string name="old_password_error">Kata sandi lama minimum 8 karakter</string>
+    <string name="old_password_hint">Ketik kata sandi lama</string>
     <string name="update_password">Perbarui Kata Sandi</string>
     <string name="disease_detail">Detail Penyakit</string>
     <string name="sample_disease_on_the_leaf">Sampel penyakit pada daun</string>
