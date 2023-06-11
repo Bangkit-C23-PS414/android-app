@@ -17,7 +17,7 @@ android {
         versionCode 1
         versionName "1.0"
 
-        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner "com.bangkit.coffee.CustomTestRunner"
         vectorDrawables {
             useSupportLibrary true
         }
@@ -129,20 +129,26 @@ dependencies {
     implementation "androidx.paging:paging-compose:$paging_version"
 
     // Unit Testing
-    implementation "com.jakewharton.timber:timber:5.0.1"
     testImplementation "junit:junit:4.13.2"
-    androidTestImplementation "androidx.test.ext:junit:1.1.5"
-    androidTestImplementation "androidx.test.espresso:espresso-core:3.5.1"
     testImplementation "org.mockito:mockito-core:5.3.1"
-    androidTestImplementation "org.mockito:mockito-android:5.3.1"
 
     // Compose Testing
     androidTestImplementation platform("androidx.compose:compose-bom:2023.05.01")
+    androidTestImplementation "androidx.test.espresso:espresso-core:3.5.1"
+    androidTestImplementation 'androidx.test:rules:1.5.0'
+    androidTestImplementation "org.mockito:mockito-android:5.3.1"
     androidTestImplementation "androidx.compose.ui:ui-test-junit4:$compose_ui_version"
+    androidTestImplementation 'com.google.dagger:hilt-android-testing:2.46.1'
+    kaptAndroidTest 'com.google.dagger:hilt-android-compiler:2.46.1'
+
+    // Debugging
+    implementation "com.jakewharton.timber:timber:5.0.1"
     debugImplementation "androidx.compose.ui:ui-tooling:$compose_ui_version"
     debugImplementation "androidx.compose.ui:ui-test-manifest:$compose_ui_version"
-    androidTestImplementation "com.kaspersky.android-components:kaspresso:1.5.2"
-    androidTestImplementation "com.kaspersky.android-components:kaspresso-compose-support:1.5.2"
+}
+
+hilt {
+    enableTransformForLocalTests = true
 }
 
 kapt {
