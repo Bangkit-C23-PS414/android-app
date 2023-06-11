@@ -14,7 +14,6 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import retrofit2.HttpException
-import timber.log.Timber
 import javax.inject.Inject
 
 @HiltViewModel
@@ -53,7 +52,6 @@ class SignInViewModel @Inject constructor(
                         signedIn = true
                     )
                 }
-                Timber.d("logged in with token " + response.token)
             } catch (e: HttpException) {
                 if (e.code() == 401) {
                     val errorBody = e.response()?.errorBody()?.string()
@@ -66,7 +64,12 @@ class SignInViewModel @Inject constructor(
                     }
                 }
             } catch (e: Exception) {
-                Timber.d(e.toString())
+                _stateFlow.update {
+                    it.copy(
+                        inProgress = false,
+                        message = Event("Timeout error")
+                    )
+                }
             }
         }
     }
