@@ -1,7 +1,6 @@
 package com.bangkit.coffee.presentation.signup
 
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
@@ -17,7 +16,6 @@ import androidx.compose.material.icons.filled.Email
 import androidx.compose.material.icons.filled.Lock
 import androidx.compose.material.icons.filled.Person
 import androidx.compose.material3.Button
-import androidx.compose.material3.Checkbox
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
@@ -26,18 +24,14 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.SpanStyle
-import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
-import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
@@ -207,34 +201,6 @@ fun SignUpScreen(
                 )
             }
 
-            Spacer(modifier = Modifier.height(12.dp))
-
-            field(SignUpForm::termsAndConditionAgreed) {
-                val checked = this.state.value?.value == true
-                val setField = this::setField
-
-                Row(
-                    modifier = Modifier.fillMaxWidth(),
-                    verticalAlignment = Alignment.CenterVertically
-                ) {
-                    Checkbox(
-                        modifier = Modifier.testTag("AgreementCheckbox"),
-                        checked = checked,
-                        onCheckedChange = setField,
-                    )
-                    Text(
-                        text = buildAnnotatedString {
-                            append(stringResource(R.string.terms_agreement))
-                            append(" ")
-                            withStyle(style = SpanStyle(Color.Blue)) {
-                                append(stringResource(R.string.terms_and_conditions))
-                            }
-                            append(".")
-                        },
-                        style = MaterialTheme.typography.bodyMedium
-                    )
-                }
-            }
             Spacer(modifier = Modifier.height(12.dp))
 
             val formData = formState.value
