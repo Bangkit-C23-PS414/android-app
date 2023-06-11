@@ -1,5 +1,6 @@
 package com.bangkit.coffee.presentation.history
 
+import androidx.activity.compose.setContent
 import androidx.compose.ui.test.ExperimentalTestApi
 import androidx.compose.ui.test.assertAll
 import androidx.compose.ui.test.assertHasClickAction
@@ -10,29 +11,40 @@ import androidx.compose.ui.test.hasClickAction
 import androidx.compose.ui.test.hasTestTag
 import androidx.compose.ui.test.isDialog
 import androidx.compose.ui.test.isToggleable
+import androidx.compose.ui.test.junit4.createAndroidComposeRule
 import androidx.compose.ui.test.onAllNodesWithTag
 import androidx.compose.ui.test.onFirst
 import androidx.compose.ui.test.onNodeWithTag
 import androidx.compose.ui.test.performClick
-import com.bangkit.coffee.presentation.ComposeTest
+import com.bangkit.coffee.MainActivity
 import com.bangkit.coffee.util.AppTest
+import dagger.hilt.android.testing.HiltAndroidRule
+import dagger.hilt.android.testing.HiltAndroidTest
+import org.junit.Rule
 import org.junit.Test
 
-@OptIn(ExperimentalTestApi::class)
-class HistoryRouteTest : ComposeTest() {
+@HiltAndroidTest
+class HistoryRouteTest  {
+
+    @get:Rule(order = 1)
+    var hiltTestRule = HiltAndroidRule(this)
+
+    @get:Rule(order = 2)
+    var rule = createAndroidComposeRule<MainActivity>()
 
     @OptIn(ExperimentalTestApi::class)
     @Test
     fun should_showListImageDetection_when_loaded() {
-        rule.setContent { AppTest { HistoryRoute() } }
+        rule.activity.setContent { AppTest { HistoryRoute() } }
 
         rule.waitUntilAtLeastOneExists(hasTestTag("ImageDetectionCard"))
         rule.onAllNodesWithTag("ImageDetectionCard").assertAll(hasClickAction())
     }
 
+    @OptIn(ExperimentalTestApi::class)
     @Test
     fun should_showFilterBottomSheet_when_filterClicked() {
-        rule.setContent { AppTest { HistoryRoute() } }
+        rule.activity.setContent { AppTest { HistoryRoute() } }
 
         rule.onNodeWithTag("FilterButton").assertHasClickAction()
         rule.onNodeWithTag("FilterButton").assertIsEnabled()
@@ -52,9 +64,10 @@ class HistoryRouteTest : ComposeTest() {
         rule.onAllNodesWithTag("DiseaseCheckbox").assertAll(isToggleable())
     }
 
+    @OptIn(ExperimentalTestApi::class)
     @Test
     fun should_closeDialog_when_clearFilterButtonClicked() {
-        rule.setContent { AppTest { HistoryRoute() } }
+        rule.activity.setContent { AppTest { HistoryRoute() } }
 
         rule.onNodeWithTag("FilterButton").performClick()
         rule.waitUntilExactlyOneExists(hasTestTag("FilterHistoryBottomSheet"))
@@ -63,9 +76,10 @@ class HistoryRouteTest : ComposeTest() {
         rule.onNodeWithTag("FilterHistoryBottomSheet").assertDoesNotExist()
     }
 
+    @OptIn(ExperimentalTestApi::class)
     @Test
     fun should_closeDialog_when_applyFilterButtonClicked() {
-        rule.setContent { AppTest { HistoryRoute() } }
+        rule.activity.setContent { AppTest { HistoryRoute() } }
 
         rule.onNodeWithTag("FilterButton").performClick()
         rule.waitUntilExactlyOneExists(hasTestTag("FilterHistoryBottomSheet"))
@@ -74,9 +88,10 @@ class HistoryRouteTest : ComposeTest() {
         rule.onNodeWithTag("FilterHistoryBottomSheet").assertDoesNotExist()
     }
 
+    @OptIn(ExperimentalTestApi::class)
     @Test
     fun should_disableApplyFilterButton_when_allDiseaseOptionOff() {
-        rule.setContent { AppTest { HistoryRoute() } }
+        rule.activity.setContent { AppTest { HistoryRoute() } }
 
         rule.onNodeWithTag("FilterButton").performClick()
         rule.waitUntilExactlyOneExists(hasTestTag("FilterHistoryBottomSheet"))
@@ -93,9 +108,10 @@ class HistoryRouteTest : ComposeTest() {
         rule.onNodeWithTag("ApplyFilterButton").assertIsNotEnabled()
     }
 
+    @OptIn(ExperimentalTestApi::class)
     @Test
     fun should_openDateRangePicker_when_pickDateRangeClicked() {
-        rule.setContent { AppTest { HistoryRoute() } }
+        rule.activity.setContent { AppTest { HistoryRoute() } }
 
         rule.onNodeWithTag("FilterButton").performClick()
         rule.waitUntilExactlyOneExists(hasTestTag("FilterHistoryBottomSheet"))

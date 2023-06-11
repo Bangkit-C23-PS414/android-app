@@ -1,5 +1,6 @@
 package com.bangkit.coffee.presentation.profile
 
+import androidx.activity.compose.setContent
 import androidx.compose.ui.test.assertHasClickAction
 import androidx.compose.ui.test.assertHeightIsAtLeast
 import androidx.compose.ui.test.assertIsDisplayed
@@ -7,20 +8,31 @@ import androidx.compose.ui.test.assertIsEnabled
 import androidx.compose.ui.test.assertIsNotEnabled
 import androidx.compose.ui.test.assertWidthIsAtLeast
 import androidx.compose.ui.test.isDialog
+import androidx.compose.ui.test.junit4.createAndroidComposeRule
 import androidx.compose.ui.test.onNodeWithTag
 import androidx.compose.ui.test.performClick
 import androidx.compose.ui.test.performTextInput
 import androidx.compose.ui.test.performTextReplacement
 import androidx.compose.ui.unit.dp
-import com.bangkit.coffee.presentation.ComposeTest
+import com.bangkit.coffee.MainActivity
 import com.bangkit.coffee.util.AppTest
+import dagger.hilt.android.testing.HiltAndroidRule
+import dagger.hilt.android.testing.HiltAndroidTest
+import org.junit.Rule
 import org.junit.Test
 
-class ProfileRouteTest : ComposeTest() {
+@HiltAndroidTest
+class ProfileRouteTest  {
+
+    @get:Rule(order = 1)
+    var hiltTestRule = HiltAndroidRule(this)
+
+    @get:Rule(order = 2)
+    var rule = createAndroidComposeRule<MainActivity>()
 
     @Test
     fun should_showAvatar_when_loaded() {
-        rule.setContent { AppTest { ProfileRoute() } }
+        rule.activity.setContent { AppTest { ProfileRoute() } }
 
         rule.onNodeWithTag("Avatar").assertIsDisplayed()
         rule.onNodeWithTag("Avatar").assertWidthIsAtLeast(150.dp)
@@ -32,7 +44,7 @@ class ProfileRouteTest : ComposeTest() {
 
     @Test
     fun should_showEditProfile_when_clicked() {
-        rule.setContent { AppTest { ProfileRoute() } }
+        rule.activity.setContent { AppTest { ProfileRoute() } }
 
         rule.onNodeWithTag("EditProfile").assertHasClickAction()
         rule.onNodeWithTag("EditProfile").performClick()
@@ -46,7 +58,7 @@ class ProfileRouteTest : ComposeTest() {
 
     @Test
     fun should_changeEnableButton_when_editProfileFormChange() {
-        rule.setContent { AppTest { ProfileRoute() } }
+        rule.activity.setContent { AppTest { ProfileRoute() } }
 
         rule.onNodeWithTag("EditProfile").performClick()
         rule.onNodeWithTag("SaveButton").assertHasClickAction()
@@ -64,7 +76,7 @@ class ProfileRouteTest : ComposeTest() {
 
     @Test
     fun should_showChangePassword_when_clicked() {
-        rule.setContent { AppTest { ProfileRoute() } }
+        rule.activity.setContent { AppTest { ProfileRoute() } }
 
         rule.onNodeWithTag("ChangePassword").assertHasClickAction()
         rule.onNodeWithTag("ChangePassword").performClick()
@@ -77,7 +89,7 @@ class ProfileRouteTest : ComposeTest() {
 
     @Test
     fun should_changeEnableButton_when_changePasswordFormChange() {
-        rule.setContent { AppTest { ProfileRoute() } }
+        rule.activity.setContent { AppTest { ProfileRoute() } }
 
         rule.onNodeWithTag("ChangePassword").performClick()
         rule.onNodeWithTag("SaveButton").assertIsNotEnabled()
@@ -97,7 +109,7 @@ class ProfileRouteTest : ComposeTest() {
 
     @Test
     fun should_showSignOutButton_when_loaded() {
-        rule.setContent { AppTest { ProfileRoute() } }
+        rule.activity.setContent { AppTest { ProfileRoute() } }
 
         rule.onNodeWithTag("SignOut").assertHasClickAction()
     }

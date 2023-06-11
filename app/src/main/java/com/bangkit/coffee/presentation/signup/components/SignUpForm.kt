@@ -1,7 +1,6 @@
 package com.bangkit.coffee.presentation.signup.components
 
 import me.naingaungluu.formconductor.annotations.EmailAddress
-import me.naingaungluu.formconductor.annotations.IsChecked
 import me.naingaungluu.formconductor.annotations.MinLength
 
 data class SignUpForm(
@@ -16,7 +15,4 @@ data class SignUpForm(
 
     @SignUpConfirmPassword
     val confirmPassword: String = "",
-
-    @IsChecked
-    val termsAndConditionAgreed: Boolean = false
 )
