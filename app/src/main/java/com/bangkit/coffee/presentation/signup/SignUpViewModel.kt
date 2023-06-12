@@ -1,6 +1,5 @@
 package com.bangkit.coffee.presentation.signup
 
-import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.bangkit.coffee.data.source.remote.AuthService
