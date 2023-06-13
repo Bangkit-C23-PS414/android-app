@@ -10,13 +10,13 @@ import com.bangkit.coffee.app.LocalRecoffeeryAppActions
 @Composable
 fun ResetPasswordRoute(
     coordinator: ResetPasswordCoordinator = rememberResetPasswordCoordinator(),
-    navigateToLogin: () -> Unit = {}
+    navigateToSignIn: () -> Unit = {}
 ) {
     // State observing and declarations
     val uiState by coordinator.screenStateFlow.collectAsStateWithLifecycle()
 
     // UI Actions
-    val actions = rememberResetPasswordActions(coordinator, navigateToLogin)
+    val actions = rememberResetPasswordActions(coordinator, navigateToSignIn)
 
     // Handle events
     val appActions = LocalRecoffeeryAppActions.current
@@ -29,7 +29,7 @@ fun ResetPasswordRoute(
     }
     if(uiState.changeSucceed) {
         LaunchedEffect(Unit) {
-            actions.navigateToLogin()
+            actions.navigateToSignIn()
         }
     }
 
@@ -41,12 +41,12 @@ fun ResetPasswordRoute(
 @Composable
 fun rememberResetPasswordActions(
     coordinator: ResetPasswordCoordinator,
-    navigateToLogin: () -> Unit
+    navigateToSignIn: () -> Unit
 ): ResetPasswordActions {
     return remember(coordinator) {
         ResetPasswordActions(
             resetPassword = coordinator::resetPassword,
-            navigateToLogin = navigateToLogin
+            navigateToSignIn = navigateToSignIn
         )
     }
 }

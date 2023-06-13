@@ -21,7 +21,7 @@ data class ResetPasswordState(
  **/
 data class ResetPasswordActions(
     val resetPassword: (String) -> Unit = {},
-    val navigateToLogin: () -> Unit = {}
+    val navigateToSignIn: () -> Unit = {}
 )
 
 /**

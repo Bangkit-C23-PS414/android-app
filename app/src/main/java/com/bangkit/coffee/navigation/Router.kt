@@ -2,7 +2,6 @@ package com.bangkit.coffee.navigation
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.NavHostController
 import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
@@ -56,16 +55,22 @@ fun Router(
         // Welcome
         composable(Screen.Welcome.route) {
             WelcomeRoute(
-                navigateToSignIn = { navController.navigate(Screen.SignIn.route) },
-                navigateToSignUp = { navController.navigate(Screen.SignUp.route) }
+                navigateToSignIn = {
+                    navController.navigate(Screen.SignIn.route)
+                },
+                navigateToSignUp = {
+                    navController.navigate(Screen.SignUp.route)
+                }
             )
         }
 
         // Auth
         composable(Screen.SignIn.route) {
             SignInRoute(
-                navigateToForgotPassword = { navController.navigate(Screen.ForgotPassword.route) },
-                navigateToDashboard = {
+                navigateToForgotPassword = {
+                    navController.navigate(Screen.ForgotPassword.route)
+                },
+                navigateToHome = {
                     navController.navigate(Screen.Home.route) {
                         popUpTo(navController.graph.id) {
                             inclusive = true
@@ -79,9 +84,11 @@ fun Router(
             SignUpRoute(
                 navigateToSignIn = {
                     navController.navigate(Screen.SignIn.route) {
-                        popUpTo(navController.graph.id) {
-                            inclusive = true
+                        popUpTo(Screen.Welcome.route) {
+                            saveState = true
                         }
+                        launchSingleTop = true
+                        restoreState = true
                     }
                 }
             )
@@ -122,9 +129,9 @@ fun Router(
             })
         ) {
             ResetPasswordRoute(
-                navigateToLogin = {
+                navigateToSignIn = {
                     navController.navigate(Screen.SignIn.route) {
-                        popUpTo(navController.graph.findStartDestination().id) {
+                        popUpTo(Screen.Welcome.route) {
                             saveState = true
                         }
                         launchSingleTop = true
@@ -137,7 +144,9 @@ fun Router(
         // Dashboard
         composable(Screen.Home.route) {
             HomeRoute(
-                navigateToCamera = { navController.navigate(Screen.Camera.route) },
+                navigateToCamera = {
+                    navController.navigate(Screen.Camera.route)
+                },
                 navigateToDetailDisease = { id ->
                     navController.navigate(
                         Screen.DiseaseDetail.createRoute(id)
@@ -177,7 +186,9 @@ fun Router(
             })
         ) {
             DiseaseDetailRoute(
-                navigateUp = { navController.navigateUp() }
+                navigateUp = {
+                    navController.navigateUp()
+                }
             )
         }
 
@@ -190,7 +201,9 @@ fun Router(
             })
         ) {
             ImageDetectionDetailRoute(
-                navigateUp = { navController.navigateUp() }
+                navigateUp = {
+                    navController.navigateUp()
+                }
             )
         }
 
@@ -204,7 +217,7 @@ fun Router(
 
                     // Navigate to history
                     navController.navigate(Screen.History.route) {
-                        popUpTo(navController.graph.findStartDestination().id) {
+                        popUpTo(Screen.Home.route) {
                             saveState = true
                         }
                         launchSingleTop = true

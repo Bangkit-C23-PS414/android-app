@@ -11,7 +11,7 @@ import com.bangkit.coffee.app.LocalRecoffeeryAppActions
 fun SignInRoute(
     coordinator: SignInCoordinator = rememberSignInCoordinator(),
     navigateToForgotPassword: () -> Unit = {},
-    navigateToDashboard: () -> Unit = {}
+    navigateToHome: () -> Unit = {}
 ) {
     // State observing and declarations
     val uiState by coordinator.screenStateFlow.collectAsStateWithLifecycle()
@@ -20,14 +20,14 @@ fun SignInRoute(
     val actions = rememberSignInActions(
         coordinator,
         navigateToForgotPassword,
-        navigateToDashboard
+        navigateToHome
     )
 
     // Handle events
     val appActions = LocalRecoffeeryAppActions.current
     if (uiState.signedIn) {
         LaunchedEffect(Unit) {
-            actions.navigateToDashboard()
+            actions.navigateToHome()
         }
     }
     uiState.message?.let { event ->
@@ -47,14 +47,14 @@ fun SignInRoute(
 fun rememberSignInActions(
     coordinator: SignInCoordinator,
     navigateToForgotPassword: () -> Unit,
-    navigateToDashboard: () -> Unit
+    navigateToHome: () -> Unit
 ): SignInActions {
     return remember(coordinator) {
         SignInActions(
             signIn = coordinator::signIn,
             setPasswordVisibility = coordinator::setPasswordVisibility,
             navigateToForgotPassword = navigateToForgotPassword,
-            navigateToDashboard = navigateToDashboard
+            navigateToHome = navigateToHome
         )
     }
 }

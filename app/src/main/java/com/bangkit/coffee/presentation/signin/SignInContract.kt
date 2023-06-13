@@ -24,7 +24,7 @@ data class SignInActions(
     val signIn: (SignInForm) -> Unit = {},
     val setPasswordVisibility: (Boolean) -> Unit = {},
     val navigateToForgotPassword: () -> Unit = {},
-    val navigateToDashboard: () -> Unit = {},
+    val navigateToHome: () -> Unit = {},
 )
 
 /**
