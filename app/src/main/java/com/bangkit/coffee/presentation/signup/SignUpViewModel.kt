@@ -1,6 +1,5 @@
 package com.bangkit.coffee.presentation.signup
 
-import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.bangkit.coffee.data.source.remote.AuthService
@@ -15,7 +14,6 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import retrofit2.HttpException
-import timber.log.Timber
 import javax.inject.Inject
 
 @HiltViewModel
@@ -54,7 +52,12 @@ class SignUpViewModel @Inject constructor(
                     }
                 }
             } catch (e: Exception) {
-                Timber.d(e.toString())
+                _stateFlow.update {
+                    it.copy(
+                        loading = false,
+                        message = Event("Timeout error")
+                    )
+                }
             }
         }
     }
